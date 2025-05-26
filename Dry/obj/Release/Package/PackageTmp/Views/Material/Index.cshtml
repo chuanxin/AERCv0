@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+    @Styles.Render("~/jqgrid/css")
+    @Scripts.Render("~/bundles/jqueryjqgrid")
+}
+
+<script type="text/javascript">
+    var form;
+    $(function () {
+
+        var grid = $('#grid'); 
+        
+        grid.jqGrid({
+            url: '@Url.Action("GetMaterialData", "Material")',
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'POMNo'
+            },
+            mtype: 'GET',
+            colNames: ['', '模組代號', '模組名稱', '物料名稱', '口徑1代號', '口徑', '口徑2代號', '口徑', '口徑3代號', '口徑','材質代號' ,'材質', '長度(m)', '品項單位', '備註'/*, ''*/],
+            colModel: [
+                {
+                    name: 'myac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        onEdit: function () {
+                            $('select[name="ModuleCNS"]').css('width', '100px');
+                        }
+                    },
+                },
+                { name: 'ModuleNo', index: 'ModuleNo', search: false, hidden: true },
+                { name: 'ModuleCNS', width: 60, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { value: GetModuleDDL } },
+                { name: 'MName', width: 170, align: 'left', search: true, editable: true, edittype: 'text', editrules: { required: true } },
+                { name: 'Spec1', search: false, hidden: true },
+                { name: 'Spec1CNS', width: 60, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { value: GetSpecDDL } },
+                { name: 'Spec2', search: false, hidden: true },
+                { name: 'Spec2CNS', width: 60, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { value: GetSpecDDL } },
+                { name: 'Spec3', search: false, hidden: true },
+                { name: 'Spec3CNS', width: 60, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { value: GetSpecDDL } },
+                { name: 'MatType', search: false, hidden: true },
+                { name: 'MatTypeCNS', width: 50, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { value: GetMatType } },
+                { name: 'SpecLength', width: 55, align: 'left', search: true, editable: true, edittype: 'text' },
+                { name: 'ItemUnit', width: 60, align: 'center', search: true, editable: true, edittype: 'text', edutrules: { required: true } },
+                { name: 'Note', width: 200, align: 'left', search: true, editable: true, editypte: 'text' }
+            ],
+            pager: '#pager',
+            //autowidth: true,
+            width: 1200,
+            height: 'auto',
+            rowNum: 20, 
+            rowList: [5, 10, 20, 50], 
+            sortname: 'ModuleNo',
+            sortorder: "desc",
+            viewrecords: true,
+            rownumbers: true,
+            caption: '管路灌溉材料表管理', 
+            loadComplete: function (ids) {
+                $('.ui-pg-table table input[type=text]').css('width', '20').css('height', '20'); 
+                $('.ui-pg-table table select').css('width', '60').css('height', '30'); 
+                $('#pager_center').css('width', '400'); 
+                $('#pager_left').css('width', '250'); 
+                //$('#pager').css('height', '40px'); 
+                //$('#jqgh_grid_ModuleCNS').css('height', '25px').css('font-size', '12px');
+                //$('#jqgh_grid_MName').css('height', '25px').css('font-size', '12px');
+                //$('#jqgh_grid_Spec').css('height', '25px').css('font-size', '12px');
+                //$('#jqgh_grid_ItemUnit').css('height', '25px').css('font-size', '12px');
+                //$('#jqgh_grid_Note').css('height', '25px').css('font-size', '12px');
+            },
+            editurl: '@Url.Action("EditDelMaterialData", "Material")',
+            subGrid: true,
+            subGridOptions: {
+                "plusicon": "ui-icon-triangle-1-e",
+                "minusicon": "ui-icon-triangle-1-s",
+                "openicon": "ui-icon-arrowreturn-1-e"
+            },
+            
+            subGridRowExpanded: function (subgrid_id, row_id) {
+                var subgrid_table_id, pager_id;
+                subgrid_table_id = subgrid_id + "_t";
+                pager_id = "p_" + subgrid_table_id;
+                $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
+                var sub_grid = $("#" + subgrid_table_id).jqGrid({
+                    url: '@Url.Action("GetMaterialPrice","Material")' + '?POMNo=' + row_id,
+                    datatype: "json",
+                    mtype: 'GET',
+                    jsonReader: {
+                        repeatitems: false,
+                        id: 'No'
+                    },
+                    colNames: ['', 'No', 'POMNo', '年度', '單價'],
+                    colModel: [
+                        {
+                            name: 'submyac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                            formatoptions: {
+                                keys: true,
+                                editbutton: true,
+                                delbutton: true,
+                                onEdit: function () {
+                                    $('input[name="BYear"]').attr('readonly', true).css({
+                                        "background-color": "lightgray"
+                                    });
+                                }
+                            },
+                        },
+                        { name: "No", index: "No", hidden: true },
+                        { name: "POMNo", index: "POMNo", hidden: true, editable: false },
+                        { name: "BYear", index: "BYear", width: 80, align: "center", sortable: false, editable: true, editrules: { required: true, integer: true } },
+                        { name: "Price", index: "Price", width: 80, align: "right", sortable: false, editable: true, edittype: 'text', editrules: { required: true, number: true } },
+                    ],
+                    rowNum: 10,
+                    pager: pager_id,
+                    sortname: 'BYear',
+                    //sortorder: "asc",
+                    height: '100%',
+                    loadComplete: function (ids) {
+                        $('.tablediv input[type=text]').css('width', '20').css('height', '20'); 
+                        //$('.ui-pg-table table select').css('width', '60').css('height', '30'); 
+                        $('#p_grid_1_t_center').css('width', '200'); 
+                        $('#pager_left').css('width', '250'); 
+                        $('.ui-jqgrid .ui-widget .ui-widget-content .ui-corner-all').css('height', '40px'); 
+                        //$('#jqgh_grid_1_t_BYear').css('height', '25px').css('font-size', '12px');
+                        //$('#jqgh_grid_1_t_Price').css('height', '25px').css('font-size', '12px');
+
+                        //$('.tablediv div[class="ui-pg-div ui-inline-del"]').remove();
+                    },
+                    editurl: '@Url.Action("EditMaterialPrice", "Material")',
+
+                });
+                $("#" + subgrid_table_id).jqGrid('navGrid', "#" + pager_id,
+                    { edit: false, add: true, del: false, search: false },
+                    {}, /*edit*/
+                    {
+                        url: '@Url.Action("AddMaterialPrice", "Material")' + '?POMNo=' + row_id,
+                        mtype: 'GET',
+                        closeOnEscape: true,
+                        closeAfterAdd: true
+                    }, /*add*/
+                    {}, /*delete*/
+                    {}, /*search*/
+                    {} /*view*/
+                    )
+            }
+
+        });
+
+        grid.navGrid('#pager',
+            { edit: false, add: true, del: false, search: false },
+            {}, /*edit*/
+            { url: '@Url.Action("AddMaterialData", "Material")', closeOnEscape: true, closeAfterAdd: true }, /*add*/
+            { url: '@Url.Action("DelMaterialData", "Material")', closeOnEscape: true, closeAfterAdd: true }, /*delete*/
+            {}, /*search*/
+            {} /*view*/);
+
+        
+        function GetModuleDDL() {
+            var resData = '';
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetModuleDDL","Material")', function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    resData += res[i].Value + ':' + res[i].Text;
+                    if (i < res.length - 1) {
+                        resData += ';';
+                    }
+                }
+            });
+            return resData;
+        }
+      
+        function GetSpecDDL() {
+            var resData = '';
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetSpecDDL", "Material")', function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    resData += res[i].Value + ':' + res[i].Text;
+                    if (i < res.length - 1) {
+                        resData += ';';
+                    }
+                }
+            });
+            return resData;
+        }
+        
+        function GetMatType() {
+            var resData = '';
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetMatType", "Material")', function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    resData += res[i].Value + ':' + res[i].Text;
+                    if (i < res.length - 1) {
+                        resData += ';';
+                    }
+                }
+            });
+            return resData;
+        }
+        
+        function EditPriceBtn(cellvalue, options, rowObject) {
+            //alert(rowObject.ModuleCNS);
+            return '<a href="javascript:" class="btn" onclick="EditPrice(' + cellvalue + ');">設定價格</a>';
+        }
+
+        
+        $("#searchbtn").click(function () {
+            var searchFiler = $("#searchbar").val();
+            var grid = $("#grid");
+            if (searchFiler.length === 0) {
+                grid[0].p.search = false;
+                $.extend(grid[0].p.postData, { searchString: "" });
+            } else {
+                grid[0].p.search = true;
+                $.extend(grid[0].p.postData, { searchString: searchFiler });
+            }
+            grid.trigger("reloadGrid", [{ page: 1, current: true }]); 
+            return false;
+        });
+
+    });
+    function Edit(No) {
+        var Price = $('#tb_Price span[name="' + No + '"]').parent().parent().parent().find('td:eq(2)').html();
+        $('#tb_Price span[name="' + No + '"]').parent().parent().parent().find('td:eq(2)').html('<input type="text" value="' + Price + '" />');
+        var EditBtn = $('#tb_Price span[name="' + No + '"]');
+        EditBtn.removeClass('ui-icon-pencil').addClass('ui-icon-disk');
+        //console.log($('#tb_Price span[name="' + No + '"]').parent().parent().parent().find('td:eq(2)').html());
+    }
+</script>
+
+<h2>管路灌溉材料表管理</h2>
+<div class="content">
+    <div id="title" class="form-inline">
+        <input id="searchbar" type="text" name="search" placeholder="輸入物料名稱" />
+        <input id="searchbtn" type="submit" value="查詢" class="btn" />
+        
+    </div>
+    <br />
+    <div id="div_Content">
+        <table id="grid"></table>
+        <div id="pager"></div>
+    </div>
+</div>

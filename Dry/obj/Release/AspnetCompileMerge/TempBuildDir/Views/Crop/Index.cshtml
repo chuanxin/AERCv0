@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+    @Styles.Render("~/jqgrid/css")
+    @Scripts.Render("~/bundles/jqueryjqgrid")
+}
+
+<script type="text/javascript">
+    $(function () {
+        var grid = $('#grid');
+        //農作物總覽
+        grid.jqGrid({
+            url: '@Url.Action("GetCropList", "Crop")',
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'Crop_Id'
+            },
+            mtype: 'GET',
+            colNames: ['', '', '作物', '作物類型'],
+            colModel: [
+                {
+                    name: 'myac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        onEdit: function () {
+                            $('select[name="Crop_Type"]').css('width', '180px');
+                        }
+                    },
+                },
+                { name: 'Crop_Id', search: false, hidden: true, editable: false },
+                { name: 'Crop', width: 180, align: 'left', search: true, editable: true, edittype: 'text', editoptions: { required: true } },
+                { name: 'Crop_Type', width: 180, align: 'left', search: true, align: 'center', editable: true, edittype: 'select', editoptions: { value: GetCropTypeDDL } }
+            ],
+            pager: '#pager',
+            //autowidth: true,
+            //width: 500,
+            height: 'auto',
+            rowNum: 20, //預設行數
+            rowList: [5, 10, 20, 50], //行數選單
+            sortname: 'Crop',
+            viewrecords: true,
+            rownumbers: true,
+            caption: '農作物代碼管理', //表格title
+            loadComplete: function (ids) {
+                $('.ui-pg-table table input[type=text]').css('width', '20').css('height', '20'); //設定頁數的textbox寬度及高度
+                $('.ui-pg-table table select').css('width', '60').css('height', '30'); //設定筆數的DropDownList
+                $('#pager_center').css('width', '300'); //設定頁數區塊的寬度
+                //$('#pager_left').css('width', '250'); //設定功能按鈕的區塊寬度
+            },
+            editurl: '@Url.Action("EditCrop", "Crop")',
+        });
+        grid.navGrid('#pager',
+            { edit: false, add: true, del: false, search: false },
+            {}, /*edit*/
+            {
+                url: '@Url.Action("AddCrop", "Crop")',
+                closeOnEscape: true,
+                closeAfterAdd: true/*,
+                mtype: 'GET'*/
+            }, /*add*/
+            {}, /*delete*/
+            {}, /*search*/
+            {} /*view*/
+        );
+        //查詢
+        $("#searchbtn").click(function () {
+            var searchFiler = $("#searchbar").val();
+            var grid = $("#grid");
+            if (searchFiler.length === 0) {
+                grid[0].p.search = false;
+                $.extend(grid[0].p.postData, { searchString: "" });
+            } else {
+                grid[0].p.search = true;
+                $.extend(grid[0].p.postData, { searchString: searchFiler });
+            }
+            grid.trigger("reloadGrid", [{ page: 1, current: true }]); //重新載入jqGrid
+            return false;
+        });
+        //取得作物種類DropDownList
+        function GetCropTypeDDL() {
+            var resData = '';
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetCropTypeDDL", "Crop")', function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    resData += res[i].Value + ':' + res[i].Text;
+                    if (i < res.length - 1) {
+                        resData += ';';
+                    }
+                }
+            });
+            return resData;
+        }
+    });
+</script>
+
+<h2>農作物代碼管理</h2>
+<div id="title" class="form-inline">
+    <input id="searchbar" type="text" name="search" placeholder="輸入作物名稱" />
+    <input id="searchbtn" type="submit" value="查詢" class="btn" />
+</div>
+<div id="div_Content">
+    <table id="grid"></table>
+    <div id="pager"></div>
+</div>

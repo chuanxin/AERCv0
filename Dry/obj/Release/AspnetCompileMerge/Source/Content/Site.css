@@ -1,0 +1,202 @@
+﻿* {
+	margin: 0;
+	padding: 0;
+}
+body {
+    margin: 0;
+    background: #554d42;
+    font-family:微軟正黑體;
+    font-size: 16px;
+    line-height: 20px;
+    color: #222;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+a {
+text-decoration: none;
+color: #554d42;
+}
+a:hover {
+text-decoration: underline;
+color: #CF9F5A;
+}
+#wrap {
+margin: 0px auto;
+width: 1000px;
+}
+
+#header {
+padding: 2px;
+display:block;
+height: 166px;
+background:url(images/header2.jpg) no-repeat;
+text-indent:-9999px;
+}
+#header h1 { 
+font-size: 28px;
+letter-spacing: -1px;
+padding: 29px 0 0 20px;
+color: #FF5500;
+}
+#header h1 a { 
+color: #fff;
+text-decoration: none;
+font-weight: 100;
+letter-spacing: -2px;
+}
+#header h1 a:hover {
+color: #fff;
+}
+#header h2 {
+font-size: 19px;
+color: #fff;
+padding: 5px 0 0 20px;
+letter-spacing: -1px;
+font-weight: 100;
+}
+
+#menu {
+height: 30px;
+line-height: 30px;
+background: #fff url(images/menu.jpg) no-repeat;
+}
+#menu ul {
+list-style-type: none;
+padding-left: 30px;
+}
+#menu ul li {
+display: block;
+float: left;
+font-weight:800;
+border-right:1px solid #FFE7CD;
+}
+#menu ul li a {
+padding: 0px 20px 0 10px;
+text-decoration: none;
+font-weight: 800;
+font-size: 16px;
+}
+#menu ul li a:hover 
+{
+    display:block;
+color: #FEFFAF;
+text-decoration: none;
+background-color:#7D6041;
+}
+#menu ul li a:active 
+{
+    display:block;
+color: #FEFFAF;
+text-decoration: none;
+background-color:#7D6041;
+}
+
+#content {
+background: #fff url(images/content.jpg) repeat-y;
+padding: 0 20px 20px 20px;
+/*height:600px;*/
+}
+
+
+.left {
+float: left;
+width: 160px;
+padding-top: 10px;
+}
+.left h2 {
+margin: 10px 0 0 0;
+padding-left: 10px;
+height: 24px;
+line-height: 24px;
+background: #413326;
+color: #fff;
+font-size: 16px;
+}
+.left ul {
+padding: 10px 0 15px 10px;
+list-style-type: none;
+}
+.left ul li a {
+text-decoration: none;
+font-weight: 600;
+}
+.left ul li a:hover {
+
+}
+
+#bottom {
+background: #fff url(images/bottom.jpg) no-repeat;
+padding: 10px 0;
+}
+
+#footer 
+{
+	clear: left;
+	color: #fff;
+	display:block;
+    width:1000px;
+    height:95px;
+    background:url('images/foot.jpg') no-repeat;
+
+    padding: 20px;
+	height: 1%;
+}
+#footer a { color: #fff; }
+.tbtdColor
+{
+    background:#EEE6DE;
+    text-align:center;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

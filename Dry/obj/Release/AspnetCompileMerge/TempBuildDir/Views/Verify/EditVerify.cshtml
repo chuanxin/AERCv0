@@ -1,0 +1,156 @@
+﻿@model Dry.Models.ViewModel.VerifyView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "旱作管路灌溉管理資訊系統";
+}
+<h2>農戶申請業務</h2>
+<div id="steps">
+    <table width="90%" border="0">
+        <tr>
+            @*<td class="step_n">1. 農戶基本資料</td>
+                <td class="step_to"></td>
+                <td class="step_n">2. 土地資料</td>
+                <td class="step_to"></td>
+                <td class="step_n">3. 田間管路系統</td>
+                <td class="step_to"></td>
+                <td class="step_n">4. 動力設施</td>
+                <td class="step_to"></td>
+            *@
+            <td class="step_n">5. 蓄水池</td>
+            <td class="step_to"></td>
+            <td class="step_n">6. 調控設施</td>
+            <td class="step_to"></td>
+            <td class="step_n">7. 現場勘查</td>
+            <td class="step_to"></td>
+            <td class="step_n">8. 預算書編製</td>
+            <td class="step_to"></td>
+            <td class="step_n">9. 變更設計</td>
+            <td class="step_to"></td>
+            <td class="step_n">10. 竣工報驗</td>
+            <td class="step_to"></td>
+            <td class="step_y">11. 辦理驗收</td>
+            <td class="step_to"></td>
+            <td class="step_n">12. 電子檔上傳</td>
+        </tr>
+    </table>
+</div>
+@{
+    <form id="form1">
+        <table border="1">
+            <tr>
+                <td>申請年度</td>
+                <td>@Html.Label("Year", Model.ApplyY.ToString())</td>
+            </tr>
+            <tr>
+                <td>案件編號</td>
+                <td>@Html.Label("CaseNo", Model.Case.ToString())</td>
+            </tr>
+            <tr>
+                <td>農戶姓名</td>
+                <td>@Html.Label("FName", Model.Name)</td>
+            </tr>
+            <tr>
+                <td>農戶住址</td>
+                <td>@Html.Label("FAddr", Model.Address)</td>
+            </tr>
+            <tr>
+                <td>設施地段</td>
+                <td>
+                    @foreach (var farm in Model.Farm)
+                    {
+                        <font>@farm.full_sectName , 地號: @farm.LandNo </font>
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>設施面積</td>
+                <td>@((double)Model.BuildArea / 10000) 公頃</td>
+            </tr>
+            <tr>
+                <td>設施型式</td>
+                <td>
+                    @Model.EndType
+                </td>
+            </tr>
+
+            <tr>
+                <td>驗收日期</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.VDate, new { Value = Model.VDate.ToString("yyyy/MM/dd"), @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.VDate, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>驗收人員</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.VID, (IEnumerable<SelectListItem>)Model.personDDL, new { style = "width: 100px;" })
+                            @Html.ValidationMessageFor(model => model.VID, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>驗收結果</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.statCode, (IEnumerable<SelectListItem>)Model.statusDDL, new { style = "width: 290px; height: 40px" })
+                            @Html.ValidationMessageFor(model => model.statCode, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                    原應發放: <font id="ShdPay" size="3" color="blue">@Model.PayM</font>&nbsp; &nbsp;
+                    <div class="control-group">
+                        <div class="controls">
+                            減列 :
+                            @if (Model.statCode.ToString().Equals("2"))
+                            {
+                                @Html.TextBoxFor(model => model.ReduceM, new { @style = "width: 80px;" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.ReduceM, new { @readonly = "readonly", @style = "width: 80px;" })
+                            }
+                            @Html.ValidationMessageFor(model => model.ReduceM, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            實際發放: @Html.TextBox("PayM", Convert.ToInt32(Model.PayM) - Convert.ToInt32(Model.ReduceM), new { @readonly = "readonly", @style = "width: 80px;" })
+                            @Html.ValidationMessageFor(model => model.PayM, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+
+
+
+            </tr>
+            <tr>
+                <td>驗收相關說明</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextAreaFor(model => model.Descript, new { @style = "width: 500px; height: 119px;resize: none; border: 1pt double;" })
+                            @Html.ValidationMessageFor(model => model.Descript, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" id="btn_EditData" value="送出，前往下個步驟" class="btn" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+    <script src="~/Scripts/jquery.ui.datepicker-zh-TW.js"></script>
+    <script src="~/Scripts/_Verify.js"></script>
+}

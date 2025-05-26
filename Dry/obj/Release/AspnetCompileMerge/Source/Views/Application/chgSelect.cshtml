@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+
+<h2>選擇申請項目</h2>
+
+<table id="AppTable" width="80%" border="1">
+    <thead>
+        <tr>
+            <th colspan="2" align="center">選擇申請項目</th>
+        </tr>
+    </thead>
+
+    <tr id="td_app">
+        <td width="60" align="center" class="td_style">
+            <center><input id="btn_Piping" type="button" value="申請田間管路設施補助" /></center>
+        </td>
+        <td width="60" align="center" class="td_style">
+            <center><input id="btn_Eng" type="button" value="申請動力設施補助" /></center>
+        </td>
+    </tr>
+
+    <tr>
+        <td width="60" align="center" class="td_style">
+            <center><input id="btn_Pool" type="button" value="申請蓄水池補助" /></center>
+        </td>
+        <td width="60" align="center" class="td_style">
+            <center><input id="btn_cntrl" type="button" value="申請調控設施補助" /></center>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" width="60" align="center" class="td_style">
+            <center><input id="btn_Examine" type="button" value="現地勘查資料填寫" /></center>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" width="60" align="center" class="td_style">
+            <center><input id="btn_Book" type="button" value="前往預算書編製步驟" /></center>
+        </td>
+    </tr>
+</table>
+
+<script>
+    var App_status = [];
+    $('#btn_Piping').click(function () {
+        if (data == "Success") {
+            window.location.href = "FarmerSys/chgFarmerSys";
+        }
+        return false;
+    });
+
+    $('#btn_Eng').click(function () {
+        if (data == "Success") {
+            window.location.href = "ApplyEngine/chgEng";
+        }
+        return false;
+    });
+
+    $('#btn_Pool').click(function () {
+        if (data == "Success") {
+            window.location.href = "ApplyPool/chgPool";
+        }
+        return false;
+    });
+
+    $('#btn_cntrl').click(function () {
+        if (data == "Success") {
+            window.location.href = "Ctrl/chgCtrl";
+        }
+        return false;
+    });
+
+    $('#btn_Examine').click(function () {
+        if (data == "Success") {
+            window.location.href = "Examine/chgExamine";
+        }
+        return false;
+    });
+
+    $('#btn_Book').click(function () {
+        if (data == "Success") {
+            window.location.href = "BudgetBook/Create";
+        }
+        return false;
+    });
+
+    function CheckStaus() {
+        $.ajaxSettings.async = false;
+        $.getJSON('../Application/GetStatus', function (data) {
+        });
+    }
+</script>

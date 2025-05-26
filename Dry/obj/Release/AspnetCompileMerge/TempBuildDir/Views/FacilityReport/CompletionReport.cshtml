@@ -1,0 +1,95 @@
+﻿@model Dry.Models.ViewModel.FacilityReportView
+
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+
+@{
+    <form id="form_CompletionReport">
+        <table border="1" class="dashTable" style="width:100%;">
+            <tr>
+                <td class="td_style">申請年度</td>
+                <td>@Model.ApplyY</td>
+            </tr>
+            <tr>
+                <td class="td_style">案件編號</td>
+                <td>@Model.IANum</td>
+            </tr>
+            <tr>
+                <td class="td_style">農戶姓名</td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <td class="td_style">農戶住址</td>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <td class="td_style">設施地段</td>
+                <td>
+                    @foreach (var farm in Model.Farm)
+                    {
+                        <font>@farm.full_sectName , 地號: @farm.LandNo </font>
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">設施面積</td>
+                <td>@((double)Model.BuildArea / 10000) 公頃</td>
+            </tr>
+            <tr>
+                <td class="td_style">設施型式</td>
+                <td>
+                    @Model.EndType
+                </td>
+            </tr>
+
+            <tr>
+                <td class="td_style">竣工日期</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.EDate, new { Value = Model.EDate.ToString("yyyy/MM/dd"), @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.EDate, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">竣工狀況</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @foreach (var item in Model.ResultList)
+                            {
+                                @Html.RadioButton("Result", item.Value, item.Selected)  <font> @item.Text </font><br />
+                            }
+                            @Html.ValidationMessageFor(model => model.Result, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+                @{
+                    if (Model.Complete)
+                    {
+                        
+                    } else {
+                               if (!Model.IsModify)
+                              {
+                              <input type="button" id="btn_SubmitCompletionReport" value="送出，前往下個步驟" class="btn" />
+                              } else
+                              {
+                                <input id="btn_CompletionReportModify" type="button" value="修改案件驗收" class="btn" />
+                              }
+                    }
+                }
+    </form>
+    @*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">*@
+    @*<script src="~/Scripts/jquery.ui.datepicker-zh-TW.js"></script>*@
+    <script src="~/Scripts/_ComRpt.js"></script>
+    <script type="text/javascript">
+        ResetTimeout();
+    </script>
+}

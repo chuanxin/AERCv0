@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+@model AERC.Models.ViewModel.AdminViewData
+@Styles.Render("~/content/css")
+@Scripts.Render("~/js")
+<script type="text/javascript">
+    $(function () {
+        $('#passOver').hover(function () {
+            $('#span_pass').css('color', '#000000');
+        }, function () {
+            $('#span_pass').css('color', '#ffffff');
+        });
+    });
+</script>
+<html>
+<body>
+    <table class="table">
+        <tr>
+            <td>姓名</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>帳號</td>
+            <td>@Model.Account</td>
+        </tr>
+        <tr id ="passOver">
+            <td>密碼</td>
+            <td>
+                <span id="span_pass" style="color:white;">@Model.Password</span>
+            </td>
+        </tr>
+        <tr>
+            <td>職稱</td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td>組室</td>
+            <td>@Model.Organization</td>
+        </tr>
+        <tr>
+            <td>電話</td>
+            <td>@Model.Telephone</td>
+        </tr>
+        <tr>
+            <td>手機</td>
+            <td>@Model.Mobile</td>
+        </tr>
+        <tr>
+            <td>傳真</td>
+            <td>@Model.Fax</td>
+        </tr>
+    </table>
+</body>
+</html>

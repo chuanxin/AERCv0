@@ -1,0 +1,112 @@
+﻿@model Dry.Models.ViewModel.FacSystemView
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+
+<form id="form1">
+    <table border="1" class="dashTable" align="center" width="80%">
+        <tr>
+            <th colspan="4">公版系統資訊</th>
+        </tr>
+        <tr>
+            <td class="td_style">
+                公版系統代號 :
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.EditorFor(model => model.StdSysNo)
+                        @Html.ValidationMessageFor(model => model.StdSysNo, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">
+                公版系統名字 :
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.EditorFor(model => model.StdSysName)
+                        @Html.ValidationMessageFor(model => model.StdSysName, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_style">
+                末端型式 :
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownList("ddl_EndType", (IEnumerable<SelectListItem>)Model.EndTypeDDL)
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">
+                噴頭種類 :
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownList("ddl_FacType", (IEnumerable<SelectListItem>)Model.FacTypeDDL)
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_style">
+                系統描述 :
+            </td>
+            <td colspan="3">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextAreaFor(model => model.StdSysDesp, new { style = "overflow: hidden; resize: none; width: 90%; height: 60px" })
+                        @Html.ValidationMessageFor(model => model.StdSysDesp, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">物料蒐索 : </td>
+            <td colspan="3">
+                <div class="repo-dropdown-menu">
+                    <input id="btn_search" class="typeahead" type="text" placeholder="請輸入物料名稱 or 物料代碼">
+                </div>
+            </td>
+            @*<td colspan="1"><input id="btn_addMat" type="button" class="btn btn-info" value="新增物料" /></td>*@
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table id="Mat_tabl" border="1" class="dashTable" align="center" width="100%">
+                    <thead>
+                        <tr>
+                            <th colspan="7">公版系統物料表</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td class="td_style">物料代碼</td>
+                        <td class="td_style">物料名稱</td>
+                        <td class="td_style">物料類別</td>
+                        <td class="td_style">物料規格</td>
+                        <td class="td_style">物料單位</td>
+                        <td class="td_style">物料敘述</td>
+                        <td class="td_style">刪除</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="4">
+                <input id="btn_create" type="button" value="創建公版系統" class="btn btn-primary btn-lg" style="width: 100%" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script src="~/Scripts/_StandardSys.js"></script>

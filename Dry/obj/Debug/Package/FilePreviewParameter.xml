@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site\NewDryTest" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="Default Web Site\NewDryTest/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="CommonEntities-Web.config Connection String" description="" value="metadata=res://*/Common.csdl|res://*/Common.ssdl|res://*/Common.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=203.66.65.113;Initial Catalog=Common;Persist Security Info=True;User ID=aerc;Password=aerc43509532;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CommonEntities']/@connectionString" />
+  </parameter>
+  <parameter name="DryContext-Web.config Connection String" description="" value="Data Source=(localdb)\v11.0; Initial Catalog=DryContext-20150128103444; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|DryContext-20150128103444.mdf" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DryContext']/@connectionString" />
+  </parameter>
+  <parameter name="DryEntities-Web.config Connection String" description="" value="metadata=res://*/Dry.csdl|res://*/Dry.ssdl|res://*/Dry.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=203.66.65.113;Initial Catalog=DryTest;Persist Security Info=True;User ID=aerc;Password=aerc43509532;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Source\\Workspaces\\AERC\\Dry\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DryEntities']/@connectionString" />
+  </parameter>
+</parameters>

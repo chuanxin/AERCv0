@@ -1,0 +1,321 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+    @model Dry.Models.ViewModel.ReportView
+}
+
+<script>
+    $(function () {
+        //$('input[id^="IANumStart"]').attr('class', 'input-mini');
+        //$('input[id^="IANumEnd"]').attr('class', 'input-mini');
+        $('#ddl_ApplyYear').change(function () {
+            var year = $(this).val();
+            $('input[id^="ApplyYear"]').each(function () {
+                $(this).val(year);
+            });
+        });
+        $('#ddl_ApplyYearS').change(function () {
+            var year = $(this).val();
+            $('input[id^="ApplyYearStart"]').each(function () {
+                $(this).val(year);
+            });
+        });
+        $('#ddl_ApplyYearE').change(function () {
+            var year = $(this).val();
+            $('input[id^="ApplyYearEnd"]').each(function () {
+                $(this).val(year);
+            });
+        });
+
+        $('input[id^="ApplyYear"]').hide();
+        $('input[id^="ApplyYearStart"]').hide();
+        $('input[id^="ApplyYearEnd"]').hide();
+
+        $('#govtype').change(function () {
+            var gov = $(this).val();
+            $('input[id^="govtype"]').each(function () {
+                $(this).val(gov);
+            });
+        });
+        $('input[id^="govtype"]').hide();
+        $('#ApplyUnit').change(function () {
+            var uit = $(this).val();
+            $('input[id^="ApplyUnit"]').each(function () {
+                $(this).val(uit);
+            });
+        });
+
+        $('input[id^="ApplyUnit"]').hide();
+
+    });
+</script>
+<h2>統計報表</h2>
+@Html.DropDownList("ddl_ApplyYear", (IEnumerable<SelectListItem>)Model.ApplyYearDDL, new { style = "width: 100px;" })
+@{
+    if (ViewBag.Unit == 9 || ViewBag.Unit == 10 || ViewBag.Unit == 0 || ViewBag.Unit == 99 || ViewBag.Unit == 20) {
+        <span>類型</span>
+        @Html.DropDownListFor(model => model.govtype, new SelectList(new List<object>
+            {
+            new {value = 1 , text = "一般"},
+            new {value = 2, text = "不含黃金廊道"}
+            }, "value", "text", 0
+        ), new { @class = "form-control" })
+    }
+    if (ViewBag.Unit == 99 || ViewBag.Unit == 0 || ViewBag.Unit == 20)
+    {
+        @Html.DropDownListFor(model => model.ApplyUnit, Model.UnitsDDL, new { @class = "form-control"})
+    }
+}
+<div class="row-fluid">
+    <div class="span6">
+        <div class="span12">
+            <span class="label label-info">農作物統計表</span>
+        </div>
+        <div class="row-fluid">
+            @using (Html.BeginForm("PlantArea", "StatReport"))
+            {
+                @Html.EditorFor(model => model.ApplyYear)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+            }
+        </div>
+    </div>
+    <div class="span6">
+        <div class="span12">
+            <span class="label label-info">工程決算表</span>
+        </div>
+        <div class="row-fluid">
+            @using (Html.BeginForm("ClosingAccount", "StatReport"))
+            {
+
+                @Html.EditorFor(model => model.ApplyYear)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="span12">
+            <span class="label label-info">設施面積及補助金額統計表</span>
+        </div>
+        <div class="row-fluid">
+            @using (Html.BeginForm("TownApplyStastics", "StatReport"))
+            {
+                @Html.EditorFor(model => model.ApplyYear)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+            }
+        </div>
+    </div>
+    <div class="span6">
+        <div class="span12">
+            <span class="label label-info">成果統計表</span>
+        </div>
+        <div class="row-fluid">
+            @using (Html.BeginForm("DeliverResult", "StatReport"))
+            {
+
+                @Html.EditorFor(model => model.ApplyYear)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+@if (ViewBag.Unit == 99 || ViewBag.Unit == 0 || ViewBag.Unit == 20)
+{
+
+    List<SelectListItem> dd1 = new List<SelectListItem>();
+    List<SelectListItem> dd2 = new List<SelectListItem>();
+    dd1.Add(new SelectListItem { Text = "開始年", Value = "0", Selected = true });
+    dd2.Add(new SelectListItem { Text = "結束年", Value = "0", Selected = true });
+    foreach (var item in Model.ApplyYearDDL)
+    {
+        item.Selected = false;
+        dd1.Add(item);
+        dd2.Add(item);
+    }
+
+    <div>
+
+        @Html.DropDownList("ddl_ApplyYearS", dd1, new { style = "width: 100px;" })
+        <span><i class="icon-circle-arrow-right "></i></span>
+        @Html.DropDownList("ddl_ApplyYearE", dd2, new { style = "width: 100px;" })
+    </div>
+    <div class="row-fluid">
+
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info">鄉鎮設施面積及補助金額統計表</span>
+            </div>
+            <div class="row-fluid">
+                @using (Html.BeginForm("TownApplyStasticsAll", "StatReport", FormMethod.Post, new { id = "formTASA" }))
+                {
+
+                @Html.EditorFor(model => model.ApplyYearStart)
+                @Html.EditorFor(model => model.ApplyYearEnd)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+                    }
+            </div>
+        </div>
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info">全國歷年成果統計表</span>
+            </div>
+            <div class="row-fluid">
+                @using (Html.BeginForm("DeliverResultAll", "StatReport", FormMethod.Post, new { id="formDRA" }))
+                {
+
+                @Html.EditorFor(model => model.ApplyYearStart)
+                @Html.EditorFor(model => model.ApplyYearEnd)
+                @Html.EditorFor(model => model.govtype)
+                @Html.EditorFor(model => model.ApplyUnit)
+                <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                    <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                    <br />
+                    <font size="2">匯出Excel</font>
+                </button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info">縣市設施面積及補助金額統計表</span>
+            </div>
+            <div class="row-fluid">
+                @using (Html.BeginForm("CityApplyStasticsAll", "StatReport", FormMethod.Post, new { id = "formCASA" }))
+                {
+
+                    @Html.EditorFor(model => model.ApplyYearStart)
+                    @Html.EditorFor(model => model.ApplyYearEnd)
+                    @Html.EditorFor(model => model.govtype)
+                    @Html.EditorFor(model => model.ApplyUnit)
+                    <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                        <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                        <br />
+                        <font size="2">匯出Excel</font>
+                    </button>
+                    }
+            </div>
+        </div>
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info">管理處歷年統計表</span>
+            </div>
+            <div class="row-fluid">
+                @using (Html.BeginForm("IaApplyStatisticsReport", "StatReport", FormMethod.Post, new { id = "formISR" }))
+                {
+
+                    @Html.EditorFor(model => model.ApplyYearStart)
+                    @Html.EditorFor(model => model.ApplyYearEnd)
+                    @Html.EditorFor(model => model.govtype)
+                    @Html.EditorFor(model => model.ApplyUnit)
+                    <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                        <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                        <br />
+                        <font size="2">匯出Excel</font>
+                    </button>
+                    }
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row-fluid">
+
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info">預算中鄉鎮統計表</span>
+            </div>
+            <div class="row-fluid">
+                @using (Html.BeginForm("TownApplyStasticsAllBudget", "StatReport"))
+                {
+
+                    @Html.EditorFor(model => model.ApplyYearStart)
+                    @Html.EditorFor(model => model.ApplyYearEnd)
+                    @Html.EditorFor(model => model.govtype)
+                    @Html.EditorFor(model => model.ApplyUnit)
+                    <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                        <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                        <br />
+                        <font size="2">匯出Excel</font>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="span6">
+            <div class="span12">
+                <span class="label label-info"></span>
+            </div>
+            <div class="row-fluid">
+               
+            </div>
+        </div>
+    </div>*@
+}
+
+
+@section scripts{
+    <script>
+        //alert("script");
+        $("#formDRA").on("submit", () => {            
+            if ($("#ddl_ApplyYearS").val() == 0 || $("#ddl_ApplyYearE").val() == 0) {
+                alert("年期不可以為空白");
+                return false;
+            }
+        });
+        $("#formCASA").on("submit", () => {
+            if ($("#ddl_ApplyYearS").val() == 0 || $("#ddl_ApplyYearE").val() == 0) {
+                alert("年期不可以為空白");
+                return false;
+            }
+        });
+        $("#formISR").on("submit", () => {
+            if ($("#ddl_ApplyYearS").val() == 0 || $("#ddl_ApplyYearE").val() == 0) {
+                alert("年期不可以為空白");
+                return false;
+            }
+        });
+        $("#formTASA").on("submit", () => {
+            if ($("#ddl_ApplyYearS").val() == 0 || $("#ddl_ApplyYearE").val() == 0) {
+                alert("年期不可以為空白");
+                return false;
+            }
+        });
+
+    </script>
+    
+    }
+
+
+

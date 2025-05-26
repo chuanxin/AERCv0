@@ -1,0 +1,204 @@
+﻿@model Dry.Models.ViewModel.PoolView
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+<table id="tb_PoolShowTable" class="dashTable" style="width:100%;" border="1" align="center">
+    <thead>
+        <tr>
+            <th colspan="5" align="center">蓄水池列表</th>
+        </tr>
+    </thead>
+    <tr id="td_PoolTitle">
+        <th width="40" align="center" class="td_style">序號</th>
+        <th width="100" align="center" class="td_style">蓄水池材質</th>
+        <th width="100" align="center" class="td_style">蓄水池噸數</th>
+        @*<th width="120" align="center" class="td_style">蓄水池尺吋(m x m)</th>*@
+        <th width="100" align="center" class="td_style">政府補助</th>
+        <th width="40" align="center" class="td_style">刪除</th>
+    </tr>
+    @if (Model.PoolData != null)
+    {
+        int i = 1;
+        foreach (var item in Model.PoolData)
+        {
+            string money_str = @item.Money.ToString();
+            if (@item.Money == 0)
+                money_str += " (農戶需自行支出)";
+            <tr id="tr_pool_@i">
+                <td id="td_no" width="40" align="center">
+                    @i
+                </td>
+                <td id="td_pooltype" width="100" align="center">@item.PoolTypeName</td>
+                <td id="td_poolW" width="100" align="center">@item.PoolWeight</td>
+                @*<td id="td_poolSize" width="100" align="center">@item.PoolSize</td>*@
+                <td id="td_money" width="100" class="number_right">@money_str</td>
+                <td width="40" align="center">
+                    <a class="btn btn-danger" id="del_link" href="#" onclick="$('#tr_pool_@i').DelPool();return false;">刪除</a>
+                </td>
+                <input id="hidden_pType" type="hidden" value="@item.PoolType" />
+                <input id="hidden_pPrice" type="hidden" value="@item.Money" />
+            </tr>
+            i++;
+        }
+    }
+    else
+    {
+        <tr id="td_PoolEmpty">
+            <td colspan="5" align="center"><h2>尚未新增蓄水設施</h2></td>
+        </tr>
+    }
+</table>
+<input type="hidden" id="tdCaseM" name="tdCaseM">
+<br />
+
+<form id="form_Pool1">
+    <table border="1" class="dashTable" align="center" style="width:100%;">
+        <tr>
+            <td class="td_style">
+                材質
+            </td>
+            
+            <td class="td_style">
+                噸數
+            </td>
+            <td class ="td_style">
+                單價
+            </td>
+            @*<td class="td_style">
+                    尺寸，單位: m (周長x高)
+                </td>*@
+
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                @Html.DropDownList("ddl_PoolType", (IEnumerable<SelectListItem>)Model.PoolTypeDDL, new { style = "width: 100px;"})
+            </td>
+
+            <td>
+                @*<div class="control-group">
+        <div class="controls">*@
+                @*@Html.DropDownList("ddl_Weight", (IEnumerable<SelectListItem>)Model.WeightDDL, new { style = "width: 100px;" })*@
+                @*@Html.EditorFor(model => model.txt_PoolW)*@
+                @*@Html.DropDownListFor(model => model.txt_PoolW, new SelectList((System.Collections.IEnumerable)Model.WeightDDL, "Value", "Text"), new { style = "width: 100px;" })*@
+                @*@Html.ValidationMessageFor(model => model.txt_PoolW, null, new { @class = "help-inline" })*@
+                @*</div>
+        </div>*@
+                @Html.DropDownList("ddl_Weight", (IEnumerable<SelectListItem>)Model.WeightDDL, new { style = "width: 100px;" })
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.PoolPrice, new { @readonly = "readonly" })
+                        <input type="button" class="btn btn-danger" id="mdy_price" value="修改單價" name="mdy_price" />
+                        <input type="button" class="btn btn-primary" id="rst_price" value="回復" name="rst_price" />
+                    </div>
+                    
+                </div>
+
+            </td>
+            @*<td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.EditorFor(model => model.txt_PoolSize)
+                            @Html.ValidationMessageFor(model => model.txt_PoolSize, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>*@
+            <td>
+                <input type="button" id="btn_PoolIns15" value="15年" class="btn invisible" disabled="disabled"/>
+                <input type="button" id="btn_PoolIns20" value="20年" class="btn invisible" disabled="disabled"/>
+            </td>
+            <td>
+                <input type="button" id="btn_PoolIns" value="新增蓄水設施" class="btn" name="btn_PoolIns" />
+            </td>
+
+        </tr>
+    </table>
+    <br />
+</form>
+
+<form id="form_Pool2">
+    <table border="1" class="dashTable" align="center" style="width:80%;">
+        @*<tr>
+                <td class="td_style">
+                    蓄水設施建置工程費
+                </td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.EditorFor(model => model.FacPrice)
+                            @Html.ValidationMessageFor(model => model.FacPrice, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>*@
+
+        <tr>
+            <td class="td_style">
+                補助來源
+            </td>
+            <td colspan="2">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.ddl_PoolUnit, new SelectList((System.Collections.IEnumerable)Model.UnitDDL, "Value", "Text"), new { style = "width: 320px;" })
+                        @Html.ValidationMessageFor(model => model.ddl_PoolUnit, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                @{if (@ViewBag.Gold == true)
+                  {
+                      //Html.RenderPartial("../FundingTableGold");
+                      Html.RenderPartial("../FundingTable"); 
+                      
+                  }
+                  else 
+                  { 
+                      Html.RenderPartial("../FundingTable"); 
+                  }
+                    
+                    
+                  }
+            </td>
+        </tr>
+    </table>
+    @if(Model.Step < 8)
+    {
+        if(!@Model.IsModify)
+        {
+            <input id="btn_PoolSubmit" type="button" value="送出，前往下個步驟" class="btn" />
+            <input id="btn_PoolPass" type="button" value="略過>>" class="btn" />
+        }
+        else
+        {
+            <input id="btn_PoolModify" type="button" value="修改蓄水池" class="btn" name="btn_PoolModify" />
+        }
+    }
+    <div id="alert_PoolNoData" class="alert alert-error" style="display:none; width:160px;">
+        至少輸入一筆蓄水設施。
+    </div>
+</form>
+
+<script src="~/Scripts/_Pool.js"></script>
+
+<script>
+    //Set CaseMoney & TotalM
+    var Area = '@(Model.Area)';
+    $("#tdCaseM").text('@(Model.CaseMoney)');
+    $("#tdTotalM").text('@(Model.TotalM)');
+    $("#tdGovM").text('@(Model.GovM)');
+    $('#tdFarM').text('@(Model.FarmM)');
+    var gold = $('#tdGoldM');
+    if (gold !== null) 
+    {
+        gold.text('@Model.GoldM');
+
+       
+    }   
+
+</script>

@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>typeahead – examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="http://twitter.com/favicons/favicon.ico">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />    
+</head>
+<body>
+    <div id="custom-templates">
+        <input id="typeahead" class="typeahead" type="text" placeholder="請輸入「物料名稱」">
+    </div>
+
+    <script src="http://twitter.github.io/typeahead.js/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="http://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+    <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+    <script src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
+
+    <script>
+        $(function () {
+
+            var MatData = function (query, process) {
+                var Mat = [];
+                var parameter = { query: query };
+                $.ajaxSetup({ "async": false });
+                jQuery.getJSON("/Home/GetData", parameter, function (data) {
+                    Mat = data;
+                });
+                return Mat;
+            };
+
+            var DryMat = new Bloodhound({
+                name: 'Mat',
+                local: MatData,
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('matname'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+            DryMat.initialize();
+
+            $('#typeahead').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'DryMat',
+                    displayKey: 'matname',
+                    valueKey: 'name',
+                    source: DryMat.ttAdapter(),
+                    templates: {
+                        empty: [
+                          '<div class="empty-message">',
+                          '找不到您輸入的物料， 請重新查詢!',
+                          '</div>'
+                        ].join('\n'),
+                        suggestion: Handlebars.compile('<p class="repo-module">{{module}}</p><p class="repo-matname">{{matname}}</p><p class="repo-description">規格: {{spec}}<br>&nbsp;&nbsp;描述: {{description}}</p>')
+                    }
+                    , engine: Hogan
+                }
+            );
+            console.log();
+        });
+    </script>
+
+</body>
+
+</html>

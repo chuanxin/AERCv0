@@ -1,0 +1,75 @@
+﻿@model Dry.Models.DesignerList
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <h2>新增設計者</h2>
+    <div class="content">
+        <table>
+            <tr>
+                <td class="td_style">姓名</td>
+                <td>
+                    @Html.EditorFor(model => model.Designer_Name)
+                    @Html.ValidationMessageFor(model => model.Designer_Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">電話</td>
+                <td >
+                    @Html.EditorFor(model => model.Phone)
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="新增" id="Designersubmit" class="addBtn" />
+        </p>
+</div>
+}
+
+<h4>
+    >> @Html.ActionLink("返回設計者列表", "Index")
+</h4>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+<script type="text/javascript">
+    $('#Designersubmit').click(function (e) {
+        e.preventDefault();
+        if ($('#Designer_Name').val() == '') {
+            alert('請輸入設計者姓名!!');
+            return false;
+        }
+        if ($('#Phone').val() == '') {
+            alert('請輸入設計者電話!!');
+            return false;
+        }
+
+        $.ajaxSettings.async = false;
+        $.post(
+               "../Designer/Create",
+               {
+                   Designer_Name: $('#Designer_Name').val(),
+                   Phone: $('#Phone').val()
+               },
+               function (data) {
+                   alert(data.result);
+                   if (data.result == '新增失敗!!') {
+                       return false;
+                   }
+                   else {
+                       window.location.href = data.url;
+                   }
+               },
+               "json"
+            );
+    });
+</script>

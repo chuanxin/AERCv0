@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/content/css")*@
+    @*@Scripts.Render("~/Scripts/modernizr-1.5.min.js")*@
+    @*@Styles.Render("~/content/AllMyCss")*@
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/js")
+</head>
+<body>
+
+    <div id="main">
+        <header>
+            <div id="logo">
+                <div id="logo_text">
+                    <!-- class="logo_colour", allows you to change the colour of the text
+                    <img src="~/Content/images/header2(new1200).png" />-->
+                    <!--<h2 align="right">推廣旱作灌太及現代化管理設施計畫</h2>-->
+                </div>
+
+            </div>
+            <nav>
+                <ul class="sf-menu" id="nav">
+                    <li class="current">@Html.ActionLink("旱作灌溉系統", "Index", "Home", new { area = "Dry" }, null)</li>
+                    <!--<li><a href="#">災情通報系統</a></li>
+                    <li><a href="#">水資源管理系統</a></li>
+                    <li><a href="#">農田排水管理系統</a></li>
+                    <li><a href="#">漁業署的系統</a></li>-->
+                </ul>
+            </nav>
+        </header>
+        <div id="site_content">
+            <div id="sidebar_container">
+                <div class="sidebar">
+                    <h3>登入資訊</h3>
+                    <div class="sidebar_item">
+                        <h4>宜蘭農田水利會 <img src="~/Content/images/user32.png" /></h4>
+                        <h5>IP 192.168.1.1</h5>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <h3>申請業務</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            <!--<li>@Html.ActionLink("調控設施", "Index", "Ctrl", new { area = "Dry" }, null)</li>
+                                <li><a href="1.html">* 公告資訊</a></li>-->
+                            <li>
+                                @Html.ActionLink("農戶申請業務", "Index", "Farmer", new { area = "Dry" }, null)
+                            </li>
+                            @*<li><a</li>
+                                href="#">旱灌區會員申請業務</a></li>*@
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                @*<div class="sidebar">
+                        <h3>農戶及旱灌區會員</h3>
+                        <div class="sidebar_item">
+                            <ul>
+                                <li><a href="#">農戶管理</a></li>
+                                <li><a href="3.html">旱灌區會員管理</a></li>
+                                <li><a href="#">土地所有權人管理</a></li>
+                            </ul>
+                        </div>
+                        <div class="sidebar_base"></div>
+                    </div>*@
+                <div class="sidebar">
+                    <h3>後台基本資料維護</h3>
+                    <div class="sidebar_item">
+                        <ul>
+
+                            <li><a href="#">鄉鎮代碼管理</a></li>
+                            <li><a href="#">地段代碼管理</a></li>
+                            <li><a href="#">農作物代碼管理</a></li>
+                            <li><a href="#">公版灌溉系統管理</a></li>
+                            <li><a href="#">管路灌溉材料表管理</a></li>
+                            @*<li><a href="#">灌溉設施補助標準管理</a></li>*@
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                <div class="sidebar">
+                    <h3>查詢</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            @*<li><a href="#">旱灌受益戶查詢</a></li>*@
+                            <li><a href="#">鄉鎮查詢</a></li>
+                            <li><a href="#">地段查詢</a></li>
+                            <li><a href="#">農作物查詢</a></li>
+                            <li><a href="#">地籍地號查詢</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                <div class="sidebar">
+                    <h3>歷年統計資訊</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            <li><a href="#">旱作灌溉資料統計</a></li>
+                            @*<li><a href="#">旱灌受益戶可加入會員統計</a></li>*@
+                            <li><a href="#">補助鄉鎮成果統計</a></li>
+                            <li><a href="#">作物推廣面積及比例</a></li>
+                            <li><a href="#">推廣補助經費統計</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                @*<div class="sidebar">
+                        <h3>報表輸出</h3>
+                        <div class="sidebar_item">
+                            <ul>
+                                <li><a href="#">會員會籍卡輸出</a></li>
+                                <li><a href="#">加入會員(旱灌區) 申請書</a></li>
+                            </ul>
+                        </div>
+                        <div class="sidebar_base"></div>
+                    </div>*@
+                <div class="sidebar">
+                    <h3>文件下載</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            @*<li><a href="#">受益戶申請會員會籍說明</a></li>*@
+                            <li><a href="#">推廣旱作管路灌溉作業要點</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                <div class="sidebar">
+                    <h3>GIS業務</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            <li><a href="#">GIS業務</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+                <div class="sidebar">
+                    <h3>管理者功能</h3>
+                    <div class="sidebar_item">
+                        <ul>
+                            <li><a href="4.html">使用者管理</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar_base"></div>
+                </div>
+            </div>
+            <div class="content">
+                @RenderBody()
+                @*@Scripts.Render("~/bundles/jquery")
+                    @RenderSection("scripts", required: false)*@
+            </div>
+
+        </div>
+        <footer>
+            <p>Copyright &copy; 2014 | <a href="http://www.aerc.org.tw">design from 農業工程研究中心</a></p>
+        </footer>
+    </div>
+    <!-- javascript at the bottom for fast page loading -->
+    @*@Scripts.Render("~/Scripts/jquery.js")
+        @Scripts.Render("~/Scripts/jquery.easing-sooper.js")
+        @Scripts.Render("~/Scripts/jquery.sooperfish.js")*@
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('ul.sf-menu').sooperfish();
+            });
+        </script>*@
+
+</body>
+</html>

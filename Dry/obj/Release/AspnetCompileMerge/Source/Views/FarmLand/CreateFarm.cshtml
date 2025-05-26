@@ -1,0 +1,945 @@
+﻿@model Dry.Models.ViewModel.FarmLandView
+@Scripts.Render("~/jquery.validate")
+<script src="~/Scripts/jquery.textchange.min.js"></script>
+<script src="~/Scripts/_Farm.js"></script>
+@Scripts.Render("~/bundles/jqueryjqgrid")
+@Styles.Render("~/jqgrid/css")
+
+
+<script type="text/javascript">
+    var Map;
+    var marker;
+
+    //Define OSM as base layer in addition to the default Google layers
+    //var osmMapType = new google.maps.ImageMapType({
+    //    getTileUrl: function (coord, zoom) {
+    //        return "http://tile.openstreetmap.org/" +
+    //    zoom + "/" + coord.x + "/" + coord.y + ".png";
+    //    },
+    //    tileSize: new google.maps.Size(256, 256),
+    //    isPng: true,
+    //    alt: "OpenStreetMap",
+    //    name: "OSM",
+    //    maxZoom: 19
+    //});
+
+    //define mapAPI
+
+    $("#btnMap").click(function () {
+        //alert("123");
+
+        //$("#grid tr td:nth-child(2)").each(function (item) {
+        //    alert($(this).text());
+        //});
+        var fnolist = [];
+        $("#grid tr td[aria-describedby='grid_FNo'][style='display:none;']").each(function () {
+            //alert($(this).text());
+            fnolist.push($(this).text());
+        });
+        if (fnolist.length > 0 ) {
+            //alert(fnolist.length);
+            $.ajax({
+                type: "get",
+                url: "@Url.Content("~/FarmLand/getMapData")",
+                data: {o: JSON.stringify(fnolist)  },
+                dataType: "json",
+                success: function (data) {
+                    var js = JSON.stringify(data).replace("Operator", "operator").replace("wherE", "where");
+                    openMap(js);
+                }
+            });
+        } else {
+            alert("沒有土地資料可供定位!!");
+        }
+    });
+
+
+    function openMap(js) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "http://irrggis.aerc.org.tw/AercAPI/AERC/MapAPI");
+        form.setAttribute("target", 'IrrgAPI');
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'jsonTxt';
+        input.value = js;
+        form.appendChild(input);
+        document.body.appendChild(form);
+        window.open('http://irrggis.aerc.org.tw/AercAPI/AERC/MapAPI', 'IrrgAPI')
+
+        form.submit();
+        document.body.removeChild(form);
+    }
+
+    //Define custom WMS tiled layer
+    @*var SLPLayer = new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            var proj = Map.getProjection();
+            var zfactor = Math.pow(2, zoom);
+            // get Long Lat coordinates
+            var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 256 / zfactor, coord.y * 256 / zfactor));
+            var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 256 / zfactor, (coord.y + 1) * 256 / zfactor));
+
+            //corrections for the slight shift of the SLP (mapserver)
+            var deltaX = 0
+            var deltaY = 0;
+
+            //create the Bounding box string
+            var bbox = (top.lng() + deltaX) + "," +
+                           (bot.lat() + deltaY) + "," +
+                           (bot.lng() + deltaX) + "," +
+                           (top.lat() + deltaY);
+            //base WMS URL
+            var url = "http://203.66.14.109:8080/geoserver/Taiwan/wms?";
+            url += "REQUEST=GetMap"; //WMS operation
+            url += "&SERVICE=WMS";    //WMS service
+            url += "&VERSION=1.1.0";  //WMS version
+            url += "&LAYERS=Taiwan:" + '@Model.iaWMS'; //WMS layers
+            url += "&FORMAT=image/png"; //WMS format
+            url += "&BGCOLOR=0xFFFFFF";
+            url += "&TRANSPARENT=TRUE";
+            url += "&SRS=EPSG:4326";     //set WGS84
+            url += "&BBOX=" + bbox;      // set bounding box
+            url += "&WIDTH=256";          //tile size in google
+            url += "&HEIGHT=256";
+            return url;                 // return URL for the tile
+
+        },
+        tileSize: new google.maps.Size(256, 256),
+        isPng: true
+    });*@
+
+    //function initialize(latlng) {
+    //    //var latlng = new google.maps.LatLng(24.985, 121.240);
+    //    var Options = {
+    //        zoom: 15,
+    //        center: latlng,
+    //        mapTypeId: 'OSM',
+    //        mapTypeControlOptions: {
+    //            mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP,
+	//			google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN],
+    //            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+    //        }
+    //    };
+    //    Map = new google.maps.Map(document.getElementById("div_Map"), Options);
+    //    Map.mapTypes.set('OSM', osmMapType);
+    //    Map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+    //    //add WMS layer
+    //    //Map.overlayMapTypes.push(SLPLayer);
+
+    //    //Accordion預設閉合
+    //    $('.accordion-header-selected').trigger('click');
+    //}
+
+    //function MarkMap(Position) {
+    //    //清除上一筆Marker
+    //    /*if (marker) {
+    //        marker.setMap(null);
+    //    }*/
+    //    if (Position.lat() == 0 && Position.lng() == 0)
+    //        return;
+    //    marker = new google.maps.Marker({
+    //        position: Position,
+    //        map: Map
+    //    });
+
+    //    Map.setCenter(Position);
+
+    //}
+
+
+
+    $(function () {
+        //var latlng = new google.maps.LatLng(24.985, 121.240);
+        //var count = 0;
+        //initialize(latlng);
+        //藉由html5取得位置
+        //if (navigator.geolocation) {
+        //    navigator.geolocation.getCurrentPosition(function (position) {
+        //        var coords = position.coords;
+        //        latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+        //        initialize(latlng);
+        //    }),
+        //    function (error) {
+        //        latlng = new google.maps.LatLng(24.985, 121.240);
+        //    }
+        //}
+
+        //google.maps.event.addListener(Map, 'click', function (e) {
+        //    MarkMap(e.latLng);
+        //    //填入坐標
+        //    $('#Lat').val(e.latLng.lat().toFixed(6));
+        //    $('#Long').val(e.latLng.lng().toFixed(6));
+        //});
+
+        //數字格式化
+        //$('#LandArea').number(true, 2);
+        //$('#BuildArea').number(true, 2);
+
+        //瑠公-會員申請書-列印
+        $('#BtnMemberPdf').click(function () {
+            var count = 1;
+            var SectionDataArry = []; //地段資料陣列
+            var Data = new Object(); //農地資訊
+            var Section_Data = new Object(); //地段資料
+            var ApprovedArea = 0; //核定面積
+            $('#FarmTable > tbody > tr:not(:first)').each(function () {
+                //console.log($(this).find('td:eq(0)').html());
+                Data.Build_Area = $.trim($(this).find('td:eq(0)').html().split('-')[0]) + $.trim($(this).find('td:eq(0)').html().split('-')[1]); //施設地區
+                ApprovedArea += parseFloat($.trim($(this).find('td:eq(4)').html())); //核定面積
+                if ($(this).find('td:eq(0)').html().split('-').length > 3) { //判斷有無小段
+                    Section_Data.Section = $(this).find('td:eq(0)').html().split('-')[2]; //地段
+                    Section_Data.SubSection = $(this).find('td:eq(0)').html().split('-')[3]; //小段
+                } else {
+                    Section_Data.Section = $(this).find('td:eq(0)').html().split('-')[2];
+                    Section_Data.SubSection = null;
+                }
+                Section_Data.LandType = $(this).find('td:eq(1)').html(); //地目
+                Section_Data.LandNO = $(this).find('td:eq(2)').html(); //地號
+                Section_Data.LandArea = $(this).find('td:eq(3)').html() //該筆面積
+                SectionDataArry.push(Section_Data);
+            });
+            Data.Approved_Area = ApprovedArea; //核定面積合計
+            Data.SectionData = SectionDataArry;
+            Data.MapNo = '@Session["MapNo"].ToString()';
+            jQuery.postJson = function (url, data, callback, type) {
+                if ($.isFunction(data)) {
+                    type = type || callback;
+                    callback = data;
+                    data = undefined;
+                }
+                return jQuery.ajax({
+                    url: url,
+                    type: "POST",
+                    dataType: type,
+                    contentType: "application/json",
+                    data: typeof (data) == "string" ? data : JSON.stringify(data),
+                    success: callback
+                });
+            };
+            $('#obj').val($.param(Data));
+            //$('#btn_submit').click();
+            var dlLink = '@Url.Action("ExportForLiuGongMemberPDF", "FarmLand")' + '?data=' + JSON.stringify(Data);
+            //alert(res);
+            var $ifrm = $('<iframe style="display:none" />');
+            $ifrm.attr('src', dlLink);
+            $ifrm.appendTo("body");
+            $ifrm.load(function () {
+                //if the download link return a page
+                //load event will be triggered
+                $("body").append(
+                    "<div>Failed to download <i>'" + dlLink + "'</i>!");
+            });
+        });
+        //計算持分人土地面積
+        $('#child').bind('keyup', function () {
+            if ($('#Par').val().length > 0) {
+                CacuPleaseHolderArea();
+            }
+        });
+        $('#Par').bind('keyup', function () {
+            if ($('#child').val().length > 0) {
+                CacuPleaseHolderArea();
+            }
+        });
+
+        //關閉土地資料建立及編輯按鈕
+        var step = parseInt('@Model.Step');
+        if (step > 8) {
+            $('#btn_EditFarm').attr('disabled', 'disabled');
+            $('#btn_AddFarm').attr('disabled', 'disabled');
+            $('#btn_AddHolder').attr('disabled', 'disabled');
+        }
+
+        //保持Session時效性專用
+        $('#btn_AddHolder').click(function () { //新增持分人時
+            //重新設定自動登出時間
+            ResetTimeout();
+        });
+        $('#btn_AddFarm').click(function () { //加入農地資料時
+            //重新設定自動登出時間
+            ResetTimeout();
+        });
+        $('#btn_EditFarm').click(function () { //編輯農地資料時
+            //重新設定自動登出時間
+            ResetTimeout();
+        });
+        //重新設定自動登出時間
+        ResetTimeout();
+
+        var grid = $('#grid');
+        grid.jqGrid({
+            url: '@Url.Action("ListFarm", "FarmLand")' + '?id=' + '@Session["MapNo"].ToString()',
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'MapNo'
+            },
+            mtype: 'GET',
+            colNames: ['FNo', '地段', '地目', '地號', '農地面積m²', '設施面積m²', '作物數', '持分人數', '灌區內', '重覆申請', '編輯', '刪除'],
+            colModel: [
+                { name: 'FNo', hidden: true},
+                { name: 'FullName', index: 'SectName', align: 'center', sortable: false, search: false },
+                { name: 'TypeName', width: 50, align: 'center', sortable: false, search: false },
+                { name: 'LandNo', width: 120, align: 'center', sortable: false, search: false },
+                { name: 'Area', width:100, align: 'center', search: false, sortable: false },
+                { name: 'BArea', width: 100, align: 'center', sortable: false, search: false },
+                { name: 'CorpCount', width: 70, align: 'center', search: false, sortable: false },
+                { name: 'HolderCount', width: 70, align: 'center', index: 'EventNo', search: false, editable: false, sortable: false, viewable: false },
+                { name: 'OutSideStr', width: 70, align: 'center', search: false, editable: false, sortable: false, viewable: false },
+                { name: 'IsAppliedStr', width: 70, align: 'center', search: false, editable: false, sortable: false, viewable: false },
+                { name: 'FNo', width: 55, align: 'center', search: false, editable: false, sortable: false, viewable: false, formatter: FarmListEdit },
+                { name: 'FNo', width: 55, align: 'center', search: false, editable: false, sortable: false, viewable: false, formatter: FarmListDel }
+            ],
+            //pager: '#pager',
+            autowidth: true,
+            //width: 800,
+            rowNum: 1000,
+            height: 'auto',
+            //sortname: 'SectName',
+            sortorder: "desc",
+            viewrecords: true,
+            rownumbers: true,
+            caption: '農地資訊' //表格title
+        });
+        //編輯
+        function FarmListEdit(cellvalue, options, rowObject) {
+            //alert('<a href="#" onclick="javascript:EditFarm(\'' + cellvalue + '\')" class="btn">編輯</a>');
+            return '<a href="#" onclick="javascript:GetEditFarmData(\'' + cellvalue + '\');return false;" class="btn">編輯</a>';
+        }
+        //刪除
+        function FarmListDel(cellvalue, options, rowObject) {
+            return '<a href="#" onclick="javascript:DelFarmData(\'' + cellvalue + '\');return false;" class="btn">刪除</a>';
+        }
+
+    });
+    function CacuPleaseHolderArea() {
+        var area = parseFloat($('#LandArea').val().length > 0 ? $('#LandArea').val() : 0);
+        var par = parseFloat($('#Par').val());
+        var chd = parseFloat($('#child').val());
+        $('#hasArea').val((area * (chd / par)).toFixed(4));
+    }
+    function GetEditFarmData(fno) {
+        //alert(fno);
+        $.getJSON('@Url.Action("SingleFarm", "FarmLand")' + '?fno=' + fno, function (data) {
+
+            $("#form_Farm1 input[id='LandNo']").val(data.LandNo);
+
+            //CityDDL
+            $("#FarmCityCode").val(data.CTCode);
+
+            //TownDDL
+            if (data.TownCode == undefined) {
+                GetTownDDL(data.CTCode);
+                $("#FarmTownId").val(data.twCode);
+            } else {
+                GetTownDDL(data.CTCode);
+                $("#FarmTownId").val(data.TownCode);
+            }
+            //SectionDDL
+            if (data.TownCode == undefined) {
+                GetSecDDL(data.twCode);
+                $("#FarmSection").val(data.SectCode);
+            } else {
+                GetSecDDL(data.TownCode);
+                $("#FarmSection").val(data.SectCode);//$('#Section').prop('selectedIndex', (data.SectCode - 1));
+            }
+            $('#hidn_fno').val(fno);
+            $('#LandType').prop('selectedIndex', (data.TypeCode - 1));
+            $('#LandArea').val(data.Area);
+            $('#txt_FarmHa').val((parseFloat(data.Area) / 10000).toFixed(4));
+            $('#BuildArea').val(data.BArea);
+            $('#txt_BuildHa').val((parseFloat(data.BArea) / 10000).toFixed(4));
+            $('#Lat').val(data.Lat);
+            $('#Long').val(data.Long);
+            $('#Outside').prop('checked', data.OutSide);
+            $('#IsApplied').prop('checked', data.IsApplied);
+            $('#ApplicationStatus').val(data.ApplicationStatus);
+            $('#Pcent_Chd').val(data.Pcent_Chd);
+            $('#Pcent_Par').val(data.Pcent_Par);
+
+            //corp data
+            Remove_corptr();
+
+            var corplist = data.Corp;
+            var no = $('td[id=td_cropno]').length;
+            for (var item in corplist) {
+                no++;
+                $('#CropTable').append(
+               '<tr id="corpTabltr_' + no + '">' +
+                   '<td id="td_cropno" align="center">' + no + '</td>' +
+                   '<td id="td_cname" align="center">' + corplist[item].corpname + '</td>' +
+                   '<td align="center"><a id="del_link" href="#" onclick="$(\'#corpTabltr_' + no + '\').DelCorp();return false;">刪除</a></td>' +
+                   '<input id="hidden_corpcode" type="hidden" value="' + corplist[item].corpcode + '" />' +
+               '</tr>');
+            }
+            if (no == 0) {
+                Append_corp_Empty();;
+            }
+
+            //hanlder data
+            Remove_holdertr();
+
+            var holderlist = data.Holder;
+            var no = $('td[id=td_holdno]').length;
+            for (var item in holderlist) {
+                no++;
+                $('#HolderTable').append(
+               '<tr id="holdTabltr_' + no + '">' +
+                   '<td id="td_holdno" align="center">' + no + '</td>' +
+                   '<td id="td_holdname" align="center">' + holderlist[item].name + '</td>' +
+                   '<td id="td_holdIDNo" align="center">' + holderlist[item].id + '</td>' +
+                   '<td id="td_holdAddr" align="center">' + holderlist[item].addr + '</td>' +
+                   '<td id="td_holdPer" align="center">' + holderlist[item].perC + '/' + holderlist[item].perP + '</td>' +
+                   '<td id="td_holdArea" align="center">' + holderlist[item].area + '</td>' +
+                   '<td align="center"><a id="del_link" href="#" onclick="$(\'#holdTabltr_' + no + '\').DelCorp();return false;">刪除</a></td>' +
+               '</tr>');
+            }
+            if (no == 0) {
+                Append_holderEmpty();
+            }
+        });
+    }
+    function DelFarmData(fno) {
+        if (!confirm('確定刪除？')) {
+            return null;
+        }
+        $.getJSON('@Url.Action("DelSingleData", "FarmLand")' + '?fno=' + fno, function (data) {
+            //alert(data);
+            if (data == 'Success') {
+                $('#grid').trigger("reloadGrid", [{ current: true }]); //重新載入jqGrid
+            } else {
+                alert(data);
+            }
+        });
+    }
+    function AddFarmData(FarmStatus) {
+        //alert("addfarm1");
+        var check = true;
+        var cropAmt = $('td[id=td_cropno]').length;
+        //var holdAmt = $('td[id=td_holdno]').length;
+
+        if (cropAmt <= 0) {// || holdAmt <= 0)
+            check = false;
+            alert("請輸入作物");
+        } else {
+            check = ChkLandArea();//判斷土地面積是否符合
+            //農地基本資料
+            //alert("farmbasic");
+            if ($("#form_Farm1").validate().form() && check) {
+                var FarmObj = new Object();
+                FarmObj.MapNo = 0;
+                FarmObj.LandNo = $('#LandNo').val(); //目前申請之地號
+
+                FarmObj.CTName = $('#FarmCityCode :selected').text(); //縣市(名稱)
+                FarmObj.CTCode = $('#FarmCityCode :selected').val(); //縣市(代碼)
+
+                FarmObj.twName = $('#FarmTownId :selected').text(); //鄉鎮市(名稱)
+                FarmObj.twCode = $('#FarmTownId :selected').val(); //鄉鎮市(代碼)
+
+                FarmObj.SectName = $('#FarmSection :selected').text(); //地段(名稱)
+                FarmObj.SectCode = $('#FarmSection :selected').val(); //地段(代碼)
+                FarmObj.FullName = '';
+                //
+                FarmObj.TypeName = $("#LandType :selected").text(); //地目(名稱)
+                FarmObj.TypeCode = $('#LandType :selected').val(); //地目(代碼)
+                //
+                FarmObj.Area = $("#LandArea").val(); //農地面積(m²)
+                FarmObj.BArea = $("#BuildArea").val(); //施設面積(m²)
+
+                FarmObj.Lat = $("#Lat").val(); //經度
+                FarmObj.Long = $("#Long").val(); //緯度
+
+                FarmObj.OutSide = $('#Outside').is(":checked"); //灌區外
+                FarmObj.OutSideStr = '';
+                FarmObj.IsApplied = $('#IsApplied').is(':checked'); //是否重覆申請
+
+                FarmObj.Pcent_Par = $("#Pcent_Par").val(); //持分比例(分母)
+                FarmObj.Pcent_Chd = $("#Pcent_Chd").val(); //持分比例(分子)
+                FarmObj.ApplicationStatus = $('#ApplicationStatus').val(); //備註
+
+                var corpary = []; //crop data
+                var holderary = []; //holder data
+                //Get Corp Data
+                $('#CropTable tr:gt(1)').each(function () {
+                    var corpName = $(this).find('#td_cname').text();
+                    var corpCode = $(this).find('#hidden_corpcode').val();
+                    if (corpName != undefined && corpCode != undefined) {
+                        var CorpObj = new Object();
+                        CorpObj.corpcode = corpCode;
+                        CorpObj.corpname = corpName;
+                        corpary.push(CorpObj);
+                    }
+                });
+                FarmObj.Corp = corpary;
+                FarmObj.CorpCount = corpary.length;
+                FarmObj.Cpp = corpary;
+                //FarmObj.Crop = corpary;
+                //FarmObj.CropCount = corpary.length;
+                //alert(corpary.length);
+                //alert(corpary[0].corpname);
+                //alert(FarmObj.Corp[0].corpname);
+                //alert(FarmObj.CorpCount);
+                //Get Holder Data
+                $('#HolderTable tr:gt(1)').each(function () {
+                    var Name = $(this).find('#td_holdname').text();
+                    var IDNO = $(this).find('#td_holdIDNo').text();
+                    var Addr = $(this).find('#td_holdAddr').text();
+                    var PerC = $(this).find('#td_holdPer').text().split("/")[0];
+                    var PerP = $(this).find('#td_holdPer').text().split("/")[1];
+                    var Area = $(this).find('#td_holdArea').text();
+
+                    //alert(IDNO);
+                    if (Name != ''/* && IDNO != ''*/) {
+                        var HolderObj = new Object();
+                        HolderObj.name = Name;
+                        HolderObj.id = IDNO;
+                        HolderObj.addr = Addr;
+                        HolderObj.perP = PerP;
+                        HolderObj.perC = PerC;
+                        HolderObj.area = Area;
+                        holderary.push(HolderObj);
+                    }
+                });
+                //alert(holderary.length);
+                
+               
+                FarmObj.Holder = holderary;
+                
+                FarmObj.HolderCount = holderary.length;
+                //alert(FarmObj.Corp[0].corpcode);
+                //-----------------------------------------------------------------------------------
+
+                //$('#FarmTable').AddFarm(LandNo, sectName, sectCode, cityName, cityCode, townName, townCode,
+                //                        LtypeName, LtypeCode, Farea, Barea, Lat, Long, Outside, IsApplied, Par, Chd, FarmStatus);
+                jQuery.postJson = function (url, data, callback, type) {
+                    //alert("postjason");
+                    //alert(data.Corp[0].corpname);
+                    //debugger;
+                    if ($.isFunction(data)) {
+                        type = type || callback;
+                        callback = data;
+                        data = undefined;
+                    }
+                    return jQuery.ajax({
+                        url: url,
+                        type: "POST",
+                        dataType: type,
+                        contentType: "application/json",
+                        data: typeof (data) == "string" ? data : JSON.stringify(data),
+                        success: callback
+                    });
+                };
+
+                if (FarmStatus == 1) { //新增
+                    //alert(FarmObj.IsApplied);
+                    $.EnableBlockUI('寫入中...');
+                    //console.log(JSON.stringify(FarmObj));
+                    //alert("add");
+                    $.postJson('@Url.Action("CreateSingleData", "FarmLand")', FarmObj, function (data) {
+                        if (data == 'Success') {
+                            $('#grid').trigger("reloadGrid", [{ current: true }]); //重新載入jqGrid
+                            clearAllTxt();
+                            $.DisableBlockUI();
+                            $('#btn_AddFarm').after(
+                                '<div id="alert_FarmerModifySuccess" class="alert alert-success fade in" style="width:200px;">' +
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong>新增成功!</strong> 資料已完成新增。' +
+                                '</div>'
+                                );
+                            
+                        } else {
+                            $.DisableBlockUI();
+                            //alert(data)
+                            $('#btn_AddFarm').after(
+                                '<div id="alert_FarmerModifyFail" class="alert alert-error fade in" style="width:200px;">' +
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong>新增失敗!</strong> 資料未新增。' + data + "。" +
+                                '</div>'
+                                );
+                        }
+
+                    });
+                } else if (FarmStatus == 2) { //修改
+                    $.EnableBlockUI('寫入中...');
+                    console.log(JSON.stringify(FarmObj));
+                    FarmObj.FNo = $('#hidn_fno').val();
+                    //alert(FarmObj.Corp[0].corpname +","+ FarmObj.Corp[0].corpcode);
+                    //alert("edit");
+                    $.postJson('@Url.Action("ModifyDataSingle", "FarmLand")', FarmObj, function (data) {
+                        //alert("inside");
+                        if (data == 'Success') {
+                            $('#grid').trigger("reloadGrid", [{ current: true }]); //重新載入jqGrid
+                            clearAllTxt();
+                            $.DisableBlockUI();
+                            $('#btn_EditFarm').after(
+                                '<div id="alert_FarmerModifySuccess" class="alert alert-success fade in" style="width:200px;">' +
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong>更新成功!</strong> 資料已完成修改。' +
+                                '</div>'
+                                );
+                        } else {
+                            $.DisableBlockUI();
+                            //alert(data)
+                            $('#btn_EditFarm').after(
+                                '<div id="alert_FarmerModifyFail" class="alert alert-error fade in" style="width:200px;">' +
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong>更新失敗!</strong> 資料未修改。' + data + "。" +
+                                '</div>'
+                                );
+                        }
+
+                    });
+                }
+
+                //alert(FarmObj.Lat);
+                //$('#alert_FarmerNoData').hide();
+                ExportReport();
+                //隱藏編輯按鈕
+                //$('#btn_EditFarm').hide();
+            }
+        }
+    }
+</script>
+@*Google Map*@
+<div id="div_GoogleMapAccordion" class="easyui-accordion" data-options="selected:-1">
+    <div title="地藉定位資訊">
+        <div id="div_Map" style="height: 500px; width:auto;" align="center" title="地圖"></div>
+        <button class="btn btn-danger" type="button" id="btnMap">MAP</button>
+    </div>
+
+</div>
+
+@*<table id="FarmTable" class="dashTable">
+    <thead>
+        <tr id="TableHeader">
+            <th colspan="11" align="center">農地資訊</th>
+        </tr>
+    </thead>
+    <tr id="td_Title">
+        <td width="140" align="center" class="td_style">地段</td>
+        <td width="40" align="center" class="td_style">地目</td>
+        <td width="100" align="center" class="td_style">地號</td>
+        <td width="80" align="center" class="td_style">農地面積</td>
+        <td width="80" align="center" class="td_style">施設面積</td>
+        <td width="70" align="center" class="td_style">作物數</td>
+        <td width="80" align="center" class="td_style">持分人數</td>
+        <td width="70" align="center" class="td_style">灌區內</td>
+        <td width="80" align="center" class="td_style">重覆申請</td>
+        <td width="80" align="center" class="td_style">農地編輯</td>
+        <td width="80" align="center" class="td_style">農地刪除</td>
+    </tr>
+    <tr id="farm_Empty">
+        <td colspan="11" align="center">
+            <h2>尚未新增農地</h2>
+        </td>
+    </tr>
+</table>*@
+<table id="grid"></table>
+<div style="height:10px;"></div>
+@*瑠公報表列印*@
+@{
+    @*if (Model.ApplyUnit==17)
+    {
+        <div id="div_Report" >
+            <button id="BtnMemberPdf" type="button" class="btn btn-primary" title="匯出">
+                <img id="img_liupdf" src="~/Content/images/adobe_pdf.ico" style="width:65px;" />
+                <br />
+                匯出會員申請書
+            </button>
+        </div>
+    }*@
+}
+<input id="hidn_fno" type="hidden" />
+<div style="border-width:1px; border-style:dashed;">
+    <div id="accordion_create" class="easyui-accordion" data-options="multiple:true">
+        <div title="建置農地基本資料" style="overflow:auto;padding:10px;">
+            <form id="form_Farm1">
+                <table border="1" class="dashTable">
+                    <tr>
+                        <td class="td_style">
+                            地段 :
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls span12 form-horizontal">
+                                    @*縣市*@
+                                    @Html.DropDownListFor(model => model.FarmCityCode, (IEnumerable<SelectListItem>)Model.CityDDL, new { style = "width: 100px;" })
+                                    @Html.ValidationMessageFor(model => model.FarmCityCode, null, new { @class = "help-inline" })
+                                    @*鄉鎮市*@
+                                    @Html.DropDownListFor(model => model.FarmTownId, (IEnumerable<SelectListItem>)Model.TownDDL, new { style = "width: 100px;" })
+                                    @Html.ValidationMessageFor(model => model.FarmTownId, null, new { @class = "help-inline" })
+
+                                    @Html.DropDownListFor(model => model.FarmSection, (IEnumerable<SelectListItem>)Model.SectionList, new { style = "" })
+                                    @Html.ValidationMessageFor(model => model.FarmSection, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td_style">
+                            地目 :
+                        </td>
+                        <td colspan="3">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @*@Html.DropDownListFor(model => model.ddl_Unit, new SelectList((System.Collections.IEnumerable)Model.UnitDDL, "Value", "Text"), new { style = "width: 300px;" })*@
+                                    @Html.DropDownListFor(model => model.LandType, (IEnumerable<SelectListItem>)Model.LandTypeList, new { style = "" })
+                                    @Html.ValidationMessageFor(model => model.LandType, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_style">
+                            地號 :
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <!--目前申請之地號 :--> @Html.EditorFor(model => model.LandNo, new { @class = "input-small" })
+                                    @Html.ValidationMessageFor(model => model.LandNo, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                            @*重測前地號檢測 :
+                            <input id="beforeLNo" type="text" />*@
+                            <span class="label label-info">範例: 1-1 或 1</span>
+                        </td>
+                        <td class="td_style">
+                            位於灌區內 :
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <center>
+                                        是 :@Html.EditorFor(model => model.Outside)
+                                        @Html.ValidationMessageFor(model => model.Outside, null, new { @class = "help-inline" })
+                                    </center>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td_style">
+                            再次申請：
+                        </td>
+                        <td>
+                            是：@Html.EditorFor(model=>model.IsApplied)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_style">
+                            農地面積 :
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.LandArea) m²
+                                    @Html.ValidationMessageFor(model => model.LandArea, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                            <input id="txt_FarmHa" type="text" /> ha
+                        </td>
+                        <td class="td_style">
+                            施設面積 :
+                        </td>
+                        <td colspan="3">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.BuildArea) m²
+                                    @Html.ValidationMessageFor(model => model.BuildArea, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                            <input id="txt_BuildHa" type="text" /> ha
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_style">
+                            經度 :
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.Lat)
+                                    @Html.ValidationMessageFor(model => model.Lat, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td_style">
+                            緯度 :
+                        </td>
+                        <td colspan="3">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.Long)
+                                    @Html.ValidationMessageFor(model => model.Long, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @if(Session["UnitID"].ToString() == "17")
+                    {
+                    @*<tr>
+                        <td class="td_style">
+                            持分比例 :
+                        </td>
+                        <td colspan="5">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.Pcent_Chd)@Html.ValidationMessageFor(model => model.Pcent_Chd, null, new { @class = "help-inline" }) (分子) /@Html.EditorFor(model => model.Pcent_Par) (分母)
+                                    @Html.ValidationMessageFor(model => model.Pcent_Par, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>*@
+                    }
+                    
+                    <tr>
+                        <td class="td_style">
+                            備註
+                        </td>
+                        <td colspan="5">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model=>model.ApplicationStatus)
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div>
+                <form id="form_Farm2">
+                    
+                    <table id="CropTable" class="dashTable" width="80%">
+                        <thead>
+                            <tr id="TableHeader">
+                                <th colspan="3" align="center">建置農地作物資訊</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td class="td_style">
+                                作物別 :
+                            </td>
+                            <td colspan="2">
+                                <div class="repo-dropdown-menu">
+                                    <input id="Crop_Search" class="typeahead" type="text" placeholder="請輸入作物名稱 or 作物代碼">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="td_Title">
+                            <td width="40" align="center" class="td_style">NO.</td>
+                            <td width="40" align="center" class="td_style">作物</td>
+                            <td width="40" align="center" class="td_style">刪除</td>
+                        </tr>
+                        <tr id="corp_Empty">
+                            <td colspan="3" align="center">尚未新增作物</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div title="建置所有權人資料">
+            <form id="form_Farm3">
+                <table id="HolderTable" class="dashTable" width="90%">
+                    <thead>
+                        <tr id="TableHeader">
+
+                            <th colspan="10" align="center">農地持分人資訊</th>
+                        </tr>
+                    </thead>
+                    <tr id="td_Title">
+                        <td class="td_style" width="40" align="center">NO.</td>
+                        <td class="td_style" width="100" align="center">姓名</td>
+                        <td class="td_style" width="100" align="center">身份證字號</td>
+                        <td class="td_style" width="100" align="center">地址</td>
+                        <td class="td_style" width="100" align="center">持分比例</td>
+                        <td class="td_style" width="100" align="center">持分面積</td>
+                        <td class="td_style" width="100" align="center">刪除</td>
+                    </tr>
+                    <tr id="holder_Empty">
+                        <td colspan="9" align="center">尚未新增土地持分人</td>
+                    </tr>
+                </table>
+
+                <table border="1" class="dashTable" width="90%">
+                    <tr>
+                        <td class="td_style">持分人姓名</td>
+                        <td class="td_style">持分人身份證</td>
+                        <td class="td_style">持分人地址</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.HolderName)
+                                    @Html.ValidationMessageFor(model => model.HolderName, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.IDNum)
+                                    @Html.ValidationMessageFor(model => model.IDNum, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                        <td colspan="3">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.Addr)
+                                    @Html.ValidationMessageFor(model => model.Addr, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td_style" colspan="2">持分比例</td>
+                        <td class="td_style">持分面積</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="control-group">
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.child)@Html.ValidationMessageFor(model => model.child, null, new { @class = "help-inline" }) (分子) /@Html.EditorFor(model => model.Par) (分母)
+                                    @Html.ValidationMessageFor(model => model.Par, null, new { @class = "help-inline" })
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="number_right">@Html.EditorFor(model => model.hasArea) m²</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="button" id="btn_AddHolder" value="新增土地持分人" class="btn" />
+                        </td>
+                    </tr>
+                </table>
+                <br />
+            </form>
+        </div>
+
+    </div>
+    <p style="text-align:center;">
+        <input type="button" id="btn_EditFarm" value="編輯此筆農地資料" class="btn" />
+        <input type="button" id="btn_AddFarm" value="加入此筆農地資料" class="btn" />
+    </p>
+</div>
+
+<div>
+    @if(Model.Step < 8)
+    {
+        if(!Model.IsModify)
+        {
+            <input type="button" id="btn_SubmitFarmData" value="送出，前往下個步驟" class="btn" />
+        }
+        else
+        {
+            <input type="button" id="btn_ModifyFarmData" value="修改農地資料" class="btn" />
+        }
+    } 
+    <div id="alert_FarmerNoData" class="alert alert-error" style="display:none; width:135px;">
+        至少輸入一筆農地資料。
+    </div>
+</div>
+
+

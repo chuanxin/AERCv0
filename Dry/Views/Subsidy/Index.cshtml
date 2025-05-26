@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model Dry.Models.ViewModel.SubsidyView
+
+@Html.DropDownListFor(model => model.ApplyUnit, (IEnumerable<SelectListItem>)Model.UnitDDL, new { style = "width: 120px;" })
+@Html.DropDownListFor(model => model.ApplyYear, (IEnumerable<SelectListItem>)Model.YearDDL, new { style = "width: 60px;" })
+
+<div class="row">
+    <div class="col-md-1"></div>
+</div>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+@model AERC.Models.ViewModel.AdminView
+
+@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+@Styles.Render("~/content/css")
+@Scripts.Render("~/js")
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        var message = '@TempData["message"].ToString()';
+        alert(message);
+    </script>
+}
+<html>
+<body>
+    @{Html.EnableClientValidation(true);}
+    @using (Html.BeginForm("UserEditByDuty", "UserManage", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Admin_Id)
+        @Html.HiddenFor(model => model.UnitId)
+        <div class="control-group">
+            <label class="control-label" for="Name">姓名</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Name, new { @class = "input-lg" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Account">帳號</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control " } })
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Password">密碼</label>
+            <div class="controls">
+                @Html.PasswordFor(model => model.Password, new { value = Model.Password, htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="TitleDDL">職稱</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.Title_Id, Model.TitleDDL, "--請選擇--", new { style = "width: 150px;" })
+                @Html.ValidationMessageFor(model => model.Title_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="OrganDDL">組室</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.Organization_Id, Model.OrganDDL, "--請選擇--", new { style = "width: 150px;" })
+                @Html.ValidationMessageFor(model => model.Organization_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Telephone">電話</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Mobile">手機</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Fax">傳真</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="radio inline">
+                    @Html.RadioButtonFor(model => model.Status, "true", new { @class = "statusRadio" }) 承辦
+                </label>
+                <label class="radio inline">
+                    @Html.RadioButtonFor(model => model.Status, "false", new { @class = "statusRadio" }) 非承辦
+                </label>
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="radio inline">
+                    @Html.RadioButtonFor(model => model.Enabled, "true", new { @class = "statusRadio" }) 啟用
+                </label>
+                <label class="radio inline">
+                    @Html.RadioButtonFor(model => model.Enabled, "false", new { @class = "statusRadio" }) 停用
+                </label>
+                @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <input id="btnEdit" type="submit" value="修改會員資料" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+    <script src="~/Scripts/_ChgPwd.js"></script>
+    <script>
+        $("#Password").on("blur", function () {
+            const chk = CheckInput($(this).val().trim());
+            if (!chk.pass) {
+                $(this).val("");
+                alert(chk.error);
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
+
+

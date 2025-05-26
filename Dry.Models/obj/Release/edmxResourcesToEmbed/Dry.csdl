@@ -1,0 +1,2142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CntrlApply">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="FacMoney" Type="Int32" Nullable="false" />
+    <Property Name="Subsidy" Type="Int32" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_CntrlApply_VerMapping" FromRole="CntrlApply" ToRole="VerMapping" />
+    <NavigationProperty Name="CntrlFac" Relationship="Self.FK_CntrlFac_CntrlApply" FromRole="CntrlApply" ToRole="CntrlFac" />
+  </EntityType>
+  <EntityType Name="CntrlFac">
+    <Key>
+      <PropertyRef Name="CFNo" />
+    </Key>
+    <Property Name="CFNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CntrlApply" Relationship="Self.FK_CntrlFac_CntrlApply" FromRole="CntrlFac" ToRole="CntrlApply" />
+    <NavigationProperty Name="CntrlMat" Relationship="DryModel.FK_CntrlMat_CntrlFac" FromRole="CntrlFac" ToRole="CntrlMat" />
+  </EntityType>
+  <EntityType Name="CntrlList">
+    <Key>
+      <PropertyRef Name="CntrlCode" />
+    </Key>
+    <Property Name="CntrlCode" Type="Int16" Nullable="false" />
+    <Property Name="CntrlCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ControlLimit" Relationship="Self.FK_ControlLimit_CntrlList" FromRole="CntrlList" ToRole="ControlLimit" />
+  </EntityType>
+  <EntityType Name="ControlLimit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LimitID" Type="Int32" Nullable="false" />
+    <Property Name="CntrlCode" Type="Int16" Nullable="false" />
+    <Property Name="SubsidyPercent" Type="Double" />
+    <Property Name="Price" Type="Int32" />
+    <NavigationProperty Name="CntrlList" Relationship="Self.FK_ControlLimit_CntrlList" FromRole="ControlLimit" ToRole="CntrlList" />
+    <NavigationProperty Name="SubsidyLimit" Relationship="DryModel.FK_ControlLimit_SubsidyLimit" FromRole="ControlLimit" ToRole="SubsidyLimit" />
+  </EntityType>
+  <EntityType Name="DesignerList">
+    <Key>
+      <PropertyRef Name="Designer_Id" />
+    </Key>
+    <Property Name="Designer_Id" Type="Guid" Nullable="false" />
+    <Property Name="Unit_Id" Type="Int16" Nullable="false" />
+    <Property Name="Designer_Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EFile">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="FileType" Type="Byte" Nullable="false" />
+    <Property Name="Filepath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Coordinate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileDes" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UpldTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Enable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_EFile_VerMapping" FromRole="EFile" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="EndTypeList">
+    <Key>
+      <PropertyRef Name="EndType" />
+    </Key>
+    <Property Name="EndType" Type="Byte" Nullable="false" />
+    <Property Name="EndTypeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PigingLimit" Relationship="Self.FK_PigingLimit_EndTypeList" FromRole="EndTypeList" ToRole="PigingLimit" />
+    <NavigationProperty Name="EndType1" Relationship="DryModel.FK_EndType_EndTypeList" FromRole="EndTypeList" ToRole="EndType" />
+    <Property Name="Catalog" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EngApply">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="FacMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_EngApply_VerMapping" FromRole="EngApply" ToRole="VerMapping" />
+    <NavigationProperty Name="Engine" Relationship="Self.FK_Engine_EngApply" FromRole="EngApply" ToRole="Engine" />
+  </EntityType>
+  <EntityType Name="Engine">
+    <Key>
+      <PropertyRef Name="ENo" />
+    </Key>
+    <Property Name="ENo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="EngCode" Type="Byte" Nullable="false" />
+    <Property Name="EngRegCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EngPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EngApply" Relationship="Self.FK_Engine_EngApply" FromRole="Engine" ToRole="EngApply" />
+    <NavigationProperty Name="EngineList" Relationship="Self.FK_Engine_EngineList" FromRole="Engine" ToRole="EngineList" />
+  </EntityType>
+  <EntityType Name="EngineList">
+    <Key>
+      <PropertyRef Name="EngCode" />
+    </Key>
+    <Property Name="EngCode" Type="Byte" Nullable="false" />
+    <Property Name="EngCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Engine" Relationship="Self.FK_Engine_EngineList" FromRole="EngineList" ToRole="Engine" />
+    <NavigationProperty Name="EngLimit" Relationship="Self.FK_EngLimit_EngineList" FromRole="EngineList" ToRole="EngLimit" />
+  </EntityType>
+  <EntityType Name="EngLimit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LimitID" Type="Int32" Nullable="false" />
+    <Property Name="EngCode" Type="Byte" Nullable="false" />
+    <Property Name="EngPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EngineList" Relationship="Self.FK_EngLimit_EngineList" FromRole="EngLimit" ToRole="EngineList" />
+    <NavigationProperty Name="SubsidyLimit" Relationship="DryModel.FK_EngLimit_SubsidyLimit" FromRole="EngLimit" ToRole="SubsidyLimit" />
+  </EntityType>
+  <EntityType Name="Examine">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="EnginePnt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WaterPnt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Result" Type="Byte" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Examiner" Type="Guid" Nullable="false" />
+    <Property Name="EDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_Examine_VerMapping" FromRole="Examine" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="FacDesign">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="Unit" Type="Int16" Nullable="false" />
+    <Property Name="DesId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_FacDesign_VerMapping" FromRole="FacDesign" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="FacInspection">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="E_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Result" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_FacInspection_VerMapping" FromRole="FacInspection" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="FacStatList">
+    <Key>
+      <PropertyRef Name="statCode" />
+    </Key>
+    <Property Name="statCode" Type="Byte" Nullable="false" />
+    <Property Name="statCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FacSysMAT">
+    <Key>
+      <PropertyRef Name="POMNo" />
+    </Key>
+    <Property Name="POMNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleNo" Type="Int32" Nullable="false" />
+    <Property Name="Bunit" Type="Int16" Nullable="false" />
+    <Property Name="MName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SpecLength" Type="Double" />
+    <Property Name="MatType" Type="Int32" Nullable="false" />
+    <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecNo1" Type="Int32" />
+    <Property Name="SpecNo2" Type="Int32" />
+    <Property Name="SpecNo3" Type="Int32" />
+    <Property Name="ItemUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MAT_Spec" Relationship="Self.FK_FacSysMAT_MAT_Spec" FromRole="FacSysMAT" ToRole="MAT_Spec" />
+    <NavigationProperty Name="MAT_Types" Relationship="Self.FK_FacSysMAT_MAT_Types" FromRole="FacSysMAT" ToRole="MAT_Types" />
+    <NavigationProperty Name="PriceOfMat" Relationship="Self.FK_PriceOfMat_FacSysMAT" FromRole="FacSysMAT" ToRole="PriceOfMat" />
+  </EntityType>
+  <EntityType Name="FacTypeList">
+    <Key>
+      <PropertyRef Name="FacType" />
+    </Key>
+    <Property Name="FacType" Type="Byte" Nullable="false" />
+    <Property Name="FTpeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PigingLimit" Relationship="Self.FK_PigingLimit_FacTypeList" FromRole="FacTypeList" ToRole="PigingLimit" />
+    <NavigationProperty Name="EndType" Relationship="DryModel.FK_EndType_FacTypeList" FromRole="FacTypeList" ToRole="EndType" />
+  </EntityType>
+  <EntityType Name="FacVerify">
+    <Key>
+      <PropertyRef Name="V_RecNo" />
+    </Key>
+    <Property Name="V_RecNo" Type="Int32" Nullable="false" />
+    <Property Name="StatCode" Type="Byte" Nullable="false" />
+    <Property Name="VDes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VId" Type="Guid" Nullable="false" />
+    <Property Name="ReduceM" Type="Int32" Nullable="false" />
+    <Property Name="PayM" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Farm">
+    <Key>
+      <PropertyRef Name="FNo" />
+    </Key>
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="Section" Type="Int32" Nullable="false" />
+    <Property Name="LandNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LandType" Type="Byte" Nullable="false" />
+    <Property Name="Long" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Lat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+    <Property Name="FinalArea" Type="Double" Nullable="false" />
+    <Property Name="IsApplied" Type="Boolean" />
+    <Property Name="ApplicationStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AppliedArea" Type="Int32" />
+    <Property Name="AreaCanApply" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Outside" Type="Boolean" Nullable="false" />
+    <Property Name="Pcent_Chd" Type="Int32" Nullable="false" />
+    <Property Name="Pcent_Par" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_Farm_VerMapping" FromRole="Farm" ToRole="VerMapping" />
+    <NavigationProperty Name="FarmChange" Relationship="Self.FK_FarmChange_Farm" FromRole="Farm" ToRole="FarmChange" />
+    <NavigationProperty Name="FarmCrop" Relationship="Self.FK_FarmCrop_Farm" FromRole="Farm" ToRole="FarmCrop" />
+    <NavigationProperty Name="LandEquity" Relationship="DryModel.FK_LandEquity_Farm" FromRole="Farm" ToRole="LandEquity" />
+  </EntityType>
+  <EntityType Name="FarmChange">
+    <Key>
+      <PropertyRef Name="FarmChangeID" />
+    </Key>
+    <Property Name="FarmChangeID" Type="Int32" Nullable="false" />
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+    <Property Name="Section" Type="Int32" Nullable="false" />
+    <Property Name="LandNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LandType" Type="Byte" Nullable="false" />
+    <Property Name="Long" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Lat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+    <Property Name="FinalArea" Type="Double" Nullable="false" />
+    <Property Name="IsApplied" Type="Boolean" Nullable="false" />
+    <Property Name="ApplicationStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AppliedArea" Type="Int32" />
+    <Property Name="AreaCanApply" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Outside" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Farm" Relationship="Self.FK_FarmChange_Farm" FromRole="FarmChange" ToRole="Farm" />
+  </EntityType>
+  <EntityType Name="FarmCrop">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+    <Property Name="CropCode" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Farm" Relationship="Self.FK_FarmCrop_Farm" FromRole="FarmCrop" ToRole="Farm" />
+  </EntityType>
+  <EntityType Name="FarmDataLog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="DBMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Farm_Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FarmCrop_Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LandEquity_Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserHostName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserMac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Farmer">
+    <Key>
+      <PropertyRef Name="FId" />
+    </Key>
+    <Property Name="FId" Type="Guid" Nullable="false" />
+    <Property Name="IdNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsMember" Type="Boolean" Nullable="false" />
+    <Property Name="CId" Type="Guid" Nullable="false" />
+    <Property Name="CDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Case" Relationship="DryModel.FK_Case_Farmer" FromRole="Farmer" ToRole="Case" />
+  </EntityType>
+  <EntityType Name="FarmerSys">
+    <Key>
+      <PropertyRef Name="FarSysNo" />
+    </Key>
+    <Property Name="FarSysNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="FacNo" Type="Int32" Nullable="false" />
+    <Property Name="FacMoney" Type="Int32" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="StdFacSys" Relationship="Self.FK_FarmerSys_StdFacSys" FromRole="FarmerSys" ToRole="StdFacSys" />
+    <NavigationProperty Name="PigingConf" Relationship="DryModel.FK_FarmerSys_PigingConf" FromRole="FarmerSys" ToRole="PigingConf" />
+    <NavigationProperty Name="FarmerSysM" Relationship="DryModel.FK_FarmerSysM_FarmerSys" FromRole="FarmerSys" ToRole="FarmerSysM" />
+  </EntityType>
+  <EntityType Name="FileTypeList">
+    <Key>
+      <PropertyRef Name="FileType" />
+    </Key>
+    <Property Name="FileType" Type="Byte" Nullable="false" />
+    <Property Name="FileTypeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IrrWaterList">
+    <Key>
+      <PropertyRef Name="IrrWCode" />
+    </Key>
+    <Property Name="IrrWCode" Type="Byte" Nullable="false" />
+    <Property Name="IrrWCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LandTypeList">
+    <Key>
+      <PropertyRef Name="LandType" />
+    </Key>
+    <Property Name="LandType" Type="Byte" Nullable="false" />
+    <Property Name="LandTypeCNS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mat_Module">
+    <Key>
+      <PropertyRef Name="ModuleNo" />
+    </Key>
+    <Property Name="ModuleNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleCNS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MAT_Spec">
+    <Key>
+      <PropertyRef Name="SpecNo" />
+    </Key>
+    <Property Name="SpecNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Spec" Type="Double" Nullable="false" />
+    <Property Name="SpecName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="FacSysMAT" Relationship="Self.FK_FacSysMAT_MAT_Spec" FromRole="MAT_Spec" ToRole="FacSysMAT" />
+  </EntityType>
+  <EntityType Name="MAT_Types">
+    <Key>
+      <PropertyRef Name="TypeNo" />
+    </Key>
+    <Property Name="TypeNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FacSysMAT" Relationship="Self.FK_FacSysMAT_MAT_Types" FromRole="MAT_Types" ToRole="FacSysMAT" />
+  </EntityType>
+  <EntityType Name="MoneyRules">
+    <Key>
+      <PropertyRef Name="MoneyRID" />
+    </Key>
+    <Property Name="MoneyRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MYear" Type="Int16" Nullable="false" />
+    <Property Name="MItem" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MClass" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Money" Type="Int32" Nullable="false" />
+    <Property Name="Max" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PigingLimit">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LimitID" Type="Int32" Nullable="false" />
+    <Property Name="EndType" Type="Byte" Nullable="false" />
+    <Property Name="FacType" Type="Byte" />
+    <Property Name="SubsidyReference" Type="Double" Nullable="false" />
+    <Property Name="FacilityFee" Type="Int32" Nullable="false" />
+    <Property Name="WorkingFee" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EndTypeList" Relationship="Self.FK_PigingLimit_EndTypeList" FromRole="PigingLimit" ToRole="EndTypeList" />
+    <NavigationProperty Name="FacTypeList" Relationship="Self.FK_PigingLimit_FacTypeList" FromRole="PigingLimit" ToRole="FacTypeList" />
+    <NavigationProperty Name="SubsidyLimit" Relationship="DryModel.FK_PigingLimit_SubsidyLimit" FromRole="PigingLimit" ToRole="SubsidyLimit" />
+  </EntityType>
+  <EntityType Name="Pool">
+    <Key>
+      <PropertyRef Name="PNo" />
+    </Key>
+    <Property Name="PNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="PoolWeight" Type="Int16" Nullable="false" />
+    <Property Name="PtypeCode" Type="Byte" Nullable="false" />
+    <Property Name="PoolSize" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PoolPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PoolApply" Relationship="Self.FK_Pool_PoolApply" FromRole="Pool" ToRole="PoolApply" />
+    <NavigationProperty Name="PoolTypeList" Relationship="Self.FK_Pool_PoolTypeList" FromRole="Pool" ToRole="PoolTypeList" />
+  </EntityType>
+  <EntityType Name="PoolApply">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="FacMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pool" Relationship="Self.FK_Pool_PoolApply" FromRole="PoolApply" ToRole="Pool" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_PoolApply_VerMapping" FromRole="PoolApply" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="PoolTonList">
+    <Key>
+      <PropertyRef Name="PoolTonID" />
+    </Key>
+    <Property Name="PoolTonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LimitID" Type="Int32" Nullable="false" />
+    <Property Name="PtypeCode" Type="Byte" Nullable="false" />
+    <Property Name="PoolTon" Type="Int32" Nullable="false" />
+    <Property Name="PoolPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PoolTypeList" Relationship="Self.FK_PoolTonList_PoolTypeList" FromRole="PoolTonList" ToRole="PoolTypeList" />
+    <NavigationProperty Name="SubsidyLimit" Relationship="DryModel.FK_PoolTonList_SubsidyLimit" FromRole="PoolTonList" ToRole="SubsidyLimit" />
+  </EntityType>
+  <EntityType Name="PoolTypeList">
+    <Key>
+      <PropertyRef Name="PtypeCode" />
+    </Key>
+    <Property Name="PtypeCode" Type="Byte" Nullable="false" />
+    <Property Name="PtypeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pool" Relationship="Self.FK_Pool_PoolTypeList" FromRole="PoolTypeList" ToRole="Pool" />
+    <NavigationProperty Name="PoolTonList" Relationship="Self.FK_PoolTonList_PoolTypeList" FromRole="PoolTypeList" ToRole="PoolTonList" />
+  </EntityType>
+  <EntityType Name="PriceOfMat">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="POMNo" Type="Int32" Nullable="false" />
+    <Property Name="BYear" Type="Int16" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="FacSysMAT" Relationship="Self.FK_PriceOfMat_FacSysMAT" FromRole="PriceOfMat" ToRole="FacSysMAT" />
+  </EntityType>
+  <EntityType Name="RegionList">
+    <Key>
+      <PropertyRef Name="RegionCode" />
+    </Key>
+    <Property Name="RegionCode" Type="Byte" Nullable="false" />
+    <Property Name="RegionCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StdFacSys">
+    <Key>
+      <PropertyRef Name="FacNo" />
+    </Key>
+    <Property Name="FacNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FacName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EndType" Type="Byte" Nullable="false" />
+    <Property Name="SubEndType" Type="Byte" />
+    <Property Name="FacType" Type="Byte" Nullable="false" />
+    <Property Name="Descript" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="FarmerSys" Relationship="Self.FK_FarmerSys_StdFacSys" FromRole="StdFacSys" ToRole="FarmerSys" />
+    <NavigationProperty Name="StdFacSysMAT" Relationship="Self.FK_StdFacSysMAT_StdFacSys" FromRole="StdFacSys" ToRole="StdFacSysMAT" />
+  </EntityType>
+  <EntityType Name="StdFacSysMAT">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacNo" Type="Int32" Nullable="false" />
+    <Property Name="POMNo" Type="Int32" Nullable="false" />
+    <Property Name="AmountFormula" Type="Int32" />
+    <NavigationProperty Name="StdFacSys" Relationship="Self.FK_StdFacSysMAT_StdFacSys" FromRole="StdFacSysMAT" ToRole="StdFacSys" />
+  </EntityType>
+  <EntityType Name="Subsidy">
+    <Key>
+      <PropertyRef Name="SNo" />
+    </Key>
+    <Property Name="SNo" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SYear" Type="Int16" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="Total_M" Type="Int32" Nullable="false" />
+    <Property Name="Now_M" Type="Int32" Nullable="false" />
+    <Property Name="FcstArea" Type="Int32" Nullable="false" />
+    <Property Name="FcstAmt" Type="Int32" Nullable="false" />
+    <Property Name="IAUnit" Type="Int16" />
+  </EntityType>
+  <EntityType Name="SubsidyItemList">
+    <Key>
+      <PropertyRef Name="ItemCode" />
+    </Key>
+    <Property Name="ItemCode" Type="Byte" Nullable="false" />
+    <Property Name="ItemCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VerifyLog">
+    <Key>
+      <PropertyRef Name="V_RecNo" />
+    </Key>
+    <Property Name="V_RecNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="VerMapping" Relationship="Self.FK_VerifyLog_VerMapping" FromRole="VerifyLog" ToRole="VerMapping" />
+  </EntityType>
+  <EntityType Name="VerMapping">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="ChgVer" Type="Int16" Nullable="false" />
+    <Property Name="ChgReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChgDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ChgId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="CntrlApply" Relationship="Self.FK_CntrlApply_VerMapping" FromRole="VerMapping" ToRole="CntrlApply" />
+    <NavigationProperty Name="EFile" Relationship="Self.FK_EFile_VerMapping" FromRole="VerMapping" ToRole="EFile" />
+    <NavigationProperty Name="EngApply" Relationship="Self.FK_EngApply_VerMapping" FromRole="VerMapping" ToRole="EngApply" />
+    <NavigationProperty Name="Examine" Relationship="Self.FK_Examine_VerMapping" FromRole="VerMapping" ToRole="Examine" />
+    <NavigationProperty Name="FacDesign" Relationship="Self.FK_FacDesign_VerMapping" FromRole="VerMapping" ToRole="FacDesign" />
+    <NavigationProperty Name="FacInspection" Relationship="Self.FK_FacInspection_VerMapping" FromRole="VerMapping" ToRole="FacInspection" />
+    <NavigationProperty Name="Farm" Relationship="Self.FK_Farm_VerMapping" FromRole="VerMapping" ToRole="Farm" />
+    <NavigationProperty Name="PoolApply" Relationship="Self.FK_PoolApply_VerMapping" FromRole="VerMapping" ToRole="PoolApply" />
+    <NavigationProperty Name="VerifyLog" Relationship="Self.FK_VerifyLog_VerMapping" FromRole="VerMapping" ToRole="VerifyLog" />
+    <NavigationProperty Name="Pay" Relationship="DryModel.FK_Pay_VerMapping" FromRole="VerMapping" ToRole="Pay" />
+    <NavigationProperty Name="PigingConf" Relationship="DryModel.FK_PigingConf_VerMapping" FromRole="VerMapping" ToRole="PigingConf" />
+    <NavigationProperty Name="TotalFee" Relationship="DryModel.FK_TotalFee_VerMapping" FromRole="VerMapping" ToRole="TotalFee" />
+    <NavigationProperty Name="Case" Relationship="DryModel.FK_VerMapping_Case" FromRole="VerMapping" ToRole="Case" />
+  </EntityType>
+  <EntityType Name="WaterSrcList">
+    <Key>
+      <PropertyRef Name="WsCode" />
+    </Key>
+    <Property Name="WsCode" Type="Byte" Nullable="false" />
+    <Property Name="WsCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WrkExecutReport">
+    <Key>
+      <PropertyRef Name="WNo" />
+    </Key>
+    <Property Name="WNo" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="FcstArea" Type="Double" Nullable="false" />
+    <Property Name="FcstAmt" Type="Int16" Nullable="false" />
+    <Property Name="CapitalAcc" Type="Double" Nullable="false" />
+    <Property Name="CurrentAcc" Type="Double" Nullable="false" />
+    <Property Name="M_Dis" Type="Double" Nullable="false" />
+    <Property Name="M_Used" Type="Double" Nullable="false" />
+    <Property Name="FinishAmt" Type="Int16" Nullable="false" />
+    <Property Name="FinishArea" Type="Int16" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CntrlApply_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CntrlApply" Type="Self.CntrlApply" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="CntrlApply">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CntrlFac_CntrlApply">
+    <End Role="CntrlApply" Type="Self.CntrlApply" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CntrlFac" Type="Self.CntrlFac" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CntrlApply">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="CntrlFac">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ControlLimit_CntrlList">
+    <End Role="CntrlList" Type="Self.CntrlList" Multiplicity="1" />
+    <End Role="ControlLimit" Type="Self.ControlLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CntrlList">
+        <PropertyRef Name="CntrlCode" />
+      </Principal>
+      <Dependent Role="ControlLimit">
+        <PropertyRef Name="CntrlCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EFile_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EFile" Type="Self.EFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="EFile">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PigingLimit_EndTypeList">
+    <End Role="EndTypeList" Type="Self.EndTypeList" Multiplicity="1" />
+    <End Role="PigingLimit" Type="Self.PigingLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EndTypeList">
+        <PropertyRef Name="EndType" />
+      </Principal>
+      <Dependent Role="PigingLimit">
+        <PropertyRef Name="EndType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EngApply_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EngApply" Type="Self.EngApply" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="EngApply">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Engine_EngApply">
+    <End Role="EngApply" Type="Self.EngApply" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Engine" Type="Self.Engine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EngApply">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="Engine">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Engine_EngineList">
+    <End Role="EngineList" Type="Self.EngineList" Multiplicity="1" />
+    <End Role="Engine" Type="Self.Engine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EngineList">
+        <PropertyRef Name="EngCode" />
+      </Principal>
+      <Dependent Role="Engine">
+        <PropertyRef Name="EngCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EngLimit_EngineList">
+    <End Role="EngineList" Type="Self.EngineList" Multiplicity="1" />
+    <End Role="EngLimit" Type="Self.EngLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EngineList">
+        <PropertyRef Name="EngCode" />
+      </Principal>
+      <Dependent Role="EngLimit">
+        <PropertyRef Name="EngCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Examine_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Examine" Type="Self.Examine" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="Examine">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacDesign_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FacDesign" Type="Self.FacDesign" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="FacDesign">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacInspection_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FacInspection" Type="Self.FacInspection" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="FacInspection">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacSysMAT_MAT_Spec">
+    <End Role="MAT_Spec" Type="Self.MAT_Spec" Multiplicity="0..1" />
+    <End Role="FacSysMAT" Type="Self.FacSysMAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAT_Spec">
+        <PropertyRef Name="SpecNo" />
+      </Principal>
+      <Dependent Role="FacSysMAT">
+        <PropertyRef Name="SpecNo1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacSysMAT_MAT_Types">
+    <End Role="MAT_Types" Type="Self.MAT_Types" Multiplicity="1" />
+    <End Role="FacSysMAT" Type="Self.FacSysMAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAT_Types">
+        <PropertyRef Name="TypeNo" />
+      </Principal>
+      <Dependent Role="FacSysMAT">
+        <PropertyRef Name="MatType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PriceOfMat_FacSysMAT">
+    <End Role="FacSysMAT" Type="Self.FacSysMAT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PriceOfMat" Type="Self.PriceOfMat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacSysMAT">
+        <PropertyRef Name="POMNo" />
+      </Principal>
+      <Dependent Role="PriceOfMat">
+        <PropertyRef Name="POMNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PigingLimit_FacTypeList">
+    <End Role="FacTypeList" Type="Self.FacTypeList" Multiplicity="0..1" />
+    <End Role="PigingLimit" Type="Self.PigingLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacTypeList">
+        <PropertyRef Name="FacType" />
+      </Principal>
+      <Dependent Role="PigingLimit">
+        <PropertyRef Name="FacType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Farm_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Farm" Type="Self.Farm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="Farm">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmChange_Farm">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FarmChange" Type="Self.FarmChange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FNo" />
+      </Principal>
+      <Dependent Role="FarmChange">
+        <PropertyRef Name="FNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmCrop_Farm">
+    <End Role="Farm" Type="Self.Farm" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FarmCrop" Type="Self.FarmCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FNo" />
+      </Principal>
+      <Dependent Role="FarmCrop">
+        <PropertyRef Name="FNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmerSys_StdFacSys">
+    <End Role="StdFacSys" Type="Self.StdFacSys" Multiplicity="1" />
+    <End Role="FarmerSys" Type="Self.FarmerSys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StdFacSys">
+        <PropertyRef Name="FacNo" />
+      </Principal>
+      <Dependent Role="FarmerSys">
+        <PropertyRef Name="FacNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pool_PoolApply">
+    <End Role="PoolApply" Type="Self.PoolApply" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pool" Type="Self.Pool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PoolApply">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pool_PoolTypeList">
+    <End Role="PoolTypeList" Type="Self.PoolTypeList" Multiplicity="1" />
+    <End Role="Pool" Type="Self.Pool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PoolTypeList">
+        <PropertyRef Name="PtypeCode" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="PtypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PoolApply_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PoolApply" Type="Self.PoolApply" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="PoolApply">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PoolTonList_PoolTypeList">
+    <End Role="PoolTypeList" Type="Self.PoolTypeList" Multiplicity="1" />
+    <End Role="PoolTonList" Type="Self.PoolTonList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PoolTypeList">
+        <PropertyRef Name="PtypeCode" />
+      </Principal>
+      <Dependent Role="PoolTonList">
+        <PropertyRef Name="PtypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StdFacSysMAT_StdFacSys">
+    <End Role="StdFacSys" Type="Self.StdFacSys" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StdFacSysMAT" Type="Self.StdFacSysMAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StdFacSys">
+        <PropertyRef Name="FacNo" />
+      </Principal>
+      <Dependent Role="StdFacSysMAT">
+        <PropertyRef Name="FacNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VerifyLog_VerMapping">
+    <End Role="VerMapping" Type="Self.VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VerifyLog" Type="Self.VerifyLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="VerifyLog">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CntrlApply" EntityType="Self.CntrlApply" />
+    <EntitySet Name="CntrlFac" EntityType="Self.CntrlFac" />
+    <EntitySet Name="CntrlList" EntityType="Self.CntrlList" />
+    <EntitySet Name="ControlLimit" EntityType="Self.ControlLimit" />
+    <EntitySet Name="DesignerList" EntityType="Self.DesignerList" />
+    <EntitySet Name="EFile" EntityType="Self.EFile" />
+    <EntitySet Name="EndTypeList" EntityType="Self.EndTypeList" />
+    <EntitySet Name="EngApply" EntityType="Self.EngApply" />
+    <EntitySet Name="Engine" EntityType="Self.Engine" />
+    <EntitySet Name="EngineList" EntityType="Self.EngineList" />
+    <EntitySet Name="EngLimit" EntityType="Self.EngLimit" />
+    <EntitySet Name="Examine" EntityType="Self.Examine" />
+    <EntitySet Name="FacDesign" EntityType="Self.FacDesign" />
+    <EntitySet Name="FacInspection" EntityType="Self.FacInspection" />
+    <EntitySet Name="FacStatList" EntityType="Self.FacStatList" />
+    <EntitySet Name="FacSysMAT" EntityType="Self.FacSysMAT" />
+    <EntitySet Name="FacTypeList" EntityType="Self.FacTypeList" />
+    <EntitySet Name="FacVerify" EntityType="Self.FacVerify" />
+    <EntitySet Name="Farm" EntityType="Self.Farm" />
+    <EntitySet Name="FarmChange" EntityType="Self.FarmChange" />
+    <EntitySet Name="FarmCrop" EntityType="Self.FarmCrop" />
+    <EntitySet Name="FarmDataLog" EntityType="Self.FarmDataLog" />
+    <EntitySet Name="Farmer" EntityType="Self.Farmer" />
+    <EntitySet Name="FarmerSys" EntityType="Self.FarmerSys" />
+    <EntitySet Name="FileTypeList" EntityType="Self.FileTypeList" />
+    <EntitySet Name="IrrWaterList" EntityType="Self.IrrWaterList" />
+    <EntitySet Name="LandTypeList" EntityType="Self.LandTypeList" />
+    <EntitySet Name="Mat_Module" EntityType="Self.Mat_Module" />
+    <EntitySet Name="MAT_Spec" EntityType="Self.MAT_Spec" />
+    <EntitySet Name="MAT_Types" EntityType="Self.MAT_Types" />
+    <EntitySet Name="MoneyRules" EntityType="Self.MoneyRules" />
+    <EntitySet Name="PigingLimit" EntityType="Self.PigingLimit" />
+    <EntitySet Name="Pool" EntityType="Self.Pool" />
+    <EntitySet Name="PoolApply" EntityType="Self.PoolApply" />
+    <EntitySet Name="PoolTonList" EntityType="Self.PoolTonList" />
+    <EntitySet Name="PoolTypeList" EntityType="Self.PoolTypeList" />
+    <EntitySet Name="PriceOfMat" EntityType="Self.PriceOfMat" />
+    <EntitySet Name="RegionList" EntityType="Self.RegionList" />
+    <EntitySet Name="StdFacSys" EntityType="Self.StdFacSys" />
+    <EntitySet Name="StdFacSysMAT" EntityType="Self.StdFacSysMAT" />
+    <EntitySet Name="Subsidy" EntityType="Self.Subsidy" />
+    <EntitySet Name="SubsidyItemList" EntityType="Self.SubsidyItemList" />
+    <EntitySet Name="VerifyLog" EntityType="Self.VerifyLog" />
+    <EntitySet Name="VerMapping" EntityType="Self.VerMapping" />
+    <EntitySet Name="WaterSrcList" EntityType="Self.WaterSrcList" />
+    <EntitySet Name="WrkExecutReport" EntityType="Self.WrkExecutReport" />
+    <AssociationSet Name="FK_CntrlApply_VerMapping" Association="Self.FK_CntrlApply_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="CntrlApply" EntitySet="CntrlApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CntrlFac_CntrlApply" Association="Self.FK_CntrlFac_CntrlApply">
+      <End Role="CntrlApply" EntitySet="CntrlApply" />
+      <End Role="CntrlFac" EntitySet="CntrlFac" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ControlLimit_CntrlList" Association="Self.FK_ControlLimit_CntrlList">
+      <End Role="CntrlList" EntitySet="CntrlList" />
+      <End Role="ControlLimit" EntitySet="ControlLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EFile_VerMapping" Association="Self.FK_EFile_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="EFile" EntitySet="EFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PigingLimit_EndTypeList" Association="Self.FK_PigingLimit_EndTypeList">
+      <End Role="EndTypeList" EntitySet="EndTypeList" />
+      <End Role="PigingLimit" EntitySet="PigingLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EngApply_VerMapping" Association="Self.FK_EngApply_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="EngApply" EntitySet="EngApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Engine_EngApply" Association="Self.FK_Engine_EngApply">
+      <End Role="EngApply" EntitySet="EngApply" />
+      <End Role="Engine" EntitySet="Engine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Engine_EngineList" Association="Self.FK_Engine_EngineList">
+      <End Role="EngineList" EntitySet="EngineList" />
+      <End Role="Engine" EntitySet="Engine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EngLimit_EngineList" Association="Self.FK_EngLimit_EngineList">
+      <End Role="EngineList" EntitySet="EngineList" />
+      <End Role="EngLimit" EntitySet="EngLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Examine_VerMapping" Association="Self.FK_Examine_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="Examine" EntitySet="Examine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacDesign_VerMapping" Association="Self.FK_FacDesign_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="FacDesign" EntitySet="FacDesign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacInspection_VerMapping" Association="Self.FK_FacInspection_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="FacInspection" EntitySet="FacInspection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacSysMAT_MAT_Spec" Association="Self.FK_FacSysMAT_MAT_Spec">
+      <End Role="MAT_Spec" EntitySet="MAT_Spec" />
+      <End Role="FacSysMAT" EntitySet="FacSysMAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacSysMAT_MAT_Types" Association="Self.FK_FacSysMAT_MAT_Types">
+      <End Role="MAT_Types" EntitySet="MAT_Types" />
+      <End Role="FacSysMAT" EntitySet="FacSysMAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PriceOfMat_FacSysMAT" Association="Self.FK_PriceOfMat_FacSysMAT">
+      <End Role="FacSysMAT" EntitySet="FacSysMAT" />
+      <End Role="PriceOfMat" EntitySet="PriceOfMat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PigingLimit_FacTypeList" Association="Self.FK_PigingLimit_FacTypeList">
+      <End Role="FacTypeList" EntitySet="FacTypeList" />
+      <End Role="PigingLimit" EntitySet="PigingLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Farm_VerMapping" Association="Self.FK_Farm_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="Farm" EntitySet="Farm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmChange_Farm" Association="Self.FK_FarmChange_Farm">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="FarmChange" EntitySet="FarmChange" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmCrop_Farm" Association="Self.FK_FarmCrop_Farm">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="FarmCrop" EntitySet="FarmCrop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmerSys_StdFacSys" Association="Self.FK_FarmerSys_StdFacSys">
+      <End Role="StdFacSys" EntitySet="StdFacSys" />
+      <End Role="FarmerSys" EntitySet="FarmerSys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pool_PoolApply" Association="Self.FK_Pool_PoolApply">
+      <End Role="PoolApply" EntitySet="PoolApply" />
+      <End Role="Pool" EntitySet="Pool" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pool_PoolTypeList" Association="Self.FK_Pool_PoolTypeList">
+      <End Role="PoolTypeList" EntitySet="PoolTypeList" />
+      <End Role="Pool" EntitySet="Pool" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PoolApply_VerMapping" Association="Self.FK_PoolApply_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="PoolApply" EntitySet="PoolApply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PoolTonList_PoolTypeList" Association="Self.FK_PoolTonList_PoolTypeList">
+      <End Role="PoolTypeList" EntitySet="PoolTypeList" />
+      <End Role="PoolTonList" EntitySet="PoolTonList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StdFacSysMAT_StdFacSys" Association="Self.FK_StdFacSysMAT_StdFacSys">
+      <End Role="StdFacSys" EntitySet="StdFacSys" />
+      <End Role="StdFacSysMAT" EntitySet="StdFacSysMAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerifyLog_VerMapping" Association="Self.FK_VerifyLog_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="VerifyLog" EntitySet="VerifyLog" />
+    </AssociationSet>
+    <EntitySet Name="Old_CountryCode" EntityType="DryModel.Old_CountryCode" />
+    <EntitySet Name="Old_Farm" EntityType="DryModel.Old_Farm" />
+    <EntitySet Name="Old_Farmer" EntityType="DryModel.Old_Farmer" />
+    <EntitySet Name="Old_Unit" EntityType="DryModel.Old_Unit" />
+    <EntitySet Name="LastVerOfMapNo" EntityType="DryModel.LastVerOfMapNo" />
+    <EntitySet Name="Pay" EntityType="DryModel.Pay" />
+    <AssociationSet Name="FK_Pay_VerMapping" Association="DryModel.FK_Pay_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="Pay" EntitySet="Pay" />
+    </AssociationSet>
+    <EntitySet Name="EndType" EntityType="DryModel.EndType" />
+    <AssociationSet Name="FK_EndType_EndTypeList" Association="DryModel.FK_EndType_EndTypeList">
+      <End Role="EndTypeList" EntitySet="EndTypeList" />
+      <End Role="EndType" EntitySet="EndType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EndType_FacTypeList" Association="DryModel.FK_EndType_FacTypeList">
+      <End Role="FacTypeList" EntitySet="FacTypeList" />
+      <End Role="EndType" EntitySet="EndType" />
+    </AssociationSet>
+    <EntitySet Name="MatGroup" EntityType="DryModel.MatGroup" />
+    <EntitySet Name="PigingConf" EntityType="DryModel.PigingConf" />
+    <AssociationSet Name="FK_EndType_PigingConf" Association="DryModel.FK_EndType_PigingConf">
+      <End Role="PigingConf" EntitySet="PigingConf" />
+      <End Role="EndType" EntitySet="EndType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmerSys_PigingConf" Association="DryModel.FK_FarmerSys_PigingConf">
+      <End Role="PigingConf" EntitySet="PigingConf" />
+      <End Role="FarmerSys" EntitySet="FarmerSys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PigingConf_VerMapping" Association="DryModel.FK_PigingConf_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="PigingConf" EntitySet="PigingConf" />
+    </AssociationSet>
+    <EntitySet Name="OldSystemFarm" EntityType="DryModel.OldSystemFarm" />
+    <EntitySet Name="LiugongReport" EntityType="DryModel.LiugongReport" />
+    <EntitySet Name="LiugongReport_Crop" EntityType="DryModel.LiugongReport_Crop" />
+    <EntitySet Name="LiugongReport_Engine" EntityType="DryModel.LiugongReport_Engine" />
+    <EntitySet Name="LiugongReport_Piging" EntityType="DryModel.LiugongReport_Piging" />
+    <EntitySet Name="LiugongReport_Pool" EntityType="DryModel.LiugongReport_Pool" />
+    <EntitySet Name="TotalFunds" EntityType="DryModel.TotalFunds" />
+    <EntitySet Name="FarmData" EntityType="DryModel.FarmData" />
+    <EntitySet Name="AcceptanceReportData" EntityType="DryModel.AcceptanceReportData" />
+    <EntitySet Name="CntrlMat" EntityType="DryModel.CntrlMat" />
+    <AssociationSet Name="FK_CntrlMat_CntrlFac" Association="DryModel.FK_CntrlMat_CntrlFac">
+      <End Role="CntrlFac" EntitySet="CntrlFac" />
+      <End Role="CntrlMat" EntitySet="CntrlMat" />
+    </AssociationSet>
+    <EntitySet Name="LiugongReport_Town" EntityType="DryModel.LiugongReport_Town" />
+    <EntitySet Name="TotalFee" EntityType="DryModel.TotalFee" />
+    <AssociationSet Name="FK_TotalFee_VerMapping" Association="DryModel.FK_TotalFee_VerMapping">
+      <End Role="VerMapping" EntitySet="VerMapping" />
+      <End Role="TotalFee" EntitySet="TotalFee" />
+    </AssociationSet>
+    <EntitySet Name="CasePayDetail" EntityType="DryModel.CasePayDetail" />
+    <EntitySet Name="FarmerSysM" EntityType="DryModel.FarmerSysM" />
+    <AssociationSet Name="FK_FarmerSysM_FarmerSys" Association="DryModel.FK_FarmerSysM_FarmerSys">
+      <End Role="FarmerSys" EntitySet="FarmerSys" />
+      <End Role="FarmerSysM" EntitySet="FarmerSysM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmerSysM_MatGroup" Association="DryModel.FK_FarmerSysM_MatGroup">
+      <End Role="MatGroup" EntitySet="MatGroup" />
+      <End Role="FarmerSysM" EntitySet="FarmerSysM" />
+    </AssociationSet>
+    <EntitySet Name="CropAreaDetail" EntityType="DryModel.CropAreaDetail" />
+    <EntitySet Name="LandEquity" EntityType="DryModel.LandEquity" />
+    <AssociationSet Name="FK_LandEquity_Farm" Association="DryModel.FK_LandEquity_Farm">
+      <End Role="Farm" EntitySet="Farm" />
+      <End Role="LandEquity" EntitySet="LandEquity" />
+    </AssociationSet>
+    <EntitySet Name="CasePayUnit" EntityType="DryModel.CasePayUnit" />
+    <EntitySet Name="UserLog" EntityType="DryModel.UserLog" />
+    <EntitySet Name="SummaryView" EntityType="DryModel.SummaryView" />
+    <EntitySet Name="Indigenous" EntityType="DryModel.Indigenous" />
+    <EntitySet Name="CaseDetail" EntityType="DryModel.CaseDetail" />
+    <EntitySet Name="FarmReapplyQuery" EntityType="DryModel.FarmReapplyQuery" />
+    <EntitySet Name="LandData" EntityType="DryModel.LandData" />
+    <EntitySet Name="LeisureFarm" EntityType="DryModel.LeisureFarm" />
+    <EntitySet Name="LeisureFarm_LandInfo" EntityType="DryModel.LeisureFarm_LandInfo" />
+    <AssociationSet Name="FK_LeisureFarm_LandInfo_LeisureFarm" Association="DryModel.FK_LeisureFarm_LandInfo_LeisureFarm">
+      <End Role="LeisureFarm" EntitySet="LeisureFarm" />
+      <End Role="LeisureFarm_LandInfo" EntitySet="LeisureFarm_LandInfo" />
+    </AssociationSet>
+    <EntitySet Name="SWCBPools" EntityType="DryModel.SWCBPools" />
+    <EntitySet Name="Case" EntityType="DryModel.Case" />
+    <AssociationSet Name="FK_Case_Farmer" Association="DryModel.FK_Case_Farmer">
+      <End Role="Farmer" EntitySet="Farmer" />
+      <End Role="Case" EntitySet="Case" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerMapping_Case" Association="DryModel.FK_VerMapping_Case">
+      <End Role="Case" EntitySet="Case" />
+      <End Role="VerMapping" EntitySet="VerMapping" />
+    </AssociationSet>
+    <EntitySet Name="SubsidyLimit" EntityType="DryModel.SubsidyLimit" />
+    <AssociationSet Name="FK_ControlLimit_SubsidyLimit" Association="DryModel.FK_ControlLimit_SubsidyLimit">
+      <End Role="SubsidyLimit" EntitySet="SubsidyLimit" />
+      <End Role="ControlLimit" EntitySet="ControlLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EngLimit_SubsidyLimit" Association="DryModel.FK_EngLimit_SubsidyLimit">
+      <End Role="SubsidyLimit" EntitySet="SubsidyLimit" />
+      <End Role="EngLimit" EntitySet="EngLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PigingLimit_SubsidyLimit" Association="DryModel.FK_PigingLimit_SubsidyLimit">
+      <End Role="SubsidyLimit" EntitySet="SubsidyLimit" />
+      <End Role="PigingLimit" EntitySet="PigingLimit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PoolTonList_SubsidyLimit" Association="DryModel.FK_PoolTonList_SubsidyLimit">
+      <End Role="SubsidyLimit" EntitySet="SubsidyLimit" />
+      <End Role="PoolTonList" EntitySet="PoolTonList" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Old_CountryCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Double" Nullable="false" />
+    <Property Name="CITY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CITYCNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CITYCODE" Type="Double" />
+  </EntityType>
+  <EntityType Name="Old_Farm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="年度" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="單位" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="編號1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="編號2" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="灌溉型式" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="地段" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="地目" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="面積" Type="Double" Nullable="false" />
+    <Property Name="地號1" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="地號2" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="地號3" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="備註" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="灌區外" Type="Boolean" Nullable="false" />
+    <Property Name="工作站代號" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Old_Farmer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="年度" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="單位" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="編號1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="編號2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="鄉鎮" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="地區分類" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="推廣類別" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="農作物" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="農作物1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="農作物2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="農作物3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="農作物4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="灌溉型式" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="動力" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="動力6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="抽水機" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="蓄水池1" Type="Double" />
+    <Property Name="蓄水池2" Type="Double" />
+    <Property Name="蓄水池3" Type="Double" />
+    <Property Name="水源設施" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="水源管路類別" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="設施面積" Type="Double" />
+    <Property Name="身份証字號" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="電話" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="地址1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="地址2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="勘查日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="驗收日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="設施情形" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="末端設施費" Type="Double" />
+    <Property Name="設計費" Type="Double" />
+    <Property Name="審查費" Type="Double" />
+    <Property Name="動力輔助款" Type="Double" />
+    <Property Name="蓄水池輔助款" Type="Double" />
+    <Property Name="水源管路設施費" Type="Double" />
+    <Property Name="調控設施費" Type="Double" />
+    <Property Name="水井設施費" Type="Double" />
+    <Property Name="農戶配合款" Type="Double" />
+    <Property Name="政府總輔助款" Type="Double" />
+    <Property Name="水源設施輔助款" Type="Double" />
+    <Property Name="調控設施輔助款" Type="Double" />
+    <Property Name="備註" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SS" Type="Double" />
+    <Property Name="SL" Type="Double" />
+    <Property Name="系統設計代號" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="灌溉器名稱" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="蓄水池材質" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="重複" Type="Boolean" />
+    <Property Name="更新日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="抽水機數量" Type="Int32" />
+    <Property Name="蓄水池數量" Type="Int32" />
+    <Property Name="工作站代號" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="行動電話" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="設計人" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="住址鄉鎮" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="灌區外" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Old_Unit">
+    <Key>
+      <PropertyRef Name="LOCAL" />
+    </Key>
+    <Property Name="LOCAL" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="LOCNS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NUB" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LastVerOfMapNo">
+    <Key>
+      <PropertyRef Name="EventNo" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Pay">
+    <Key>
+      <PropertyRef Name="PayNo" />
+    </Key>
+    <Property Name="PayNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ItemCode" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="PayMoney" Type="Int32" Nullable="false" />
+    <Property Name="FarmerMoney" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="VerMapping" Relationship="DryModel.FK_Pay_VerMapping" FromRole="Pay" ToRole="VerMapping" />
+  </EntityType>
+  <Association Name="FK_Pay_VerMapping">
+    <End Type="DryModel.VerMapping" Role="VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.Pay" Role="Pay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="Pay">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EndType">
+    <Key>
+      <PropertyRef Name="EndTypeID" />
+    </Key>
+    <Property Name="EndTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="EndTypeCode" Type="Byte" Nullable="false" />
+    <Property Name="FacType" Type="Byte" Nullable="false" />
+    <Property Name="BranchPipeMat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BranchPipeSpec" Type="Double" />
+    <Property Name="StdpipeHei" Type="Double" />
+    <Property Name="StdpipeMat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StdpipeSpec" Type="Double" />
+    <Property Name="SL" Type="Double" Nullable="false" />
+    <Property Name="SS" Type="Double" Nullable="false" />
+    <Property Name="SprinklerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SprinklerSpec" Type="Double" />
+    <NavigationProperty Name="EndTypeList" Relationship="DryModel.FK_EndType_EndTypeList" FromRole="EndType" ToRole="EndTypeList" />
+    <NavigationProperty Name="FacTypeList" Relationship="DryModel.FK_EndType_FacTypeList" FromRole="EndType" ToRole="FacTypeList" />
+    <NavigationProperty Name="PigingConf" Relationship="DryModel.FK_EndType_PigingConf" FromRole="EndType" ToRole="PigingConf" />
+  </EntityType>
+  <Association Name="FK_EndType_EndTypeList">
+    <End Type="DryModel.EndTypeList" Role="EndTypeList" Multiplicity="1" />
+    <End Type="DryModel.EndType" Role="EndType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EndTypeList">
+        <PropertyRef Name="EndType" />
+      </Principal>
+      <Dependent Role="EndType">
+        <PropertyRef Name="EndTypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EndType_FacTypeList">
+    <End Type="DryModel.FacTypeList" Role="FacTypeList" Multiplicity="1" />
+    <End Type="DryModel.EndType" Role="EndType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacTypeList">
+        <PropertyRef Name="FacType" />
+      </Principal>
+      <Dependent Role="EndType">
+        <PropertyRef Name="FacType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MatGroup">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupCNS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FarmerSysM" Relationship="DryModel.FK_FarmerSysM_MatGroup" FromRole="MatGroup" ToRole="FarmerSysM" />
+  </EntityType>
+  <EntityType Name="PigingConf">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="L1" Type="Double" Nullable="false" />
+    <Property Name="L1Mat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="L1Spec" Type="Double" />
+    <Property Name="L1Price" Type="Double" Nullable="false" />
+    <Property Name="L1Amount" Type="Int16" Nullable="false" />
+    <Property Name="L2" Type="Double" Nullable="false" />
+    <Property Name="L2Mat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="L2Spec" Type="Double" />
+    <Property Name="L2Price" Type="Double" Nullable="false" />
+    <Property Name="L2Amount" Type="Int16" Nullable="false" />
+    <Property Name="Cblock" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IrrWCode" Type="Byte" Nullable="false" />
+    <Property Name="OtherDescript" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="WorkPrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EndType" Relationship="DryModel.FK_EndType_PigingConf" FromRole="PigingConf" ToRole="EndType" />
+    <NavigationProperty Name="FarmerSys" Relationship="DryModel.FK_FarmerSys_PigingConf" FromRole="PigingConf" ToRole="FarmerSys" />
+    <NavigationProperty Name="VerMapping" Relationship="DryModel.FK_PigingConf_VerMapping" FromRole="PigingConf" ToRole="VerMapping" />
+  </EntityType>
+  <Association Name="FK_EndType_PigingConf">
+    <End Type="DryModel.PigingConf" Role="PigingConf" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.EndType" Role="EndType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PigingConf">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="EndType">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmerSys_PigingConf">
+    <End Type="DryModel.PigingConf" Role="PigingConf" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.FarmerSys" Role="FarmerSys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PigingConf">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="FarmerSys">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PigingConf_VerMapping">
+    <End Type="DryModel.VerMapping" Role="VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.PigingConf" Role="PigingConf" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="PigingConf">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OldSystemFarm">
+    <Key>
+      <PropertyRef Name="面積" />
+      <PropertyRef Name="灌區外" />
+    </Key>
+    <Property Name="年度" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="單位" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="編號1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="編號2" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="灌溉型式" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="CITY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CITYCNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SECNO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SEC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SECCNS1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SECCNS2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="地目" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="面積" Type="Double" Nullable="false" />
+    <Property Name="地號1" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="地號2" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="地號3" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="備註" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="灌區外" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LiugongReport">
+    <Key>
+      <PropertyRef Name="EventNo" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="IdNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Addr" />
+      <PropertyRef Name="LandNo" />
+      <PropertyRef Name="LandTypeCNS" />
+      <PropertyRef Name="FarmArea" />
+      <PropertyRef Name="BuildArea" />
+      <PropertyRef Name="Outside" />
+      <PropertyRef Name="EDate" />
+      <PropertyRef Name="GovSubsidy" />
+      <PropertyRef Name="FarmerFee" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="IdNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Section" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+    <Property Name="Subsection" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="LandNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LandTypeCNS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+    <Property Name="Outside" Type="Boolean" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GovSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="FarmerFee" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="FileType" Type="Byte" />
+    <Property Name="Filepath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LiugongReport_Crop">
+    <Key>
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="LandNo" />
+      <PropertyRef Name="FarmArea" />
+      <PropertyRef Name="BuildArea" />
+      <PropertyRef Name="CropCode" />
+    </Key>
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LandNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+    <Property Name="CropCode" Type="Int16" Nullable="false" />
+    <Property Name="Crop" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LiugongReport_Engine">
+    <Key>
+      <PropertyRef Name="EngCode" />
+      <PropertyRef Name="EngPrice" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="EngCode" Type="Byte" Nullable="false" />
+    <Property Name="EngCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EngPrice" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LiugongReport_Piging">
+    <Key>
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="SysPrice" />
+      <PropertyRef Name="Total" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="IrrWCode" Type="Byte" />
+    <Property Name="L1" Type="Double" />
+    <Property Name="L2" Type="Double" />
+    <Property Name="SL" Type="Double" />
+    <Property Name="SS" Type="Double" />
+    <Property Name="FacType" Type="Byte" />
+    <Property Name="FTpeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EndTypeCode" Type="Byte" />
+    <Property Name="MAT" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+    <Property Name="ItemUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int16" Nullable="false" />
+    <Property Name="SysPrice" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <Property Name="WorkPrice" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LiugongReport_Pool">
+    <Key>
+      <PropertyRef Name="PoolWeight" />
+      <PropertyRef Name="PtypeCode" />
+      <PropertyRef Name="PtypeCNS" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="PoolWeight" Type="Int16" Nullable="false" />
+    <Property Name="PtypeCode" Type="Byte" Nullable="false" />
+    <Property Name="PtypeCNS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TotalFunds">
+    <Key>
+      <PropertyRef Name="MapNo" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="GovSubsidy" />
+      <PropertyRef Name="FarmerFee" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="GovSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="FarmerFee" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FarmData">
+    <Key>
+      <PropertyRef Name="MapNo" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Section" />
+      <PropertyRef Name="LandNo" />
+      <PropertyRef Name="LandType" />
+      <PropertyRef Name="Pcent_Chd" />
+      <PropertyRef Name="Pcent_Par" />
+      <PropertyRef Name="FarmArea" />
+      <PropertyRef Name="BuildArea" />
+      <PropertyRef Name="FinalArea" />
+      <PropertyRef Name="Outside" />
+      <PropertyRef Name="FNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Section" Type="Int32" Nullable="false" />
+    <Property Name="LandNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LandType" Type="Byte" Nullable="false" />
+    <Property Name="Pcent_Chd" Type="Int32" Nullable="false" />
+    <Property Name="Pcent_Par" Type="Int32" Nullable="false" />
+    <Property Name="Long" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Lat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+    <Property Name="FinalArea" Type="Double" Nullable="false" />
+    <Property Name="IsApplied" Type="Boolean" />
+    <Property Name="ApplicationStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AppliedArea" Type="Int32" />
+    <Property Name="AreaCanApply" Type="Double" />
+    <Property Name="Outside" Type="Boolean" Nullable="false" />
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AcceptanceReportData">
+    <Key>
+      <PropertyRef Name="EventNo" />
+      <PropertyRef Name="FId" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="Gold" />
+      <PropertyRef Name="IdNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CityCode" />
+      <PropertyRef Name="Addr" />
+      <PropertyRef Name="IsMember" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="FId" Type="Guid" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Gold" Type="Boolean" Nullable="false" />
+    <Property Name="IdNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsMember" Type="Boolean" Nullable="false" />
+    <Property Name="V_RecNo" Type="Int32" />
+    <Property Name="StatCode" Type="Byte" />
+    <Property Name="VDes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VDate" Type="DateTime" Precision="0" />
+    <Property Name="VId" Type="Guid" />
+    <Property Name="ReduceM" Type="Int32" />
+    <Property Name="PayM" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CntrlMat">
+    <Key>
+      <PropertyRef Name="MatNo" />
+    </Key>
+    <Property Name="MatNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CFNo" Type="Int32" Nullable="false" />
+    <Property Name="CntrlCode" Type="Int16" Nullable="false" />
+    <Property Name="MatName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MatAmt" Type="Int16" Nullable="false" />
+    <Property Name="MatPrice" Type="Double" Nullable="false" />
+    <Property Name="MatAmtAply" Type="Int16" Nullable="false" />
+    <Property Name="MatPriceAply" Type="Double" Nullable="false" />
+    <NavigationProperty Name="CntrlFac" Relationship="DryModel.FK_CntrlMat_CntrlFac" FromRole="CntrlMat" ToRole="CntrlFac" />
+  </EntityType>
+  <Association Name="FK_CntrlMat_CntrlFac">
+    <End Type="DryModel.CntrlFac" Role="CntrlFac" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.CntrlMat" Role="CntrlMat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CntrlFac">
+        <PropertyRef Name="CFNo" />
+      </Principal>
+      <Dependent Role="CntrlMat">
+        <PropertyRef Name="CFNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LiugongReport_Town">
+    <Key>
+      <PropertyRef Name="FNo" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="LandNo" />
+      <PropertyRef Name="LandType" />
+      <PropertyRef Name="LandTypeCNS" />
+      <PropertyRef Name="FarmArea" />
+      <PropertyRef Name="BuildArea" />
+    </Key>
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Subsection" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LandNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LandType" Type="Byte" Nullable="false" />
+    <Property Name="LandTypeCNS" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FarmArea" Type="Double" Nullable="false" />
+    <Property Name="BuildArea" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TotalFee">
+    <Key>
+      <PropertyRef Name="MapNo" />
+    </Key>
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="GovSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="GoldSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="FarmerFee" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="VerMapping" Relationship="DryModel.FK_TotalFee_VerMapping" FromRole="TotalFee" ToRole="VerMapping" />
+  </EntityType>
+  <Association Name="FK_TotalFee_VerMapping">
+    <End Type="DryModel.VerMapping" Role="VerMapping" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.TotalFee" Role="TotalFee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="VerMapping">
+        <PropertyRef Name="MapNo" />
+      </Principal>
+      <Dependent Role="TotalFee">
+        <PropertyRef Name="MapNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CasePayDetail">
+    <Key>
+      <PropertyRef Name="mapno" />
+    </Key>
+    <Property Name="mapno" Type="Int32" Nullable="false" />
+    <Property Name="田間管路設施費" Type="Int32" />
+    <Property Name="規劃設計費" Type="Int32" />
+    <Property Name="水源設施費" Type="Int32" />
+    <Property Name="調控設施費" Type="Int32" />
+    <Property Name="動力設備費" Type="Int32" />
+    <Property Name="蓄水設備費" Type="Int32" />
+    <Property Name="設施費總計" Type="Int32" />
+    <Property Name="工作費" Type="Int32" />
+    <Property Name="FarmerFee" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FarmerSysM">
+    <Key>
+      <PropertyRef Name="No" />
+    </Key>
+    <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarSysNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="POMNo" Type="Int32" Nullable="false" />
+    <Property Name="ModuleNo" Type="Int32" />
+    <Property Name="ModuleCNS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatGroupID" Type="Int32" />
+    <Property Name="MatOrder" Type="Int32" />
+    <Property Name="MatGroupCNS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Spec1" Type="Double" />
+    <Property Name="SpecName1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Spec2" Type="Double" />
+    <Property Name="SpecName2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Spec3" Type="Double" />
+    <Property Name="SpecName3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ItemUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SysPrice" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="TotalPrice" Type="Double" />
+    <NavigationProperty Name="FarmerSys" Relationship="DryModel.FK_FarmerSysM_FarmerSys" FromRole="FarmerSysM" ToRole="FarmerSys" />
+    <NavigationProperty Name="MatGroup" Relationship="DryModel.FK_FarmerSysM_MatGroup" FromRole="FarmerSysM" ToRole="MatGroup" />
+  </EntityType>
+  <Association Name="FK_FarmerSysM_FarmerSys">
+    <End Type="DryModel.FarmerSys" Role="FarmerSys" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.FarmerSysM" Role="FarmerSysM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FarmerSys">
+        <PropertyRef Name="FarSysNo" />
+      </Principal>
+      <Dependent Role="FarmerSysM">
+        <PropertyRef Name="FarSysNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmerSysM_MatGroup">
+    <End Type="DryModel.MatGroup" Role="MatGroup" Multiplicity="0..1" />
+    <End Type="DryModel.FarmerSysM" Role="FarmerSysM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MatGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="FarmerSysM">
+        <PropertyRef Name="MatGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CropAreaDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="Buildarea" Type="Double" />
+    <Property Name="Crop" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Crop_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LandEquity">
+    <Key>
+      <PropertyRef Name="LNo" />
+    </Key>
+    <Property Name="LNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FNo" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IdNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pcent_Chd" Type="Int32" />
+    <Property Name="Pcent_Par" Type="Int32" />
+    <Property Name="EquityArea" Type="Double" />
+    <Property Name="IsMember" Type="Boolean" />
+    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Farm" Relationship="DryModel.FK_LandEquity_Farm" FromRole="LandEquity" ToRole="Farm" />
+  </EntityType>
+  <Association Name="FK_LandEquity_Farm">
+    <End Type="DryModel.Farm" Role="Farm" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.LandEquity" Role="LandEquity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farm">
+        <PropertyRef Name="FNo" />
+      </Principal>
+      <Dependent Role="LandEquity">
+        <PropertyRef Name="FNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CasePayUnit">
+    <Key>
+      <PropertyRef Name="PayNo" />
+      <PropertyRef Name="MapNo" />
+      <PropertyRef Name="ApplyUnit" />
+    </Key>
+    <Property Name="PayNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" Nullable="false" />
+    <Property Name="ItemCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="GovPayUnit" Type="Int64" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="OperationLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OperationTime" Type="DateTime" Precision="3" />
+    <Property Name="Ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SummaryView">
+    <Key>
+      <PropertyRef Name="EventNo" />
+      <PropertyRef Name="FId" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="Gold" />
+      <PropertyRef Name="IdNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CityCode" />
+      <PropertyRef Name="Addr" />
+      <PropertyRef Name="IsMember" />
+      <PropertyRef Name="Step" />
+      <PropertyRef Name="DesId" />
+      <PropertyRef Name="Designer_Name" />
+      <PropertyRef Name="Complete" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="FId" Type="Guid" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Gold" Type="Boolean" Nullable="false" />
+    <Property Name="IdNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsMember" Type="Boolean" Nullable="false" />
+    <Property Name="Step" Type="Byte" Nullable="false" />
+    <Property Name="DesId" Type="Guid" Nullable="false" />
+    <Property Name="Designer_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Complete" Type="Boolean" Nullable="false" />
+    <Property Name="PDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Indigenous">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="CityCode" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="TownCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CaseDetail">
+    <Key>
+      <PropertyRef Name="EventNo" />
+      <PropertyRef Name="FId" />
+      <PropertyRef Name="ApplyYear" />
+      <PropertyRef Name="ApplyUnit" />
+      <PropertyRef Name="IANum" />
+      <PropertyRef Name="Gold" />
+      <PropertyRef Name="IdNo" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CityCode" />
+      <PropertyRef Name="Addr" />
+      <PropertyRef Name="IsMember" />
+      <PropertyRef Name="Step" />
+      <PropertyRef Name="DesId" />
+      <PropertyRef Name="Designer_Name" />
+      <PropertyRef Name="Complete" />
+      <PropertyRef Name="EndTypeCNS" />
+      <PropertyRef Name="CatalogCNS" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" />
+    <Property Name="MapNo" Type="Int32" />
+    <Property Name="FId" Type="Guid" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Gold" Type="Boolean" Nullable="false" />
+    <Property Name="IdNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Tel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsMember" Type="Boolean" Nullable="false" />
+    <Property Name="Step" Type="Byte" Nullable="false" />
+    <Property Name="DesId" Type="Guid" Nullable="false" />
+    <Property Name="Designer_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Complete" Type="Boolean" Nullable="false" />
+    <Property Name="PDate" Type="DateTime" Precision="3" />
+    <Property Name="EndTypeCNS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FTpeCNS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CatalogCNS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="landTown" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="landCity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="buildarea" Type="Double" />
+    <Property Name="farmarea" Type="Double" />
+    <Property Name="finalarea" Type="Double" />
+    <Property Name="Indigenous" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FarmReapplyQuery">
+    <Key>
+      <PropertyRef Name="Section_Id" />
+    </Key>
+    <Property Name="Section_Id" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Office" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Office_code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Section_Code" Type="Int32" />
+    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Subsection" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LandCode" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="TownCode" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Indigenous" Type="Int32" />
+    <Property Name="secno" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LandData">
+    <Key>
+      <PropertyRef Name="Section_Id" />
+    </Key>
+    <Property Name="Section_Id" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Office" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Office_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Section_Code" Type="Int32" />
+    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Subsection" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LandCode" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="TownCode" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Indigenous" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LeisureFarm">
+    <Key>
+      <PropertyRef Name="LicenseId" />
+    </Key>
+    <Property Name="LicenseId" Type="Int32" Nullable="false" />
+    <Property Name="Farm_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Site" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="License_Exp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LeisureFarm_LandInfo" Relationship="DryModel.FK_LeisureFarm_LandInfo_LeisureFarm" FromRole="LeisureFarm" ToRole="LeisureFarm_LandInfo" />
+  </EntityType>
+  <EntityType Name="LeisureFarm_LandInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City_cns" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CityCode" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Town_cns" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TownCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectionCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LandNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LicenseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LeisureFarm" Relationship="DryModel.FK_LeisureFarm_LandInfo_LeisureFarm" FromRole="LeisureFarm_LandInfo" ToRole="LeisureFarm" />
+  </EntityType>
+  <Association Name="FK_LeisureFarm_LandInfo_LeisureFarm">
+    <End Type="DryModel.LeisureFarm" Role="LeisureFarm" Multiplicity="1" />
+    <End Type="DryModel.LeisureFarm_LandInfo" Role="LeisureFarm_LandInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeisureFarm">
+        <PropertyRef Name="LicenseId" />
+      </Principal>
+      <Dependent Role="LeisureFarm_LandInfo">
+        <PropertyRef Name="LicenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SWCBPools">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplyYear" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Pools" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SecCNS" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SectionCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LandNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Case">
+    <Key>
+      <PropertyRef Name="EventNo" />
+    </Key>
+    <Property Name="EventNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FId" Type="Guid" Nullable="false" />
+    <Property Name="ApplyYear" Type="Byte" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="IANum" Type="Int32" Nullable="false" />
+    <Property Name="Gold" Type="Boolean" Nullable="false" />
+    <Property Name="Step" Type="Byte" Nullable="false" />
+    <Property Name="Complete" Type="Boolean" Nullable="false" />
+    <Property Name="CId" Type="Guid" Nullable="false" />
+    <Property Name="CDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Enable" Type="Boolean" Nullable="false" />
+    <Property Name="Is12" Type="Boolean" Nullable="false" />
+    <Property Name="PDate" Type="DateTime" Precision="3" />
+    <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Farmer" Relationship="DryModel.FK_Case_Farmer" FromRole="Case" ToRole="Farmer" />
+    <NavigationProperty Name="VerMapping" Relationship="DryModel.FK_VerMapping_Case" FromRole="Case" ToRole="VerMapping" />
+  </EntityType>
+  <Association Name="FK_Case_Farmer">
+    <End Type="DryModel.Farmer" Role="Farmer" Multiplicity="1" />
+    <End Type="DryModel.Case" Role="Case" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farmer">
+        <PropertyRef Name="FId" />
+      </Principal>
+      <Dependent Role="Case">
+        <PropertyRef Name="FId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VerMapping_Case">
+    <End Type="DryModel.Case" Role="Case" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.VerMapping" Role="VerMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Case">
+        <PropertyRef Name="EventNo" />
+      </Principal>
+      <Dependent Role="VerMapping">
+        <PropertyRef Name="EventNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SubsidyLimit">
+    <Key>
+      <PropertyRef Name="LimitID" />
+    </Key>
+    <Property Name="LimitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplyYear" Type="Int16" Nullable="false" />
+    <Property Name="ApplyUnit" Type="Int16" Nullable="false" />
+    <Property Name="GeneralPercent" Type="Double" Nullable="false" />
+    <Property Name="GoldPercent" Type="Double" />
+    <Property Name="MountainIncrease" Type="Double" Nullable="false" />
+    <Property Name="TotalLimit" Type="Int32" Nullable="false" />
+    <Property Name="PersionLimit" Type="Int32" Nullable="false" />
+    <Property Name="EngineMaxSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="ControlMinimumArea" Type="Double" Nullable="false" />
+    <Property Name="PoolMaxSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="PoolMinimumArea" Type="Double" Nullable="false" />
+    <Property Name="ControlMaxSubsidy" Type="Int32" Nullable="false" />
+    <Property Name="AppliedPercent" Type="Double" Nullable="false" />
+    <Property Name="PlanningFee" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ControlLimit" Relationship="DryModel.FK_ControlLimit_SubsidyLimit" FromRole="SubsidyLimit" ToRole="ControlLimit" />
+    <NavigationProperty Name="EngLimit" Relationship="DryModel.FK_EngLimit_SubsidyLimit" FromRole="SubsidyLimit" ToRole="EngLimit" />
+    <NavigationProperty Name="PigingLimit" Relationship="DryModel.FK_PigingLimit_SubsidyLimit" FromRole="SubsidyLimit" ToRole="PigingLimit" />
+    <NavigationProperty Name="PoolTonList" Relationship="DryModel.FK_PoolTonList_SubsidyLimit" FromRole="SubsidyLimit" ToRole="PoolTonList" />
+  </EntityType>
+  <Association Name="FK_ControlLimit_SubsidyLimit">
+    <End Type="DryModel.SubsidyLimit" Role="SubsidyLimit" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.ControlLimit" Role="ControlLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubsidyLimit">
+        <PropertyRef Name="LimitID" />
+      </Principal>
+      <Dependent Role="ControlLimit">
+        <PropertyRef Name="LimitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EngLimit_SubsidyLimit">
+    <End Type="DryModel.SubsidyLimit" Role="SubsidyLimit" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.EngLimit" Role="EngLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubsidyLimit">
+        <PropertyRef Name="LimitID" />
+      </Principal>
+      <Dependent Role="EngLimit">
+        <PropertyRef Name="LimitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PigingLimit_SubsidyLimit">
+    <End Type="DryModel.SubsidyLimit" Role="SubsidyLimit" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.PigingLimit" Role="PigingLimit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubsidyLimit">
+        <PropertyRef Name="LimitID" />
+      </Principal>
+      <Dependent Role="PigingLimit">
+        <PropertyRef Name="LimitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PoolTonList_SubsidyLimit">
+    <End Type="DryModel.SubsidyLimit" Role="SubsidyLimit" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DryModel.PoolTonList" Role="PoolTonList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubsidyLimit">
+        <PropertyRef Name="LimitID" />
+      </Principal>
+      <Dependent Role="PoolTonList">
+        <PropertyRef Name="LimitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

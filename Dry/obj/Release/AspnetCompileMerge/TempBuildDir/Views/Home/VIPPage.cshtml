@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "管路灌溉及時資訊下載";
+    
+}
+<div class="text-center">
+    <h2 class="text-info text-center">@ViewBag.Title</h2>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4 text-center">
+            <h4 class="text-warning">年度原民鄉鎮補助情形</h4>
+            <div class="row-fluid" align="center">
+                @using (Html.BeginForm("DownLoadIndiTown", "HOME"))
+                {<button id="BtnExcel" type="submit" class="btn" title="下載">
+                        <img src="~/Content/images/adobe_pdf.ico" style="width:40px" />
+                        <br />
+                        <font size="2">下載</font>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="span4 text-center">
+            <h4 class="text-warning">年度原民鄉補助管理處辦理情形</h4>
+            <div class="row-fluid" aling="center">
+                @using (Html.BeginForm("DownLoadIndiIa", "HOME"))
+                {
+                    <button id="BtnExcel" type="submit" class="btn" title="下載">
+                        <img src="~/Content/images/adobe_pdf.ico" style="width:40px" />
+                        <br />
+                        <font size="2">下載</font>
+                    </button>
+                }
+            </div>
+
+        </div>
+        <div class="span4 text-center">
+            <h4 class="text-warning">年度管理處辦理情形</h4>
+            <div class="row-fluid" aling="center">
+                @using (Html.BeginForm("DownLoadIaKPI", "HOME"))
+                {
+                    <button id="BtnExcel" type="submit" class="btn" title="下載">
+                        <img src="~/Content/images/adobe_pdf.ico" style="width:40px" />
+                        <br />
+                        <font size="2">下載</font>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2 class="text-info text-center">本年度資料統計</h2>
+<div class="row-fluid">
+    <div class="span4">
+        <h4 class="text-warning text-center">管理處灌區內外推動統計表</h4>
+        <ul>
+            <li>
+                <a href=@Url.Content("~/reportsample/iareport/iairrg11202.xlsx") download="112管理處灌區內外統計表2月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                    <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                    2月
+                </a>
+            </li>
+        </ul>
+            
+        
+    </div>
+    <div class="span4">
+        <h4 class="text-warning text-center">縣市灌區內外統計表</h4>
+        <ul>
+            <li>
+                <a href=@Url.Content("~/reportsample/iareport/cityirrg11202.xlsx") download="112縣市灌區內外統計表2月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                    <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                    112年縣市灌區內外統計表2月
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="span4">
+        <h4 class="text-warning text-center">55原民鄉統計</h4>
+        <ul>
+            <li>
+                <a href=@Url.Content("~/reportsample/iareport/110_112indigenous02.xlsx") download="原民鄉55統計表2月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                    <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                    2月
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <h2 class="text-info text-center">歷年資料統計</h2>
+    <ul>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_112irrg02.xlsx") download="100-112年農田水利灌溉服務區域內外統計表2月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~112年農田水利灌溉服務區域內外統計表2月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/cityirrg12V1.xlsx") download="111縣市灌區內外統計表12月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                111年縣市灌區內外統計表12月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/iairrg12V1.xlsx") download="111管理處灌區內外統計表12月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                111年管理處灌區內外統計表12月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/110_111indigenous12.xlsx") download="原民鄉55統計表12月.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                111年原民鄉統計12月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/waterRs106111V3.xlsx") download="106-111年競用區補助統計" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                106~111年農水資源競用區統計表(新增蓄水設施統計)
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/waterRs106111V2.xlsx") download="106-111年競用區補助統計" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                106~111年農水資源競用區統計表(更新111年全年度結案案件)
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg12.xlsx") download="100-111年農田水利灌溉服務區域內外統計表12月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表12月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg11.xlsx") download="100-111年農田水利灌溉服務區域內外統計表11月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表11月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg10.xlsx") download="100-111年農田水利灌溉服務區域內外統計表10月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表10月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/waterRs106111.xlsx") download="106-111年競用區補助統計" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                106~111年農水資源競用區統計表(111年資料統計至10月28日)
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg09.xlsx") download="100-111年農田水利灌溉服務區域內外統計表9月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表9月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg08.xlsx") download="100-111年農田水利灌溉服務區域內外統計表8月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表8月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/101_110hecheng.xlsx") download="101-110年合成里補助名細" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                101~110年合成里補助名細
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg07.xlsx") download="100-111年農田水利灌溉服務區域內外統計表7月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表7月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg06v1.xlsx") download="100-111年農田水利灌溉服務區域內外統計表6月v1" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表6月(更新南投高雄)
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrrg06.xlsx") download="100-111年農田水利灌溉服務區域內外統計表6月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表6月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrg05v1.xlsx") download="100-111年農田水利灌溉服務區域內外統計表5月v1" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表5月(更新南投高雄)
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/hist100_111irrrg05.xlsx") download="100-111年農田水利灌溉服務區域內外統計表5月" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~111年農田水利灌溉服務區域內外統計表5月
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/110indigenous.xlsx") download="110年原民鄉統計表.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                110年原民鄉補助統計
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/106110Dsgfee.xlsx") download="106~110年各管理處規劃設計費統計表.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                106~110年各管理處規劃設計費統計表
+            </a>
+        </li>
+        <li>
+            <div class="row-fluid" aling="center">
+                <a href=@Url.Content("~/reportsample/iareport/iairrghist0010v1.xlsx") download="管理處灌區內外統計表100_110v1.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)" />
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~110年管理處灌區內外統計表(更新南投高雄)
+            </div>
+        </li>
+        <li>
+            <div class="row-fluid" aling="center">
+                <a href=@Url.Content("~/reportsample/iareport/iairrghist0010.xlsx") download="管理處灌區內外統計表100_110.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)" />
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                100~110年管理處灌區內外統計表
+            </div>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/cityirrghist0010v1.xlsx") download="縣市灌區內外統計表100_110v1.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                <span>100~110年縣市灌區內外統計表(更新南投高雄)</span>
+            </a>
+        </li>
+        <li>
+            <a href=@Url.Content("~/reportsample/iareport/cityirrghist0010.xlsx") download="縣市灌區內外統計表100_110.xlsx" onclick="setTimeout(() => { $.unblockUI(); },1000)">
+                <img src="~/Content/images/ms_excel.ico" style="width:40px" />
+                <span>100~110年縣市灌區內外統計表</span>
+            </a>
+        </li>
+    </ul>
+</div>

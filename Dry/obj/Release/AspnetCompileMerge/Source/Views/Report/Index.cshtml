@@ -1,0 +1,408 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+    @model Dry.Models.ViewModel.ReportView
+}
+<script>
+    $(function () {
+        $('input[id^="IANumStart"]').attr('class', 'input-mini');
+        $('input[id^="IANumEnd"]').attr('class', 'input-mini');
+        $('#ddl_ApplyYear').change(function () {
+            var year = $(this).val();
+            $('input[id^="ApplyYear"]').each(function () {
+                $(this).val(year);
+            });
+            $("#MainBtn").click();
+        });
+        $('input[id^="ApplyYear"]').hide();
+        $("#MainBtn").hide();
+    });
+</script>
+<h2>報表列印</h2>
+@using (Html.BeginForm("Main"))
+{
+    <div>
+        @Html.DropDownList("ddl_ApplyYear", (IEnumerable<SelectListItem>)Model.ApplyYearDDL, new { style = "width: 100px;" })
+        <input id="MainBtn" type="submit" value="查詢" class="btn btn-default" />
+    </div>
+    <div>@Html.EditorFor(model => model.ApplyYear)</div>
+
+}
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#Report_1" data-toggle="tab">1</a>
+        </li>        
+    </ul>
+    <div class="tab-content">
+        <div id="Report_1" class="tab-pane active">
+            
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">外出拍攝照片攜帶表</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("PhotoGraphCarry", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出Excel</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">封面</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("CoverReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">現場勘查表</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("SiteSurveyReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出Excel</font>
+                            </button>
+                        }
+                    </div>
+                </div>                
+                <div class="span6">
+                    <span class="label label-info">工程預算書</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("BudgetBookReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" >
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">印領清冊</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("SubsidyList", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini", style = "width: 10px;" })
+                            
+                            @*@Html.DropDownListFor(model => model.CheeseList, (IEnumerable<SelectListItem>)Model.CheeseList, new { style = "width: 120px;" })*@
+                            @*@Html.DropDownListFor(model => model.CheeseList, Model.CheeseList, new { style = "width: 120px;" })*@
+
+                        if (Session["UnitID"].ToString() == "11")
+                        {
+                            <br />
+                            <select name="MyList">
+                                <option value="A">推廣</option>
+                                <option value="B">推廣蓄水池</option>
+                                <option value="C">瑠公蓄水池</option>
+                            </select>
+                                <span>梯次：</span>
+                                @Html.TextBoxFor(model => model.number, new { @class = "input-mini", style = "width: 10px;" })<br />
+                                @Html.TextBox("DesignName1", null, new { @class = "form-control", placeholder = "設計人" })
+                                @Html.TextBox("Design1Start", null, new { @class = "form-control input-mini", placeholder = "開始案號" })
+                                @Html.TextBox("Design1End", null, new { @class = "form-control input-mini", placeholder = "結束案號" })
+                                <br />
+
+                                @Html.TextBox("DesignName2", null, new { @class = "form-control ", placeholder = "設計人" })
+                                @Html.TextBox("Design2Start", null, new { @class = "form-control input-mini", placeholder = "開始案號" })
+                                @Html.TextBox("Design2End", null, new { @class = "form-control input-mini", placeholder = "結束案號" })
+
+                        }
+
+
+                        <br />
+                        <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                            <br />
+                            <font size="2">匯出Excel</font>
+                        </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">功能測試、複查報告書</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("AcceptanceReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" >
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>            
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">施工前後照片</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ConstructionPhoto", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">切結書</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ExportAcceptAffidavitPDF", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" >
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                            <br />
+                            @*<span>報驗時間：</span><br />
+                            @Html.EditorFor(model => model.moon, new { @class = "input-mini" })
+                            <span>月</span>
+                            @Html.EditorFor(model => model.day, new { @class = "input-mini" })
+                            <span>日</span>*@
+                        }
+                    </div>
+                </div>
+                             
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">管路補助金額明細表</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("EngineeringReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+
+
+                            <span>種類</span>
+                            @Html.DropDownListFor(model => model.step, new SelectList(new List<Object> {
+                           new {value = 7 , text = "已編列"},
+                           new {value = 10, text = "已驗收"}
+                       }, "value", "text", 1
+                           )
+                            , new { @class = "form-control" })
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            if (Session["UnitID"].ToString() == "11")
+                            {
+                                <br>
+                                <select name="MyList">
+                                    <option value="A">推廣</option>
+                                    <option value="B">推廣蓄水池</option>
+                                    <option value="C">瑠公蓄水池</option>
+                                </select>
+                                <span>梯次：</span>
+                                @Html.TextBoxFor(model => model.number, new { @class = "input-mini", style = "width: 10px;" })
+                            }
+                            <br />
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出Excel</font>
+                            </button>
+
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">結案申報書</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ExportCompletePDF", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" >
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>                
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="span12">
+                        <span class="label label-info">管路灌溉系統設施設計表</span>
+                    </div>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("SystemFacilityDesignReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出Excel</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">領款收據</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("PayeeReceipt", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>                
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">土地清冊</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ExportFarmLands", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出Excel">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">設計費收據</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("DesignReceiptReport", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                               
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <span class="label label-info">住址標籤</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ExportAddress", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/ms_excel.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出Excel</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="span6">
+                    <span class="label label-info">書面審查表</span>
+                    <div class="row-fluid">
+                        @using (Html.BeginForm("ExportCheckList", "Report"))
+                        {
+                            @Html.EditorFor(model => model.ApplyYear)
+                            <span>設施編號</span>
+                            @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+                            <span>~</span>
+                            @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" >
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:20px" />
+                                <br />
+                                <font size="2">匯出PDF</font>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    @*<div id="Report_2" class="tab-pane"></div>
+    <div id="Report_3" class="tab-pane"></div>*@
+    </div>
+</div>

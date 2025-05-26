@@ -1,0 +1,19 @@
+﻿@*
+    -- =============================================
+    -- Author: WEI
+    -- Create date: 2014-2-10
+    -- Description: 調控設施首頁的View
+    -- =============================================
+*@
+
+@model Dry.Models.ViewModel.CtrlView
+
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+@*調控設備列表*@
+<input id="hiddn_DataListCount" type="hidden" value="0" />
+@{Html.RenderPartial("DataList");}
+@*調控設備資料輸入欄位*@
+@{Html.RenderPartial("EditTable");}

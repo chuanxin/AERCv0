@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Dry.Models.DesignerList>
+
+@{
+    var pagedlist = (IPagedList)Model;
+}
+
+<table id="DesignerList" class="table">
+    <tr style="background: #3B3B3B;">
+        <th></th>
+        <th>
+            姓名
+        </th>
+        <th>
+            電話
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td class="td_style">
+            @Html.HiddenFor(modelItem => item.Designer_Id)
+        </td>
+        <td class="td_style">
+            @Html.DisplayFor(modelItem => item.Designer_Name)
+        </td>
+        <td class="td_style">
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td class="btn">
+            @Html.ActionLink("修改", "Edit", new { Designer_Id = item.Designer_Id })
+            </td>
+        <td class="btn">
+            <div style="padding:3.8px 9px;"><input type="submit" value="刪除" id="Delete" name="Delete" /></div>
+        </td>
+    </tr>
+    }
+</table>
+<div style="text-align:center" class="span12">
+    @Html.Pager(pagedlist.PageSize, pagedlist.PageNumber, pagedlist.TotalItemCount,
+                new AjaxOptions { UpdateTargetId = "container" }).Options(
+                    o => o.Action("DesignerList").MaxNrOfPages(4))
+</div>
+<script type="text/javascript">
+    $(function () {
+        $.unblockUI();
+    });
+</script>
+

@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/themes/base/css")
+    @*@Scripts.Render("~/Scripts/modernizr-1.5.min.js")*@
+    @*@Styles.Render("~/content/AllMyCss")*@
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/js")
+    @RenderSection("css", false)
+
+    <script type="text/javascript">
+        var sessionTimeout = '@Session.Timeout';
+        function ResetTimeout() {
+            $('#_Blank').attr('src', '@Url.Action("_Blank","FarmLand")');
+            sessionTimeout = '@Session.Timeout';
+            $('#lbl_LogoutMin').html(sessionTimeout);
+            //console.log(sessionTimeout);
+        }
+        function DisplaySessionTimeout() {
+            //assigning minutes left to session timeout to Label
+            $('#lbl_LogoutMin').html(sessionTimeout);
+            sessionTimeout = sessionTimeout - 1;
+
+            //if session is not less than 0
+            if (sessionTimeout >= 1)
+                //call the function again after 1 minute delay
+                window.setTimeout("DisplaySessionTimeout()", 60000);
+            else {
+                //show message box
+                alert("系統閒置過久，請重新登入。");
+                window.location.href = '@Url.Action("Logout", "Account")';
+            }
+        }
+       
+        $(function () {
+            DisplaySessionTimeout();
+            //重新設定自動登出時間
+            window.setTimeout('ResetTimeout()', 600000);
+        });
+
+        $(function () {
+            $('#a_MemberLink').click(function () {
+                $.DisableBlockUI();
+            });
+        });
+        $(function () {
+            $("#gislink").on("click", function () {
+                $.DisableBlockUI();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <header>            
+            <div id="slogan"></div>
+        </header>
+
+        <div id="content">
+            <div class="row-fluid">
+                <!--2020 chj-->
+                <div id="content_left">
+                    <div id="login_msg">
+                        <!--登入資訊-->
+                        @*登入資訊*@
+                        @{Html.RenderAction("UserInfo", "Account");}
+                    </div>
+                    <!--選單區-->
+                    <div id="sidebar2">
+                        <section>
+                            <ul class="style1 style2">
+                                <li>
+                                    @Html.ActionLink(">>返回公告資訊首頁", "Index", "Home")
+                                </li>
+                                @if (Session["UnitID"].ToString() == "99" || Session["UnitID"].ToString() == "0")
+                                {
+                                    <li>
+                                        @Html.ActionLink(">>即時資訊下載", "VIPPage", "Home")
+                                    </li>
+                                }
+
+                            </ul>
+                            <div class="sbox1">
+                                <h2>申請業務</h2>
+                                <div>
+                                    <ul class="style1">
+                                        <li>
+                                            @Html.ActionLink("農戶申請業務", "Index", "ApplyIndex")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("重覆申請查詢", "Index", "ReapplyQuery")
+                                        </li>
+                                        @if ((bool)Session["Status"])
+                                        {
+                                            <li>
+                                                @Html.ActionLink("初審意見表", "Index", "PreliminaryTrial")
+                                            </li>
+                                        }
+                                        <li>
+                                            @Html.ActionLink("報表列印", "Index", "Report")
+                                        </li>
+                                        <li>@Html.ActionLink("統計報表", "Index", "StatReport")</li>
+                                        <li>
+                                            @Html.ActionLink("山坡地查定資料", "Index", "SlopelandQuery")
+                                        </li>
+                                        <li>@Html.ActionLink("系統教學影片", "CourseVideos", "Home")</li>
+                                        @*<li><a href="https://gisvm1.aerc.org.tw/drygis" id="gislink" target="_blank">GIS地圖</a></li>*@
+                                        <li>@Html.ActionLink("GIS地圖", "Gisweb", new { controller = "Applyindex" }, new {target = "_gisPage",  id= "gislink" })</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @if ((bool)Session["Status"])
+                            {
+                                <div class="sbox2">
+                                    <h2>系統基本資料維護</h2>
+                                    <ul class="style1">
+                                        <li>@Html.ActionLink("管路灌溉材料表管理", "Index", "Material")</li>
+                                    </ul>
+                                </div>
+                                <div class="sbox3">
+                                    <h2>管理者功能</h2>
+                                    <ul class="style1">
+                                        <li>@Html.ActionLink("修改密碼", "ChangePwd", "UserManage")</li>
+                                        <li>@Html.ActionLink("使用者管理", "UserManage", "UserManage")</li>                                        
+                                        @{if ((bool)Session["Status"])
+                                            {
+                                                <li>@Html.ActionLink("設計者管理", "Index", "Designer")</li>
+                                            }
+                                        }
+                                        <li>@Html.ActionLink("案件設計者批次修改", "Index", "DesignerChange")</li>
+
+                                    </ul>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="sbox3">
+                                    <h2>管理者功能</h2>
+                                    <ul class="style1">
+                                        <li>@Html.ActionLink("使用者管理", "UserManage", "UserManage")</li>                                        
+
+                                    </ul>
+
+                                </div>
+
+                            }
+                        </section>
+                    </div>
+
+
+                </div>
+
+                <div id="content_right">
+                    <!--Body content-->
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="copyright">
+            COPYRIGHT © 2020 AERC
+        </div>
+
+    </div>
+    <iframe id="_Blank" style="display:none;"></iframe>
+    @RenderSection("scripts", false)
+</body>
+</html>

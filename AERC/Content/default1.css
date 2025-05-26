@@ -1,0 +1,189 @@
+﻿/*@charset "utf-8";*/
+/* CSS Document */
+/******按鈕樣式******/
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: rgb(245, 245, 245);
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(230, 230, 230));
+    background-repeat: repeat-x;
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgb(179, 179, 179);
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn:hover, .btn:focus {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+    background-position: 0px -15px;
+    transition: background-position 0.1s linear 0s;
+}
+.btn:hover, .btn:focus, .btn:active, .btn.active {
+    color: rgb(51, 51, 51);
+    background-color: rgb(230, 230, 230);
+}
+.btn-small {
+    padding: 2px 10px;
+    font-size: 14px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+/*輸入框樣式*/
+input[type="text"]{
+    margin-bottom: 0px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;	
+	display: inline-block;
+	height: 20px;
+	padding: 3px 5px;
+	margin-bottom: 1px;
+	font-size: 14px;
+	line-height: 20px;
+	color: rgb(85, 85, 85);
+	vertical-align: middle;
+	border-radius: 2px 2px 2px 2px;
+	
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset, 0px 0px 2px rgba(82, 168, 236, 0.6);
+}
+input:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+
+input:hover{
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);	
+}
+
+/*搜尋輸入框，導圓角*/
+input.search-query {
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-bottom: 0px;
+    border-radius: 15px 15px 15px 15px;
+}
+.input-medium {
+    width: 120px;
+}
+
+/******下拉選單******/
+select {
+    width: 220px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	/*height: 30px;*/
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: rgb(85, 85, 85);
+	vertical-align: middle;
+	border-radius: 4px 4px 4px 4px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: normal;
+	cursor: pointer;
+	margin: 0px;
+}
+select:focus{
+	outline: thin dotted rgb(51, 51, 51);
+	outline-offset: -2px;
+}
+select[class*="span"]{
+	float: none;
+	margin-left: 0px;
+	min-height: 1px;
+}
+.span1 {
+    width: 70px;
+}
+
+
+/******頁籤******/
+.nav {
+    list-style: none outside none;
+}
+.nav > li > a {
+	color: #000000;
+    text-decoration: none;
+    display: block;
+}
+.nav-tabs{
+  *zoom: 1;
+}
+
+.nav-tabs:before,
+.nav-tabs:after{
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.nav-tabs:after{
+  clear: both;
+}
+
+.nav-tabs > li {
+  float: left;
+}
+
+.nav-tabs > li > a{
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: 2px;
+  line-height: 12px;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-tabs > li {
+  margin-bottom: -1px;
+}
+
+.nav-tabs > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 20px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 4px 4px 0 0;
+     -moz-border-radius: 4px 4px 0 0;
+          border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+  color: #FF7573;
+  cursor: default;
+  background-color: #FFEBEB;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+

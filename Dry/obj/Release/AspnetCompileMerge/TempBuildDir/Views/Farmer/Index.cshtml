@@ -1,0 +1,437 @@
+﻿@*
+    -- =============================================
+    -- Author: WEI, HaoHsuan
+    -- Update date: 2014-6-17
+    -- Description: 農戶資料首頁
+    -- =============================================
+*@
+
+@model Dry.Models.ViewModel.FarmerView
+@Scripts.Render("~/jquery.validate")
+<script type="text/javascript">
+    $(function () {
+        //$('input').css('height', '30px');
+        jQuery.postJson = function (url, data, callback, type) {
+            if ($.isFunction(data)) {
+                type = type || callback;
+                callback = data;
+                data = undefined;
+            }
+            return jQuery.ajax({
+                url: url,
+                type: "POST",
+                dataType: type,
+                contentType: "application/json",
+                data: typeof (data) == "string" ? data : JSON.stringify(data),
+                success: callback
+            });
+        };
+
+        function GetTownDDL() {
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetTownDDL", "Farmer")' + '?CityCode=' + $('#FarmerCityCode option:selected').val(), function (data) {
+                var TownDDL = $('#FarmerTownId');
+                TownDDL.empty();
+                for (i = 0; i < data.length; i++) { //依選擇縣市，列出鄉鎮市
+                    TownDDL.append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+                }
+                $.DisableBlockUI('');
+            });
+        }
+
+        $('#FarmerCityCode').change(function () {
+            $.EnableBlockUI('');
+            GetTownDDL();
+        });
+
+        $("#FarmerIdNo").keyup(function (e) {
+            var str = $(this).val();
+            str = str.toUpperCase();
+            $(this).val(str);
+        });
+
+        /*
+        if ($('#Gold').val() == "True") {
+            $('#tr_Gold').show();
+        } else {
+            $('#tr_Gold').hide();
+        }
+        */
+        //如果是雲林開啟黃金廊道選項
+        //alert($('#UnitID').val());
+        if ($('#UnitID').val() == "10" || $('#UnitID').val() == "9") {
+            $('#tr_Gold').show();
+        } else {
+            $('#tr_Gold').hide();
+        }
+        
+
+
+
+        //儲存資料
+        $('#btn_SaveFarmer').click(function () {
+            if (!$('#FarmerForm').validate().form()) {
+                return false;
+            }
+           
+            var DataObj = new Object();
+            DataObj = StoreData();
+            $.postJson('@Url.Action("SaveData", "Farmer")', DataObj, function (data) {
+                //$.DisableBlockUI();
+                //alert(data);
+                if (data == "Success") {
+                    //window.location.href = "FarmLand/CreateFarm";//Server path
+                    @*window.location.href = '@Url.Action("CreateFarm", "FarmLand")';*@//localhost test path
+                    window.location.href = '@Url.Action("Index", "ApplyStep")';//localhost test path
+                } else {
+                    $.DisableBlockUI();
+                    alert(data);
+                }
+            });
+        });
+        //修改資料
+        $('#btn_ModifyFarmer').click(function () {
+            if (!$('#FarmerForm').validate().form()) {
+                return false;
+            }
+            $('#alert_FarmerModifyFail').alert('close');
+            $('#alert_FarmerModifySuccess').alert('close');
+            //$('#btn_ModifyFarmer').after().empty();
+            var DataObj = new Object();
+            DataObj = StoreData();
+            $.postJson('@Url.Action("ModifyData", "Farmer")', DataObj, function (data) {
+                //$.DisableBlockUI();
+
+                if (data == "Success") {
+                    //alert(data);
+                    //$('#alert_FarmerModifySuccess').addClass('fade').addClass('in');
+                    //$('#alert_FarmerModifySuccess').alert('close');
+                    //$('#alert_FarmerModifySuccess').alert();
+                    //$(".alert").alert()
+                    $('#btn_ModifyFarmer').after(
+                        '<div id="alert_FarmerModifySuccess" class="alert alert-success fade in" style="width:200px;">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong>更新成功!</strong> 資料已完成修改。' +
+                        '</div>'
+                        );
+                } else {
+                    //$('#alert_FarmerModifyFail').addClass('fade').addClass('in');
+                    //$('#alert_FarmerModifyFail').alert();
+                    $('#btn_ModifyFarmer').after(
+                        '<div id="alert_FarmerModifyFail" class="alert alert-error fade in" style="width:200px;">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong>更新失敗!</strong> 資料未修改。' +
+                        '</div>'
+                        );
+
+                    alert(data);
+                }
+                $.DisableBlockUI();
+            });
+
+        });
+
+        function StoreData() {
+            $.ajaxSettings.async = false;
+            $.EnableBlockUI('寫入中...');
+            //var DataAry = [];
+            var DataObj = new Object();
+            //DataObj.EvntNo = $('#EvntNo').val(); //案件代碼
+            DataObj.ApplyYear = $('#ApplyYear').val();//申請年度
+            DataObj.IANum = $('#IANum').val();//水利會編號
+            DataObj.FId = $('#FId').val();//農戶編號
+            DataObj.FarmerName = $('#FarmerName').val(); //姓名
+            DataObj.FarmerIdNo = $('#FarmerIdNo').val(); //身份證號
+            DataObj.FarmerCityCode = $('#FarmerCityCode option:selected').val(); //縣市代碼
+            DataObj.FarmerTownId = $('#FarmerTownId option:selected').val(); //鄉鎮代碼
+            DataObj.FarmerAddr = $('#FarmerCityCode option:selected').text() + ' ' + $('#FarmerTownId option:selected').text() + ' ' + $('#FarmerAddr').val().trim(); //地址
+            DataObj.FarmerTel = $('#FarmerTel').val(); //電話
+            DataObj.FarmerPhone = $('#FarmerPhone').val(); //行動電話
+            DataObj.IsMember = $('input[name="liu"]:checked').val() == true ? true : false; //是否為瑠公會員
+            DataObj.Gold = $('input[name="Gold"]:checked').val() == "True" ? true : false; //是否為黃金廊道方案
+            DataObj.Is12 = $('input[name="Is12"]:checked').val() == "True" ? true : false; //是否為山坡地離島
+            DataObj.DesingerId = $('#DesingerId option:selected').val();
+            return DataObj;
+            //DataAry.push(DataObj);
+        }
+
+        $('#ApplyYear').blur(function () {
+            //$.ajaxSettings.async = false;
+            $.getJSON('Farmer/GetNewIANum?Year=' + $(this).val(), function (data) {
+                $('#IANum').val(data);
+            });
+        });
+        $('#FarmerIdNo').blur(function () {
+            
+            if ($(this).val().length > 0) {
+                //alert(checkTwID($(this).val()));
+                if (!checkTwID($(this).val())) {
+                    $('#IdNoSpan').fadeIn();
+                } else {
+                    $('#IdNoSpan').fadeOut();
+                }
+            }
+        });
+        $('#chkianum').click(function () {
+            
+            var applyyear = $('#ApplyYear').val();
+            var applyunit = $("#UnitID").val();
+            var ianum = $('#IANum').val();
+            if (applyyear == "" || applyunit == "" || ianum == "") {
+                alert("申請年度、案件編號不可以為空白");
+                return false;
+            }
+            $.getJSON("@Url.Content("~/Farmer/chkIaNum?applyunit=")" + applyunit + "&applyyear=" + applyyear + "&ianum=" + ianum, function (data) {
+                if (data == true) {
+                    alert("案件編號已存在!!");
+                } else alert("案件編號未重複!!");
+
+                //alert(data);
+            });
+
+        });
+
+        //重新設定自動登出時間
+        ResetTimeout();
+    });
+    function checkTwID(id) {
+        //建立字母分數陣列(A~Z)
+        var city = new Array(
+        1, 10, 19, 28, 37, 46, 55, 64, 39, 73, 82, 2, 11,
+        20, 48, 29, 38, 47, 56, 65, 74, 83, 21, 3, 12, 30
+        )
+        id = id.toUpperCase();
+        // 使用「正規表達式」檢驗格式
+
+        if (id.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+            //alert('基本格式錯誤');
+            return false;
+        } else {
+            //將字串分割為陣列(IE必需這麼做才不會出錯)
+            id = id.split('');
+            //計算總分
+            var total = city[id[0].charCodeAt(0) - 65];
+            for (var i = 1; i <= 8; i++) {
+                total += eval(id[i]) * (9 - i);
+            }
+            //補上檢查碼(最後一碼)
+            total += eval(id[9]);
+            //檢查比對碼(餘數應為0);
+            return ((total % 10 == 0));
+        }
+    }
+</script>
+
+@{Html.BeginForm(null, null,FormMethod.Post, new { id = "FarmerForm" });}
+    <div id="UpdateDiv">
+        @Html.HiddenFor(model => model.FId)
+        @Html.HiddenFor(model => model.IsMember)
+        @Html.HiddenFor(model => model.Gold)
+        @Html.Hidden("UnitID",Session["UnitID"].ToString())
+        <table class="dashTable" style="width:100%;">
+            <tr>
+                <td class="td_style">申請年度</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @if (Session["UnitID"].ToString() == "11" || Session["UnitID"].ToString() == "9")
+                            {
+		                        @Html.TextBoxFor(model => model.ApplyYear, new { @class = "form-control input-medium" })
+                                @Html.ValidationMessageFor(model => model.ApplyYear, null, new { @class = "help-inline" })
+                            }
+                            else
+                            {
+                            if (ViewBag.checkIanum)
+                            {
+                                @Html.TextBoxFor(model => model.ApplyYear, new { @class = "form-control input-medium" })
+                                @Html.ValidationMessageFor(model => model.ApplyYear, null, new { @class = "help-inline" })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.ApplyYear, new { @class = "form-control input-medium", disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.ApplyYear, null, new { @class = "help-inline" })
+                            }
+                            }
+                        </div>
+                    </div>
+                </td>
+                <td class="td_style">水利會案件編號</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="input-append">
+                                @if (Session["UnitID"].ToString() == "11" || Session["UnitID"].ToString() == "9")
+                                {
+                                    @Html.TextBoxFor(model => model.IANum)
+                                    @Html.ValidationMessageFor(model => model.IANum, null, new { @class = "help-inline" })
+                                    <button class="btn btn-small" type="button" id="chkianum"><i class="icon-search"></i></button>
+                                }
+                                else
+                                {
+
+                                if (ViewBag.checkIanum)
+                                {
+                                    @Html.TextBoxFor(model => model.IANum)
+                                    @Html.ValidationMessageFor(model => model.IANum, null, new { @class = "help-inline" })
+                                    <button class="btn btn-small" type="button" id="chkianum"><i class="icon-search"></i></button>
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.IANum, new { disabled = "disabled" })
+                                    @Html.ValidationMessageFor(model => model.IANum, null, new { @class = "help-inline" })
+                                }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="td_style">姓名</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.FarmerName)
+                            @Html.ValidationMessageFor(model => model.FarmerName, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+                <td class="td_style">身分證字號</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.FarmerIdNo)
+                            @Html.ValidationMessageFor(model => model.FarmerIdNo, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                    <span id="IdNoSpan" class="label label-warning" style="display:none;">身份證字號有誤。</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">地址</td>
+                <td colspan="3">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.FarmerCityCode, (IEnumerable<SelectListItem>)Model.CityDDL, new { style = "width: 100px;" })@*縣市*@
+                            @Html.ValidationMessageFor(model => model.FarmerCityCode, null, new { @class = "help-inline" })
+                            @Html.DropDownListFor(model => model.FarmerTownId, (IEnumerable<SelectListItem>)Model.TownDDL, new { style = "width: 100px;" })@*鄉鎮市*@
+                            @Html.ValidationMessageFor(model => model.FarmerTownId, null, new { @class = "help-inline" })
+                            @Html.TextBoxFor(model => model.FarmerAddr, new { style = "width: 350px;" })
+                            @Html.ValidationMessageFor(model => model.FarmerAddr, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">電話</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.FarmerTel)
+                            @Html.ValidationMessageFor(model => model.FarmerTel, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+                <td class="td_style">行動電話</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.FarmerPhone)
+                            @Html.ValidationMessageFor(model => model.FarmerPhone, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            @*<tr id="tr_LiuMember">
+                    <td class="td_style">瑠公會員</td>
+                    <td colspan="3">
+                        <div class="control-group">
+                            <div class="controls">
+                                @Html.RadioButton("liu", 1, false)是
+                                @Html.RadioButton("liu", 0, true)否
+                            </div>
+                        </div>
+                    </td>
+                </tr>*@
+            <tr id="tr_Gold">
+                <td class="td_style">黃金廊道</td>
+                <td colspan="3">
+                    <div class="control-group">
+                        <div class="controls">
+                            @*@Html.RadioButton("gold", 1, false)是
+                            @Html.RadioButton("gold", 0, true)否*@
+                            @Html.RadioButtonFor(m => m.Gold, "True", new { @disabled = "false" })是
+                            @Html.RadioButtonFor(m => m.Gold, "False", new { @disabled = "false" })否
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="tr_Island">
+                <td class="td_style">離島與高山地區<a id="btn_EngBudget" href="#div_whatdef" data-toggle="modal"><i class="icon-info-sign"></i></a></td>
+                <td colspan="3" class="td_style">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.RadioButtonFor(m => m.Is12,"True", new { @disabled="false"})是
+                            @Html.RadioButtonFor(m => m.Is12,"False", new { @disabled = "false" })否
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">設計人</td>
+                <td colspan="3">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.DesingerId, (IEnumerable<SelectListItem>)Model.DesginerDDL, new { style = "width: 120px;" })@*縣市*@
+                            @Html.ValidationMessageFor(model => model.DesingerId, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+        @if(Model.Step < 8)
+        {//超過預算書步驟時，不可再編輯
+            if(!Model.IsModify)
+            {//是否為新增或修改
+                <input id="btn_SaveFarmer" type="button" value="送出，前往下個步驟" class="btn" />
+            }
+            else
+            {
+                <input id="btn_ModifyFarmer" type="button" value="修改農戶資料" class="btn" />
+                <div></div>
+            }
+        }
+        else
+        {
+            if(Model.IsChg)
+            {//是否為新增或修改
+                <input id="btn_SaveFarmer" type="button" value="送出，前往下個步驟" class="btn" />
+            }
+        }
+        
+    </div>
+<div id="div_whatdef" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="EngBudgetLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="EngBudgetLabel">離島與高山地區</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                <td>
+                    7. 本表山僻地區之偏遠地區支給對象所稱「山地地區」者，係以台北縣烏來鄉、宜蘭縣大同鄉、南澳鄉、桃園縣復興鄉、新竹縣尖石鄉、五峰鄉、苗栗縣泰安鄉、臺中縣和平鄉
+                    、南投縣信義鄉、仁愛鄉、嘉義縣阿里山鄉、高雄縣茂林鄉、桃源鄉、三民鄉、屏東縣、三地門鄉、霧臺鄉、瑪家鄉、泰武鄉、來義鄉、春日鄉、獅子鄉、牡丹鄉、臺東縣延平鄉
+                    、海端鄉、達仁鄉、金峰鄉、蘭嶼鄉、花蓮縣秀林鄉、萬榮鄉、卓溪鄉等三十個臺灣地區山地（原住民）鄉為限。
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+@{Html.EndForm();}
+

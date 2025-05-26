@@ -1,0 +1,53 @@
+﻿@model Dry.Models.ViewModel.EngineView
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+
+<table border="1" class="dashTable" align="center" style="width:95%;">
+    <tr>
+        <td style="text-align:center;vertical-align:middle;">
+            @{Html.BeginForm("Changed", "ChgDesign");}
+            @if (ViewBag.CaseComplete == "0")
+            {
+            <input id="btn_change" type="submit" value="進行變更設計" onclick="javascript:return confirm('變更設計需從【農戶基本資料】開始進行變更，\n確定進行變更設計?');" class="addBtn" />    
+            }
+            else
+            {
+                <input type="button" class="btn-danger large" value="已經結案無法進行變更" />
+            }
+   
+            @{Html.EndForm();}
+        </td>
+        <td style="text-align:center;vertical-align:middle;">
+            @{Html.BeginForm("Continue", "ChgDesign");}
+            <input id="btn_nextstep" type="submit" value="不需要，進行下一步驟!" class="loginBtn" />
+            @{Html.EndForm();}
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        ResetTimeout();
+        @*if (@ViewBag.CaseComplete == "1")
+        {
+            $("#btn_change").attr('disabled', true);
+        }*@
+        //$('#btn_change').click(function () {
+        //    var box = confirm("變更設計需從【農戶基本資料】開始進行變更，\n確定進行變更設計?");
+        //    if (box == true) {
+        //        $.EnableBlockUI('');
+        //        //window.location.href = "../Farmer/chgFarmer";
+        //        window.location.href = "../ApplyStep/Index";
+        //    } else {
+        //        return false;
+        //    }
+        //});
+
+        //$('#btn_nextstep').click(function () {
+        //    $.EnableBlockUI('');
+        //    window.location.href = "../FacilityReport/CompletionReport";
+        //});
+    });
+</script>

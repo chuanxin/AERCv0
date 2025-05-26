@@ -1,0 +1,273 @@
+﻿@*
+    -- =============================================
+    -- Author: WEI
+    -- Create date: 2014-2-10
+    -- Description: 旱作灌溉系統首頁的View
+    -- =============================================
+*@
+@model Dry.Models.ViewModel.StatisticHomeView2020
+@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+<h2>公告資訊</h2>
+<div class="content">
+    <div class="content_item">
+        <div align="center"><h5>@ViewBag.QryYear 年度目前預算書編製情形</h5> </div>
+        
+        <b>一、農委會經費</b>
+        <table class="dashTable">
+            <tr class="odd">
+                @*<td>預定推廣戶數</td>*@
+                <td>預定推廣面積(a)</td>
+                <td>預定推廣金額(千元)</td>
+                <td>調整推廣金額(千元)(b)</td>
+                <td>建檔戶數(c)</td>
+                <td>建檔面積(d)</td>
+                @*<td>面積達成率%(d/a)</td>*@
+                <td>已編預算戶數</td>
+                <td>已編預算面積(e)</td>
+                <td>已編列補助款(f)</td>
+                <td>尚未編列補助款(g)=(b)-(f)</td>
+                <td>已驗收戶數</td>
+                <td>已驗收面積</td>
+                <td>已驗收金額(h)</td>
+                <td>計畫執行率%(i)=(h)/(f)</td>
+                <td>設計費</td>
+            </tr>
+            <tr>
+                @*<td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarmer_coa)</td>預定推廣戶數*@
+                <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarm_coa)</td>@*預定推廣面積(a)*@
+                <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofMoney_coa)</td>@*預定推廣金額(千元)*@
+                <td class="number_right">@Html.DisplayFor(Model => Model.Ch_ReservationsofMoney_coa)</td>@*調整推廣金額(千元)(b)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarmer_coa)</td>@*建檔戶數(c)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarm_coa)</td>@*建檔面積(d)*@
+                @*<td class="number_right">@Html.DisplayTextFor(Model => Model.ReachOfArea_coa)%</td>面積達成率%(d/a)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmer_coa)</td>@*已編預算戶數*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarm_coa)</td>@*已編預算面積(e)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoney_coa)</td>@*已編列補助款(f)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.Unusemoney_coa)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionofFarmerend_coa)</td>@*已驗收戶數*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmend_coa)</td>@*已驗收面積*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoneyend_coa)</td>@*已驗收金額(h)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.PlanExe_coa)%</td>@*計畫執行率%(i)=(h)/(b)*@
+                <td class="number_right">@Html.DisplayTextFor(Model => Model.Desinge_coa)</td>@*設計費*@
+            </tr>
+        </table>
+
+        <b>二、瑠公經費</b>
+            <table class="dashTable">
+                <tr class="odd">
+                    @*<td>預定推廣戶數</td>*@
+                    <td>預定推廣面積(a)</td>
+                    <td>預定推廣金額(千元)</td>
+                    <td>調整推廣金額(千元)(b)</td>
+                    <td>建檔戶數(c)</td>
+                    <td>建檔面積(d)</td>
+                    @*<td>面積達成率%(d/a)</td>*@
+                    <td>已編預算戶數</td>
+                    <td>已編預算面積(e)</td>
+                    <td>已編列補助款(f)</td>
+                    <td>尚未編列補助款(g)=(b)-(f)</td>
+                    <td>已驗收戶數</td>
+                    <td>已驗收面積</td>
+                    <td>已驗收金額(h)</td>
+                    <td>計畫執行率%(i)=(h)/(f)</td>
+                    <td>設計費</td>
+                </tr>
+                <tr>
+                    @*<td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarmer_lu)</td>預定推廣戶數*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarm_lu)</td>預定推廣面積(a)
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofMoney_lu)</td>預定推廣金額(千元)
+                    <td class="number_right">@Html.DisplayFor(Model => Model.Ch_ReservationsofMoney_lu)</td>@*調整推廣金額(千元)(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarmer_lu)</td>@*建檔戶數(c)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarm_lu)</td>@*建檔面積(d)*@
+                    @*<td class="number_right">@Html.DisplayTextFor(Model => Model.ReachOfArea_lu)%</td>面積達成率%(d/a)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmer_lu)</td>@*已編預算戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarm_lu)</td>@*已編預算面積(e)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoney_lu)</td>@*已編列補助款(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Unusemoney_lu)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionofFarmerend_lu)</td>@*已驗收戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmend_lu)</td>@*已驗收面積*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoneyend_lu)</td>@*已驗收金額(h)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.PlanExe_lu)%</td>@*計畫執行率%(i)=(h)/(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Desinge_lu)</td>@*設計費*@
+                </tr>
+            </table>
+
+        <b>三、七星經費</b>
+            <table class="dashTable">
+                <tr class="odd">
+                    @*<td>預定推廣戶數</td>*@
+                    <td>預定推廣面積(a)</td>
+                    <td>預定推廣金額(千元)</td>
+                    <td>調整推廣金額(千元)(b)</td>
+                    <td>建檔戶數(c)</td>
+                    <td>建檔面積(d)</td>
+                    @*<td>面積達成率%(d/a)</td>*@
+                    <td>已編預算戶數</td>
+                    <td>已編預算面積(e)</td>
+                    <td>已編列補助款(f)</td>
+                    <td>尚未編列補助款(g)=(b)-(f)</td>
+                    <td>已驗收戶數</td>
+                    <td>已驗收面積</td>
+                    <td>已驗收金額(h)</td>
+                    <td>計畫執行率%(i)=(h)/(f)</td>
+                    <td>設計費</td>
+                </tr>
+                
+                <tr>
+                    @*<td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarmer_cx)</td>預定推廣戶數*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarm_cx)</td>預定推廣面積(a)
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofMoney_cx)</td>預定推廣金額(千元)
+                    <td class="number_right">@Html.DisplayFor(Model => Model.Ch_ReservationsofMoney_cx)</td>調整推廣金額(千元)(b)
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarmer_cx)</td>@*建檔戶數(c)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarm_cx)</td>@*建檔面積(d)*@
+                    @*<td class="number_right">@Html.DisplayTextFor(Model => Model.ReachOfArea_cx)%</td>面積達成率%(d/a)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmer_cx)</td>@*已編預算戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarm_cx)</td>@*已編預算面積(e)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoney_cx)</td>@*已編列補助款(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Unusemoney_cx)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionofFarmerend_cx)</td>@*已驗收戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmend_cx)</td>@*已驗收面積*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoneyend_cx)</td>@*已驗收金額(h)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.PlanExe_cx)%</td>@*計畫執行率%(i)=(h)/(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Desinge_cx)</td>@*設計費*@
+                </tr>
+            </table>
+
+            <b>四、合計</b>
+            <table class="dashTable">
+                <tr class="odd">
+                    @*<td>預定推廣戶數</td>*@
+                    <td>預定推廣面積(a)</td>
+                    <td>預定推廣金額(千元)</td>
+                    <td>調整推廣金額(千元)(b)</td>
+                    <td>建檔戶數(c)</td>
+                    <td>建檔面積(d)</td>
+                    @*<td>面積達成率%(d/a)</td>*@
+                    <td>已編預算戶數</td>
+                    <td>已編預算面積(e)</td>
+                    <td>已編列補助款(f)</td>
+                    <td>尚未編列補助款(g)=(b)-(f)</td>
+                    <td>已驗收戶數</td>
+                    <td>已驗收面積</td>
+                    <td>已驗收金額(h)</td>
+                    <td>計畫執行率%(i)=(h)/(f)</td>
+                    <td>設計費</td>
+                </tr>
+                <tr>
+                    @*<td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarmer_pis)</td>預定推廣戶數*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarm_pis)</td>@*預定推廣面積(a)*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofMoney_pis)</td>@*預定推廣金額(千元)*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.Ch_ReservationsofMoney_pis)</td>@*調整推廣金額(千元)(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarmer_pis)</td>@*建檔戶數(c)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarm_pis)</td>@*建檔面積(d)*@
+                    @*<td class="number_right">@Html.DisplayTextFor(Model => Model.ReachOfArea_pis)%</td>面積達成率%(d/a)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmer_pis)</td>@*已編預算戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarm_pis)</td>@*已編預算面積(e)*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ProvisionOfMoney_pis)</td>@*已編列補助款(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Unusemoney_pis)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionofFarmerend_pis)</td>@*已驗收戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmend_pis)</td>@*已驗收面積*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoneyend_pis)</td>@*已驗收金額(h)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.PlanExe)%</td>@*計畫執行率%(i)=(h)/(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Desinge_pis)</td>@*設計費*@
+                </tr>
+            </table>
+            <b>五、黃金廊道</b>
+            <table class="dashTable">
+                <tr class="odd">
+                    @*<td>預定推廣戶數</td>*@
+                    <td>預定推廣面積(a)</td>
+                    <td>預定推廣金額(千元)</td>
+                    <td>調整推廣金額(千元)(b)</td>
+                    <td>建檔戶數(c)</td>
+                    <td>建檔面積(d)</td>
+                    @*<td>面積達成率%(d/a)</td>*@
+                    <td>已編預算戶數</td>
+                    <td>已編預算面積(e)</td>
+                    <td>已編列補助款(f)</td>
+                    <td>尚未編列補助款(g)=(b)-(f)</td>
+                    <td>已驗收戶數</td>
+                    <td>已驗收面積</td>
+                    <td>已驗收金額(h)</td>
+                    <td>計畫執行率%(i)=(h)/(f)</td>
+                    <td>設計費</td>
+                </tr>
+                <tr>
+                    @*<td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarmer_gold)</td>預定推廣戶數*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofFarm_gold)</td>@*預定推廣面積(a)*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.ReservationsofMoney_gold)</td>@*預定推廣金額(千元)*@
+                    <td class="number_right">@Html.DisplayFor(Model => Model.Ch_ReservationsofMoney_gold)</td>@*調整推廣金額(千元)(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarmer_gold)</td>@*建檔戶數(c)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.NumofFarm_gold)</td>@*建檔面積(d)*@
+                    @*<td class="number_right">@Html.DisplayTextFor(Model => Model.ReachOfArea_gold)%</td>面積達成率%(d/a)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmer_gold)</td>@*已編預算戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarm_gold)</td>@*已編預算面積(e)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoney_gold)</td>@*已編列補助款(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Unusemoney_gold)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionofFarmerend_gold)</td>@*已驗收戶數*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfFarmend_gold)</td>@*已驗收面積*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.ProvisionOfMoneyend_gold)</td>@*已驗收金額(h)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.PlanExe_gold)%</td>@*計畫執行率%(i)=(h)/(b)*@
+                    <td class="number_right">@Html.DisplayTextFor(Model => Model.Desinge_gold)</td>@*設計費*@
+                </tr>
+            </table>
+            @{
+                if (Session["UnitID"].ToString() == "0" || Session["UnitID"].ToString() == "20" || Session["UnitID"].ToString() == "99")
+                {
+
+                    using (Html.BeginForm("AllUnitData", "Home"))
+                    {
+                        @Html.DropDownList("ApplyYear", (IEnumerable<SelectListItem>)ViewBag.ApplyYearDDL, new { style = "width: 100px;" })
+                        <button id="AllUnitData" type="submit" class="btn btn-info" title="匯出">
+                            <img src="~/Content/images/ms_excel.ico" style="width:65px" />
+                            <br />
+                            各會經費統計表
+                        </button>
+                    }
+
+
+                }
+            }
+            <br />
+            <table width="100%" align="center" class="dashTable">
+                <thead><tr><th colspan="4">推廣管路灌溉設施管理資訊系統公佈欄</th></tr></thead>
+                <tr>
+                    <td colspan="2">
+
+                        @if (Session["UnitID"].ToString() == "17")
+                        {
+                            /*2020 chj marked*/
+                            <!--<b>推廣旱作灌溉暨旱作灌溉受益戶申請會員會藉建置工作計畫-省水管路灌溉管理資訊系統</b>-->
+                        }
+                        else
+                        {
+                            /*2020 chj marked*/
+                            <!--<b>行政院農業委員會推廣旱作灌溉計畫-省水管路灌溉管理資訊系統</b>-->
+
+                        }
+                        本系統的維運與聯繫工作由本中心同仁辦理，如有任何需要協助或解答疑問之處，請以下列聯絡方式告知，謝謝！
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td width="74%" align="right">
+                        <div align="right">
+                            聯絡人姓名：<br />
+                            聯絡人電話：<br />
+                            聯絡人電子信箱：
+                        </div>
+                    </td>
+                    <td width="26%">
+                        資訊組 劉時偉  助理研究員<br>
+                        03-4521314  轉219<br>
+                        alex@aerc.org.tw
+                    </td>
+                </tr>
+            </table>
+</div>
+</div>

@@ -1,0 +1,179 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Dry.Models.ViewModel.SlopelandQueryView
+
+<script>
+    var city = '';
+    var town = '';
+    var section = '';
+    $(function () {
+
+        $('#CityCode').change(function () {
+            var val = $('#CityCode option:selected').val();
+            city = val;
+            GetTownDDL(val);
+        });
+        $('#TownId').change(function () {
+            var val = parseInt($('#TownId option:selected').val());
+            town = val;
+            GetSecDDL(val);
+        });
+        $('#Section').change(function () {
+            var val = $("#Section option:selected").val();
+            section = val;
+        });
+        $('#btn_Query').click(function (event) {
+            confirm("系統功能因為提供API服務已停止，請直接點選[行動水保服務網]進行查詢");
+            return false;
+
+            $('#tb_result').hide();
+            var postStr = $.post('@Url.Action("QueryJS", "SlopelandQuery")', { CityCode: city, TownId: town, Section: section, LandNo: $('#LandNo').val() });
+
+            postStr.done(function (data) {
+                //alert($(data).find("#landClass"));
+                $('#div_SlopelQueryandMsg').fadeIn();
+                for (i = 0; i < data.results.length; i++) {
+                    //alert('='+data.results[i].landClass);
+                    $('#span_landClass').html(data.results[i].landClass);
+                    $('#span_gisBou').html(data.results[i].gisBou);
+                    $('#span_inSoilWater').html(data.results[i].inSoilWater);
+                }
+            }).fail(function () {
+                alert('error');
+            });
+        });
+        $('#btnLink1').click(function () {
+            window.open("https://serv.ardswc.gov.tw/B/#BLinkMain");
+            $.unblockUI('');
+        });
+        $('#btnLink2').click(function () {
+            window.open("https://serv.ardswc.gov.tw/B/");
+            $.unblockUI('');
+        });
+    });
+    function GetTownDDL(DDLvalue) {
+        $.ajaxSettings.async = false;
+        $.getJSON('@Url.Action("GetTownDDLByAjax", "SlopelandQuery")' + '?CityCode=' + DDLvalue, function (data) {
+            var TownDDL = $('#TownId');
+            TownDDL.empty();
+            for (i = 0; i < data.length; i++) { 
+                TownDDL.append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+            }
+        });
+    }
+    function GetSecDDL(DDLvalue) {
+        $.ajaxSettings.async = false;
+        $.getJSON('@Url.Action("GetSecDDLByAjax", "SlopelandQuery")' + '?townid=' + DDLvalue, function (data) {
+            var sectDDL = $('#Section');
+            sectDDL.empty();
+            for (i = 0; i < data.length; i++) { 
+                sectDDL.append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+            }
+        });
+    }
+</script>
+
+@*@using (Html.BeginForm("Query", "Query"))
+    {*@
+<h2>山坡地查定資料</h2>
+
+<div class="content">
+    <table>
+        <tr>
+            <td class="td_style">
+                縣市：@Html.DropDownListFor(model => model.CityCode, (IEnumerable<SelectListItem>)Model.CityDDL, new { style = "width: 100px;" })
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                鄉鎮：@Html.DropDownListFor(model => model.TownId, (IEnumerable<SelectListItem>)Model.TownDDL, new { style = "width: 100px;" })
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                地段：@Html.DropDownListFor(model => model.Section, (IEnumerable<SelectListItem>)Model.SectionList, new { style = "" })
+
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                地號：@Html.TextBoxFor(model => model.LandNo)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label label-important">系統功能因為提供API服務已停止，請直接點選[行動水保服務網]進行查詢</div>
+                <input id="btn_Query" type="button" class="btn" value="查詢" disabled />                
+            </td>
+        </tr>
+    </table>
+
+    <div id="div_SlopelQueryandMsg" class="alert alert-info" style="display:none; width:400px;">
+        <table border="1">
+            <tr>
+                <td>
+                    查定分類：
+                </td>
+                <td>
+                    <span id="span_landClass"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    是否為山坡地保育條例之山坡地：
+                </td>
+                <td>
+                    <span id="span_gisBou"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    是否為特定水保區：
+                </td>
+                <td>
+                    <span id="span_inSoilWater"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-info" role="alert">        
+        <a class="btn btn-danger" id="btnLink1"><i class="icon-hand-right"></i>直轄市政府山坡地查詢連結</a>
+        <a class="btn btn-danger" id="btnLink2"><i class="icon-hand-right"></i>行動水保服務網</a>
+    </div>
+    </div>
+<div class="content">
+    @*<h1>多筆資料查詢</h1>
+    @using (Html.BeginForm("Download", "SlopelandQuery"))
+    {
+        <span class="font-size3">查詢注意事項:</span><br />
+        <a style="color: Red;font-size:large">請下載Excel範例，並依範例格式進行查詢資料填寫，填寫完畢後上傳至系統，查詢結果將會自動下載。</a>
+        <br />
+                    <button id="BtnExcel" type="submit" class="btn" title="匯出" disabled>
+                        <img src="~/Content/images/ms_excel.ico" style="width:45px" />
+                        <br />
+                        下載Excel範例
+                    </button>
+    }
+    @using (Html.BeginForm("Upload", "SlopelandQuery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table>
+            <tr>
+                <td>檔案上傳:</td>
+                <td>
+                    <input type="file" name="UploadedFile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" class="btn" value="上傳" disabled />
+                </td>
+            </tr>
+        </table>
+    }
+    <div class="label label-info">
+        本山坡地查定資料來源為水土保持局提供，若有任何疑問，請洽水土保持局相關主管機關，六都資料請洽地方政府主管機關。
+    </div>*@
+</div>

@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Unit_Id" Type="smallint" Nullable="false" />
+    <Property Name="Title_Id" Type="smallint" />
+    <Property Name="Organization_Id" Type="smallint" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Enabled" Type="bit" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Admin_Page">
+    <Key>
+      <PropertyRef Name="Admin_Page_Id" />
+    </Key>
+    <Property Name="Admin_Page_Id" Type="smallint" Nullable="false" />
+    <Property Name="Function_Page_Id" Type="smallint" />
+    <Property Name="Admin_Id" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Aerc_System">
+    <Key>
+      <PropertyRef Name="System_Id" />
+    </Key>
+    <Property Name="System_Id" Type="smallint" Nullable="false" />
+    <Property Name="System" Type="nvarchar" MaxLength="20" />
+    <Property Name="Staus" Type="bit" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="City_Code" />
+    </Key>
+    <Property Name="City_Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="10" />
+    <Property Name="City_Area_Id" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="City_Area">
+    <Key>
+      <PropertyRef Name="City_Area_Id" />
+    </Key>
+    <Property Name="City_Area_Id" Type="tinyint" Nullable="false" />
+    <Property Name="Area_Place" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Crop">
+    <Key>
+      <PropertyRef Name="Crop_Id" />
+    </Key>
+    <Property Name="Crop_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Crop" Type="nvarchar" MaxLength="20" />
+    <Property Name="Crop_Modulus" Type="float" />
+    <Property Name="Crop_Type_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Crop_Type">
+    <Key>
+      <PropertyRef Name="Crop_Type_Id" />
+    </Key>
+    <Property Name="Crop_Type_Id" Type="smallint" Nullable="false" />
+    <Property Name="Crop_Type" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Function_Page">
+    <Key>
+      <PropertyRef Name="Funtion_Page_Id" />
+    </Key>
+    <Property Name="Funtion_Page_Id" Type="smallint" Nullable="false" />
+    <Property Name="Funtion_Page" Type="nvarchar" MaxLength="20" />
+    <Property Name="Funtion_Group_Id" Type="smallint" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Funtion_Group">
+    <Key>
+      <PropertyRef Name="Funtion_Group_Id" />
+    </Key>
+    <Property Name="Funtion_Group_Id" Type="smallint" Nullable="false" />
+    <Property Name="Funtion_Group" Type="nvarchar" MaxLength="10" />
+    <Property Name="System_Id" Type="smallint" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Land_Number">
+    <Key>
+      <PropertyRef Name="Land_Number_Id" />
+    </Key>
+    <Property Name="Land_Number_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Land_Code" Type="nvarchar" MaxLength="10" />
+    <Property Name="Section_Id" Type="int" />
+    <Property Name="Land_type_Id" Type="tinyint" />
+    <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+    <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+  </EntityType>
+  <EntityType Name="Land_Office">
+    <Key>
+      <PropertyRef Name="Land_Office_Id" />
+    </Key>
+    <Property Name="Land_Office_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Land_Office_Code" Type="nvarchar" MaxLength="5" />
+    <Property Name="Land_Office" Type="nvarchar" MaxLength="10" />
+    <Property Name="City_Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Land_Type">
+    <Key>
+      <PropertyRef Name="Land_Type_Id" />
+    </Key>
+    <Property Name="Land_Type_Id" Type="tinyint" Nullable="false" />
+    <Property Name="Land_Type_Code" Type="nvarchar" MaxLength="10" />
+    <Property Name="Land_Type" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Organization_Id" />
+    </Key>
+    <Property Name="Organization_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Organization" Type="nvarchar" MaxLength="10" />
+    <Property Name="Parent_Organization" Type="smallint" />
+    <Property Name="Unit_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Section_Id" />
+    </Key>
+    <Property Name="Section_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Section_Code" Type="int" />
+    <Property Name="Section" Type="nvarchar" MaxLength="20" />
+    <Property Name="Subsection" Type="nvarchar" MaxLength="20" />
+    <Property Name="Town_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Soil">
+    <Key>
+      <PropertyRef Name="Soil_Id" />
+    </Key>
+    <Property Name="Soil_Id" Type="tinyint" Nullable="false" />
+    <Property Name="Soil" Type="nvarchar" MaxLength="20" />
+    <Property Name="Seep_Modulus" Type="float" />
+    <Property Name="Soil_Type_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Soil_Type">
+    <Key>
+      <PropertyRef Name="Soil_Type_Id" />
+    </Key>
+    <Property Name="Soil_Type_Id" Type="smallint" Nullable="false" />
+    <Property Name="Soil_Type" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Structure">
+    <Key>
+      <PropertyRef Name="SId" />
+    </Key>
+    <Property Name="SId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="Area" Type="decimal" Precision="11" Scale="3" />
+    <Property Name="Length" Type="decimal" Precision="11" Scale="3" />
+    <Property Name="Capacity" Type="decimal" Precision="11" Scale="3" />
+    <Property Name="Unit_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="StructureKind">
+    <Key>
+      <PropertyRef Name="KindId" />
+    </Key>
+    <Property Name="KindId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KindName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StructureType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KindId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="Title_Id" />
+    </Key>
+    <Property Name="Title_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Title_Page">
+    <Key>
+      <PropertyRef Name="Title_Page_Id" />
+    </Key>
+    <Property Name="Title_Page_Id" Type="int" Nullable="false" />
+    <Property Name="Title_Id" Type="smallint" />
+    <Property Name="Funtion_Page_Id" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="Town_Id" />
+    </Key>
+    <Property Name="Town_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Town_Code" Type="nvarchar" MaxLength="10" />
+    <Property Name="Town" Type="nvarchar" MaxLength="20" />
+    <Property Name="Zip_Code" Type="smallint" />
+    <Property Name="Land_Office_Id" Type="smallint" />
+    <Property Name="City_Code" Type="nvarchar" MaxLength="10" />
+    <Property Name="Indigenous" Type="int" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Unit_Id" />
+    </Key>
+    <Property Name="Unit_Id" Type="smallint" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+    <Property Name="Parent_Unit" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Unit_Town">
+    <Key>
+      <PropertyRef Name="Unit_Town_Id" />
+    </Key>
+    <Property Name="Unit_Town_Id" Type="int" Nullable="false" />
+    <Property Name="Unit_Id" Type="smallint" />
+    <Property Name="Town_Id" Type="smallint" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Common.dbo.AdminQuery' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="AdminQuery">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+      <PropertyRef Name="Unit_Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Account" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="Admin_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit_Id" Type="smallint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+    <Property Name="Organization" Type="nvarchar" MaxLength="10" />
+    <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'Common.dbo.View_Admin' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="View_Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Account" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Unit_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Unit_Id" Type="smallint" Nullable="false" />
+    <Property Name="Title_Id" Type="smallint" />
+    <Property Name="Organization_Id" Type="smallint" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+    <Property Name="Organization" Type="nvarchar" MaxLength="10" />
+    <Property Name="Enabled" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Admin_Page_Function_Page">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Admin_Page" Type="Self.Admin_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Admin_Id" />
+      </Principal>
+      <Dependent Role="Admin_Page">
+        <PropertyRef Name="Admin_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_City_Area">
+    <End Role="City_Area" Type="Self.City_Area" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Area">
+        <PropertyRef Name="City_Area_Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="City_Area_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Crop_Crop_Type">
+    <End Role="Crop_Type" Type="Self.Crop_Type" Multiplicity="0..1" />
+    <End Role="Crop" Type="Self.Crop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Crop_Type">
+        <PropertyRef Name="Crop_Type_Id" />
+      </Principal>
+      <Dependent Role="Crop">
+        <PropertyRef Name="Crop_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Function_Page_Funtion_Group">
+    <End Role="Funtion_Group" Type="Self.Funtion_Group" Multiplicity="0..1" />
+    <End Role="Function_Page" Type="Self.Function_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funtion_Group">
+        <PropertyRef Name="Funtion_Group_Id" />
+      </Principal>
+      <Dependent Role="Function_Page">
+        <PropertyRef Name="Funtion_Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Funtion_Group_System">
+    <End Role="Aerc_System" Type="Self.Aerc_System" Multiplicity="0..1" />
+    <End Role="Funtion_Group" Type="Self.Funtion_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aerc_System">
+        <PropertyRef Name="System_Id" />
+      </Principal>
+      <Dependent Role="Funtion_Group">
+        <PropertyRef Name="System_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Number_Land_Type">
+    <End Role="Land_Type" Type="Self.Land_Type" Multiplicity="0..1" />
+    <End Role="Land_Number" Type="Self.Land_Number" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land_Type">
+        <PropertyRef Name="Land_Type_Id" />
+      </Principal>
+      <Dependent Role="Land_Number">
+        <PropertyRef Name="Land_type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Number_Section">
+    <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+    <End Role="Land_Number" Type="Self.Land_Number" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="Section_Id" />
+      </Principal>
+      <Dependent Role="Land_Number">
+        <PropertyRef Name="Section_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Office_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Land_Office" Type="Self.Land_Office" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="City_Code" />
+      </Principal>
+      <Dependent Role="Land_Office">
+        <PropertyRef Name="City_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_Unit">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Section_Town">
+    <End Role="Town" Type="Self.Town" Multiplicity="0..1" />
+    <End Role="Section" Type="Self.Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="Town_Id" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="Town_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soil_Soil_Type">
+    <End Role="Soil_Type" Type="Self.Soil_Type" Multiplicity="0..1" />
+    <End Role="Soil" Type="Self.Soil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soil_Type">
+        <PropertyRef Name="Soil_Type_Id" />
+      </Principal>
+      <Dependent Role="Soil">
+        <PropertyRef Name="Soil_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Structure_StructureType">
+    <End Role="StructureType" Type="Self.StructureType" Multiplicity="1" />
+    <End Role="Structure" Type="Self.Structure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StructureType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="Structure">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StructureType_StructureKind">
+    <End Role="StructureKind" Type="Self.StructureKind" Multiplicity="1" />
+    <End Role="StructureType" Type="Self.StructureType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StructureKind">
+        <PropertyRef Name="KindId" />
+      </Principal>
+      <Dependent Role="StructureType">
+        <PropertyRef Name="KindId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Title_Page_Function_Page">
+    <End Role="Function_Page" Type="Self.Function_Page" Multiplicity="0..1" />
+    <End Role="Title_Page" Type="Self.Title_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Function_Page">
+        <PropertyRef Name="Funtion_Page_Id" />
+      </Principal>
+      <Dependent Role="Title_Page">
+        <PropertyRef Name="Funtion_Page_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Title_Page_Title">
+    <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
+    <End Role="Title_Page" Type="Self.Title_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="Title_Id" />
+      </Principal>
+      <Dependent Role="Title_Page">
+        <PropertyRef Name="Title_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Town_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Town" Type="Self.Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="City_Code" />
+      </Principal>
+      <Dependent Role="Town">
+        <PropertyRef Name="City_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Town_Land_Office">
+    <End Role="Land_Office" Type="Self.Land_Office" Multiplicity="0..1" />
+    <End Role="Town" Type="Self.Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land_Office">
+        <PropertyRef Name="Land_Office_Id" />
+      </Principal>
+      <Dependent Role="Town">
+        <PropertyRef Name="Land_Office_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Town_Town">
+    <End Role="Town" Type="Self.Town" Multiplicity="0..1" />
+    <End Role="Unit_Town" Type="Self.Unit_Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="Town_Id" />
+      </Principal>
+      <Dependent Role="Unit_Town">
+        <PropertyRef Name="Town_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Town_Unit">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Unit_Town" Type="Self.Unit_Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Unit_Town">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Unit">
+    <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Unit1" Type="Self.Unit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Unit1">
+        <PropertyRef Name="Parent_Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CommonModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin_Page" EntityType="Self.Admin_Page" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Aerc_System" EntityType="Self.Aerc_System" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City_Area" EntityType="Self.City_Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Crop" EntityType="Self.Crop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Crop_Type" EntityType="Self.Crop_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Function_Page" EntityType="Self.Function_Page" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Funtion_Group" EntityType="Self.Funtion_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Land_Number" EntityType="Self.Land_Number" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Land_Office" EntityType="Self.Land_Office" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Land_Type" EntityType="Self.Land_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Soil" EntityType="Self.Soil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Soil_Type" EntityType="Self.Soil_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Structure" EntityType="Self.Structure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StructureKind" EntityType="Self.StructureKind" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StructureType" EntityType="Self.StructureType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Title_Page" EntityType="Self.Title_Page" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Unit_Town" EntityType="Self.Unit_Town" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminQuery" EntityType="Self.AdminQuery" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[AdminQuery].[Admin_Id] AS [Admin_Id], 
+[AdminQuery].[Unit] AS [Unit], 
+[AdminQuery].[Unit_Id] AS [Unit_Id], 
+[AdminQuery].[Name] AS [Name], 
+[AdminQuery].[Title] AS [Title], 
+[AdminQuery].[Organization] AS [Organization], 
+[AdminQuery].[Account] AS [Account], 
+[AdminQuery].[Password] AS [Password], 
+[AdminQuery].[Telephone] AS [Telephone], 
+[AdminQuery].[Mobile] AS [Mobile], 
+[AdminQuery].[email] AS [email], 
+[AdminQuery].[Fax] AS [Fax], 
+[AdminQuery].[Status] AS [Status]
+FROM [dbo].[AdminQuery] AS [AdminQuery]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Admin" EntityType="Self.View_Admin" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[View_Admin].[Admin_Id] AS [Admin_Id], 
+[View_Admin].[Name] AS [Name], 
+[View_Admin].[Account] AS [Account], 
+[View_Admin].[Password] AS [Password], 
+[View_Admin].[Unit_Id] AS [Unit_Id], 
+[View_Admin].[Title_Id] AS [Title_Id], 
+[View_Admin].[Organization_Id] AS [Organization_Id], 
+[View_Admin].[Telephone] AS [Telephone], 
+[View_Admin].[Mobile] AS [Mobile], 
+[View_Admin].[Fax] AS [Fax], 
+[View_Admin].[Status] AS [Status], 
+[View_Admin].[Title] AS [Title], 
+[View_Admin].[Unit] AS [Unit], 
+[View_Admin].[Organization] AS [Organization], 
+[View_Admin].[Enabled] AS [Enabled]
+FROM [dbo].[View_Admin] AS [View_Admin]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Admin_Page_Function_Page" Association="Self.FK_Admin_Page_Function_Page">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Admin_Page" EntitySet="Admin_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_City_Area" Association="Self.FK_City_City_Area">
+      <End Role="City_Area" EntitySet="City_Area" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Crop_Crop_Type" Association="Self.FK_Crop_Crop_Type">
+      <End Role="Crop_Type" EntitySet="Crop_Type" />
+      <End Role="Crop" EntitySet="Crop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Function_Page_Funtion_Group" Association="Self.FK_Function_Page_Funtion_Group">
+      <End Role="Funtion_Group" EntitySet="Funtion_Group" />
+      <End Role="Function_Page" EntitySet="Function_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Funtion_Group_System" Association="Self.FK_Funtion_Group_System">
+      <End Role="Aerc_System" EntitySet="Aerc_System" />
+      <End Role="Funtion_Group" EntitySet="Funtion_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Number_Land_Type" Association="Self.FK_Land_Number_Land_Type">
+      <End Role="Land_Type" EntitySet="Land_Type" />
+      <End Role="Land_Number" EntitySet="Land_Number" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Number_Section" Association="Self.FK_Land_Number_Section">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Land_Number" EntitySet="Land_Number" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Office_City" Association="Self.FK_Land_Office_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Land_Office" EntitySet="Land_Office" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_Unit" Association="Self.FK_Organization_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_Town" Association="Self.FK_Section_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="Section" EntitySet="Section" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soil_Soil_Type" Association="Self.FK_Soil_Soil_Type">
+      <End Role="Soil_Type" EntitySet="Soil_Type" />
+      <End Role="Soil" EntitySet="Soil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Structure_StructureType" Association="Self.FK_Structure_StructureType">
+      <End Role="StructureType" EntitySet="StructureType" />
+      <End Role="Structure" EntitySet="Structure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StructureType_StructureKind" Association="Self.FK_StructureType_StructureKind">
+      <End Role="StructureKind" EntitySet="StructureKind" />
+      <End Role="StructureType" EntitySet="StructureType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Title_Page_Function_Page" Association="Self.FK_Title_Page_Function_Page">
+      <End Role="Function_Page" EntitySet="Function_Page" />
+      <End Role="Title_Page" EntitySet="Title_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Title_Page_Title" Association="Self.FK_Title_Page_Title">
+      <End Role="Title" EntitySet="Title" />
+      <End Role="Title_Page" EntitySet="Title_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Town_City" Association="Self.FK_Town_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Town" EntitySet="Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Town_Land_Office" Association="Self.FK_Town_Land_Office">
+      <End Role="Land_Office" EntitySet="Land_Office" />
+      <End Role="Town" EntitySet="Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Town_Town" Association="Self.FK_Unit_Town_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="Unit_Town" EntitySet="Unit_Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Town_Unit" Association="Self.FK_Unit_Town_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Unit_Town" EntitySet="Unit_Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Unit" Association="Self.FK_Unit_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Unit1" EntitySet="Unit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,516 @@
+﻿@{
+//ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+    @Scripts.Render("~/bundles/jqueryjqgrid")
+    @Styles.Render("~/jqgrid/css")
+}
+@model Dry.Models.ViewModel.EfileListView
+<link href="~/Content/lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/lightbox-2.6.js"></script>
+<style>
+    .divImgCss {
+        vertical-align: top;
+        background-color: #0094ff;
+        margin: 3px;
+        cursor: pointer;
+        border: 1px solid transparent;
+    }
+
+    .divImg {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    ResetTimeout();
+    (function ($) {
+        $.fn.bindData = function () {
+            //拖拉上傳
+            $(this).bind('dragover', function (event) { //滑鼠移至上方時
+                eventStop(event);
+                $(event.target).addClass('divImgCss');
+            }).bind('dragleave', function (event) { //滑鼠移開時
+                eventStop(event);
+                $(event.target).removeClass('divImgCss');
+            }).bind('drop', function (event) { //滑鼠拖放時
+                eventStop(event);
+                $(event.target).removeClass('divImgCss');
+                var fileType = $(event.target).attr('id').split('_');
+                //取得檔案資訊
+                var files = event.originalEvent.dataTransfer.files;
+                var imageFiles = $.map(files, function (f, i) { //過濾檔案類型(限圖片)
+                    return f.type.indexOf("image") == 0 ? f : null;
+                });
+                UploadImg(imageFiles, $(event.target), fileType[1], fileType[2]);
+            });
+        };
+        //圖片上傳
+        $.fn.ImgfileBindData = function () {
+            //傳統上傳
+            $(this).change(function (e) {
+                var files = e.target.files;
+                var imageFiles = $.map(files, function (f, i) { //過濾檔案類型
+                    return f.type.indexOf("image") == 0 ? f : null;
+                });
+                //console.log($(this).prev('div').attr('id'));
+                var fileType = $(this).prev('div').attr('id').split('_');
+                UploadImg(imageFiles, $(this).prev('div'), fileType[1], fileType[2]);
+            });
+        };
+        //其他檔案上傳
+        $.fn.FileBindData = function () {
+            $(this).change(function (e) {
+                var files = e.target.files;
+                var Div = $(this).prev().prev('input[type="text"]').prev('table');
+                var fileType = Div.attr('id').split('_')[1];
+                $.each(files, function (i, file) {
+                    //alert(file.name);
+                    var reader = new FileReader();
+                    reader.onload = function (events) {
+                        $.EnableBlockUI('上傳中...');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("FileUpload", "Efile")" + "?file=" + file.name + '&fileType=' + fileType + '&fileDes=' + encodeURI(Div.next('input[type="text"]').val()),
+                            contentType: file.type,
+                            processData: false, //只上傳原始資料(重要)
+                            data: file,
+                            success: function (res) {
+                                var filePath = res[0].FilePath;
+                                //alert(res[0].FileID);
+                                Div.append('<tr><td><a id="file_' + res[0].FileID + '" href="javascript:void(0)" onclick=DownloadFile(' + res[0].FileID + ')>' + res[0].FileDes + '</a></td>' +
+                                    '<td><a id="btn_' + res[0].FileID + '" onclick="DelFile(' + res[0].FileID + ');" href="javascript: void(0);">刪除</a>' +
+                                    '</td></tr>');
+                                Div.next('input[type="text"]').val('');
+                                $.DisableBlockUI();
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                    $('#btn_Save').attr('disabled', false);
+                });
+            });
+        };
+        //電子檔上傳
+        $.fn.eFileBindData = function () {
+            $(this).change(function (e) {
+                var files = e.target.files;
+                //var Div = $(this).prev().prev('input[type="text"]').prev('table');
+                var fileType = $('#ddl_FileType option:selected').val();
+                $.each(files, function (i, file) {
+                    var reader = new FileReader();
+                    reader.onload = function (events) {
+                        $.EnableBlockUI('上傳中...');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("FileUpload", "Efile")" + "?file=" + file.name + '&fileType=' + fileType + '&fileDes=' + encodeURI($('#txt_efile').val()),
+                            contentType: file.type,
+                            processData: false, //只上傳原始資料(重要)
+                            data: file,
+                            success: function (res) {
+                                var filePath = res[0].FilePath;
+                                //alert(res[0].FileID);
+                                /*Div.append('<tr><td><a id="file_' + res[0].FileID + '" href="../' + filePath + '">' + res[0].FileDes + '</a></td>' +
+                                    '<td><a id="btn_' + res[0].FileID + '" onclick="DelFile(' + res[0].FileID + ');" href="javascript: void(0);">刪除</a>' +
+                                    '</td></tr>');*/
+                                $('#grid').trigger("reloadGrid", [{ page: 1, current: true }]); //重新載入jqGrid
+                                $('#txt_efile').val('');
+                                $('#file_efile').val('');
+                                $.DisableBlockUI();
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                    $('#btn_Save').attr('disabled', false);
+                });
+            });
+        };
+
+        //一般檔案上傳
+        $.fn.genFileBindData = function () {
+            $(this).change(function (e) {
+                var files = e.target.files;
+                //var Div = $(this).prev().prev('input[type="text"]').prev('table');
+                var fileType = $('#ddl_genFileType option:selected').val();
+                $.each(files, function (i, file) {
+                    //alert(file.name);
+                    var reader = new FileReader();
+                    reader.onload = function (events) {
+                        $.EnableBlockUI('上傳中...');
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("FileUpload", "Efile")" + "?file=" + file.name + '&fileType=' + fileType + '&fileDes=' + encodeURI($('#txt_efile').val()),
+                            contentType: file.type,
+                        processData: false, //只上傳原始資料(重要)
+                        data: file,
+                        success: function (res) {
+                            var filePath = res[0].FilePath;
+                            //alert(res[0].FileID);
+                            /*Div.append('<tr><td><a id="file_' + res[0].FileID + '" href="../' + filePath + '">' + res[0].FileDes + '</a></td>' +
+                                '<td><a id="btn_' + res[0].FileID + '" onclick="DelFile(' + res[0].FileID + ');" href="javascript: void(0);">刪除</a>' +
+                                '</td></tr>');*/
+                            $('#gengrid').trigger("reloadGrid", [{ page: 1, current: true }]); //重新載入jqGrid
+                            $('#txt_genefile').val('');
+                            $('#file_genefile').val('');
+                            $.DisableBlockUI();
+                        }
+                    });
+                };
+                reader.readAsDataURL(file);
+                $('#btn_Save').attr('disabled', false);
+            });
+        });
+    };
+    })(jQuery);
+    function eventStop(event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+
+    function UploadImg(imageFiles, divID, fileType1, fileType2) {
+        //先給定刪除後的原始html
+        //divID.prev('input[type="hidden"]').val(divID.html());
+        //console.log(divID.html());
+        //依據各檔案，取得DataURI
+        $.each(imageFiles, function (i, file) {
+            //使用File API讀取圖檔內容轉為DataUri
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                divID.append('<img src="@Url.Content("~/Content/images/ajax-loader.gif")" />');
+                var data = e.target.result;
+                ajaxUploadImg(divID, file, fileType1, fileType2);
+                divID.next('input[type="file"]').remove();
+            };
+            reader.readAsDataURL(file);
+            $('#btn_Save').attr('disabled', false);
+        });
+    }
+
+    function ajaxUploadImg(divID, data, fileType1, fileType2) {
+        $.EnableBlockUI('上傳中...')
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ImgUpload", "Efile")" + "?file=" + data.name + '&fileType1=' + fileType1 + '&fileType2=' + fileType2,
+            contentType: data.type,
+            processData: false, //只上傳原始資料(重要)
+            data: data,
+            success: function (res) {
+                var filePath = res;
+                var btnIDAry = filePath.split('\\');
+                var btnID = btnIDAry[btnIDAry.length - 1].split('.')[0].split('_')[1];
+                divID.find('img').remove();
+                divID.empty();
+                divID.append('<img width="225px" height="150px" src="' + filePath + '"/>');
+                divID.append('<a id="' + btnID + '" onclick="DelImg(' + btnID + ');" href="javascript: void(0);">刪除</a>');
+                $.DisableBlockUI();
+            }
+        });
+    }
+    //刪除圖片
+    function DelImg(btnID) {
+        if (!confirm('確定刪除？'))
+            return false;
+        var DelBtn = $('#' + btnID);
+        //alert(OriHtml);
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ImgDel", "Efile")" + "?fileName=" + DelBtn.prev('img').attr('src').split('/')[4],
+            success: function (res) {
+                if (res == 'Success') {
+                    //console.log(DelBtn.parent().parent().html());
+                    //刪除後，回覆上傳Button
+                    DelBtn.parent().parent().append('<input type="file" />');
+                    //重新綁定上傳Button事件
+                    DelBtn.parent().parent().find('input[type="file"]').ImgfileBindData();
+                    //刪除後，回覆原始的字樣
+                    var OriHtml = DelBtn.parent().prev('input[type="hidden"]').val();
+                    DelBtn.parent().empty().append(OriHtml);
+                    $.DisableBlockUI();
+                }
+            }
+        });
+    }
+    //刪除檔案
+    function DelFile(FileID) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("FileDel", "Efile")' + '?No=' + FileID,
+            success: function (res) {
+                if (res == 'Success') {
+                    $('#file_' + FileID).parent().parent().remove();
+                }
+                $.DisableBlockUI();
+            }
+        });
+    }
+
+    function DownloadFile(no) {
+        var dlLink = '@Url.Action("FileDownload", "Efile")' + '?No=' + no;
+        var $ifrm = $('<iframe style="display:none" />');
+        $ifrm.attr('src', dlLink);
+        $ifrm.appendTo("body");
+        $ifrm.load(function () {
+            //if the download link return a page
+            //load event will be triggered
+            $("body").append(
+                "<div>Failed to download <i>'" + dlLink + "'</i>!");
+        });
+    }
+
+    $(function () {
+        $('#btn_SubmitData').click(function () {
+            $.EnableBlockUI('寫入中...');
+            window.location.href = '@Url.Action("Index", "ApplyIndex")';
+        });
+
+        //繫結檔案上傳事件
+        $('div[id^="div_"]').bindData(); //拖拉上傳
+        $('input[name="fileImg"]').ImgfileBindData(); //傳統上傳(圖片)
+        $('input[name="fileCertificate"]').FileBindData(); //傳統上傳(一般檔案)
+
+        //繫結電子檔上傳事件(僅限電子檔類別)
+        $('#file_efile').eFileBindData();
+        //繫結土地資料
+        $('#file_genefile').genFileBindData();
+
+
+        //電子檔上傳資料總覽(僅限電子檔類別)
+        var grid = $('#grid');
+        grid.jqGrid({
+            url: '@Url.Action("eFileList", "Efile")',
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'No'
+            },
+            mtype: 'GET',
+            colNames: ['','MapNo', '檔案類型', '', '檔案描述', '上傳時間',''],
+            colModel: [
+                {
+                    name: 'submyac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        editbutton: false,
+                        delbutton: true
+                    },
+                },
+                { name: 'MapNo', index: 'MapNo', width: 25, align: 'center', search: false, hidden: true },
+                { name: 'FileTypeCNS', width: 80, align: 'center', search: false },
+                { name: 'Filepath', width: 80, align: 'center', search: false, hidden: true },
+                { name: 'FileDes', width: 80, align: 'center', search: false, sortable: false },
+                { name: 'UpldTime', width: 80, align: 'center', search: false },
+                { name: 'No', index: 'No', width: 30, search: false, editable: false, sortable: false, viewable: false, formatter: OpenData }
+            ],
+            pager: '#pager',
+            //autowidth: true,
+            width: '600',
+            height: 'auto',
+            rowNum: 5, //預設行數
+            //rowList: [5], //行數選單
+            sortname: 'IANum desc',
+            sortorder: "desc",
+            viewrecords: true,
+            rownumbers: true,
+            emptyrecords: '尚未上傳檔案',
+            //caption: '電子檔上傳列表', //表格title
+            loadComplete: function (ids) {
+                $('.ui-pg-table table input[type=text]').css('width', '20').css('height', '20'); //設定頁數的textbox寬度及高度
+                //$('.ui-pg-table table select').css('width', '60').css('height', '30'); //設定筆數的DropDownList
+                //$('#pager_center').css('width', '100'); //設定頁數區塊的寬度
+                //$('#pager_left').css('width', '50'); //設定功能按鈕的區塊寬度
+            },
+            editurl:'@Url.Action("eFileDel", "Efile")'
+        });
+        grid.navGrid('#pager',
+            { edit: false, add: false, del: false, search: false, refresh: false },
+            {}, /*edit*/
+            {}, /*add*/
+            {}, /*delete*/
+            {}, /*search*/
+            {} /*view*/);
+
+        function OpenData(cellvalue, options, rowObject) {
+            return '<a href="javascript:void(0)" class="btn" onclick="DownloadFile(' + cellvalue + ');">下載</a>';
+        }
+
+        //一般檔案上傳資料總覽(僅限一般檔案類別)
+        var grid = $('#gengrid');
+        grid.jqGrid({
+            url: '@Url.Action("FileList", "Efile")',
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'No'
+            },
+            mtype: 'GET',
+            colNames: ['', 'MapNo', '檔案類型', '', '檔案描述', '上傳時間', ''],
+            colModel: [
+                {
+                    name: 'submyac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        editbutton: false,
+                        delbutton: true
+                    },
+                },
+                { name: 'MapNo', index: 'MapNo', width: 25, align: 'center', search: false, hidden: true },
+                { name: 'FileTypeCNS', width: 80, align: 'center', search: false },
+                { name: 'Filepath', width: 80, align: 'center', search: false, hidden: true },
+                { name: 'FileDes', width: 80, align: 'center', search: false, sortable: false },
+                { name: 'UpldTime', width: 80, align: 'center', search: false },
+                { name: 'No', index: 'No', width: 30, search: false, editable: false, sortable: false, viewable: false, formatter: OpenData }
+            ],
+            pager: '#pager',
+            //autowidth: true,
+            width: '600',
+            height: 'auto',
+            rowNum: 5, //預設行數
+            //rowList: [5], //行數選單
+            sortname: 'IANum desc',
+            sortorder: "desc",
+            viewrecords: true,
+            rownumbers: true,
+            emptyrecords: '尚未上傳檔案',
+            //caption: '電子檔上傳列表', //表格title
+            loadComplete: function (ids) {
+                $('.ui-pg-table table input[type=text]').css('width', '20').css('height', '20'); //設定頁數的textbox寬度及高度
+            },
+            editurl: '@Url.Action("eFileDel", "Efile")'
+        });
+        grid.navGrid('#pager',
+            { edit: false, add: false, del: false, search: false, refresh: false },
+            {}, /*edit*/
+            {}, /*add*/
+            {}, /*delete*/
+            {}, /*search*/
+            {} /*view*/);
+
+        function OpenData(cellvalue, options, rowObject) {
+            return '<a href="javascript:void(0)" class="btn" onclick="DownloadFile(' + cellvalue + ');">下載</a>';
+        }
+    });
+    
+</script>
+
+<table class="dashTable" style="width:100%;">
+    <tr>
+        <td colspan="2" class="caption">
+            <h3 align="center">申請人身份證正反面</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="hidden" value="<p></p><p>身分證正面</p>" />
+            <div id="div_2_1" class="divImg" style="width: 225px; border: dashed; background-color: #F5F2F8; text-align:center;">
+            @{
+                int count = 0;
+                foreach (var item in Model.EfileList)
+                {
+                    if (item.FileType == 2 && item.Filepath.Split('.')[0].Split('_')[2] == "1")
+                    {
+                        count++;
+                        <a href="@Model.ServerPath/@item.MapNo/@item.FileType/@item.Filepath" data-lightbox="IdImage" data-title="身份證正面">
+                            <img width="225" height="150" src="@Model.ServerPath/@item.MapNo/@item.FileType/@item.Filepath" />
+                        </a>
+                        <a id="@item.Filepath.Split('.')[0].Split('_')[1]" onclick="DelImg(@item.Filepath.Split('.')[0].Split('_')[1]);" href="javascript: void(0);">刪除</a>
+
+                    }
+                }
+                if (count <= 0)
+                {
+                    <p></p>
+                    <p>身分證正面</p>
+                }
+            }
+            </div>
+            @if (count <= 0)
+            {
+                <input name="fileImg" type="file" accept="image/*" />
+            }
+        </td>
+        <td>
+            <input type="hidden" value="<p></p><p>身分證反面</p>" />
+            <div id="div_2_2" class="divImg" style="width: 225px; border: dashed; background-color: #F5F2F8; text-align: center; ">
+                                @{
+                    count = 0;
+                    foreach (var item in Model.EfileList)
+                    {
+                        if (item.FileType == 2 && item.Filepath.Split('.')[0].Split('_')[2] == "2")
+                        {
+                            count++;
+                            <a href="@Model.ServerPath/@item.MapNo/@item.FileType/@item.Filepath" data-lightbox="IdImage" data-title="身份證反面">
+                                <img width="225" height="150" src="@Model.ServerPath/@item.MapNo/@item.FileType/@item.Filepath" />
+                            </a>
+                            <a id="@item.Filepath.Split('.')[0].Split('_')[1]" onclick="DelImg(@item.Filepath.Split('.')[0].Split('_')[1]);" href="javascript: void(0);">刪除</a>
+
+                        }
+                    }
+                    if (count <= 0)
+                    {
+                        <p></p>
+                        <p>身分證反面</p>
+                    }
+                }
+            </div>
+            @if (count <= 0)
+            {
+                <input name="fileImg" type="file" accept="image/*" />
+            }
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="caption">
+            <h3 align="center">土地資料</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="ddl_genFileType">
+                <option value="5">土地登記謄本</option>
+                <option value="6">地藉圖謄本</option>
+                <option value="8">租賃同意書</option>
+                <option value="7">土地施設同意書</option>
+            </select>
+            <br />
+            <input id="txt_genefile" type="text" placeholder="請輸入檔案描述" />
+            <br />
+            <input id="file_genefile" type="file" />
+        </td>
+        <td colspan="3">
+            <div id="div_genContent">
+                <table id="gengrid"></table>
+                <div id="genpager"></div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="caption">
+            <h3 align="center">電子檔上傳</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="ddl_FileType">
+                <option value="23">現勘記錄表</option>
+                <option value="11">規劃委託書</option>
+                <option value="13">接受補助切結書</option>
+                <option value="14">竣工報驗書</option>
+                <option value="20">驗收報告書</option>
+                <option value="21">領款收據</option>
+                <option value="24">設計圖</option>
+            </select>
+            <br />
+            <input id="txt_efile" type="text" placeholder="請輸入檔案描述" />
+            <br />
+            <input id="file_efile" type="file" />
+        </td>
+        <td colspan="3">
+            <div id="div_Content">
+                <table id="grid"></table>
+                <div id="pager"></div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" align="center">
+            <div align="center"><input type="button" id="btn_SubmitData" value="完成" class="btn" align="center" /></div>
+        </td>
+    </tr>
+</table>

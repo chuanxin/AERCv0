@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "AllUnitData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Dry.Models.ViewModel.StatisticHomeView>
+
+<h2>經費使用概況統計表</h2>
+
+一、農水署經費
+<table class="dashTable">
+    <tr class="odd">
+        <td>單位</td>
+        <td>預定推廣戶數</td>
+        <td>預定推廣面積(a)</td>
+        <td>預定推廣金額(千元)</td>
+        <td>調整推廣金額(千元)(b)</td>
+        <td>建檔戶數(c)</td>
+        <td>建檔面積(d)</td>
+        <td>面積達成率%(d/a)</td>
+        <td>已編預算戶數</td>
+        <td>已編預算面積(e)</td>
+        <td>已編列補助款(f)</td>
+        <td>尚未編列補助款(g)=(b)-(f)</td>
+        <td>已驗收戶數</td>
+        <td>已驗收面積</td>
+        <td>已驗收金額(h)</td>
+        <td>計畫執行率%(i)=(h)/(b)</td>
+    </tr>
+
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td class="number_right">@Html.DisplayFor(m => item.IaName)</td>
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofFarmer_coa)</td>
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofFarm_coa)</td>
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofMoney_coa)</td>
+                <td class="number_right">@Html.DisplayFor(m => item.Ch_ReservationsofMoney_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.NumofFarmer_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.NumofFarm_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ReachOfArea_coa)%</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarmer_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarm_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfMoney_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.Unusemoney_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionofFarmerend_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarmend_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfMoneyend_coa)</td>
+                <td class="number_right">@Html.DisplayTextFor(m => item.PlanExe_coa)%</td>
+            </tr>
+
+        }
+
+    }
+    
+</table>
+
+        二、瑠公經費
+<table class="dashTable">
+    <tr class="odd">
+        <td>單位</td>
+        <td>預定推廣戶數</td>
+        <td>預定推廣面積(a)</td>
+        <td>預定推廣金額(千元)</td>
+        <td>調整推廣金額(千元)(b)</td>
+        <td>建檔戶數(c)</td>
+        <td>建檔面積(d)</td>
+        <td>面積達成率%(d/a)</td>
+        <td>已編預算戶數</td>
+        <td>已編預算面積(e)</td>
+        <td>已編列補助款(f)</td>
+        <td>尚未編列補助款(g)=(b)-(f)</td>
+        <td>已驗收戶數</td>
+        <td>已驗收面積</td>
+        <td>已驗收金額(h)</td>
+        <td>計畫執行率%(i)=(h)/(b)</td>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td class="number_right">@Html.DisplayFor(m => item.IaName)</td>@*推廣單位*@
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofFarmer_lu)</td>@*預定推廣戶數*@
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofFarm_lu)</td>@*預定推廣面積(a)*@
+                <td class="number_right">@Html.DisplayFor(m => item.ReservationsofMoney_lu)</td>@*預定推廣金額(千元)*@
+                <td class="number_right">@Html.DisplayFor(m => item.Ch_ReservationsofMoney_lu)</td>@*調整推廣金額(千元)(b)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.NumofFarmer_lu)</td>@*建檔戶數(c)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.NumofFarm_lu)</td>@*建檔面積(d)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ReachOfArea_lu)%</td>@*面積達成率%(d/a)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarmer_lu)</td>@*已編預算戶數*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarm_lu)</td>@*已編預算面積(e)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfMoney_lu)</td>@*已編列補助款(f)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.Unusemoney_lu)</td>@*尚未編列補助款(g)=(b)-(f)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionofFarmerend_lu)</td>@*已驗收戶數*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfFarmend_lu)</td>@*已驗收面積*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.ProvisionOfMoneyend_lu)</td>@*已驗收金額(h)*@
+                <td class="number_right">@Html.DisplayTextFor(m => item.PlanExe_lu)%</td>@*計畫執行率%(i)=(h)/(b)*@
+            </tr>
+        }
+
+    }
+   
+</table>

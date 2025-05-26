@@ -1,0 +1,164 @@
+﻿@model Dry.Models.ViewModel.VerifyView
+
+@{
+    <script>
+        $(function () {
+            
+            $('#statCode').change(function () {
+                if ($(this).val() == '1' && '@Session["UnitID"].ToString()' == '17') {
+                    $('#Descript').val('經驗收結果實作數量與合約相符，擬准予驗收。');
+                }
+            });
+            $('#Btn_StatementPdf').click(function () {
+                var dlLink = '@Url.Action("ExportStatementPdf", "Verify")';
+                //alert(res);
+                var $ifrm = $('<iframe style="display:none" />');
+                $ifrm.attr('src', dlLink);
+                $ifrm.appendTo("body");
+                $ifrm.load(function () {
+                    //if the download link return a page
+                    //load event will be triggered
+                    $("body").append(
+                        "<div>Failed to download <i>'" + dlLink + "'</i>!");
+                });
+            });
+            ResetTimeout();
+        });
+    </script>
+    <form id="form_Verify">
+        <table border="1" class="dashTable" style="width:100%;">
+            <tr>
+                <td class="td_style">申請年度</td>
+                <td colspan="2">@Model.ApplyY</td>
+            </tr>
+            <tr>
+                <td class="td_style">案件編號</td>
+                <td colspan="2">@Model.IANum</td>
+            </tr>
+            <tr>
+                <td class="td_style">農戶姓名</td>
+                <td colspan="2">@Model.Name</td>
+            </tr>
+            <tr>
+                <td class="td_style">農戶住址</td>
+                <td colspan="2">@Model.Address</td>
+            </tr>
+            <tr>
+                <td class="td_style">設施地段</td>
+                <td colspan="2">
+                    @foreach (var farm in Model.Farm)
+                    {
+                        <font>@farm.full_sectName , 地號: @farm.LandNo </font>
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">設施面積</td>
+                <td colspan="2">@((double)Model.BuildArea / 10000) 公頃</td>
+            </tr>
+            <tr>
+                <td class="td_style">設施型式</td>
+                <td colspan="2">
+                    @Model.EndType
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">驗收日期</td>
+                <td colspan="2">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.VDate, new { Value = Model.VDate.ToString("yyyy/MM/dd"), @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.VDate, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">驗收人員</td>
+                <td colspan="2">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.VID, (IEnumerable<SelectListItem>)Model.personDDL, new { style = "width: 150px;" })
+                            @Html.ValidationMessageFor(model => model.VID, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">驗收結果</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.statCode, (IEnumerable<SelectListItem>)Model.statusDDL, new { style = "width: 290px" })
+                            @Html.ValidationMessageFor(model => model.statCode, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                    原應發放: <font id="ShdPay" size="3" color="blue">@Model.OrginalPayM</font>&nbsp; &nbsp;
+                    <div class="control-group">
+                        <div class="controls">
+                            減列 : @Html.TextBoxFor(model => model.ReduceM, new { @readonly = "readonly", @style = "width: 80px;" })
+                            @Html.ValidationMessageFor(model => model.ReduceM, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            實際發放: @Html.TextBoxFor(model => model.PayM, new { @readonly = "readonly", @style = "width: 80px;" })
+                            @Html.ValidationMessageFor(model => model.PayM, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+                
+                <td>
+                    @if (Model.ApplyUnit == 17)
+                    {
+                           
+             
+                    }
+                </td>
+                
+            </tr>
+            <tr>
+                <td class="td_style">驗收相關說明</td>
+                <td colspan = "2" >
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextAreaFor(model => model.Descript, new { @style = "width: 500px; height: 119px;resize: none; border: 1pt double;" })
+                            @Html.ValidationMessageFor(model => model.Descript, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        @if (!Model.Complete)
+        {
+            if (!Model.IsModify)
+            {
+                <input type="button" id="btn_SubmitVerify" value="結案，前往下個步驟" class="btn" />
+            }
+            else
+            {
+                <input id="btn_VerifyModify" type="button" value="修改案件驗收" class="btn" />
+            }
+        }
+        else
+        {
+            <input type="button" value="案件已結案" class="btn btn-danger" />
+        }
+        @*@if (!Model.Complete)
+        {
+            
+        }
+        @if (!Model.IsModify)
+        {
+            <input type="button" id="btn_SubmitVerify" value="送出，前往下個步驟" class="btn" />
+        }
+        else
+        {
+            <input id="btn_VerifyModify" type="button" value="修改案件驗收" class="btn" />
+        }*@
+    </form>
+    @*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+    <script src="~/Scripts/jquery.ui.datepicker-zh-TW.js"></script>*@
+    <script src="~/Scripts/_Verify.js"></script>
+}

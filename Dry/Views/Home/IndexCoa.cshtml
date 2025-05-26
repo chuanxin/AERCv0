@@ -1,0 +1,164 @@
+﻿@*
+    -- =============================================
+    -- Author: WEI
+    -- Create date: 2014-2-10
+    -- Description: 旱作灌溉系統首頁的View
+    -- =============================================
+*@
+
+@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>公告資訊</h2>
+<div class="content">
+    <div class="content_item">
+        <div align="center"><h5>@ViewBag.QryYear 年度目前預算書編製情形</h5> </div>
+        @model IEnumerable<Dry.Models.ViewModel.StatisticCoaView>
+        <table class="dashTable">            
+            <tr class="odd">
+                <td>受理單位</td>
+                <td>預定執行面積(公頃)(a)</td>
+                <td>預定執行預算(元)(b)</td>
+                <td>已編預算戶數(c)</td>
+                <td>已編預算面積(公頃)(d)</td>
+                <td>已編列補助款(元)(e)</td>
+                <td>未編列補助款(元)(f)</td>
+                <td>已驗收戶數(g)</td>
+                <td>已驗收面積(公頃)(h)</td>
+                <td>已驗收金額(元)(i)</td>
+                <td>面積執行率%(j)=(d)/(a)</td>
+                <td>經費執行率%(j)=(e)/(b)</td>
+            </tr>
+
+                    @foreach (var item in Model)
+                    {
+        <tr>
+            <td>@Html.DisplayFor(o => item.IaName)</td>
+            <td class="number_right"> @item.RsvFarmArea.ToString("N0")</td>
+            <td class="number_right"> @item.RsvBudget.ToString("N0")</td>
+            <td class="number_right"> @item.BudgetFarmer</td>
+            <td class="number_right"> @item.BudgetFarmArea.ToString("N4")</td>
+            <td class="number_right"> @item.BudgetMoney.ToString("N0")</td>
+            <td class="number_right"> @{var v1 = item.RsvBudget - item.BudgetMoney; @v1.ToString("N0")}</td>
+            <td class="number_right"> @item.CompleteFarmer</td>
+            <td class="number_right"> @item.CompleteFarmArea.ToString("N4")</td>
+            <td class="number_right"> @item.CompleteBugdetMoney.ToString("N0")</td>
+            @if (item.RsvFarmArea > 0)
+            {
+                var aa = Math.Round((((double)item.BudgetFarmArea / (double)item.RsvFarmArea) * 100d), 2);
+                <td class="number_right"> @aa %</td>
+            }
+            else
+            {
+                <td class="number_right"> 0 %</td>
+            }
+            @if (item.RsvBudget > 0)
+            {
+                var bb = Math.Round(((double)item.BudgetMoney / (double)item.RsvBudget) * 100d, 2);
+                <td class="number_right"> @bb %</td>              
+             }
+             else
+            { 
+                <td class="number_right"> 0 %</td>
+            }
+        </tr>
+                                }
+        <tr>
+            <td>合計</td>
+            @{
+                Dry.Models.ViewModel.StatisticCoaView total = new Dry.Models.ViewModel.StatisticCoaView();
+                total.BudgetFarmer = Model.Sum(o => o.BudgetFarmer);
+                total.BudgetFarmArea = Model.Sum(o => o.BudgetFarmArea);
+                total.BudgetMoney = Model.Sum(o => o.BudgetMoney);
+                total.CompleteFarmer = Model.Sum(o => o.CompleteFarmer);
+                total.CompleteFarmArea = Model.Sum(o => o.CompleteFarmArea);
+                total.CompleteBugdetMoney = Model.Sum(o => o.CompleteBugdetMoney);
+                total.RsvFarmArea = Model.Sum(o => o.RsvFarmArea);
+                total.RsvBudget = Model.Sum(o => o.RsvBudget);
+            }
+            <td class="number_right"> @total.RsvFarmArea.ToString("N4")</td>
+            <td class="number_right"> @total.RsvBudget.ToString("N0")</td>
+            <td class="number_right"> @total.BudgetFarmer</td>
+            <td class="number_right"> @total.BudgetFarmArea.ToString("N4")</td>
+            <td class="number_right"> @total.BudgetMoney.ToString("N0")</td>
+            <td class="number_right"> @{var bt = total.RsvBudget - total.BudgetMoney; @bt.ToString("N0")}</td>
+            <td class="number_right"> @total.CompleteFarmer</td>
+            <td class="number_right"> @total.CompleteFarmArea.ToString("N4")</td>
+            <td class="number_right"> @total.CompleteBugdetMoney.ToString("N0")</td>
+            @if (total.RsvFarmArea > 0)
+            {
+                var totalexc = Math.Round((((double)total.BudgetFarmArea / (double)total.RsvFarmArea) * 100d), 2);
+                <td class="number_right"> @totalexc %</td>
+            }
+            else
+            {
+                <td class="number_right"> 0 %</td>
+            }
+            @if (total.RsvBudget > 0)
+            {
+                var cc = Math.Round(((double)total.BudgetMoney / (double)total.RsvBudget) * 100d, 2);
+                <td class="number_right"> @cc %</td>
+            }
+            else { 
+                <td class="number_right"> 0 %</td>
+            }
+
+        </tr>
+                </table>
+        <div class="container">
+            <div class="row">
+                <div class="span6" id="download">
+                    @using (Html.BeginForm("DownloadIaFees", "Home", FormMethod.Post, new { @class = "from-inline" }))
+                    {
+                        @Html.DropDownList("ApplyYear", (IEnumerable<SelectListItem>)ViewBag.ApplyYearDDL, new { style = "width: 100px;" })
+                        <button id="AllUnitData" type="submit" class="btn btn-info" title="匯出">
+                            <img src="~/Content/images/ms_excel.ico" style="width:65px" />
+                            <br />
+                            各受理單位經費統計表
+                        </button>
+                    }
+                </div>
+                <div class="span6" id="download">
+                    @using (Html.BeginForm("DownLoadTownFees", "Home", FormMethod.Post, new { @class = "from-inline" }))
+                    {
+                        @Html.DropDownList("ApplyYear", (IEnumerable<SelectListItem>)ViewBag.ApplyYearDDL, new { style = "width: 100px;" })
+                        <button id="AllUnitData" type="submit" class="btn btn-info" title="匯出">
+                            <img src="~/Content/images/ms_excel.ico" style="width:65px" />
+                            <br />
+                            鄉鎮經費統計表
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+
+                <br />
+                <table width="100%" align="center" class="dashTable">
+                    <thead><tr><th colspan="4">推廣管路灌溉設施管理資料庫公佈欄</th></tr></thead>
+                    <tr>
+                        <td colspan="2">
+
+                            本系統的維運與聯繫工作由本中心同仁辦理，如有任何需要協助或解答疑問之處，請以下列聯絡方式告知，謝謝！
+
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td width="74%" align="right">
+                            <div align="right">
+                                聯絡人姓名：<br />
+                                聯絡人電話：<br />
+                                聯絡人電子信箱：
+                            </div>
+                        </td>
+                        <td width="26%">
+                            資訊組 劉時偉  助理研究員<br>
+                            03-4521314  轉334<br>
+                            alex@aerc.org.tw
+                        </td>
+                    </tr>
+                </table>
+</div>
+</div>

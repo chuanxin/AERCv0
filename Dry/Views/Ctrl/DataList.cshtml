@@ -1,0 +1,136 @@
+﻿@model Dry.Models.ViewModel.CtrlView
+<script type="text/javascript">
+    $(function () {
+        
+        fun_HideItemType();
+        
+        $('a[name="btn_Del"]').click(function () {
+            if (confirm('確定刪除？')) {
+                $(this).parent().parent().remove();
+                $('#btn_Save').attr('disabled', false);
+                fun_HideItemType();
+                fun_TotalPrice();
+            }
+            return false;
+        });
+
+
+
+        
+
+        
+        function fun_TotalPrice() {
+
+            ResultArry = [];
+            $('#tb_MainTable tr:has(table)').each(function () {
+            //$('#tb_MainTable tr table').each(function () {
+                $(this).find('tr').each(function () {
+                    //alert($(this).html());
+                    var ResultVal = new Object();
+                    //ResultVal.MatAmt = $(this).find('td').eq(3).text(); 
+                    //ResultVal.MatPrice = $(this).find('td').eq(4).text(); 
+                    ResultVal.MatAmt = $(this).find('td').eq(1).text(); 
+                    ResultVal.MatPrice = $(this).find('td').eq(2).text(); 
+                    ResultVal.MatAmtAply = $(this).find('td').eq(1).text(); 
+                    ResultVal.MatPriceAply = $(this).find('td').eq(2).text(); 
+                    console.log(ResultVal);
+
+
+                    ResultArry.push(ResultVal);
+                });
+            });
+            //console.log(ResultVal);
+            //alert(ResultArry[0].MatPrice);
+            //debugger;
+            $.postJson("@Url.Content("~/Ctrl/TotalPrice")", ResultArry, function (Data) {
+
+                var TotalPice = Data.split(';');
+                var OldCaseMoney = $('#tdCaseM').text();
+                var OldGovM = $('#tdGovM').text();
+                var GovMChange = TotalPice[1] - OldGovM;
+                $('#tdCaseM').text(OldCaseMoney - GovMChange);
+                $('#tdTotalM').text(TotalPice[0]); 
+                $('#tdGovM').text(TotalPice[1]); 
+                $('#tdFarM').text(TotalPice[2]); 
+                var gold = $('#tdGoldM');
+                if (gold !== null) 
+                {
+                    gold.text(Data.split(';')[2]);
+                    $("#tdFarM").text(Data.split(';')[3]);
+                }
+
+            });
+        }
+    });
+    function fun_HideItemType() {
+        $('#tr_Null').show();
+        
+        $('#tb_MainTable tr').each(function () {
+            if ($(this).find('table').length > 0) {
+                if ($('#' + $(this).find('table').attr('id') + ' tr').length <= 0)
+                    $(this).hide();
+                else
+                    $('#tr_Null').hide();
+            }
+        });
+    }
+</script>
+
+<table id="tb_MainTable" border="1" class="dashTable" align="center" style="width:100%;">
+    <thead>
+        <tr>
+            <th colspan="7" align="center">調控設施物料表</th>
+        </tr>
+    </thead>
+    <tr>
+        <td align="center" width="150" class="td_style">類型</td>
+        <td width="130" class="td_style">名稱</td>
+        <td width="80" class="td_style">設施數量</td>
+        <td width="80" class="td_style">設施單價</td>
+        @*<td width="80" class="td_style">補助數量</td>
+        <td width="80" class="td_style">補助單價</td>*@
+        <td width="80" class="td_style">小計</td>
+        <td width="50"></td>
+    </tr>
+
+
+    @foreach (var TrItem in Model.ListDataList)
+    {
+        <tr id="tr_@TrItem.CntrlCode">
+            <td valign="top">
+                @TrItem.CntrlCNS
+            </td>
+            <td colspan="7">
+                <table id="tb_@TrItem.CntrlCode" align="center" width="100%">
+                    @foreach (var subTrItem in Model.MatData)
+                    {
+                        if (subTrItem.CntrlCode == TrItem.CntrlCode)
+                        {
+                            <tr>
+                                <td width="130">@subTrItem.MatName</td>
+                                <td width="80">@subTrItem.MatAmtAply</td>
+                                <td width="80">@subTrItem.MatPriceAply</td>
+                                @*<td width="80">@subTrItem.MatAmt</td>
+                                <td width="80">@subTrItem.MatPrice</td>*@
+                                @{int itemTotal = subTrItem.MatAmtAply * (int)subTrItem.MatPriceAply;}
+                                <td width="80">@itemTotal</td>
+
+                       <td width="50">
+
+                           <a class="btn btn-danger" name="btn_Del" href="javascript:void(0);">刪除</a>
+
+                           <input type="hidden" value="@TrItem.CntrlCode" />
+
+                       </td>
+
+                   </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+    <tr id="tr_Null">
+        <td colspan="7" align="center"><h2>目前暫無資料。</h2></td>
+    </tr>
+</table>

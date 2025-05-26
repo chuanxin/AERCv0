@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Dry.Models.DesignerList>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+
+<h2>設計者列表</h2>
+<div class="content">
+    <div class="addBtn">
+        @Html.ActionLink("新增設計者", "Create")
+    </div>
+    <div id="container">
+        @Html.Partial("_DesignerList", Model)
+    </div>
+    <script type="text/javascript">
+        $("input[name='Delete']").click(function (e) {
+            e.preventDefault();//防止contoller呼叫兩次
+            if (confirm('是否刪除!!')) {
+                $.ajaxSettings.async = false;
+                $.post(
+                       "../Designer/Delete",
+                       {
+                           Designer_Id: $(this).closest("tr").find("td").find('#item_Designer_Id').val()
+                       },
+                       function (data) {
+                           alert(data.result);
+                           if (data.result == '刪除失敗!!') {
+                               return false;
+                           }
+                           else {
+                               window.location.href = data.url;
+                           }
+                       },
+                       "json"
+                    );
+            }
+            else {
+                return false;
+            }
+        });
+    </script>
+    </div>

@@ -1,0 +1,76 @@
+﻿@model Dry.Models.DesignerList
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+        <h2>編輯設計者</h2>
+        <div class="content">
+            <table>
+                <tr>
+                    <td>姓名</td>
+                    <td>
+                        @Html.HiddenFor(model => model.Designer_Id)
+                        @Html.EditorFor(model => model.Designer_Name)
+                        @Html.ValidationMessageFor(model => model.Designer_Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>電話</td>
+                    <td>
+                        @Html.EditorFor(model => model.Phone)
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <input type="submit" value="修改" class="modBtn" id="DesignerEdit" />
+            </p>
+        </div>
+}
+
+<h4>
+  >>  @Html.ActionLink("返回設計者列表", "Index")
+</h4>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+<script type="text/javascript">
+    $('#DesignerEdit').click(function (e) {
+        e.preventDefault();
+        if ($('#Designer_Name').val() == '') {
+            alert('請輸入設計者姓名!!');
+            return false;
+        }
+        if ($('#Phone').val() == '') {
+            alert('請輸入設計者電話!!');
+            return false;
+        }
+        $.ajaxSettings.async = false;
+        $.post(
+               "../Designer/Edit",
+               {
+                   Designer_Id:$('#Designer_Id').val(),
+                   Designer_Name: $('#Designer_Name').val(),
+                   Phone: $('#Phone').val()
+               },
+               function (data) {
+                   alert(data.result);
+                   if (data.result == '修改失敗!!') {
+                       return false;
+                   }
+                   else {
+                       window.location.href = data.url;
+                   }
+               },
+               "json"
+            );
+    });
+</script>

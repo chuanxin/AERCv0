@@ -1,0 +1,97 @@
+﻿@model AERC.Models.ViewModel.AdminView
+
+
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("UserEdit", "UserManage", FormMethod.Post, new { id = "formUserEdit" }))
+{
+                @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <fieldset>
+        @Html.HiddenFor(model => model.UnitId)
+        <table>
+            <tr>
+                <td class="td_style">姓名</td>
+                <td>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">
+                    帳號
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">密碼</td>
+                <td>
+                    @*@Html.PasswordFor(model => model.Password, new { value = Model.Password, htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                    @Html.PasswordFor(model => model.Password, new { value = Model.Password, @class = "form-control", @readonly = "readonly" } )
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">職稱</td>
+                <td>
+                    @Html.DropDownListFor(model => model.Title_Id, Model.TitleDDL, "--請選擇--", new { style = "width: 150px;" })
+                    @Html.ValidationMessageFor(model => model.Title_Id, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">組室</td>
+                <td>
+                    @Html.DropDownListFor(model => model.Organization_Id, Model.OrganDDL, "--請選擇--", new { style = "width: 150px;" })
+                    @Html.ValidationMessageFor(model => model.Organization_Id, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">電話</td>
+                <td>
+                    @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">手機</td>
+                <td>
+                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">傳真</td>
+                <td>
+                    @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td class="td_style">承辦人</td>
+                <td>
+                    @Html.EditorFor(model => model.Status, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td class="td_style">啟用</td>
+                <td>
+                    @Html.EditorFor(model => model.Enabled, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+            @*<tr>
+            <td colspan="2">
+                <span>承辦</span>
+                @Html.RadioButtonFor(model => model.Status, "true", new { @class = "statusRadio" })
+                <span>非承辦</span>
+                @Html.RadioButtonFor(model => model.Status, "false", new { @class = "statusRadio" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </td>
+        </tr>*@
+        </table>
+    </fieldset>
+    <input id="btnEdit" type="submit" value="修改會員資料" class="btn btn-primary" />}

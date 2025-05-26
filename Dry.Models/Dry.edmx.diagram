@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7640a168d8b14d2ca134c99e524b6ca5" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="DryModel.CntrlApply" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.CntrlFac" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.CntrlList" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.ControlLimit" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.DesignerList" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.EFile" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.EndTypeList" Width="1.5" PointX="7.5" PointY="50.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.EngApply" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Engine" Width="1.5" PointX="9.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.EngineList" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.EngLimit" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Examine" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacDesign" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacInspection" Width="1.5" PointX="7.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacStatList" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacSysMAT" Width="1.5" PointX="14" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacTypeList" Width="1.5" PointX="7.5" PointY="52.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FacVerify" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Farm" Width="1.5" PointX="7.5" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FarmChange" Width="1.5" PointX="9.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FarmCrop" Width="1.5" PointX="9.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FarmDataLog" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Farmer" Width="1.5" PointX="0.75" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FarmerSys" Width="1.5" PointX="12.75" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.FileTypeList" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.IrrWaterList" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.LandTypeList" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Mat_Module" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.MAT_Spec" Width="1.5" PointX="11.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.MAT_Types" Width="1.5" PointX="11.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.MoneyRules" Width="1.5" PointX="0.625" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.PigingLimit" Width="1.5" PointX="12.75" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Pool" Width="1.5" PointX="9.75" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.PoolApply" Width="1.5" PointX="7.5" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.PoolTonList" Width="1.5" PointX="12.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.PoolTypeList" Width="1.5" PointX="7.5" PointY="56.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.PriceOfMat" Width="1.5" PointX="16.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.RegionList" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.StdFacSys" Width="1.5" PointX="10.5" PointY="46" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.StdFacSysMAT" Width="1.5" PointX="12.75" PointY="46.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.Subsidy" Width="1.5" PointX="14.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.SubsidyItemList" Width="1.5" PointX="16" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.VerifyLog" Width="1.5" PointX="7.5" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.VerMapping" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.WaterSrcList" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DryModel.WrkExecutReport" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <AssociationConnector Association="DryModel.FK_CntrlApply_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_CntrlFac_CntrlApply" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_ControlLimit_CntrlList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_EFile_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_PigingLimit_EndTypeList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_EngApply_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Engine_EngApply" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Engine_EngineList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_EngLimit_EngineList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Examine_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FacDesign_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FacInspection_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FacSysMAT_MAT_Spec" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FacSysMAT_MAT_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_PriceOfMat_FacSysMAT" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_PigingLimit_FacTypeList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Farm_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FarmChange_Farm" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FarmCrop_Farm" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_FarmerSys_StdFacSys" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Pool_PoolApply" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_Pool_PoolTypeList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_PoolApply_VerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_PoolTonList_PoolTypeList" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_StdFacSysMAT_StdFacSys" ManuallyRouted="false" />
+        <AssociationConnector Association="DryModel.FK_VerifyLog_VerMapping" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DryModel.Old_CountryCode" Width="1.5" PointX="3.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DryModel.Old_Farm" Width="1.5" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DryModel.Old_Farmer" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DryModel.Old_Unit" Width="1.5" PointX="20.375" PointY="20.75" />
+        <EntityTypeShape EntityType="DryModel.LastVerOfMapNo" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="DryModel.Pay" Width="1.5" PointX="7.5" PointY="31.875" />
+        <AssociationConnector Association="DryModel.FK_Pay_VerMapping" />
+        <EntityTypeShape EntityType="DryModel.EndType" Width="1.5" PointX="12.75" PointY="49.375" />
+        <AssociationConnector Association="DryModel.FK_EndType_EndTypeList" />
+        <AssociationConnector Association="DryModel.FK_EndType_FacTypeList" />
+        <EntityTypeShape EntityType="DryModel.MatGroup" Width="1.5" PointX="12.75" PointY="42.125" />
+        <EntityTypeShape EntityType="DryModel.PigingConf" Width="1.5" PointX="7.5" PointY="36" />
+        <AssociationConnector Association="DryModel.FK_EndType_PigingConf" />
+        <AssociationConnector Association="DryModel.FK_FarmerSys_PigingConf" />
+        <AssociationConnector Association="DryModel.FK_PigingConf_VerMapping" />
+        <EntityTypeShape EntityType="DryModel.OldSystemFarm" Width="1.5" PointX="20.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport" Width="1.5" PointX="14.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport_Crop" Width="1.5" PointX="16.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport_Engine" Width="1.5" PointX="17.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport_Piging" Width="1.5" PointX="16.375" PointY="20.75" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport_Pool" Width="1.5" PointX="10.375" PointY="17.75" />
+        <EntityTypeShape EntityType="DryModel.TotalFunds" Width="1.5" PointX="22.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DryModel.FarmData" Width="1.5" PointX="22.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DryModel.AcceptanceReportData" Width="1.5" PointX="22.375" PointY="20.75" />
+        <EntityTypeShape EntityType="DryModel.CntrlMat" Width="1.5" PointX="12" PointY="4.75" />
+        <AssociationConnector Association="DryModel.FK_CntrlMat_CntrlFac" />
+        <EntityTypeShape EntityType="DryModel.LiugongReport_Town" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DryModel.TotalFee" Width="1.5" PointX="7.5" PointY="59.125" />
+        <AssociationConnector Association="DryModel.FK_TotalFee_VerMapping" />
+        <EntityTypeShape EntityType="DryModel.CasePayDetail" Width="1.5" PointX="24.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DryModel.FarmerSysM" Width="1.5" PointX="15" PointY="38.25" />
+        <AssociationConnector Association="DryModel.FK_FarmerSysM_FarmerSys" />
+        <AssociationConnector Association="DryModel.FK_FarmerSysM_MatGroup" />
+        <EntityTypeShape EntityType="DryModel.CropAreaDetail" Width="1.5" PointX="24.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DryModel.LandEquity" Width="1.5" PointX="9.75" PointY="30.625" />
+        <AssociationConnector Association="DryModel.FK_LandEquity_Farm" />
+        <EntityTypeShape EntityType="DryModel.CasePayUnit" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="DryModel.UserLog" Width="1.5" PointX="12.375" PointY="24.75" />
+        <EntityTypeShape EntityType="DryModel.SummaryView" Width="1.5" PointX="24.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DryModel.Indigenous" Width="1.5" PointX="24.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DryModel.CaseDetail" Width="1.5" PointX="18.375" PointY="23.75" />
+        <EntityTypeShape EntityType="DryModel.FarmReapplyQuery" Width="1.5" PointX="16.375" PointY="12.75" />
+        <EntityTypeShape EntityType="DryModel.LandData" Width="1.5" PointX="24.375" PointY="17.75" />
+        <EntityTypeShape EntityType="DryModel.LeisureFarm" Width="1.5" PointX="24.375" PointY="22.375" />
+        <EntityTypeShape EntityType="DryModel.LeisureFarm_LandInfo" Width="1.5" PointX="26.625" PointY="22" />
+        <AssociationConnector Association="DryModel.FK_LeisureFarm_LandInfo_LeisureFarm" />
+        <EntityTypeShape EntityType="DryModel.SWCBPools" Width="1.5" PointX="15.375" PointY="25.75" />
+        <EntityTypeShape EntityType="DryModel.Case" Width="1.5" PointX="3" PointY="25" />
+        <AssociationConnector Association="DryModel.FK_Case_Farmer" />
+        <AssociationConnector Association="DryModel.FK_VerMapping_Case" />
+        <EntityTypeShape EntityType="DryModel.SubsidyLimit" Width="1.5" PointX="0.75" PointY="15.75" />
+        <AssociationConnector Association="DryModel.FK_ControlLimit_SubsidyLimit" />
+        <AssociationConnector Association="DryModel.FK_EngLimit_SubsidyLimit" />
+        <AssociationConnector Association="DryModel.FK_PigingLimit_SubsidyLimit" />
+        <AssociationConnector Association="DryModel.FK_PoolTonList_SubsidyLimit" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,577 @@
+﻿@model Dry.Models.ViewModel.FarmerSysView
+<script src="~/Scripts/jquery.textchange.min.js"></script>
+@Scripts.Render("~/bundles/jqueryjqgrid")
+@Styles.Render("~/jqgrid/css")
+@Scripts.Render("~/jquery.validate")
+<form id="form_FarmerSys">
+    <table id="PipingInfoTabl" border="1" class="dashTable" style="width:100%;">
+        <thead>
+            <tr>
+                <th colspan="8">田間管路系統資料</th>
+            </tr>
+        </thead>
+        <tr>
+            <td class="td_style">
+                補助來源
+            </td>
+            <td colspan="3">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.ddl_FarmerSysUnit, (IEnumerable<SelectListItem>)Model.UnitDDL, new { style = "width: 150px;" })
+                        @Html.ValidationMessageFor(model => model.ddl_FarmerSysUnit, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">
+                坵塊形狀 :
+            </td>
+            <td colspan="2">
+                @*@Html.TextBoxFor(model => model.Block, new { @Value = "100x100", style = "width: 100px;", @readonly = true })
+                @Html.ValidationMessageFor(model => model.Block, null, new { @class = "help-inline" })*@
+                @Html.HiddenFor(model=>model.BuildArea)
+                <div class="control-group">
+                    <div class="controls">
+                        長
+                        @Html.TextBoxFor(model => model.Length, new { style = "width: 50px;" })
+                        x
+                        寬
+                        @Html.TextBoxFor(model => model.width, new { style = "width: 50px;", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.Block, null, new { @class = "help-inline" })
+                        <br />
+                        施設面積：@Html.TextBoxFor(model => model.BuildArea, new { style = "width: 50px;", @readonly = true }) m²
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr> 
+            <td class="td_style" rowspan="2">田間主管1</td>
+            <td class="td_style">長度:</td>
+            <td colspan="2">
+                <div class="control-group">
+                    <div class="controls">@*L1Len可以被jqruy找到？？，無id???*@
+                        @Html.TextBoxFor(model => model.L1Len, new { style = "width: 60px;" }) 公尺
+                        @Html.ValidationMessageFor(model => model.L1Len, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">單價:</td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="repo-dropdown-menu">
+                            @*@Html.TextBoxFor(model => model.L1Mat, null, new { id = "L1Mat_search", @class = "typeahead", placeholder = "請輸入物料名稱 or 物料代碼", style = "width: 100px;" })*@
+                            @*@Html.DropDownListFor(model => model.L1Mat, (IEnumerable<SelectListItem>)Model.pipDDL, new { style = "width: 180px;" })*@
+                            @Html.TextBoxFor(model => model.L1Price, new { style="width: 60px;"})
+                            @Html.ValidationMessageFor(model => model.L1Price, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="td_style" rowspan="2">數量: </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.L1MatAmt, new { style = "width: 60px;" })
+                        @Html.ValidationMessageFor(model => model.L1MatAmt, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                材質:
+            </td>
+            <td colspan="2">
+                @Html.DropDownListFor(model => model.L1Mat, (IEnumerable<SelectListItem>)Model.L1QualityDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("L1Quality", (IEnumerable<SelectListItem>)Model.L1QualityDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td class="td_style">
+                規格:
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.L1Spec, (IEnumerable<SelectListItem>)Model.L1SpecDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("L1Spec", (IEnumerable<SelectListItem>)Model.L1SpecDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="td_style" rowspan="2">田間主管2</td>
+            <td class="td_style">長度:</td>
+            <td colspan="2">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.L2Len, new { style = "width: 60px;" }) 公尺
+                        @Html.ValidationMessageFor(model => model.L2Len, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">單價:</td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="repo-dropdown-menu">
+                            @*@Html.DropDownListFor(model => model.L2Mat, (IEnumerable<SelectListItem>)Model.pipDDL, new { style = "width: 180px;" })*@
+                            @*@Html.TextBoxFor(model => model.L2Mat, null, new { @id = "L2Mat_search", @class = "typeahead", @placeholder = "請輸入物料名稱 or 物料代碼", style = "width: 100px;" })*@
+                            @Html.TextBoxFor(model => model.L2Price, new { style="width: 60px;"})
+                            @Html.ValidationMessageFor(model => model.L2Price, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="td_style" rowspan="2">數量:</td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.L2MatAmt, new { style = "width: 60px;" })
+                        @Html.ValidationMessageFor(model => model.L2MatAmt, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                材質:
+            </td>
+            <td colspan="2">
+                @Html.DropDownListFor(model => model.L2Mat, (IEnumerable<SelectListItem>)Model.L2QualityDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("L2Quality", (IEnumerable<SelectListItem>)Model.L2QualityDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td class="td_style">
+                規格:
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.L2Spec, (IEnumerable<SelectListItem>)Model.L2SpecDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("L2Spec", (IEnumerable<SelectListItem>)Model.L2SpecDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>@* 選擇灌溉型式會聯動，先從這瞭解 *@
+            <td class="td_style">灌溉型式: </td> 
+            <td colspan="3">
+                <div class="control-group">
+                    <div class="controls">
+                        <div>@Html.DropDownList("ddl_EndType", (IEnumerable<SelectListItem>)Model.EndTypeDDL, new { style = "width: 150px;" })</div>
+                        <div>@Html.DropDownList("ddl_Drop", (IEnumerable<SelectListItem>)Model.DropDDL, new { style="width: 150px;"})</div>
+                        <div>@Html.DropDownList("ddl_Sprinkler", (IEnumerable<SelectListItem>)Model.SprayDDL, new { style = "width: 150px;" })</div>
+                        <div>
+                            <select id="ddl_Perforated">
+                                <option value="1">單向</option>
+                                <option value="2">雙向</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">設施型式: </td>
+            <td>
+                <div id="div_FacTypeTrue" class="control-group">
+                    <div class="controls">
+                        @Html.DropDownList("ddl_FacType", (IEnumerable<SelectListItem>)Model.FacTypeDDL, new { style = "width: 150px;" })
+                    </div>
+                </div>
+                <div id="div_FacTypeFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+            <td class="td_style">灌溉水源: </td>
+            <td>
+                @Html.DropDownList("ddl_WtaerSrc", (IEnumerable<SelectListItem>)Model.WaterSrcDDL, new { style = "width: 100px;" })
+            </td>
+
+        </tr>
+        <tr>
+            <td class="td_style" rowspan="2">支管</td>
+            <td class="td_style">材質:</td>
+            <td colspan="2">
+                <div id="div_BranchPipeMaterialTrue" class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.BranchPipeMaterial, (IEnumerable<SelectListItem>)Model.BranchPipeMaterialDDL, new { style = "width: 100px;" })
+                    </div>
+                </div>
+                <div id="div_BranchPipeMaterialFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+            <td class="td_style">行距(SL):</td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.SL, new { style = "width: 100px;" }) 公尺
+                        @Html.ValidationMessageFor(model => model.SL, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td rowspan="2" class="td_style">
+                變徑:
+            </td>
+            <td rowspan="2">
+                @Html.DropDownListFor(model => model.Adjustable, (IEnumerable<SelectListItem>)Model.BranchPipeSpecDDL, new { style = "width: 100px;" })
+            </td>
+            
+        </tr>
+        <tr>
+            <td class="td_style">規格:</td>
+            <td colspan="2">
+                <div id="div_BranchPipeSpecTrue" class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.BranchPipeSpec, (IEnumerable<SelectListItem>)Model.BranchPipeSpecDDL, new { style = "width: 100px;" })
+                    </div>
+                </div>
+                <div id="div_BranchPipeSpecFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+            <td class="td_style">間距(SS):</td>
+            <td>
+                <div id="div_SSTrue" class="control-group">
+                    @Html.TextBoxFor(model => model.SS, new { style = "width: 100px;" }) 公尺
+                </div>
+                <div id="div_SSFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style" rowspan="2">末端設施</td>
+            
+            <td class="td_style">規格:</td>
+            <td>
+                @Html.DropDownListFor(model => model.NozzleSpec, (IEnumerable<SelectListItem>)Model.NozzleSpecDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("NozzleSpec", (IEnumerable<SelectListItem>)Model.NozzleSpecDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td class="td_style" rowspan="2">豎管</td>
+            <td class="td_style">
+                高度:
+            </td>
+            <td>
+                <div id="div_PipeHeightTrue" class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.StdpipeHei, new { style = "width: 100px;" }) 公尺
+                        @Html.ValidationMessageFor(model => model.StdpipeHei, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+                <div id="div_PipeHeightFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">材料:</td>
+            <td>
+                @Html.DropDownListFor(model => model.NozzleType, (IEnumerable<SelectListItem>)Model.NozzleMaterialDDL, new { style = "width: 100px;" })
+                @*@Html.DropDownList("NozzleType", (IEnumerable<SelectListItem>)Model.NozzleMaterialDDL, new { style = "width: 100px;" })*@
+            </td>
+            <td class="td_style">材質:</td>
+            <td>
+                <div id="div_PipeMaterialTrue" class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.StdpipeMat, (IEnumerable<SelectListItem>)Model.StdpipeMaterialDDL, new { style = "width: 100px;" })
+                        @*@Html.DropDownList("StdpipeMaterial", (IEnumerable<SelectListItem>)Model.StdpipeMaterialDDL, new { style = "width: 100px;" })*@
+                    </div>
+                </div>
+                <div id="div_PipeMaterialFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+            <td class="td_style">規格:</td>
+            <td>
+                <div id="div_PipeSpecTrue" class="control-group">
+                    <div class="controls">
+                        @Html.DropDownList("StdpipeSpec", (IEnumerable<SelectListItem>)Model.StdpipeSpecDDL, new { style = "width: 100px;" })
+                    </div>
+                </div>
+                <div id="div_PipeSpecFalse" style="display:none;">
+                    無
+                </div>
+            </td>
+        </tr>
+    </table>
+    @*加入第二個以上的末端系統*@
+    @*@if (Model.ApplyUnit == 17)
+    {
+        <img id="btn_AddNewEndType" src="~/Content/images/add.ico" style="width:30px; cursor:pointer; display:@Model.DisplayInfoAdd" title="加入末端型式" />
+        <img id="btn_DelNewEndType" src="~/Content/images/cancel.ico" style="width: 30px; cursor: pointer; display: @Model.DisplayInfo;" title="關閉" />
+        <table id="tb_SecondEndType" style="display:@Model.DisplayInfo;" border="1">
+            <tr>
+                <td>末端型式</td>
+                <td colspan="2">
+                    @Html.DropDownList("ddl_SecondEndType", (IEnumerable<SelectListItem>)Model.SecondEndTypeDDL, new { style = "width: 150px;" })
+                    @Html.DropDownList("ddl_SecondDrop", (IEnumerable<SelectListItem>)Model.SecondDropDDL, new { style = "width: 150px; display:none;" })
+                    @Html.DropDownList("ddl_SecondSprinkler", (IEnumerable<SelectListItem>)Model.SecondSprayDDL, new { style = "width: 150px; display:none;" })
+                </td>
+                <td>設施型式</td>
+                <td colspan="2">
+                    @Html.DropDownList("ddl_SecondFacType", (IEnumerable<SelectListItem>)Model.SecondFacTypeDDL, new { style = "width: 150px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>支管行距(SL)</td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.SecondSL, new { style = "width: 100px;" }) 公尺
+                        </div>
+                    </div>
+                </td>
+                <td>噴頭間距(SS)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.SecondSS, new { style = "width: 100px;" }) 公尺
+                </td>
+                <td>豎管高度</td>
+                <td>
+                    <div id="div_SecondPipeHeightTrue">
+                        @Html.TextBoxFor(model => model.SecondStdpipeHei, new { style = "width: 40px;" }) 公尺
+                    </div>
+                    <div id="div_SecondPipeHeightFalse" style="display:none;">
+                        無
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+    }*@
+    
+    <input id="btn_LoadStd" type="button" value="<<自動帶入材料>>" class="btn" /> @*自動帶入材料按鍵*@
+    <table id="FarsysTabl" border="1" class="dashTable" style="width:100%;">
+        <thead>
+            <tr>
+                <th colspan="10">農戶設施系統資料</th>
+            </tr>
+        </thead>
+        @*<tr>
+            <td class="td_style">公版系統</td>
+            <td colspan="9">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.ddl_StdSys, (IEnumerable<SelectListItem>)Model.StdSysDDL, new { style = "width: 180px;" })
+                        @Html.DropDownListFor(model => model.ddl_StdSysByAmount, (IEnumerable<SelectListItem>)Model.StdSysByAmountDDL, new { style = "width: 180px; display: none;" })
+                        <select id="StdSysByAmountDDL" style="width:180px;display:none;">
+                        </select>
+                        @Html.ValidationMessageFor(model => model.ddl_StdSys, null, new { @class = "help-inline" })
+                        @Html.ValidationMessageFor(model => model.ddl_StdSysByAmount, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        *@
+        @*<tr>
+            <td class="td_style">套用農戶系統物料表</td>
+            <td colspan="9">
+                <div class="repo-dropdown-menu">
+                    <input id="Fsys_Search" class="typeahead2" type="text" placeholder="申請人姓名 or 案號 or 設施型式" style="width:200px;">
+                </div>
+            </td>
+        </tr>*@
+        <tr>
+            <td colspan="10">
+                @*<table id="MatTabl" border="1" style="width:100%;" class="dashTable">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">物料代碼</th>
+                            <th style="text-align:center;">物料名稱</th>
+                            <th style="text-align:center;">物料類別</th>
+                            <th style="text-align:center;">物料規格</th>
+                            <th style="text-align:center;">物料單位</th>
+                            <th style="text-align:center;">物料敘述</th>
+                            <th style="text-align:center;">單價</th>
+                            <th style="text-align:center;">數量</th>
+                            <th style="text-align:center;">總價</th>
+                            <th style="text-align:center;">刪除</th>
+                        </tr>
+                    </thead>
+                    @if (Model.FarmerSysMList != null)
+                    {
+                        foreach (var item in Model.FarmerSysMList)
+                        {
+                            <tr id="tr_p_@item.POMNo">
+                                <td id="pomno" align="center">@item.POMNo</td>
+                                <td id="matname" align="center">@item.MName</td>
+                                <td id="modul" align="center">@item.ModuleCNS</td>
+                                <td id="spec" align="center">@item.Spec1 @item.Spec2 @item.Spec3</td>
+                                <td id="itemunit" align="center">@item.ItemUnit</td>
+                                <td id="desp" align="center">@item.Note</td>
+                                <td id="price" align="center"><input id="txt_price" type="text" style="width:45px" value="@item.Price" onchange="$('#tr_p_@item.POMNo').CalTotal(); return false;"></td>
+                                <td id="amt" align="center"><input id="txt_amt" type="text" style="width:45px" onchange="$('#tr_p_@item.POMNo').CalTotal(); return false;" value="@item.Amount"></td>
+                                <td id="total" align="center"><input id="txt_totalprice" type="text" style="width:60px" value="@item.TotalPrice"></td>
+                                <td align="center" width="60"><a id="del_link" href="#" onclick="$('#tr_p_@item.POMNo').DelMat();return false;">刪除</a></td>
+                            </tr>
+                        }
+                    }
+                </table>*@
+                
+
+                <table id="MatTabl_MainPipe" border="1" style="width:100%;" class="dashTable">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">項目</th>
+                            <th style="text-align:center;">名稱</th>
+                            <th style="text-align:center;">類別</th>
+                            <th style="text-align: center; display: none;">材質</th>
+                            <th style="text-align:center;">規格</th>
+                            <th style="text-align:center;">單位</th>
+                            <th style="text-align:center;">敘述</th>
+                            <th style="text-align: center; width: 60px;">單價</th>
+                            <th style="text-align:center; width:60px;">數量</th>
+                            <th style="text-align:center; width: 70px;">總價</th>
+                            <th style="text-align: center; width: 70px;">排序</th>
+                            <th style="text-align:center; width:50px;">刪除</th>
+                        </tr>
+                    </thead>
+                    @if (Model.Mat != null)
+                    {
+                        foreach(var groupitem in Model.Mat)
+                        {
+                            <tr>
+                                <td colspan="12">@groupitem.GroupName</td>
+                            </tr>
+                            foreach (var item in groupitem.List)
+                            {
+                                string itemid = "tr_p_" + item.MatGroup + "_" + item.POMNo;
+                                <tr id="@itemid">
+                                    <td id="pomno" style="display:none;">@item.POMNo</td>
+                                    <td style="display:none;">@item.MatGroup</td>
+                                    <td style="display:none;">@item.MatOrder</td>
+                                    <td>@item.MatOrderCNS</td>
+                                    <td id="matname" style="text-align:center;">@item.MName</td>
+                                    <td id="modul" style="text-align:center;">@item.ModuleCNS</td>
+                                    <td id="mattype" style="text-align: center; display: none;"></td>
+                                    <td id="spec" style="text-align:center;">@item.Spec1 @item.Spec2 @item.Spec3</td>
+                                    <td id="itemunit" style="text-align:center;">@item.ItemUnit</td>
+                                    <td id="desp">@item.Note</td>
+                                    <td id="price" style="text-align:center;"><input id="txt_price" type="text" style="width:45px" value="@item.Price" onchange="$('#@itemid').CalTotal(); return false;"></td>
+                                    <td id="amt" style="text-align:center;"><input id="txt_amt" type="text" style="width:45px" onchange="$('#@itemid').CalTotal(); return false;" value="@item.Amount"></td>
+                                    <td id="total" style="text-align:center;"><input id="txt_totalprice" type="text" style="width:60px" value="@item.TotalPrice"></td>
+                                    <td>
+                                        <div class="row-fluid">
+                                            <div class="span6">
+                                                <input type="button" onclick="javascript:$('#@itemid').UpMatOrder();return false;" value="↑" style="width:30px; padding-right: 10;" class="btn" />
+                                            </div>
+                                            <div class="span6">
+                                                <input type="button" onclick="javascript:$('#@itemid').DownMatOrder();return false;" value="↓" style="width:30px;" class="btn" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <a href="#" onclick="$('#@itemid').DelMat();return false;" class="btn btn-danger" style="width:30px;">刪除</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        
+                    }
+                </table>
+                <div class="row-fluid">
+                    <div class="span7">
+                        <div id="div_Group" style="background-color: rgb(255,2550,204); border-style: solid; border-width: 1px; display:none; ">
+                            <div class="row-fluid">
+                                <h3 id="ProxyLabel">選擇物料群組</h3>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="row-fluid">
+                                    @Html.DropDownList("ddl_Group", (IEnumerable<SelectListItem>)Model.GroupDDL, new { style = "width: 150px;" })
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <input type="hidden" id="hiddn_pomno" />
+                                <table class="table-bordered" width="500">
+                                    <tr>
+                                        <td rowspan="2" colspan="2">
+                                            <h2><strong><span id="span_matname"></span></strong></h2>
+                                        </td>
+                                        <td>
+                                            單位：
+                                            <span id="span_itemunit"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            單價：
+                                            <span id="span_price"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            材質：
+                                            <span id="span_mattype"></span>
+                                        </td>
+                                        <td>
+                                            規格：
+                                            <span id="span_matspec"></span>
+                                        </td>
+                                        <td colspan="2">
+                                            模組名稱：
+                                            <span id="span_modulename"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            描述：
+                                            <span id="span_note"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            @*送出銨鈕的id btn_send對應jqury新增物料使用*@
+                            <div class="row-fluid text-right" style="padding-bottom:5px; padding-right:5px; border-top-width:2px;border-top-style:solid;">
+                                <input id="btn_send" type="button" value="送出" class="btn" />
+                                <input type="button" value="關閉" class="btn" onclick="$('#div_Group').fadeOut();" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span5 text-right">
+                        總計
+                        <input id="txt_Mat_Total" type="text" class="input-small" value="0" />
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr id="add_new_mat" style="display:none;">
+            <td class="td_style">新增物料</td>
+            <td colspan="9">
+                <div class="repo-dropdown-menu">
+                    <input id="Mat_Search" class="typeahead" type="text" placeholder="請輸入物料名稱 or 物料代碼">
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <table id="MatList"></table>
+    <div id="MatFooter"></div>
+    <table border="1" class="dashTable" align="center" style="width:80%;">
+        <tr>
+            <td colspan="6">
+                @{
+                    if (ViewBag.Gold == true)
+                    {
+                        //Html.RenderPartial("../FundingTableGold");
+                        Html.RenderPartial("../FundingTable");
+                    }
+                    else
+                    {
+                        Html.RenderPartial("../FundingTable");
+                    }
+}
+                
+                <script type="text/javascript">
+                    $(function () {
+                        $('#tdCaseM').text(@Model.CaseMoney);
+                    });
+                </script>
+            </td>
+        </tr>
+    </table>
+    @if(Model.Step < 8)
+    {
+        if(!Model.IsModify)
+        {
+            <input id="btn_SaveFarmerSys" type="button" value="送出，前往下個步驟" class="btn" />
+        <input id="btn_PassFarmerSys" type="button" value="略過>>" class="btn" />
+        }
+        else
+        {
+            <input id="btn_ModifyFarmerSys" type="button" value="修改田間管路" class="btn" />
+        }
+    }
+</form>
+
+<script src="~/Scripts/_FarmerSys.js"></script>

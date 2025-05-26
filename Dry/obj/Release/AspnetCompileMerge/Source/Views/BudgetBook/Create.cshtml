@@ -1,0 +1,102 @@
+﻿@model Dry.Models.ViewModel.BudgetBookView
+
+<script type="text/javascript">
+    $(function(){
+        ResetTimeout();
+        $('#btn_NextStep').click(function () {
+            if (!confirm('進入下一步驟後，案件資料將無法修改。')) {
+                return false;
+            }
+            $.EnableBlockUI('載入中...');
+            $.getJSON('@Url.Action("NextStep", "BudgetBook")', function (res) {
+                if (res == 'Success') {
+                    window.location.href = '@Url.Action("Index", "ApplyStep")';
+                }
+            });
+        });
+    });
+</script>
+
+    <table border="1" class="dashTable" align="center" style="width:80%;">
+        <tr>
+            <td class="td_style">申請年度</td>
+            <td>@Html.Label("Year", Model.ApplyY.ToString())</td>
+        </tr>
+        <tr>
+            <td class="td_style">水利會案號</td>
+            <td>@Html.Label("CaseNo", Model.IANum.ToString())</td>
+        </tr>
+        <tr>
+            <td class="td_style">農戶姓名</td>
+            <td>@Html.Label("FName", Model.Name)</td>
+        </tr>
+        <tr>
+            <td class="td_style">農戶住址</td>
+            <td>@Html.Label("FAddr", Model.Address)</td>
+        </tr>
+        <tr>
+            <td class="td_style">設施地段</td>
+            <td>
+                @if(Model.Farm != null)
+                {
+                    foreach (var farm in Model.Farm)
+                    {
+                        <font>@farm.full_sectName ,地號: @farm.LandNo </font>
+                        <br />
+                    }
+                }
+                
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">設施面積</td>
+            <td>@((double)Model.BuildArea / 10000) 公頃</td>
+        </tr>
+        <tr>
+            <td class="td_style">設施型式</td>
+            <td>
+                @if(Model.EndType == "")
+                {
+                    <font>其它</font>
+                }
+                else
+                {
+                    <font>@Model.EndType</font>
+                }
+            </td>
+        </tr>
+    </table>
+
+<br />
+
+@{
+    string tablename = string.Empty;
+}
+
+@if (Model.ApplyUnit == 17)
+{
+    //tablename = "../LiugongTable";
+    tablename = "../GeneralTable";
+}
+else
+{
+    if (Model.Gold)
+    {
+        //tablename = "../GoldTable";
+        tablename = "../GeneralTable";
+    }
+    else
+    {
+        tablename = "../GeneralTable";
+    }
+}
+@*@{tablename = "../GoldTable";}*@
+@{Html.RenderPartial(tablename);}
+
+@*<center>
+        <input id="btn_NextStep" type="button" value="結束" class="btn badge-important large" onclick="location.href = 'http://www.coa.gov.tw/show_index.php'" />
+    </center>*@
+@if(Model.Step < 8)
+{
+    <input id="btn_NextStep" type="button" value="送出，前往下個步驟" class="btn" />
+}

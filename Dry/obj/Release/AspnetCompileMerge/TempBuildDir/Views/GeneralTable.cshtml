@@ -1,0 +1,562 @@
+﻿@model Dry.Models.ViewModel.BudgetBookView
+@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+
+@{
+    string ItemAmount = string.Empty;
+    string ItemPrice = string.Empty;
+    string TotalPrice = string.Empty;
+    string Memo = string.Empty;
+}
+@*工程預算書*@
+<div id="div_EngBudget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="EngBudgetLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="EngBudgetLabel">報表列印 - 工程預算書</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("ExportPDF", "Budgetbook"))
+                    {
+                        if (Model.Step < 7)
+                        {
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出" disabled>
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                                <br />
+                                匯出PDF
+                            </button>
+                        }
+                        else
+                        {
+                            <button id="BtnExcel" type="submit" class="btn" title="匯出">
+                                <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                                <br />
+                                匯出PDF
+                            </button>
+                        }
+
+                    }
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+    @*規劃委託書*@
+<div id="div_Proxy" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ProxyLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="ProxyLabel">報表列印 - 規劃委託書</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                @*<td>
+                    @using (Html.BeginForm("ExportProxyWord", "Budgetbook"))
+                    {
+                        <button id="BtnProxyWord" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_word.ico" style="width:65px" />
+                            <br />
+                            匯出Word
+                        </button>
+                    }
+                </td>*@
+                <td>
+                    @using (Html.BeginForm("ExportProxyPDF", "Budgetbook"))
+                    {
+                        <button id="BtnProxyPdf" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                            <br />
+                            匯出PDF
+                        </button>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+    @*接受補助設置旱作管路灌溉設施切結書*@
+<div id="div_AcceptAffidavit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="AcceptAffidavitLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="AcceptAffidavitLabel">報表列印 - 推廣管路灌溉設施補助切結書</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                @*<td>
+                    @using (Html.BeginForm("ExportAcceptAffidavitWord", "Budgetbook"))
+                    {
+                        <button id="BtnAcceptAffidavitWord" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_word.ico" style="width:65px" />
+                            <br />
+                            匯出Word
+                        </button>
+                    }
+                </td>*@
+                <td>
+                    @using (Html.BeginForm("ExportAcceptAffidavitPDF", "Budgetbook"))
+                    {
+                        <button id="BtnAcceptAffidavitPdf" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                            <br />
+                            匯出PDF
+                        </button>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+    @*配合農時提前施設切結書*@
+<div id="div_FitAffidavit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="FitAffidavitLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="FitAffidavitLabel">報表列印 - 配合農時提前施設切結書</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("ExportFitAffidavitWord", "Budgetbook"))
+                    {
+                        <button id="BtnFitAffidavitWord" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_word.ico" style="width:65px" />
+                            <br />
+                            匯出Word
+                        </button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("ExportFitAffidavitPDF", "Budgetbook"))
+                    {
+                        <button id="BtnFitAffidavitPdf" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                            <br />
+                            匯出PDF
+                        </button>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+    @*竣工報驗書*@
+<div id="div_Complete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="CompleteLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="CompleteLabel">報表列印 - 結案申報書</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                @*<td>
+                    @using (Html.BeginForm("ExportCompleteWord", "Budgetbook"))
+                    {
+                        <button id="BtnCompleteWord" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_word.ico" style="width:65px" />
+                            <br />
+                            匯出Word
+                        </button>
+                    }
+                </td>*@
+                <td>
+                    @using (Html.BeginForm("ExportCompletePDF", "Budgetbook"))
+                    {
+                        <button id="BtnCompletePdf" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/adobe_pdf.ico" style="width:65px" />
+                            <br />
+                            匯出PDF
+                        </button>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>
+
+@*調控數量表*@
+@*<div id="div_CtrlMat" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="EngBudgetLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="EngBudgetLabel">報表列印 - 調節控制材料數量計算表</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("ExportCtlMat", "Budgetbook"))
+                    {
+                        <button id="BtnCtrlMat" type="submit" class="btn" title="匯出">
+                            <img src="~/Content/images/ms_excel.ico" style="width:65px" />
+                            <br />
+                            匯出Excel
+                        </button>
+                    }
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="關閉" class="btn" data-dismiss="modal" />
+    </div>
+</div>*@
+
+    <table id="general" border="1" class="dashTable" align="center" style="width:100%;">
+        <thead>
+            <tr>
+                <th colspan="2">設施項目</th>
+                <th>說明</th>
+                <th>單位</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>總價</th>
+                @{
+                    if (Model.Gold)
+                    {
+                        <th>附註(黃金)</th>
+                    }
+                    else
+                    {
+                        <th>附註(一般)</th>
+                    }
+                }
+                
+            </tr>
+        </thead>
+        <tr>
+            <td colspan="2" class="td_style">A. 田間管路設施費</td>
+            <td class="number_center">(1) + (2)</td>
+            <td class="number_center">全</td>
+            <td></td>
+            <td></td>
+            <td class="number_right">@Model.PipingTotal</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td_style">&nbsp;&nbsp;(1)材料費</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="number_right">@Model.PipingMatMoney</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;田間主管1(L1)</td>
+            <td></td>
+            <td class="number_center">支</td>
+            @if (Model.L1 != null)
+            {
+                ItemAmount = Model.L1.ItemAmount;
+                ItemPrice = Model.L1.ItemPrice;
+                TotalPrice = Model.L1.TotalPrice;
+                Memo = Model.L1.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>@Memo</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;田間主管2(L2)</td>
+            <td></td>
+            <td class="number_center">支</td>
+            @if (Model.L2 != null && Convert.ToInt16(Model.L2.ItemAmount) > 0)
+            {
+                ItemAmount = Model.L2.ItemAmount;
+                ItemPrice = Model.L2.ItemPrice;
+                TotalPrice = Model.L2.TotalPrice;
+                Memo = Model.L2.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>@Memo</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;灌溉系統</td>
+            <td></td>
+            <td class="number_center">式</td>
+            @if (Model.IrrSystem != null)
+            {
+                ItemAmount = Model.IrrSystem.ItemAmount;
+                ItemPrice = Model.IrrSystem.ItemPrice;
+                TotalPrice = Model.IrrSystem.TotalPrice;
+                Memo = Model.IrrSystem.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>@Memo</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">&nbsp;&nbsp;(2)工作費</td>
+            <td></td>
+            <td class="number_center">公頃</td>
+            @if (Model.Work != null)
+            {
+                ItemAmount = Model.Work.ItemAmount;
+                ItemPrice = Model.Work.ItemPrice;
+                TotalPrice = Model.Work.TotalPrice;
+                Memo = Model.Work.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>@Memo</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">B. 規劃設計費</td>
+            <td class="number_center"> A * 2.0 % </td>
+            <td class="number_center">式</td>
+            @if (Model.Planning != null)
+            {
+                ItemAmount = Model.Planning.ItemAmount;
+                ItemPrice = Model.Planning.ItemPrice;
+                TotalPrice = Model.Planning.TotalPrice;
+                Memo = Model.Planning.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>@Memo</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">C. 調控設施</td>
+            <td class="number_center">依計畫補助標準</td>
+            <td class="number_center">式</td>
+            @if (Model.RegulatedFac != null)
+            {
+                ItemAmount = Model.RegulatedFac.ItemAmount;
+                ItemPrice = Model.RegulatedFac.ItemPrice;
+                TotalPrice = Model.RegulatedFac.TotalPrice;
+                Memo = Model.RegulatedFac.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>
+                @*@foreach (var cntrlcnt in Memo.Split('#'))
+    {
+        <font>@cntrlcnt</font>
+        <br />
+    }*@
+                詳如數量表
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td_style">D. 動力設施(台)</td>
+            <td class="number_center">依計畫補助標準</td>
+            <td class="number_center">式</td>
+            @if (Model.Engine != null)
+            {
+                ItemAmount = Model.Engine.ItemAmount;
+                ItemPrice = Model.Engine.ItemPrice;
+                TotalPrice = Model.Engine.TotalPrice;
+                Memo = Model.Engine.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>
+                @foreach (var engcnt in Memo.Split('#'))
+            {
+                <font>@engcnt</font>
+                <br />
+            }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_style">E. 蓄水池</td>
+            <td class="number_center">依計畫補助標準</td>
+            <td class="number_center">座</td>
+            @if (Model.Pool != null)
+            {
+                ItemAmount = Model.Pool.ItemAmount;
+                ItemPrice = Model.Pool.ItemPrice;
+                TotalPrice = Model.Pool.TotalPrice;
+                Memo = Model.Pool.Memo;
+            }
+            else
+            {
+                ItemAmount = string.Empty;
+                ItemPrice = string.Empty;
+                TotalPrice = string.Empty;
+                Memo = string.Empty;
+            }
+            <td class="number_center">@ItemAmount</td>
+            <td class="number_right">@ItemPrice</td>
+            <td class="number_right">@TotalPrice</td>
+            <td>
+                @foreach (var poolcnt in Memo.Split('#'))
+            {
+                <font>@poolcnt</font>
+                <br />
+            }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="number_center td_style">合計</td>
+            <td colspan="6" class="number_center">新台幣 @Model.Total 元整</td>
+        </tr>
+    </table>
+    <h3 class="text-warning">註:自109年起田間管路設施費不包含(2)工作費</h3>
+    <table class="dashTable" style="width:100%;">
+        @{
+            string farmerMatch;
+            string govMatch;
+            if (Model.IsApplied)
+            {
+                //farmerMatch = ">=(A) x 60%";
+                //govMatch = "<(A) x 40% + (C+D+E)";
+                farmerMatch = string.Empty;
+                govMatch = string.Empty;
+            } else {
+                //farmerMatch = ">=(A) x 51%";
+                //govMatch = "<(A) x 49% + (C+D+E)";
+                farmerMatch = string.Empty;
+                govMatch = string.Empty;
+                
+            }
+        }
+        <tr>
+            <td colspan="2" class="number_center td_style">農戶配合款</td>
+            <td class="number_center">@farmerMatch</td>
+            <td class="number_right">@Model.FarmerPay</td>
+            <td rowspan="4" class="number_center">報<br />表<br />列<br />印</td>
+            <td rowspan="4">
+                @*@using (@Html.BeginForm("ExportExcel", "Budgetbook"))
+                    {
+                        <button id="BtnExcel" type="submit" value="會員名單匯出" class="btn">
+                            <img src="~/Content/images/excel.jpg" width="80" height="80" />
+                        </button>
+                    }*@
+                <ul>
+                    <li>
+                        <a class="label label-info" id="btn_EngBudget" href="#div_EngBudget" data-toggle="modal">工程預算書</a>
+                    </li>
+                    <li>
+                        <a class="label label-info" id="btn_Proxy" href="#div_Proxy" data-toggle="modal">規劃委託書</a>
+                    </li>
+                    <li>
+                        <a class="label label-info" id="btn_AcceptAffidavit" href="#div_AcceptAffidavit" data-toggle="modal">補助切結書</a>
+                    </li>
+                    @*<li>
+                        <a class="label label-info" id="btn_FitAffidavit" href="#div_FitAffidavit" data-toggle="modal">配合農時提前施設切結書</a>
+                    </li>*@
+                    <li>
+                        <a class="label label-info" id="btn_Complete" href="#div_Complete" data-toggle="modal">結案申報書</a>
+                    </li>
+                    <li>
+                        <a class="label label-info" href="~/Download/DesignStandard.xlsx">灌溉系統設計標準</a>
+                    </li>
+                  @*<li>
+                         <a class="label label-info" id="btn_CtrlMat" href="#div_CtrlMat" data-toggle="modal">調節控制材料數量計算表</a>
+                    </li>*@
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td rowspan="3" class="td_style">政府補助款</td>
+            <td class="td_style">農戶請領款</td>
+            <td >
+                @govMatch<br />
+                <pre>
+            @{ 
+                string line = string.Empty ;
+                if (Model.GovPay_Detail != null)
+                {
+                    foreach (var item in Model.GovPay_Detail)
+                    {
+                        line += item + "\n";
+                    }
+                }
+
+                @line
+            }
+               </pre>           
+            </td>
+            <td class="number_right">@Model.GovPay_Pay</td>
+        </tr>
+        <tr>
+            <td class="td_style">規劃設計費</td>
+            <td class="number_center"></td>
+            <td class="number_right">@Model.GovPay_Planning</td>
+        </tr>
+        <tr>
+            <td class="td_style">小計 </td>
+            <td align="right"></td>
+            <td colspan="1" class="number_right">@Model.GovPay_Sum</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="number_center td_style">本設施預算總計</td>
+            <td colspan="4" class="number_center">新台幣 @Model.ChineseMoney 元整</td>
+        </tr>
+    </table>

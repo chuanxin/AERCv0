@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Path>
+  <!--本地路徑-->
+  <LocalPath Value="C:\WebSite\" />
+  <!--檔案伺服器路徑-->
+  <ServerPath Value="http://localhost/" />
+  <!--檔案所在資料夾-->
+  <Folder Value="DryFile" />
+</Path>

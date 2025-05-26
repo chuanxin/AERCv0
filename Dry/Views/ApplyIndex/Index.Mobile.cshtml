@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>管路灌溉行動版資訊網</title>
+    @Styles.Render("~/Content/themes/base/css")    
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/js")
+<style>
+    footer{
+       background-color:transparent;
+
+    }
+</style>
+</head>
+<body>
+    <header>
+        <img src="~/Content/images/head_4.jpg" />
+    </header>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4 text-center">
+                <h4 class="text-warning">重複申請查詢</h4>
+                <a href="@Url.Action("index", "ReapplyQuery")">
+                    <img src="~/Content/images/question.jpg" style="width:40px" />
+                </a>
+            </div>
+            <div class="span4 text-center">
+                <h4 class="text-warning">GIS地圖查詢</h4>
+                <a href="@Url.Action("gisweb","ApplyIndex")" target = "_gisPage", id = "gislink">
+                @*@Html.ActionLink("", "Gisweb", new { controller = "Applyindex" }, new { target = "_gisPage", id = "gislink" })*@
+                <img src="@Url.Content("~/Content/images/gisweb.png")" style="width:40px" />
+                </a>
+            </div>
+            <div class="span4 text-center">
+                <h4 class="text-warning">登出</h4>
+                <a href="@Url.Action("Logout", "Account")">
+                    <img src="~/Content/images/logout.png" style="width:40px" />
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <footer class="bg-">
+        <div>
+            <p>COPYRIGHT © 2020 AERC</p>
+        </div>
+    </footer>
+    <script>
+        $("#gislink").on("click", function () {
+            //$.DisableBlockUI();
+            let tiemoutID = setTimeout($.DisableBlockUI, 3000);
+
+        });
+    </script>
+</body>
+</html>

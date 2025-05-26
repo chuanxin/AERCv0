@@ -1,0 +1,384 @@
+﻿@model Dry.Models.ViewModel.CtrlView
+@Scripts.Render("~/numberformat")
+@*@Scripts.Render("~/jquery.validate")*@
+@*<script src="~/Scripts/jquery.validate.for.jquery.js"></script>*@
+<script src="~/Scripts/_CtrlMat.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#tdCaseM').text(@Model.CaseMoney);
+        jQuery.postJson = function (url, data, callback, type) {
+            if ($.isFunction(data)) {
+                type = type || callback;
+                callback = data;
+                data = undefined;
+            }
+            return jQuery.ajax({
+                url: url,
+                type: "POST",
+                dataType: type,
+                contentType: "application/json",
+                data: typeof (data) == "string" ? data : JSON.stringify(data),
+                success: callback
+            });
+        };
+        
+        //$('#btn_Save').attr('disabled', 'disabled');
+        $('#MatAmt').val('');
+        $('#MatPrice').val('');
+
+        /*$('#FacMoney').on('input',function () {
+            $('#btn_Save').removeAttr("disabled");
+        });*/
+
+
+        
+        $('#CntrlCode').change(function () {
+            if ($('#CntrlCode option:selected').text() != "請選擇") {
+                $('#MatName').val(($('#CntrlCode option:selected').text()));
+            }
+        });
+
+
+        
+        $('#btn_Input').click(function () {
+            
+            if (!$("#form_EditTable_1").validate().form()) {
+                return false;
+            }
+
+            $('#panel_Fund').fadeIn();
+            
+            //$('#btn_Save').removeAttr("disabled");
+            var TableName;
+            var Type = $('#CntrlCode option:selected').val();
+            var TypeName = $('#CntrlCode option:selected').text();
+
+            
+            if (Type != '-1') {
+                $('#tr_Null').hide();
+                $('#tr_' + Type).fadeIn();
+                TableName = 'tb_' + Type;
+            }
+
+            
+            var MatPrice = $('#MatPrice').val();
+            var MatAtm = $('#MatAmt').val();
+            var MatName = $('#MatName').val();
+            var CntrlCode = $('#CntrlCode option:selected').val();
+            //var sendData = "itemName=" + $('#MatName').val() + "&itemCount=" + $('#MatAmt').val() + "&itemPrice=" + $('#MatPrice').val();
+            var sendData = "itemName=" + MatName + "&itemCount=" + MatAtm + "&itemPrice=" + MatPrice;
+            //alert(sendData);
+            //alert(sendData);
+            //debugger;
+            $.getJSON('@Url.Action("ItemPrices", "Ctrl")', sendData, function (res) {
+                //alert(res);
+                var result = res.split(";");
+                helpMatPrice = result[0];
+                helpMapAmt = result[1];
+                $('#' + TableName).AddCtrlMat(MatName, MatAtm, MatPrice, CntrlCode, helpMapAmt, helpMatPrice);
+
+                
+                fun_TotalPrice();
+                
+                $('#CntrlCode option:eq(0)').attr('selected', true);
+                $('#MatName').val('');
+                $('#MatAmt').val('');
+                $('#MatPrice').val('');
+                $("img[id=valimg]").remove();
+                $("#msg").hide();
+
+
+            });
+
+
+            
+            //$('#' + TableName).AddCtrlMat($('#MatName').val(), $('#MatAmt').val(), $('#MatPrice').val(), $('#CntrlCode option:selected').val());
+
+            return false;
+        });
+
+        
+        var ResultArry;
+        $('#btn_SaveCtrl').click(function () {
+            debugger;
+            if (!$("#form_EditTable_2").validate().form()) {
+
+                return false;
+            }
+            if ($('#ApplyUnit option:selected').val() == -1) {
+                alert("請選擇補助單位");
+                return false;
+            }
+
+            var sendData = $('#tb_MainTable').AddCtrlMatData($('#FacMoney').val(), $('#ApplyUnit option:selected').val());
+            //if (sendData != false) {
+
+                $.EnableBlockUI('寫入中...');
+                
+                $.postJson("@Url.Content("~/Ctrl/CreateData")", sendData, function (res) {
+                    if (res == 'Success') {
+                        //$('#btn_Save').attr('disabled', 'disabled');
+                        //alert('資料儲存成功。');
+                        //window.location.href = "../Examine/Index";
+                        window.location.href = "../ApplyStep/Index";
+                    }
+                    else {
+                        $.DisableBlockUI();
+                        alert(res);
+                    }
+                });
+
+            //} else
+            //    $('#alert_CtrlNoData').fadeIn();
+        });
+        
+        $('#btn_ModifyCtrl').click(function () {
+            debugger;
+            if (!$("#form_EditTable_2").validate().form()) {
+                return false;
+            }
+            if ($('#ApplyUnit option:selected').val() == -1) {
+                alert("請選擇補助單位");
+                return false;
+            }
+            var sendData = $('#tb_MainTable').AddCtrlMatData($('#FacMoney').val(), $('#ApplyUnit option:selected').val());
+            $('#alert_CtrlModifySuccess').alert('close');
+            $('#alert_CtrlModifyFail').alert('close');
+            //if (sendData != false) {
+                $.EnableBlockUI('寫入中...');
+                
+                $.postJson("@Url.Content("~/Ctrl/CreateData")", sendData, function (res) {
+                    if (res == 'Success') {
+                        $('#btn_ModifyCtrl').after(
+                        '<div id="alert_CtrlModifySuccess" class="alert alert-success fade in" style="width:200px;">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong>更新成功!</strong> 資料已完成修改。' +
+                        '</div>'
+                        );
+                    }
+                    else {
+                        $('#btn_ModifyCtrl').after(
+                        '<div id="alert_CtrlModifyFail" class="alert alert-error fade in" style="width:200px;">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong>更新失敗!</strong> 資料未修改。' +
+                        '</div>'
+                        );
+                        alert(res);
+                    }
+                    $.DisableBlockUI();
+                });
+            //} else
+            //    alert('至少輸入一筆設施物料。');
+        });
+        
+        $('#btn_PassCtrl').click(function () {
+            $.getJSON('@Url.Action("PassData","Ctrl")', function (res) {
+                if (res == 'Success') {
+                    $.EnableBlockUI('載入中...');
+                    //window.location.href = "../Examine/Index";
+                    window.location.href = "../ApplyStep/Index";
+                }
+            });
+        });
+        
+        @*$('#btn_chgPass').click(function () {
+            $.getJSON('@Url.Action("PassData","Ctrl")', function (res) {
+                if (res == 'Success') {
+                    $.EnableBlockUI('載入中...');
+                    window.location.href = "../Examine/Index";
+                }
+            });
+        });*@
+
+        //數字格式化
+        $('#MatAmt').number(true, 0);
+        $('#MatPrice').number(true, 0);
+    });
+    
+    function fun_TotalPrice() {
+        ResultArry = [];
+        //debugger;
+        $('#tb_MainTable tr:has(table)').each(function () {
+        //$('#tb_MainTable tr table').each(function () {
+            $(this).find('tr').each(function () {
+                var ResultVal = new Object();
+                //ResultVal.MatAmt = $(this).find('td').eq(3).text(); 
+                //ResultVal.MatPrice = $(this).find('td').eq(4).text(); 
+                //ResultVal.MatAmtAply = $(this).find('td').eq(1).text(); 
+                //ResultVal.MatPriceAply = $(this).find('td').eq(2).text(); 
+
+                ResultVal.MatAmt = $(this).find('td').eq(1).text(); 
+                ResultVal.MatPrice = $(this).find('td').eq(2).text(); 
+                ResultVal.MatAmtAply = $(this).find('td').eq(1).text(); 
+                ResultVal.MatPriceAply = $(this).find('td').eq(2).text(); 
+                ResultArry.push(ResultVal);
+            });
+        });
+        $.postJson("@Url.Content("~/Ctrl/TotalPrice")", ResultArry, function (Data) {
+            var TotalPice = Data.split(';');
+            var OldCaseMoney = $('#tdCaseM').text();
+            var OldGovM = $('#tdGovM').text();
+            var GovMChange = TotalPice[1] - OldGovM;
+            $('#tdCaseM').text(OldCaseMoney - GovMChange);
+            $('#tdTotalM').text(TotalPice[0]); 
+            $('#tdGovM').text(TotalPice[1]); 
+            $('#tdFarM').text(TotalPice[2]); 
+            var gold = $('#tdGoldM');
+            if (gold !== null) 
+            {
+                gold.text(Data.split(';')[2]);
+                $("#tdFarM").text(Data.split(';')[3]);
+            }
+
+        });
+    }
+</script>
+<form id="form_EditTable_1">
+    <table class="dashTable" align="center" style="width:100%;">
+        <tr>
+            <td class="td_style">
+                類型
+            </td>
+            <td colspan="5">
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.CntrlCode, new SelectList((System.Collections.IEnumerable)ViewBag.List, "Value", "Text"))
+                        @Html.ValidationMessageFor(model => model.CntrlCode, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_style">
+                名稱
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.MatName, new { style = "width: 120px;" })
+                        @Html.ValidationMessageFor(model => model.MatName, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">
+                數量
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.MatAmt, new { style = "width: 120px;" })
+                        @Html.ValidationMessageFor(model => model.MatAmt, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td class="td_style">
+                單價
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.MatPrice, new { style = "width: 120px;" })
+                        @Html.ValidationMessageFor(model => model.MatPrice, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <div align="center"><input id="btn_Input" type="submit" class="btn" value="輸入" /></div>
+            </td>
+        </tr>
+    </table>
+</form>
+<form id="form_EditTable_2">
+    <table class="dashTable" align="center" width="80%">
+        <tr>
+            <td class="td_style">
+                補助單位
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.ApplyUnit, new SelectList((System.Collections.IEnumerable)ViewBag.UnitList, "Value", "Text"), new { style = "width: 320px;" })
+                        @Html.ValidationMessageFor(model => model.ApplyUnit, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.Label(Model.GoldMessage)
+            </td>
+        </tr>
+        @*<tr>
+                <td class="td_style">施作工程費用</td>
+                <td colspan="2">
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.FacMoney)
+                            @Html.ValidationMessageFor(model => model.FacMoney, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>*@
+        <tr>
+            <td colspan="3">
+                @{
+                    if (ViewBag.Gold == true)
+                    {
+                        //Html.RenderPartial("../FundingTableGold");
+                        Html.RenderPartial("../FundingTable");
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#tdTotalM").text(@Model.CtrlTotalPrice);
+                                $("#tdGovM").text(@Model.PayMoney);
+                                //$("#tdGoldM").text(@Model.CtrlGoldPrice);
+                                $("#tdFarM").text(@Model.CtrlSelfPrice);
+                            });
+                        </script>
+                    }
+                    else
+                    {
+                        Html.RenderPartial("../FundingTable");
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#tdTotalM").text(@Model.CtrlTotalPrice);
+                                $("#tdGovM").text(@Model.PayMoney);
+                                $("#tdFarM").text(@Model.CtrlSelfPrice);
+                            });
+                        </script>
+                    }
+
+                }
+                @*<script type="text/javascript">
+                        $(function () {
+                            $("#tdTotalM").text(@Model.CtrlTotalPrice);
+                            $("#tdGovM").text(@Model.PayMoney);
+                            $("#tdFarM").text(@Model.CtrlSelfPrice);
+                        });
+                    </script>*@
+            </td>
+        </tr>
+        <tr>
+            <td align="right" colspan="3">
+                <div align="center">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+    @if (Model.Step < 8)
+    {
+        if (!Model.IsModify)
+        {
+            <input id="btn_SaveCtrl" type="button" value="送出，前往下個步驟" class="btn" />
+            <input id="btn_PassCtrl" type="button" value="略過>>" class="btn" />
+        }
+        else
+        {
+            <input id="btn_ModifyCtrl" type="button" value="修改調控設施" class="btn" />
+        }
+    }
+
+    <div id="alert_CtrlNoData" class="alert alert-error" style="display:none; width:160px;">
+        至少輸入一筆設施物料。
+    </div>
+</form>

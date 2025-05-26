@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+        
+    @model Dry.Models.ViewModel.ApplyIndexView
+}
+@section css{
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+
+    }
+
+
+<h2>已刪除申請案件總覽</h2>
+@*@Html.ActionLink("建立新的案件", "Index", "Farmer", null, new { @class = "btn" })*@
+@{Html.BeginForm("Redirect", "ApplyIndex",FormMethod.Post);}
+@*<input id="btn_NewCase" type="submit" value="建立新的案件" class="btn" />*@
+@{Html.EndForm();}
+@*@Html.ActionLink("建立新的案件", "Index", "ApplyStep", null, new { @class = "btn" })*@
+<div class="form-inline">
+    @Html.DropDownList("ddl_ApplyIndexYear", (IEnumerable<SelectListItem>)Model.ApplyYearDDL, new { style = "width: 100px;" })
+    @*<input id="txt_ApplyIndexQueryString" type="text" class="input-medium" placeholder="輸入案號" />*@
+    <input id="btn_ApplyIndexQuerySubmit" type="button" value="查詢" class="btn" />
+</div>
+
+<div id="div_Content">
+    <table id="grid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th style="color:black">案號</th>
+                <th style="color:black">申請年度</th>
+                <th style="color:black" width="70">承辦單位</th>
+                <th style="color:black">申請人姓名</th>
+                <th style="color:black">末端型式</th>
+                <th style="color:black">施作面積m²</th>
+                <th style="color:black">黃金廊道</th>
+                <th style="color:black" width="80">案件狀態</th>
+                <th style="color:black">編碼</th>
+                <th style="color:black">刪除原因</th>
+                <th style="color:black">審視/編輯</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <div id="pager"></div>
+</div>
+@section scripts{
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    //啟動「編輯/審視」的blockUI
+    function blockui() {
+        $.EnableBlockUI('');
+    }    
+
+    $(document).ajaxStop($.unblockUI);
+    $(function () {
+        //判別若為彰化、雲林以外的會，則不顯示黃金廊道欄位(於jqgrid中的"Gold"欄位)
+        var notLiu = true;
+        if ('@Session["UnitID"].ToString()' == '9' || '@Session["UnitID"].ToString()' == '10')
+            notLiu = false;
+        var status = false;
+        if ('@Session["Status"]' == 'True')
+            status = true;
+        //alert(status);
+        //判別是否為瑠公
+        var isLiu = false;
+        if ('@Session["UnitID"].ToString()' == '17')
+            isLiu = true;
+
+        //若單位為農工中心、農委會或聯合會，則顯示承辦單位
+        DisplayUnit = false;
+        if ('@Session["UnitID"].ToString()' != '99' && '@Session["UnitID"].ToString()' != '0' && '@Session["UnitID"].ToString()' != '20')
+            DisplayUnit = true;
+        //----------------------------------------------------------
+        var applyYear = $('#ddl_ApplyIndexYear option:selected').val();
+        //資料總覽(jqGrid)
+        var reportIds = [];
+        var grid = $('#grid');
+        var editobj = {
+            "targets": -1,
+            "data": null,
+            "defaultContent": "<button class='btn btn-primary' value='edit' >編輯</button>"
+        };
+        
+        if ('@Session["UnitID"].ToString()' == '99') {
+            editobj = {
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button class='btn btn-primary' value='edit' >編輯</button><button class='btn btn-danger' value='del')>回復</button>"
+            };
+        }
+        
+        $('#grid').DataTable({
+            "columns": [{ "data": "案號" }, { "data": "申請年度" }, { "data": "承辦單位" }, { "data": "申請人姓名" },
+                { "data": "末端型式" }, { "data": "施作面積" }, { "data": "黃金廊道" },
+                { "data": "案件狀態" }, { "data": "編號" }, { "data": "原因" }, null],
+            "columnDefs": [{
+                "targets": [8],
+                "visible": false,
+                "searchable": false
+            }, editobj],
+            "language":
+                        {
+                            "processing": "處理中...",
+                            "loadingRecords": "載入中...",
+                            "lengthMenu": "顯示 _MENU_ 項結果",
+                            "zeroRecords": "沒有符合的結果",
+                            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+                            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+                            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+                            "infoPostFix": "",
+                            "search": "搜尋:",
+                            "paginate": {
+                                "first": "第一頁",
+                                "previous": "上一頁",
+                                "next": "下一頁",
+                                "last": "最後一頁"
+                            },
+                            "aria": {
+                                "sortAscending": ": 升冪排列",
+                                "sortDescending": ": 降冪排列"
+                            }
+                        }
+
+        });
+
+        
+        $("#grid tbody").on("click", "button,input", function () {
+            var data = $("#grid").DataTable().row(this.parentElement).data();
+            var rowdata = $("#grid").DataTable().row(this.parentElement);
+            //alert(this.value);
+            //console.log(this);
+            if (data["編號"] == "") {
+                alert("沒有資料可以編輯");
+                return false;
+            }
+            if (this.value=="edit") {
+
+                //alert("edit");
+                //alert("id:" + data["編號"]);
+                $(location).attr("href", '@Url.Content("~/ApplyIndex/Redirect?eventno=")' + data["編號"]);
+            } else if (this.value == "del") {
+                //alert("del");
+                //alert("id:" + data["編號"]);
+                if (!confirm('確定刪除？'))
+                    return false;
+                //blockui();
+                $.getJSON('@Url.Action("DelRecover", "ApplyIndex")' + '?EventNo=' + data["編號"], function (result) {
+                    if (result == 'Success') {
+                        rowdata.remove();
+                        $("#grid").DataTable().draw();
+
+                    }
+                });
+                //$("#grid").DataTable().row(this.parentElement).remove();
+            } 
+
+        });
+
+
+
+        $('#ddl_ApplyIndexYear').on("change", function () {
+            applyYear = $('#ddl_ApplyIndexYear option:selected').val();
+            var parms = {};
+            parms.ApplyYear = applyYear;
+            var datatable = $("#grid").DataTable();
+            blockui();
+            $.ajax({
+                url: '@Url.Content("~/Applyindex/GetFarmerDataNew")',
+                method: "post",
+            data:parms
+        })
+            .done(function (data) {
+                datatable.clear();
+                datatable.rows.add(data);
+                datatable.draw();
+            });
+            
+    });
+
+        function editfunc() {
+            var data = $("#grid").DataTable().row(this.parentElement).data();
+            alert("edit id:" + data["編號"]);
+            var dataid = data["編號"];
+            $(location).attr("href", '@Url.Content("~/ApplyIndex/Redirect?eventno=")' + dataid);
+            //location.href('@Url.Content("~/ApplyIndex/Redirect?eventno=")' + dataid );
+        }
+
+        //查詢
+        $("#btn_ApplyIndexQuerySubmit").click(function () {
+            applyYear = $('#ddl_ApplyIndexYear option:selected').val();
+
+            var parms = {};
+            parms.ApplyYear = applyYear;
+            var datatable = $("#grid").DataTable();
+            blockui();
+            $.ajax({
+                url: '@Url.Content("~/Applyindex/GetFarmerDataNew")',
+                method: "post",
+            data:parms
+        })
+            .done(function (data) {
+                datatable.clear();
+                datatable.rows.add(data);
+                datatable.draw();
+                reportIds = [];
+            });
+
+        });
+
+        //function OpenData(cellvalue, options, rowObject) {
+        //    return '<a href="' + '@Url.Action("Redirect", "ApplyIndex")' + '?eventno=' + cellvalue + '" class="btn" onclick="blockui();">編輯/審視</a>';
+        //}
+       
+        //刪除
+        //function DelData(cellvalue, options, rowObject) {
+        //    return '<a onclick="Del(' + cellvalue + ')" class="btn">刪除</a>';
+        //}
+
+    });
+    //function Del(EventNo) {
+        //if (!confirm('確定刪除？'))
+         //   return false;
+        //$.getJSON('@Url.Action("DelData", "ApplyIndex")' + '?EventNo=' + EventNo, function (data) {
+        //    if (data == 'Success') {
+        //        $("#grid").trigger("reloadGrid", [{ page: 1, current: true }]); //重新載入jqGrid
+        //    }
+        //});
+
+    //}
+
+    
+    $(function () {
+        $("#ddl_ApplyIndexYear").trigger("change");
+    });
+    
+
+</script>
+    }

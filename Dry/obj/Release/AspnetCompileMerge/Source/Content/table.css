@@ -1,0 +1,169 @@
+/*@import url("default1.css");*/
+*
+{
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+#wrapper {
+	width: 85%;
+	margin: 0 auto;
+	position:relative;
+	font-size:16px; 
+	font-family:微軟正黑體,Arial, Helvetica, sans-serif;
+	color: #A67E54;
+}
+
+table
+{
+	text-align: left;
+	border-spacing: 0px;
+	/*border: 1px solid #aeb3b6;*/
+	border-collapse: collapse;
+	
+}
+.notice{
+	color:#DF3B39;
+}
+.caption
+{
+	font-size:1.5em; 
+  	line-height:2em; 
+  	height:2em; 
+  	padding-right:0.25em; 
+	/*color: #FF8E1C;*/
+	color: #A67E54;
+}
+
+.td_style {
+    font-family: 微軟正黑體, sans-serif;
+color: #852121;
+font-size: 16px;
+letter-spacing: 1.4pt;
+word-spacing: -0.8pt;
+line-height: 0.9;
+}
+
+table a, table, tr, th, td
+{
+	line-height: 2.0em;
+	font-size: 12px;
+	color: #55595c;
+	line-height:30px;
+}
+
+#content
+{
+    line-height: 2.0em;
+	font-size: 16px;
+	color: #55595c;
+	line-height:30px;
+}
+
+/*table td{
+	border-right: 1px dotted #8f8f8f; 
+}*/
+table caption
+{
+	padding: .4em 0 ;
+	font-size: 240%;
+	font-style: normal;
+	color: #FB7E00;
+}
+
+table a
+{
+	display: block;
+	text-decoration: none;
+	color: #FF8E53;
+	padding-right: 1.5em;
+	
+}
+table th a
+{
+	color: #FF8E53;
+	text-align: right;
+}
+table .even th a,table .even td a,table .even td{
+	/*color: #FF8E1C;*/
+	color: #A67E54;
+	padding-right: 1.0 em;
+}
+table .even th,table .even td{
+	background-color:#FFFFFF;	
+}
+table .odd th,table .odd td{
+	background-color:#DDDDDD;
+	text-align:center;	
+}
+
+
+
+thead th
+{
+	background: url(images/title_bar.gif) repeat-x center; 
+	background-position:center;
+	background-position:left;
+	text-transform: uppercase;
+	font-weight: normal;
+	letter-spacing: 1px;
+	color: #fff;
+	text-align:center;
+	border-right: 1px solid #ddd;
+}
+#tblcellHeader
+{
+    background: url('images/title_bar.gif') repeat-x center;
+	text-transform: uppercase;
+	font-weight: normal;
+	letter-spacing: 1px;
+	color: #fff;
+	text-align:center;
+	border-right: 1px solid #ddd;
+}
+#newsTable a
+{
+    line-height: 2.0em;
+	font-size: 16px;
+	color: #55595c;
+	line-height:30px;
+
+    display: block;
+	text-decoration: none;
+	color: #FF8E53;
+	padding-right: 1.5em;
+}
+
+
+/*
+tfoot{
+	background-image: url(verlauf_schwarz.gif);
+	border-top: 1px solid #fff;
+	
+	
+}*/
+tfoot th,tfoot td{
+	color: #fff;
+}
+td
+{
+   	/*color: #FF8E1C;*/
+	color:#666666;
+	padding-right: 0.5em;
+	
+}
+
+
+.dashTable td
+{
+    border-bottom:#CCCCCC solid 1px;
+	border-right:#CCCCCC dashed 1px;
+	border-left:#CCCCCC dashed 1px;
+	border-top:#CCCCCC solid 1px;
+    font-size:16px;
+    /*text-align:center;	*/
+}
+.dashTable th{
+    font-size:18px;
+}
+

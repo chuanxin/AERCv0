@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28FBC2D2-0BCD-4002-997F-4EF00EF54745}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dry.Models</RootNamespace>
+    <AssemblyName>Dry.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.Mvc, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="CusNPOI">
+      <HintPath>C:\Users\chun-i\Desktop\bin\CusNPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="dryapi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\d_net\2019\dryapi\bin\Debug\dryapi.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidationNA, Version=1.2.16.24816, Culture=neutral, PublicKeyToken=0950390b87309e14, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidationNA.1.2.16\lib\net40\FluentValidationNA.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.4\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>C:\Users\chun-i\Desktop\bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>C:\Users\chun-i\Desktop\bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>C:\Users\chun-i\Desktop\bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>C:\Users\chun-i\Desktop\bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.1.14.15853, Culture=neutral, PublicKeyToken=b72be0322d1b32a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Linq.Dynamic.Library.1.1.14\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcceptanceReportData.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Case.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaseDetail.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CasePayDetail.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CasePayUnit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlApply.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlFac.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CntrlMat.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommonCls\Calculate_Funding.cs" />
+    <Compile Include="CommonCls\CommClass.cs" />
+    <Compile Include="CommonCls\ExportReports.cs" />
+    <Compile Include="CommonCls\GetData.cs" />
+    <Compile Include="CommonCls\ImageExif.cs" />
+    <Compile Include="CommonCls\LandCoordinate.cs" />
+    <Compile Include="CommonCls\MappingClass.cs" />
+    <Compile Include="CommonCls\NumberToChinese.cs" />
+    <Compile Include="CommonCls\ZipCode.cs" />
+    <Compile Include="ControlLimit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CropAreaDetail.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DesignerList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dry.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dry.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dry.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EFile.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EndType.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EndTypeList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EngApply.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Engine.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EngineList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EngLimit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Examine.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacDesign.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacInspection.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacStatList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacSysMAT.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacTypeList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacVerify.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Farm.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmChange.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmCrop.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmData.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmDataLog.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Farmer.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmerSys.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmerSysM.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FarmReapplyQuery.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileTypeList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Indigenous.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IrrWaterList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LandData.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LandEquity.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LandTypeList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LastVerOfMapNo.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeisureFarm.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeisureFarm_LandInfo.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport_Crop.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport_Engine.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport_Piging.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport_Pool.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LiugongReport_Town.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialModules\BranchPipeline.cs" />
+    <Compile Include="MaterialModules\DripIrrigation.cs" />
+    <Compile Include="MaterialModules\HardwareMaterial.cs" />
+    <Compile Include="MaterialModules\MainPipeline.cs" />
+    <Compile Include="MaterialModules\MaterialModule.cs" />
+    <Compile Include="MaterialModules\PerforatedPipe.cs" />
+    <Compile Include="MaterialModules\Standpipeline.cs" />
+    <Compile Include="MatGroup.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mat_Module.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAT_Spec.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAT_Types.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MoneyRules.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OldSystemData\Old_ReapplyQuery.cs" />
+    <Compile Include="OldSystemFarm.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_CountryCode.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_Farm.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_Farmer.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old_Unit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pay.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PigingConf.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PigingLimit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pool.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoolApply.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoolTonList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoolTypeList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriceOfMat.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportModules\AcceptanceReport13.cs" />
+    <Compile Include="ReportModules\AcceptanceReport14.cs" />
+    <Compile Include="ReportModules\AcceptanceReport.cs" />
+    <Compile Include="ReportModules\AddressLabel.cs" />
+    <Compile Include="ReportModules\BudgetBookReport.cs" />
+    <Compile Include="ReportModules\BudgetBookReportCustom.cs" />
+    <Compile Include="ReportModules\BudgetBookReportGold10.cs" />
+    <Compile Include="ReportModules\ClosingAccountReport.cs" />
+    <Compile Include="ReportModules\ConstructionPhotoReport.cs" />
+    <Compile Include="ReportModules\CoverReport.cs" />
+    <Compile Include="ReportModules\DeliverResultReport.cs" />
+    <Compile Include="ReportModules\DesignReceiptReport15.cs" />
+    <Compile Include="ReportModules\DesignReceiptReport.cs" />
+    <Compile Include="ReportModules\EngineeringReport.cs" />
+    <Compile Include="ReportModules\EngineeringReport11.cs" />
+    <Compile Include="ReportModules\FarmLands.cs" />
+    <Compile Include="ReportModules\LiugongApplyListReport.cs" />
+    <Compile Include="ReportModules\PayeeReceipt11.cs" />
+    <Compile Include="ReportModules\PayeeReceipt12.cs" />
+    <Compile Include="ReportModules\PayeeReceipt13.cs" />
+    <Compile Include="ReportModules\PayeeReceipt14.cs" />
+    <Compile Include="ReportModules\PayeeReceipt.cs" />
+    <Compile Include="ReportModules\PhotographCarryReport.cs" />
+    <Compile Include="ReportModules\PlantArea.cs" />
+    <Compile Include="ReportModules\PreliminaryTrialReport.cs" />
+    <Compile Include="ReportModules\SiteSurveyReport.cs" />
+    <Compile Include="ReportModules\SubsidyListReport23.cs" />
+    <Compile Include="ReportModules\SubsidyListReport11.cs" />
+    <Compile Include="ReportModules\SubsidyListReport.cs" />
+    <Compile Include="ReportModules\SystemFacilityDesignReport.cs" />
+    <Compile Include="ReportModules\TownApplyStatisticsReport.cs" />
+    <Compile Include="ReportModules\VerifyBookReport.cs" />
+    <Compile Include="Service\AcceptanceReportDBService.cs" />
+    <Compile Include="Service\BudgetBookDBService.cs" />
+    <Compile Include="Service\Coor97.cs" />
+    <Compile Include="Service\CropDBService.cs" />
+    <Compile Include="Service\CtrlDBService.cs" />
+    <Compile Include="Service\CtrlPriceService.cs" />
+    <Compile Include="Service\DBCommon.cs" />
+    <Compile Include="Service\DBDesingerChange.cs" />
+    <Compile Include="Service\DelCaseDataDBService.cs" />
+    <Compile Include="Service\DesignerDBService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service\DesignReceiptDBService.cs" />
+    <Compile Include="Service\DesingerChangeDBService.cs" />
+    <Compile Include="Service\EfileDBService.cs" />
+    <Compile Include="Service\EngineDBService.cs" />
+    <Compile Include="Service\ExamineDBService.cs" />
+    <Compile Include="Service\ExcelReportDBService.cs" />
+    <Compile Include="Service\FacilityReportDBService.cs" />
+    <Compile Include="Service\FacSystemDBService.cs" />
+    <Compile Include="Service\FarmerDBService.cs" />
+    <Compile Include="Service\FarmerSysDBService.cs" />
+    <Compile Include="Service\FarmerSysPriceService.cs" />
+    <Compile Include="Service\FarmLandDBService.cs" />
+    <Compile Include="Service\IsGoldService.cs" />
+    <Compile Include="Service\LiugongPDFProcess.cs" />
+    <Compile Include="Service\MapDataService.cs" />
+    <Compile Include="Service\MaterialDBService.cs" />
+    <Compile Include="Service\PayDBService.cs" />
+    <Compile Include="Service\PayeeReceiptDBService.cs" />
+    <Compile Include="Service\PoolDBService.cs" />
+    <Compile Include="Service\ReportService.cs" />
+    <Compile Include="Service\SectionDBService.cs" />
+    <Compile Include="Service\SessionCheck.cs" />
+    <Compile Include="Service\SlopelandQueryService.cs" />
+    <Compile Include="Service\StatisticHomeDBService.cs" />
+    <Compile Include="Service\SubsidyDBService.cs" />
+    <Compile Include="Service\TotalFeeDBService.cs" />
+    <Compile Include="Service\TownManageDBService.cs" />
+    <Compile Include="Service\UserLogDBService.cs" />
+    <Compile Include="Service\VerifyDBService.cs" />
+    <Compile Include="StdFacSys.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StdFacSysMAT.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subsidy.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubsidyItemList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubsidyLimit.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SummaryView.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SWCBPools.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalFee.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalFunds.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLog.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerifyLog.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerMapping.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ApplyIndexView.cs" />
+    <Compile Include="ViewModel\ApplyStepView.cs" />
+    <Compile Include="ViewModel\BudgetBookView.cs" />
+    <Compile Include="ViewModel\CntrlMatView.cs" />
+    <Compile Include="ViewModel\CoordinateView.cs" />
+    <Compile Include="ViewModel\CropView.cs" />
+    <Compile Include="ViewModel\CtrlTableView.cs" />
+    <Compile Include="ViewModel\CtrlView.cs" />
+    <Compile Include="ViewModel\EfileView.cs" />
+    <Compile Include="ViewModel\EngineView.cs" />
+    <Compile Include="ViewModel\ExamineView.cs" />
+    <Compile Include="ViewModel\ExcelReportView.cs" />
+    <Compile Include="ViewModel\FacilityReportView.cs" />
+    <Compile Include="ViewModel\FacSystemView.cs" />
+    <Compile Include="ViewModel\FarmerSysView.cs" />
+    <Compile Include="ViewModel\FarmerView.cs" />
+    <Compile Include="ViewModel\FarmLandView.cs" />
+    <Compile Include="ViewModel\IrrgApiParms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\MaterialView.cs" />
+    <Compile Include="ViewModel\PoolView.cs" />
+    <Compile Include="ViewModel\ReapplyQueryView.cs" />
+    <Compile Include="ViewModel\ReportView.cs" />
+    <Compile Include="ViewModel\SectionView.cs" />
+    <Compile Include="ViewModel\SlopelandQueryView.cs" />
+    <Compile Include="ViewModel\StatisticHomeView.cs" />
+    <Compile Include="ViewModel\SubsidyView.cs" />
+    <Compile Include="ViewModel\TownManageView.cs" />
+    <Compile Include="ViewModel\VerifyView.cs" />
+    <Compile Include="WaterSrcList.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WrkExecutReport.cs">
+      <DependentUpon>Dry.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Dry.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Dry.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="bin\Debug\AERC.Models.dll.config" />
+    <None Include="bin\Debug\Dry.Models.dll.config" />
+    <None Include="bin\Release\AERC.Models.dll.config" />
+    <None Include="bin\Release\Dry.Models.dll.config" />
+    <None Include="Dry.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Dry.edmx</DependentUpon>
+      <LastGenOutput>Dry.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Dry.edmx.diagram">
+      <DependentUpon>Dry.edmx</DependentUpon>
+    </None>
+    <None Include="Dry.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Dry.edmx</DependentUpon>
+      <LastGenOutput>Dry.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AERC.Models\AERC.Models.csproj">
+      <Project>{832f9e9a-6ef9-4839-82aa-c266169023c1}</Project>
+      <Name>AERC.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\AERC.Models.dll" />
+    <Content Include="bin\Debug\AERC.Models.pdb" />
+    <Content Include="bin\Debug\Antlr3.Runtime.dll" />
+    <Content Include="bin\Debug\Antlr3.Runtime.pdb" />
+    <Content Include="bin\Debug\CusNPOI.dll" />
+    <Content Include="bin\Debug\DocumentFormat.OpenXml.dll" />
+    <Content Include="bin\Debug\Dry.Models.dll" />
+    <Content Include="bin\Debug\Dry.Models.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\EPPlus.dll" />
+    <Content Include="bin\Debug\EPPlus.xml" />
+    <Content Include="bin\Debug\FluentValidationNA.dll" />
+    <Content Include="bin\Debug\FluentValidationNA.xml" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\itextsharp.xml" />
+    <Content Include="bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\NPOI.dll" />
+    <Content Include="bin\Debug\NPOI.OOXML.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\Debug\System.Linq.Dynamic.dll" />
+    <Content Include="bin\Debug\System.Linq.Dynamic.xml" />
+    <Content Include="bin\Debug\System.Web.Mvc.dll" />
+    <Content Include="bin\Debug\System.Web.Mvc.xml" />
+    <Content Include="bin\Debug\WebGrease.dll" />
+    <Content Include="bin\Debug\WindowsBase.dll" />
+    <Content Include="bin\Debug\zh-Hant\EntityFramework.resources.dll" />
+    <Content Include="bin\Debug\zh-Hant\Microsoft.QualityTools.Testing.Fakes.resources.dll" />
+    <Content Include="bin\Debug\zh-Hant\System.Web.Mvc.resources.dll" />
+    <Content Include="bin\Release\AERC.Models.dll" />
+    <Content Include="bin\Release\AERC.Models.pdb" />
+    <Content Include="bin\Release\Antlr3.Runtime.dll" />
+    <Content Include="bin\Release\Antlr3.Runtime.pdb" />
+    <Content Include="bin\Release\DocumentFormat.OpenXml.dll" />
+    <Content Include="bin\Release\Dry.Models.dll" />
+    <Content Include="bin\Release\Dry.Models.pdb" />
+    <Content Include="bin\Release\EntityFramework.dll" />
+    <Content Include="bin\Release\EntityFramework.xml" />
+    <Content Include="bin\Release\FluentValidationNA.dll" />
+    <Content Include="bin\Release\FluentValidationNA.xml" />
+    <Content Include="bin\Release\itextsharp.dll" />
+    <Content Include="bin\Release\itextsharp.xml" />
+    <Content Include="bin\Release\Microsoft.QualityTools.Testing.Fakes.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.xml" />
+    <Content Include="bin\Release\System.Linq.Dynamic.dll" />
+    <Content Include="bin\Release\System.Linq.Dynamic.xml" />
+    <Content Include="bin\Release\System.Web.Mvc.dll" />
+    <Content Include="bin\Release\System.Web.Mvc.xml" />
+    <Content Include="bin\Release\WebGrease.dll" />
+    <Content Include="bin\Release\WindowsBase.dll" />
+    <Content Include="bin\Release\zh-Hant\EntityFramework.resources.dll" />
+    <Content Include="bin\Release\zh-Hant\Microsoft.QualityTools.Testing.Fakes.resources.dll" />
+    <Content Include="bin\Release\zh-Hant\System.Web.Mvc.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CommonEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin_Page" EntityType="CommonModel.Admin_Page" />
+    <EntitySet Name="Aerc_System" EntityType="CommonModel.Aerc_System" />
+    <EntitySet Name="City" EntityType="CommonModel.City" />
+    <EntitySet Name="City_Area" EntityType="CommonModel.City_Area" />
+    <EntitySet Name="Crop" EntityType="CommonModel.Crop" />
+    <EntitySet Name="Crop_Type" EntityType="CommonModel.Crop_Type" />
+    <EntitySet Name="Function_Page" EntityType="CommonModel.Function_Page" />
+    <EntitySet Name="Funtion_Group" EntityType="CommonModel.Funtion_Group" />
+    <EntitySet Name="Land_Number" EntityType="CommonModel.Land_Number" />
+    <EntitySet Name="Land_Office" EntityType="CommonModel.Land_Office" />
+    <EntitySet Name="Land_Type" EntityType="CommonModel.Land_Type" />
+    <EntitySet Name="Organization" EntityType="CommonModel.Organization" />
+    <EntitySet Name="Section" EntityType="CommonModel.Section" />
+    <EntitySet Name="Soil" EntityType="CommonModel.Soil" />
+    <EntitySet Name="Soil_Type" EntityType="CommonModel.Soil_Type" />
+    <EntitySet Name="Structure" EntityType="CommonModel.Structure" />
+    <EntitySet Name="StructureKind" EntityType="CommonModel.StructureKind" />
+    <EntitySet Name="StructureType" EntityType="CommonModel.StructureType" />
+    <EntitySet Name="Title" EntityType="CommonModel.Title" />
+    <EntitySet Name="Title_Page" EntityType="CommonModel.Title_Page" />
+    <EntitySet Name="Unit" EntityType="CommonModel.Unit" />
+    <EntitySet Name="Unit_Town" EntityType="CommonModel.Unit_Town" />
+    <AssociationSet Name="FK_Funtion_Group_System" Association="CommonModel.FK_Funtion_Group_System">
+      <End Role="Aerc_System" EntitySet="Aerc_System" />
+      <End Role="Funtion_Group" EntitySet="Funtion_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_City_Area" Association="CommonModel.FK_City_City_Area">
+      <End Role="City_Area" EntitySet="City_Area" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Office_City" Association="CommonModel.FK_Land_Office_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Land_Office" EntitySet="Land_Office" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Crop_Crop_Type" Association="CommonModel.FK_Crop_Crop_Type">
+      <End Role="Crop_Type" EntitySet="Crop_Type" />
+      <End Role="Crop" EntitySet="Crop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Function_Page_Funtion_Group" Association="CommonModel.FK_Function_Page_Funtion_Group">
+      <End Role="Funtion_Group" EntitySet="Funtion_Group" />
+      <End Role="Function_Page" EntitySet="Function_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Title_Page_Function_Page" Association="CommonModel.FK_Title_Page_Function_Page">
+      <End Role="Function_Page" EntitySet="Function_Page" />
+      <End Role="Title_Page" EntitySet="Title_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Number_Land_Type" Association="CommonModel.FK_Land_Number_Land_Type">
+      <End Role="Land_Type" EntitySet="Land_Type" />
+      <End Role="Land_Number" EntitySet="Land_Number" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Land_Number_Section" Association="CommonModel.FK_Land_Number_Section">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Land_Number" EntitySet="Land_Number" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_Unit" Association="CommonModel.FK_Organization_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Soil_Soil_Type" Association="CommonModel.FK_Soil_Soil_Type">
+      <End Role="Soil_Type" EntitySet="Soil_Type" />
+      <End Role="Soil" EntitySet="Soil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Structure_StructureType" Association="CommonModel.FK_Structure_StructureType">
+      <End Role="StructureType" EntitySet="StructureType" />
+      <End Role="Structure" EntitySet="Structure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StructureType_StructureKind" Association="CommonModel.FK_StructureType_StructureKind">
+      <End Role="StructureKind" EntitySet="StructureKind" />
+      <End Role="StructureType" EntitySet="StructureType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Title_Page_Title" Association="CommonModel.FK_Title_Page_Title">
+      <End Role="Title" EntitySet="Title" />
+      <End Role="Title_Page" EntitySet="Title_Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Town_Unit" Association="CommonModel.FK_Unit_Town_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Unit_Town" EntitySet="Unit_Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Unit" Association="CommonModel.FK_Unit_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Unit1" EntitySet="Unit" />
+    </AssociationSet>
+    <EntitySet Name="AdminQuery" EntityType="CommonModel.AdminQuery" />
+    <EntitySet Name="View_Admin" EntityType="CommonModel.View_Admin" />
+    <EntitySet Name="Town" EntityType="CommonModel.Town" />
+    <AssociationSet Name="FK_Town_City" Association="CommonModel.FK_Town_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Town" EntitySet="Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Town_Land_Office" Association="CommonModel.FK_Town_Land_Office">
+      <End Role="Land_Office" EntitySet="Land_Office" />
+      <End Role="Town" EntitySet="Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_Town" Association="CommonModel.FK_Section_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="Section" EntitySet="Section" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Unit_Town_Town" Association="CommonModel.FK_Unit_Town_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="Unit_Town" EntitySet="Unit_Town" />
+    </AssociationSet>
+    <EntitySet Name="Admin" EntityType="CommonModel.Admin" />
+    <AssociationSet Name="FK_Admin_Page_Function_Page" Association="CommonModel.FK_Admin_Page_Function_Page">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Admin_Page" EntitySet="Admin_Page" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin_Page">
+    <Key>
+      <PropertyRef Name="Admin_Page_Id" />
+    </Key>
+    <Property Name="Admin_Page_Id" Type="Int16" Nullable="false" />
+    <Property Name="Function_Page_Id" Type="Int16" />
+    <Property Name="Admin_Id" Type="Guid" />
+    <NavigationProperty Name="Admin" Relationship="CommonModel.FK_Admin_Page_Function_Page" FromRole="Admin_Page" ToRole="Admin" />
+  </EntityType>
+  <EntityType Name="Aerc_System">
+    <Key>
+      <PropertyRef Name="System_Id" />
+    </Key>
+    <Property Name="System_Id" Type="Int16" Nullable="false" />
+    <Property Name="System" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Staus" Type="Boolean" />
+    <NavigationProperty Name="Funtion_Group" Relationship="CommonModel.FK_Funtion_Group_System" FromRole="Aerc_System" ToRole="Funtion_Group" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="City_Code" />
+    </Key>
+    <Property Name="City_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City_Area_Id" Type="Byte" />
+    <NavigationProperty Name="City_Area" Relationship="CommonModel.FK_City_City_Area" FromRole="City" ToRole="City_Area" />
+    <NavigationProperty Name="Land_Office" Relationship="CommonModel.FK_Land_Office_City" FromRole="City" ToRole="Land_Office" />
+    <NavigationProperty Name="Town" Relationship="CommonModel.FK_Town_City" FromRole="City" ToRole="Town" />
+  </EntityType>
+  <EntityType Name="City_Area">
+    <Key>
+      <PropertyRef Name="City_Area_Id" />
+    </Key>
+    <Property Name="City_Area_Id" Type="Byte" Nullable="false" />
+    <Property Name="Area_Place" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City" Relationship="CommonModel.FK_City_City_Area" FromRole="City_Area" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Crop">
+    <Key>
+      <PropertyRef Name="Crop_Id" />
+    </Key>
+    <Property Name="Crop_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Crop1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Crop_Modulus" Type="Double" />
+    <Property Name="Crop_Type_Id" Type="Int16" />
+    <NavigationProperty Name="Crop_Type" Relationship="CommonModel.FK_Crop_Crop_Type" FromRole="Crop" ToRole="Crop_Type" />
+  </EntityType>
+  <EntityType Name="Crop_Type">
+    <Key>
+      <PropertyRef Name="Crop_Type_Id" />
+    </Key>
+    <Property Name="Crop_Type_Id" Type="Int16" Nullable="false" />
+    <Property Name="Crop_Type1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Crop" Relationship="CommonModel.FK_Crop_Crop_Type" FromRole="Crop_Type" ToRole="Crop" />
+  </EntityType>
+  <EntityType Name="Function_Page">
+    <Key>
+      <PropertyRef Name="Funtion_Page_Id" />
+    </Key>
+    <Property Name="Funtion_Page_Id" Type="Int16" Nullable="false" />
+    <Property Name="Funtion_Page" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Funtion_Group_Id" Type="Int16" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Funtion_Group" Relationship="CommonModel.FK_Function_Page_Funtion_Group" FromRole="Function_Page" ToRole="Funtion_Group" />
+    <NavigationProperty Name="Title_Page" Relationship="CommonModel.FK_Title_Page_Function_Page" FromRole="Function_Page" ToRole="Title_Page" />
+  </EntityType>
+  <EntityType Name="Funtion_Group">
+    <Key>
+      <PropertyRef Name="Funtion_Group_Id" />
+    </Key>
+    <Property Name="Funtion_Group_Id" Type="Int16" Nullable="false" />
+    <Property Name="Funtion_Group1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="System_Id" Type="Int16" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Aerc_System" Relationship="CommonModel.FK_Funtion_Group_System" FromRole="Funtion_Group" ToRole="Aerc_System" />
+    <NavigationProperty Name="Function_Page" Relationship="CommonModel.FK_Function_Page_Funtion_Group" FromRole="Funtion_Group" ToRole="Function_Page" />
+  </EntityType>
+  <EntityType Name="Land_Number">
+    <Key>
+      <PropertyRef Name="Land_Number_Id" />
+    </Key>
+    <Property Name="Land_Number_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Land_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Section_Id" Type="Int32" />
+    <Property Name="Land_type_Id" Type="Byte" />
+    <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+    <NavigationProperty Name="Land_Type" Relationship="CommonModel.FK_Land_Number_Land_Type" FromRole="Land_Number" ToRole="Land_Type" />
+    <NavigationProperty Name="Section" Relationship="CommonModel.FK_Land_Number_Section" FromRole="Land_Number" ToRole="Section" />
+  </EntityType>
+  <EntityType Name="Land_Office">
+    <Key>
+      <PropertyRef Name="Land_Office_Id" />
+    </Key>
+    <Property Name="Land_Office_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Land_Office_Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Office1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="City_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City" Relationship="CommonModel.FK_Land_Office_City" FromRole="Land_Office" ToRole="City" />
+    <NavigationProperty Name="Town" Relationship="CommonModel.FK_Town_Land_Office" FromRole="Land_Office" ToRole="Town" />
+  </EntityType>
+  <EntityType Name="Land_Type">
+    <Key>
+      <PropertyRef Name="Land_Type_Id" />
+    </Key>
+    <Property Name="Land_Type_Id" Type="Byte" Nullable="false" />
+    <Property Name="Land_Type_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Land_Type1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Land_Number" Relationship="CommonModel.FK_Land_Number_Land_Type" FromRole="Land_Type" ToRole="Land_Number" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Organization_Id" />
+    </Key>
+    <Property Name="Organization_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Organization1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Parent_Organization" Type="Int16" />
+    <Property Name="Unit_Id" Type="Int16" />
+    <NavigationProperty Name="Unit" Relationship="CommonModel.FK_Organization_Unit" FromRole="Organization" ToRole="Unit" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="Section_Id" />
+    </Key>
+    <Property Name="Section_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Section_Code" Type="Int32" />
+    <Property Name="Section1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Subsection" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Town_Id" Type="Int16" />
+    <NavigationProperty Name="Land_Number" Relationship="CommonModel.FK_Land_Number_Section" FromRole="Section" ToRole="Land_Number" />
+    <NavigationProperty Name="Town" Relationship="CommonModel.FK_Section_Town" FromRole="Section" ToRole="Town" />
+  </EntityType>
+  <EntityType Name="Soil">
+    <Key>
+      <PropertyRef Name="Soil_Id" />
+    </Key>
+    <Property Name="Soil_Id" Type="Byte" Nullable="false" />
+    <Property Name="Soil1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Seep_Modulus" Type="Double" />
+    <Property Name="Soil_Type_Id" Type="Int16" />
+    <NavigationProperty Name="Soil_Type" Relationship="CommonModel.FK_Soil_Soil_Type" FromRole="Soil" ToRole="Soil_Type" />
+  </EntityType>
+  <EntityType Name="Soil_Type">
+    <Key>
+      <PropertyRef Name="Soil_Type_Id" />
+    </Key>
+    <Property Name="Soil_Type_Id" Type="Int16" Nullable="false" />
+    <Property Name="Soil_Type1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Soil" Relationship="CommonModel.FK_Soil_Soil_Type" FromRole="Soil_Type" ToRole="Soil" />
+  </EntityType>
+  <EntityType Name="Structure">
+    <Key>
+      <PropertyRef Name="SId" />
+    </Key>
+    <Property Name="SId" Type="Guid" Nullable="false" />
+    <Property Name="SName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TypeId" Type="Int32" Nullable="false" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="Area" Type="Decimal" Precision="11" Scale="3" />
+    <Property Name="Length" Type="Decimal" Precision="11" Scale="3" />
+    <Property Name="Capacity" Type="Decimal" Precision="11" Scale="3" />
+    <Property Name="Unit_Id" Type="Int16" />
+    <NavigationProperty Name="StructureType" Relationship="CommonModel.FK_Structure_StructureType" FromRole="Structure" ToRole="StructureType" />
+  </EntityType>
+  <EntityType Name="StructureKind">
+    <Key>
+      <PropertyRef Name="KindId" />
+    </Key>
+    <Property Name="KindId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KindName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StructureType" Relationship="CommonModel.FK_StructureType_StructureKind" FromRole="StructureKind" ToRole="StructureType" />
+  </EntityType>
+  <EntityType Name="StructureType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KindId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Structure" Relationship="CommonModel.FK_Structure_StructureType" FromRole="StructureType" ToRole="Structure" />
+    <NavigationProperty Name="StructureKind" Relationship="CommonModel.FK_StructureType_StructureKind" FromRole="StructureType" ToRole="StructureKind" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="Title_Id" />
+    </Key>
+    <Property Name="Title_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Title_Page" Relationship="CommonModel.FK_Title_Page_Title" FromRole="Title" ToRole="Title_Page" />
+  </EntityType>
+  <EntityType Name="Title_Page">
+    <Key>
+      <PropertyRef Name="Title_Page_Id" />
+    </Key>
+    <Property Name="Title_Page_Id" Type="Int32" Nullable="false" />
+    <Property Name="Title_Id" Type="Int16" />
+    <Property Name="Funtion_Page_Id" Type="Int16" />
+    <NavigationProperty Name="Function_Page" Relationship="CommonModel.FK_Title_Page_Function_Page" FromRole="Title_Page" ToRole="Function_Page" />
+    <NavigationProperty Name="Title" Relationship="CommonModel.FK_Title_Page_Title" FromRole="Title_Page" ToRole="Title" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Unit_Id" />
+    </Key>
+    <Property Name="Unit_Id" Type="Int16" Nullable="false" />
+    <Property Name="Unit1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Parent_Unit" Type="Int16" />
+    <NavigationProperty Name="Organization" Relationship="CommonModel.FK_Organization_Unit" FromRole="Unit" ToRole="Organization" />
+    <NavigationProperty Name="Unit_Town" Relationship="CommonModel.FK_Unit_Town_Unit" FromRole="Unit" ToRole="Unit_Town" />
+    <NavigationProperty Name="Unit11" Relationship="CommonModel.FK_Unit_Unit" FromRole="Unit" ToRole="Unit1" />
+    <NavigationProperty Name="Unit2" Relationship="CommonModel.FK_Unit_Unit" FromRole="Unit1" ToRole="Unit" />
+  </EntityType>
+  <EntityType Name="Unit_Town">
+    <Key>
+      <PropertyRef Name="Unit_Town_Id" />
+    </Key>
+    <Property Name="Unit_Town_Id" Type="Int32" Nullable="false" />
+    <Property Name="Unit_Id" Type="Int16" />
+    <Property Name="Town_Id" Type="Int16" />
+    <NavigationProperty Name="Unit" Relationship="CommonModel.FK_Unit_Town_Unit" FromRole="Unit_Town" ToRole="Unit" />
+    <NavigationProperty Name="Town" Relationship="CommonModel.FK_Unit_Town_Town" FromRole="Unit_Town" ToRole="Town" />
+  </EntityType>
+  <Association Name="FK_Funtion_Group_System">
+    <End Type="CommonModel.Aerc_System" Role="Aerc_System" Multiplicity="0..1" />
+    <End Type="CommonModel.Funtion_Group" Role="Funtion_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aerc_System">
+        <PropertyRef Name="System_Id" />
+      </Principal>
+      <Dependent Role="Funtion_Group">
+        <PropertyRef Name="System_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_City_Area">
+    <End Type="CommonModel.City_Area" Role="City_Area" Multiplicity="0..1" />
+    <End Type="CommonModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Area">
+        <PropertyRef Name="City_Area_Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="City_Area_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Office_City">
+    <End Type="CommonModel.City" Role="City" Multiplicity="1" />
+    <End Type="CommonModel.Land_Office" Role="Land_Office" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="City_Code" />
+      </Principal>
+      <Dependent Role="Land_Office">
+        <PropertyRef Name="City_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Crop_Crop_Type">
+    <End Type="CommonModel.Crop_Type" Role="Crop_Type" Multiplicity="0..1" />
+    <End Type="CommonModel.Crop" Role="Crop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Crop_Type">
+        <PropertyRef Name="Crop_Type_Id" />
+      </Principal>
+      <Dependent Role="Crop">
+        <PropertyRef Name="Crop_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Function_Page_Funtion_Group">
+    <End Type="CommonModel.Funtion_Group" Role="Funtion_Group" Multiplicity="0..1" />
+    <End Type="CommonModel.Function_Page" Role="Function_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funtion_Group">
+        <PropertyRef Name="Funtion_Group_Id" />
+      </Principal>
+      <Dependent Role="Function_Page">
+        <PropertyRef Name="Funtion_Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Title_Page_Function_Page">
+    <End Type="CommonModel.Function_Page" Role="Function_Page" Multiplicity="0..1" />
+    <End Type="CommonModel.Title_Page" Role="Title_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Function_Page">
+        <PropertyRef Name="Funtion_Page_Id" />
+      </Principal>
+      <Dependent Role="Title_Page">
+        <PropertyRef Name="Funtion_Page_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Number_Land_Type">
+    <End Type="CommonModel.Land_Type" Role="Land_Type" Multiplicity="0..1" />
+    <End Type="CommonModel.Land_Number" Role="Land_Number" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land_Type">
+        <PropertyRef Name="Land_Type_Id" />
+      </Principal>
+      <Dependent Role="Land_Number">
+        <PropertyRef Name="Land_type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Land_Number_Section">
+    <End Type="CommonModel.Section" Role="Section" Multiplicity="0..1" />
+    <End Type="CommonModel.Land_Number" Role="Land_Number" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="Section_Id" />
+      </Principal>
+      <Dependent Role="Land_Number">
+        <PropertyRef Name="Section_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_Unit">
+    <End Type="CommonModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="CommonModel.Organization" Role="Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Soil_Soil_Type">
+    <End Type="CommonModel.Soil_Type" Role="Soil_Type" Multiplicity="0..1" />
+    <End Type="CommonModel.Soil" Role="Soil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soil_Type">
+        <PropertyRef Name="Soil_Type_Id" />
+      </Principal>
+      <Dependent Role="Soil">
+        <PropertyRef Name="Soil_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Structure_StructureType">
+    <End Type="CommonModel.StructureType" Role="StructureType" Multiplicity="1" />
+    <End Type="CommonModel.Structure" Role="Structure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StructureType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="Structure">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StructureType_StructureKind">
+    <End Type="CommonModel.StructureKind" Role="StructureKind" Multiplicity="1" />
+    <End Type="CommonModel.StructureType" Role="StructureType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StructureKind">
+        <PropertyRef Name="KindId" />
+      </Principal>
+      <Dependent Role="StructureType">
+        <PropertyRef Name="KindId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Title_Page_Title">
+    <End Type="CommonModel.Title" Role="Title" Multiplicity="0..1" />
+    <End Type="CommonModel.Title_Page" Role="Title_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="Title_Id" />
+      </Principal>
+      <Dependent Role="Title_Page">
+        <PropertyRef Name="Title_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Town_Unit">
+    <End Type="CommonModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="CommonModel.Unit_Town" Role="Unit_Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Unit_Town">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Unit">
+    <End Type="CommonModel.Unit" Role="Unit" Multiplicity="0..1" />
+    <End Type="CommonModel.Unit" Role="Unit1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Unit1">
+        <PropertyRef Name="Parent_Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AdminQuery">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+      <PropertyRef Name="Unit_Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Account" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="Admin_Id" Type="Guid" Nullable="false" />
+    <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit_Id" Type="Int16" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Organization" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Account" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="View_Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Account" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Unit_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Account" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit_Id" Type="Int16" Nullable="false" />
+    <Property Name="Title_Id" Type="Int16" />
+    <Property Name="Organization_Id" Type="Int16" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Organization" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="Town_Id" />
+    </Key>
+    <Property Name="Town_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Town_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Town1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Zip_Code" Type="Int16" />
+    <Property Name="Land_Office_Id" Type="Int16" />
+    <Property Name="City_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Indigenous" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="CommonModel.FK_Town_City" FromRole="Town" ToRole="City" />
+    <NavigationProperty Name="Land_Office" Relationship="CommonModel.FK_Town_Land_Office" FromRole="Town" ToRole="Land_Office" />
+    <NavigationProperty Name="Section" Relationship="CommonModel.FK_Section_Town" FromRole="Town" ToRole="Section" />
+    <NavigationProperty Name="Unit_Town" Relationship="CommonModel.FK_Unit_Town_Town" FromRole="Town" ToRole="Unit_Town" />
+  </EntityType>
+  <Association Name="FK_Town_City">
+    <End Type="CommonModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="CommonModel.Town" Role="Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="City_Code" />
+      </Principal>
+      <Dependent Role="Town">
+        <PropertyRef Name="City_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Town_Land_Office">
+    <End Type="CommonModel.Land_Office" Role="Land_Office" Multiplicity="0..1" />
+    <End Type="CommonModel.Town" Role="Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Land_Office">
+        <PropertyRef Name="Land_Office_Id" />
+      </Principal>
+      <Dependent Role="Town">
+        <PropertyRef Name="Land_Office_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Section_Town">
+    <End Type="CommonModel.Town" Role="Town" Multiplicity="0..1" />
+    <End Type="CommonModel.Section" Role="Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="Town_Id" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="Town_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Unit_Town_Town">
+    <End Type="CommonModel.Town" Role="Town" Multiplicity="0..1" />
+    <End Type="CommonModel.Unit_Town" Role="Unit_Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="Town_Id" />
+      </Principal>
+      <Dependent Role="Unit_Town">
+        <PropertyRef Name="Town_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Account" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit_Id" Type="Int16" Nullable="false" />
+    <Property Name="Title_Id" Type="Int16" />
+    <Property Name="Organization_Id" Type="Int16" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Enabled" Type="Boolean" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Admin_Page" Relationship="CommonModel.FK_Admin_Page_Function_Page" FromRole="Admin" ToRole="Admin_Page" />
+  </EntityType>
+  <Association Name="FK_Admin_Page_Function_Page">
+    <End Type="CommonModel.Admin" Role="Admin" Multiplicity="0..1" />
+    <End Type="CommonModel.Admin_Page" Role="Admin_Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Admin_Id" />
+      </Principal>
+      <Dependent Role="Admin_Page">
+        <PropertyRef Name="Admin_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

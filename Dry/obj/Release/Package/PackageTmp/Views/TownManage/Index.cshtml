@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+    @Styles.Render("~/jqgrid/css")
+    @Scripts.Render("~/bundles/jqueryjqgrid")
+}
+@model Dry.Models.ViewModel.TownManageView
+
+<script type="text/javascript">
+    $(function () {
+        var grid = $('#grid'); 
+        var cityCode = $('#CityCode option:selected').val();
+        
+        grid.jqGrid({
+            url: '@Url.Action("GetTownList", "TownManage")' + '?CityCode=' + cityCode,
+            datatype: 'json',
+            jsonReader: {
+                repeatitems: false,
+                id: 'Town_Id'
+            },
+            mtype: 'GET',
+            colNames: ['','', '郵遞區號', '鄉鎮代號', '鄉鎮名稱', '地政事務所代碼', '地政事務所'],
+            colModel: [
+                {
+                    name: 'myac', width: 55, align: 'center', fixed: true, sortable: false, resize: false, formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        onEdit: function () {
+                            $('input[name="Town_Code"]').attr('readonly', true).css({
+                                "background-color": "lightgray"
+                            });
+                            $('select[name="Land_Office"]').css('width', '100px');
+                        }
+                    },
+                },
+                { name: 'City_Code', search: false,hidden:true, editable: true, editoptions: { value: GetCityCode } },
+                { name: 'Zip_Code', width: 80, align: 'left', search: true, editable: true, edittype: 'text', editoptions: { required: true } },
+                { name: 'Town_Code', width: 80, index: 'Town_Code', search: false,editable:true },
+                { name: 'Town', width: 100, align: 'left', search: true, align: 'center', editable: true, edittype: 'text', editrules: { required: true } },
+                { name: 'Land_Office_Id', width: 180, align: 'left', hidden: true, search: false },
+                { name: 'Land_Office', width: 100, align: 'center', search: true, editable: true, edittype: 'select', editoptions: { value: GetLandOfficeDDL } }
+            ],
+            pager: '#pager',
+            //autowidth: true,
+            //width: 500,
+            height: 'auto',
+            rowNum: 20, 
+            rowList: [5, 10, 20, 50], 
+            sortname: 'Zip_Code',
+            viewrecords: true,
+            rownumbers: true,
+            caption: '鄉鎮資料管理', 
+            loadComplete: function (ids) {
+                $('.ui-pg-table table input[type=text]').css('width', '20').css('height', '20'); 
+                $('.ui-pg-table table select').css('width', '60').css('height', '30'); 
+                $('#pager_center').css('width', '300'); 
+                //$('#pager_left').css('width', '250'); 
+            },
+            editurl: '@Url.Action("EditTown", "TownManage")',
+        });
+        grid.navGrid('#pager',
+            { edit: false, add: true, del: false, search: false },
+            {}, /*edit*/
+            {
+                url: '@Url.Action("AddTown", "TownManage")',
+                closeOnEscape: true,
+                closeAfterAdd: true/*,
+                mtype: 'GET'*/
+            }, /*add*/
+            {}, /*delete*/
+            {}, /*search*/
+            {} /*view*/
+        );
+        
+        function GetLandOfficeDDL() {
+            var resData = '';
+            $.ajaxSettings.async = false;
+            $.getJSON('@Url.Action("GetOfficeDDL", "TownManage")' + '?CityCode=' + $('#CityCode option:selected').val(), function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    resData += res[i].Value + ':' + res[i].Text;
+                    if (i < res.length - 1) {
+                        resData += ';';
+                    }
+                }
+            });
+            return resData;
+        }
+        function GetCityCode(){
+            return $.trim($('#CityCode option:selected').val());
+        }
+        $('#CityCode').change(function () {
+            cityCode = $('#CityCode option:selected').val();
+            $('#grid').setGridParam({ url: '@Url.Action("GetTownList", "TownManage")' + '?CityCode=' + cityCode }).trigger("reloadGrid");
+        });
+    });
+</script>
+
+<h2>鄉鎮代碼管理</h2>
+縣市：
+@Html.DropDownListFor(model => model.CityCode, Model.CityDDL, new { style = "width: 150px;" })
+
+<div id="div_Content">
+    <table id="grid"></table>
+    <div id="pager"></div>
+</div>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommonModelStoreContainer" CdmEntityContainer="CommonEntities">
+    <EntitySetMapping Name="Admin_Page">
+      <EntityTypeMapping TypeName="CommonModel.Admin_Page">
+        <MappingFragment StoreEntitySet="Admin_Page">
+          <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+          <ScalarProperty Name="Function_Page_Id" ColumnName="Function_Page_Id" />
+          <ScalarProperty Name="Admin_Page_Id" ColumnName="Admin_Page_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aerc_System">
+      <EntityTypeMapping TypeName="CommonModel.Aerc_System">
+        <MappingFragment StoreEntitySet="Aerc_System">
+          <ScalarProperty Name="Staus" ColumnName="Staus" />
+          <ScalarProperty Name="System" ColumnName="System" />
+          <ScalarProperty Name="System_Id" ColumnName="System_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="CommonModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="City_Area_Id" ColumnName="City_Area_Id" />
+          <ScalarProperty Name="City1" ColumnName="City" />
+          <ScalarProperty Name="City_Code" ColumnName="City_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City_Area">
+      <EntityTypeMapping TypeName="CommonModel.City_Area">
+        <MappingFragment StoreEntitySet="City_Area">
+          <ScalarProperty Name="Area_Place" ColumnName="Area_Place" />
+          <ScalarProperty Name="City_Area_Id" ColumnName="City_Area_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Crop">
+      <EntityTypeMapping TypeName="CommonModel.Crop">
+        <MappingFragment StoreEntitySet="Crop">
+          <ScalarProperty Name="Crop_Type_Id" ColumnName="Crop_Type_Id" />
+          <ScalarProperty Name="Crop_Modulus" ColumnName="Crop_Modulus" />
+          <ScalarProperty Name="Crop1" ColumnName="Crop" />
+          <ScalarProperty Name="Crop_Id" ColumnName="Crop_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Crop_Type">
+      <EntityTypeMapping TypeName="CommonModel.Crop_Type">
+        <MappingFragment StoreEntitySet="Crop_Type">
+          <ScalarProperty Name="Crop_Type1" ColumnName="Crop_Type" />
+          <ScalarProperty Name="Crop_Type_Id" ColumnName="Crop_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Function_Page">
+      <EntityTypeMapping TypeName="CommonModel.Function_Page">
+        <MappingFragment StoreEntitySet="Function_Page">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Funtion_Group_Id" ColumnName="Funtion_Group_Id" />
+          <ScalarProperty Name="Funtion_Page" ColumnName="Funtion_Page" />
+          <ScalarProperty Name="Funtion_Page_Id" ColumnName="Funtion_Page_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funtion_Group">
+      <EntityTypeMapping TypeName="CommonModel.Funtion_Group">
+        <MappingFragment StoreEntitySet="Funtion_Group">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="System_Id" ColumnName="System_Id" />
+          <ScalarProperty Name="Funtion_Group1" ColumnName="Funtion_Group" />
+          <ScalarProperty Name="Funtion_Group_Id" ColumnName="Funtion_Group_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Land_Number">
+      <EntityTypeMapping TypeName="CommonModel.Land_Number">
+        <MappingFragment StoreEntitySet="Land_Number">
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Land_type_Id" ColumnName="Land_type_Id" />
+          <ScalarProperty Name="Section_Id" ColumnName="Section_Id" />
+          <ScalarProperty Name="Land_Code" ColumnName="Land_Code" />
+          <ScalarProperty Name="Land_Number_Id" ColumnName="Land_Number_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Land_Office">
+      <EntityTypeMapping TypeName="CommonModel.Land_Office">
+        <MappingFragment StoreEntitySet="Land_Office">
+          <ScalarProperty Name="City_Code" ColumnName="City_Code" />
+          <ScalarProperty Name="Land_Office1" ColumnName="Land_Office" />
+          <ScalarProperty Name="Land_Office_Code" ColumnName="Land_Office_Code" />
+          <ScalarProperty Name="Land_Office_Id" ColumnName="Land_Office_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Land_Type">
+      <EntityTypeMapping TypeName="CommonModel.Land_Type">
+        <MappingFragment StoreEntitySet="Land_Type">
+          <ScalarProperty Name="Land_Type1" ColumnName="Land_Type" />
+          <ScalarProperty Name="Land_Type_Code" ColumnName="Land_Type_Code" />
+          <ScalarProperty Name="Land_Type_Id" ColumnName="Land_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organization">
+      <EntityTypeMapping TypeName="CommonModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Parent_Organization" ColumnName="Parent_Organization" />
+          <ScalarProperty Name="Organization1" ColumnName="Organization" />
+          <ScalarProperty Name="Organization_Id" ColumnName="Organization_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Section">
+      <EntityTypeMapping TypeName="CommonModel.Section">
+        <MappingFragment StoreEntitySet="Section">
+          <ScalarProperty Name="Town_Id" ColumnName="Town_Id" />
+          <ScalarProperty Name="Subsection" ColumnName="Subsection" />
+          <ScalarProperty Name="Section1" ColumnName="Section" />
+          <ScalarProperty Name="Section_Code" ColumnName="Section_Code" />
+          <ScalarProperty Name="Section_Id" ColumnName="Section_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soil">
+      <EntityTypeMapping TypeName="CommonModel.Soil">
+        <MappingFragment StoreEntitySet="Soil">
+          <ScalarProperty Name="Soil_Type_Id" ColumnName="Soil_Type_Id" />
+          <ScalarProperty Name="Seep_Modulus" ColumnName="Seep_Modulus" />
+          <ScalarProperty Name="Soil1" ColumnName="Soil" />
+          <ScalarProperty Name="Soil_Id" ColumnName="Soil_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soil_Type">
+      <EntityTypeMapping TypeName="CommonModel.Soil_Type">
+        <MappingFragment StoreEntitySet="Soil_Type">
+          <ScalarProperty Name="Soil_Type1" ColumnName="Soil_Type" />
+          <ScalarProperty Name="Soil_Type_Id" ColumnName="Soil_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Structure">
+      <EntityTypeMapping TypeName="CommonModel.Structure">
+        <MappingFragment StoreEntitySet="Structure">
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="SName" ColumnName="SName" />
+          <ScalarProperty Name="SId" ColumnName="SId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StructureKind">
+      <EntityTypeMapping TypeName="CommonModel.StructureKind">
+        <MappingFragment StoreEntitySet="StructureKind">
+          <ScalarProperty Name="KindName" ColumnName="KindName" />
+          <ScalarProperty Name="KindId" ColumnName="KindId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StructureType">
+      <EntityTypeMapping TypeName="CommonModel.StructureType">
+        <MappingFragment StoreEntitySet="StructureType">
+          <ScalarProperty Name="KindId" ColumnName="KindId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Title">
+      <EntityTypeMapping TypeName="CommonModel.Title">
+        <MappingFragment StoreEntitySet="Title">
+          <ScalarProperty Name="Title1" ColumnName="Title" />
+          <ScalarProperty Name="Title_Id" ColumnName="Title_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Title_Page">
+      <EntityTypeMapping TypeName="CommonModel.Title_Page">
+        <MappingFragment StoreEntitySet="Title_Page">
+          <ScalarProperty Name="Funtion_Page_Id" ColumnName="Funtion_Page_Id" />
+          <ScalarProperty Name="Title_Id" ColumnName="Title_Id" />
+          <ScalarProperty Name="Title_Page_Id" ColumnName="Title_Page_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Unit">
+      <EntityTypeMapping TypeName="CommonModel.Unit">
+        <MappingFragment StoreEntitySet="Unit">
+          <ScalarProperty Name="Parent_Unit" ColumnName="Parent_Unit" />
+          <ScalarProperty Name="Unit1" ColumnName="Unit" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Unit_Town">
+      <EntityTypeMapping TypeName="CommonModel.Unit_Town">
+        <MappingFragment StoreEntitySet="Unit_Town">
+          <ScalarProperty Name="Town_Id" ColumnName="Town_Id" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Unit_Town_Id" ColumnName="Unit_Town_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminQuery">
+      <EntityTypeMapping TypeName="CommonModel.AdminQuery">
+        <MappingFragment StoreEntitySet="AdminQuery">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Admin">
+      <EntityTypeMapping TypeName="CommonModel.View_Admin">
+        <MappingFragment StoreEntitySet="View_Admin">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Organization_Id" ColumnName="Organization_Id" />
+          <ScalarProperty Name="Title_Id" ColumnName="Title_Id" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Town">
+      <EntityTypeMapping TypeName="CommonModel.Town">
+        <MappingFragment StoreEntitySet="Town">
+          <ScalarProperty Name="Indigenous" ColumnName="Indigenous" />
+          <ScalarProperty Name="City_Code" ColumnName="City_Code" />
+          <ScalarProperty Name="Land_Office_Id" ColumnName="Land_Office_Id" />
+          <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
+          <ScalarProperty Name="Town1" ColumnName="Town" />
+          <ScalarProperty Name="Town_Code" ColumnName="Town_Code" />
+          <ScalarProperty Name="Town_Id" ColumnName="Town_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="CommonModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Organization_Id" ColumnName="Organization_Id" />
+          <ScalarProperty Name="Title_Id" ColumnName="Title_Id" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

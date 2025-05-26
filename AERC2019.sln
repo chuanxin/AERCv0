@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AERC.Models", "AERC.Models\AERC.Models.csproj", "{832F9E9A-6EF9-4839-82AA-C266169023C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dry", "Dry\Dry.csproj", "{A8664B0F-8C4B-4FDE-92FB-0A28F24ACB26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dry.Models", "Dry.Models\Dry.Models.csproj", "{28FBC2D2-0BCD-4002-997F-4EF00EF54745}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{832F9E9A-6EF9-4839-82AA-C266169023C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832F9E9A-6EF9-4839-82AA-C266169023C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832F9E9A-6EF9-4839-82AA-C266169023C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832F9E9A-6EF9-4839-82AA-C266169023C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8664B0F-8C4B-4FDE-92FB-0A28F24ACB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8664B0F-8C4B-4FDE-92FB-0A28F24ACB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8664B0F-8C4B-4FDE-92FB-0A28F24ACB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8664B0F-8C4B-4FDE-92FB-0A28F24ACB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28FBC2D2-0BCD-4002-997F-4EF00EF54745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28FBC2D2-0BCD-4002-997F-4EF00EF54745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28FBC2D2-0BCD-4002-997F-4EF00EF54745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28FBC2D2-0BCD-4002-997F-4EF00EF54745}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

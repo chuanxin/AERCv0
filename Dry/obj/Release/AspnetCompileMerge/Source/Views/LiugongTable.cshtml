@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資訊系統";
+}
+@{
+    string ItemAmount = string.Empty;
+    string ItemPrice = string.Empty;
+    string TotalPrice = string.Empty;
+    string Memo = string.Empty;
+}
+
+@*style="display:none"*@
+<table id="LiugongTable" border="1" class="dashTable" align="center" style="width:100%;">
+    <tr>
+        <td colspan="2">設施項目</td>
+        <td>說明</td>
+        <td>單位</td>
+        <td>數量</td>
+        <td>單價</td>
+        <td>總價</td>
+        <td>附註(瑠公)</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td_style">A. 田間管路灌溉設施費</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td></td>
+        <td></td>
+        <td align="right"></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="td_style">&nbsp;&nbsp;(1)田間管路材料費</td>
+        <td></td>
+        <td align="center">全</td>
+        <td align="center">1</td>
+        <td></td>
+        <td class="number_right">@Model.Liu_PipingMat.TotalPrice</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td_style">&nbsp;&nbsp;(2)動力設施</td>
+        @if (Model.Liu_Engine != null)
+        {
+            ItemAmount = Model.Liu_Engine.ItemAmount;
+            ItemPrice = Model.Liu_Engine.ItemPrice;
+            TotalPrice = Model.Liu_Engine.TotalPrice;
+            Memo = Model.Liu_Engine.Memo;
+        }
+        else
+        {
+            ItemAmount = string.Empty;
+            ItemPrice = string.Empty;
+            TotalPrice = string.Empty;
+            Memo = string.Empty;
+        }
+
+        <td>
+            @foreach (var engcnt in Memo.Split('#'))
+            {
+                <font>@engcnt</font>
+                <br />
+            }
+        </td>
+        <td align="center">組</td>
+        <td>@ItemAmount</td>
+        <td></td>
+        <td align="right" class="number_right">@TotalPrice</td>
+        <td>含組裝及零件工料</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td_style">&nbsp;&nbsp;(3)蓄水槽</td>
+        @if (Model.Liu_Pool != null)
+        {
+            ItemAmount = Model.Liu_Pool.ItemAmount;
+            ItemPrice = Model.Liu_Pool.ItemPrice;
+            TotalPrice = Model.Liu_Pool.TotalPrice;
+            Memo = Model.Liu_Pool.Memo;
+        }
+        else
+        {
+            ItemAmount = string.Empty;
+            ItemPrice = string.Empty;
+            TotalPrice = string.Empty;
+            Memo = string.Empty;
+        }
+        <td>
+            @foreach (var poolcnt in Memo.Split('#'))
+            {
+                <font>@poolcnt</font>
+                <br />
+            }
+        </td>
+
+        <td align="center">個</td>
+        <td>@ItemAmount</td>
+        <td> - </td>
+        <td class="number_right">新台幣 @TotalPrice 元整</td>
+        <td>含組裝及零件工料</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td_style">B. 工作費</td>
+        <td></td>
+        <td align="center">公頃</td>
+        <td align="center">@((double)Model.BuildArea / 10000)</td>
+        <td class="number_right">48,000</td>
+        <td class="number_right">@Model.Liu_WorkM.TotalPrice</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="td_style">C.包商管理費(A+B)×     ％</td>
+        <td></td>
+        <td align="center">全</td>
+        <td align="center">-</td>
+        <td align="center">-</td>
+        <td class="number_right">-</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="td_style">D.設施費總計(A+B+C)</td>
+        <td></td>
+        <td align="center">全</td>
+        <td align="center">-</td>
+        <td align="center">-</td>
+        <td class="number_right">新台幣 @Model.Liu_TotalMoney 元整</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td rowspan="3" class="td_style">E.設施費分擔 </td>
+        <td class="td_style">農戶配合款 </td>
+        <td align="center">≧(A+B) ×20％</td>
+        <td colspan="3" align="center"></td>
+        <td class="number_right">@Model.Liu_FarmerMoney</td>
+        <td rowspan="3" class="number_center">
+            @using (@Html.BeginForm("ExportExcel", "Budgetbook"))
+            {
+                <button id="BtnExcel" type="submit" value="會員名單匯出" class="btn">
+                    <img src="~/Content/images/excel.jpg" width="80" height="80" />
+                </button>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td class="td_style">水利會補助款</td>
+        <td align="center">(A+B) ×80％ + C</td>
+        <td colspan="3" align="center"></td>
+        <td class="number_right">@Model.Liu_IAMoney</td>
+        @*<td></td>*@
+    </tr>
+    <tr>
+        <td class="td_style">小計 </td>
+        <td align="center"></td>
+        <td colspan="3" align="center"></td>
+        <td class="number_right">@Model.Liu_sum</td>
+        @*<td></td>*@
+    </tr>
+    <tr>
+        <td colspan="3" align="center" class="td_style">本設施預算總計</td>
+        <td colspan="5" align="center">新台幣 : @Model.Liu_ChineseMoney 元整</td>
+    </tr>
+</table>

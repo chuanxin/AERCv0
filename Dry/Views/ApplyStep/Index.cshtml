@@ -1,0 +1,152 @@
+﻿@model Dry.Models.ViewModel.ApplyStepView
+@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+}
+
+@Styles.Render("~/default/easyui")
+
+@Scripts.Render("~/jquery.easyui")
+@*@Scripts.Render("~/jqueryui")*@
+@*<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.exp&sensor=true"></script>*@
+
+<h2>農戶申請業務(@Model.Step /12)</h2>
+<div id="div_Step" class="easyui-tabs">
+    <div id="div_Step_1" title="1.農戶資料" style="padding:10px;" data-options="href:'@Url.Action("Index","Farmer")'"></div>
+    <div id="div_Step_2" title="2.土地資料" style="padding:10px" data-options="href:'@Url.Action("CreateFarm", "FarmLand")',panelHeight:'auto'"></div>
+    @*<div id="div_Step_6" title="3.田間管路" style="padding:10px" data-options="href:'@Url.Action("CreateFarmerSys", "FarmerSys")',panelHeight:'auto'"></div>
+        <div id="div_Step_3" title="4.動力設施" style="padding:10px" data-options="href:'@Url.Action("Create", "ApplyEngine")',panelHeight:'auto'"></div>
+        <div id="div_Step_4" title="5.蓄水設施" style="padding:10px" data-options="href:'@Url.Action("Create", "ApplyPool")',panelHeight:'auto'"></div>*@
+    <div id="div_Step_3" title="3.動力設施" style="padding:10px" data-options="href:'@Url.Action("Create", "ApplyEngine")',panelHeight:'auto'"></div>
+    <div id="div_Step_4" title="4.調蓄設施" style="padding:10px" data-options="href:'@Url.Action("Create", "ApplyPool")',panelHeight:'auto'"></div>
+    <div id="div_Step_5" title="5.田間管路" style="padding:10px" data-options="href:'@Url.Action("CreateFarmerSys", "FarmerSys")',panelHeight:'auto'"></div>
+    <div id="div_Step_6" title="6.調控設施" data-options="href:'@Url.Action("Index", "Ctrl")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_7" title="7.現場勘查" data-options="href:'@Url.Action("Index", "Examine")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_8" title="8.預算書及文件列印" data-options="href:'@Url.Action("Create", "BudgetBook")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_9" title="9.結案申報" data-options="href:'@Url.Action("CompletionReport", "FacilityReport")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_10" title="10.變更設計" data-options="href:'@Url.Action("ChangDesign", "ChgDesign")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_11" title="11.功能測試或書審初審" data-options="href:'@Url.Action("CreateVerify", "Verify")',panelHeight:'auto'" style="padding:10px"></div>
+    <div id="div_Step_12" title="12.文件上傳備查" data-options="href:'@Url.Action("Efile", "Efile")',panelHeight:'auto'" style="padding:10px"></div>
+    @*<div id="div_Step_1" title="1.農戶資料" style="padding:10px;"></div>
+        <div id="div_Step_2" title="2.土地資料" style="padding:10px" data-options="panelHeight:'auto'"></div>
+        <div id="div_Step_3" title="3.田間管路" style="padding:10px" data-options="panelHeight:'auto'"></div>
+        <div id="div_Step_4" title="4.動力設施" style="padding:10px" data-options="panelHeight:'auto'"></div>
+        <div id="div_Step_5" title="5.蓄水設施" style="padding:10px" data-options="panelHeight:'auto'"></div>
+        <div id="div_Step_6" title="6.調控設施" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_7" title="7.現場勘查" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_8" title="8.預算書" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_9" title="9.變更設計" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_10" title="10.竣工報驗" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_11" title="11.辦理驗收" data-options="tabWidth:110" style="padding:10px"></div>
+        <div id="div_Step_12" title="12.電子檔" data-options="tabWidth:110" style="padding:10px"></div>*@
+</div>
+<script>
+    
+    
+    var RefreshOnly = [false, false, false, false, false, false, false, false, false, false, false, false];
+
+    $(function () {
+
+        var Step = parseInt('@Model.Step');
+        $('#div_Step').tabs({
+            border: false,
+            collapsible: true,
+            scrollIncrement: 800,
+            onSelect: function (title, index) {
+                //UpdateTab(index);
+                //alert(index);
+                //alert(RefreshOnly[parseInt(index)]);
+                
+                if ($('#div_Step').tabs('exists', title)) {
+                    if (RefreshOnly[index]) {
+                        var current_tab = $('#div_Step').tabs('getSelected');
+                        current_tab.panel('refresh');
+                        //RefreshOnly = true;
+                    }
+
+                    //var current_tab = $('#div_Step').tabs('getSelected');
+                    //var tab = current_tab.panel('options').tab;
+                    //tab.panel('href', GetLoadUrl(index));
+                }
+                RefreshOnly[index] = true; 
+            },
+            onUnselect: function (title, index) {
+                //alert(title);
+                
+                //console.log(title);
+                $('#div_Step_' + (index + 1)).empty();
+            }
+        });
+        function GetLoadUrl(step) {
+            switch (step) {
+                case 0:
+                    return '@Url.Action("Index","Farmer")';
+                case 1:
+                    return '@Url.Action("CreateFarm", "FarmLand")';
+                case 4/*2*/:
+                    return '@Url.Action("CreateFarmerSys", "FarmerSys")';
+                case 2/*3*/:
+                    return '@Url.Action("Create", "ApplyEngine")';
+                case 3/*4*/:
+                    return '@Url.Action("Create", "ApplyPool")';
+                case 5:
+                    return '@Url.Action("Index", "Ctrl")';
+                case 6:
+                    return '@Url.Action("Index", "Examine")';
+                case 7:
+                    return '@Url.Action("Create", "BudgetBook")';
+                case 8:
+                    return '@Url.Action("ChangDesign", "ChgDesign")';
+                case 9:
+                    return '@Url.Action("CompletionReport", "FacilityReport")';
+                case 10:
+                    return '@Url.Action("CreateVerify", "Verify")';
+                case 11:
+                    return '@Url.Action("Efile", "Efile")';
+            }
+        }
+
+        if (Step < 1) { 
+            for (var i = 0; i <= 11; i++) { 
+                if (i > Step) {
+                    $('#div_Step').tabs('disableTab', i);
+                }
+            }
+        } else if (Step <= 7) { 
+            for (var i = 8; i <= 10; i++) {
+                $('#div_Step').tabs('disableTab', i);
+            }
+        }
+        if ('@Session["UnitID"].ToString()' == '13' || '@Session["UnitID"].ToString()' == '7') {
+            if ('@Session["Status"].ToString()' == 'False') {
+                for (var i = 2; i <= 10; i++) {
+                    $('#div_Step').tabs('disableTab', i);
+                }
+            }
+        }
+        //$('#span_StepHeader').html(Step + 1);
+        $('#div_Step').tabs('select', Step); 
+        //RefreshOnly = true;
+        @*$('#div_Step_' + (Step + 1)).panel({
+            href: '@Model.Url'
+        });*@
+        //$('#div_Step_' + (Step + 1)).css('height', 'auto');
+        //var p = $('#div_Step').tabs('getSelected');
+        //p.panel('refresh');
+    });
+    function UpdateTab(step) {
+        alert(step);
+        @*$.getJSON('@Url.Action("GetSelectedStepData", "ApplyStep")' + '?step=' + step, function (res) {
+            //alert(res);
+            //UpdateTab(res);
+        });
+        //alert(url);
+        var current_tab = $('#div_Step').tabs('getSelected');
+        //$('#div_Step').tabs('update', {
+        //    tab: current_tab,
+        //    options: {
+        //        href: url
+        //    }
+        //});
+        current_tab.panel('refresh');*@
+    }
+</script>

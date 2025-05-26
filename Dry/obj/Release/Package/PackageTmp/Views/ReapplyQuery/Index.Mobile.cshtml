@@ -1,0 +1,133 @@
+﻿@model Dry.Models.ViewModel.ReapplyQueryView
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管路灌溉行動版資訊網</title>
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/js")
+</head>
+<body>
+    <h2>申請案件重覆申請查詢</h2>
+    @*ex: 新北市新店區-大坪林十四張, 地號 :115*@
+<div class="jumbotron">
+    <div class="container-fluid">
+        <h4>【新系統查詢】</h4>
+
+        <div class="control-group form-inline">
+            <div class="control-group">
+                <div class="controls controls-row">
+                    @*縣市*@
+                    @*@Html.DropDownListFor(model => model.FarmCityCode, (IEnumerable<SelectListItem>)Model.CityDDL, new { style = "width: 100px;" })*@
+                    @Html.DropDownListFor(model => model.FarmCityCode, (IEnumerable<SelectListItem>)Model.CityDDL, new { @class="span3" })
+                    @Html.ValidationMessageFor(model => model.FarmCityCode, null, new { @class = "help-inline" })
+                    @*鄉鎮市*@
+                    @*@Html.DropDownListFor(model => model.FarmTownId, (IEnumerable<SelectListItem>)Model.TownDDL, new { style = "width: 100px;" })*@
+                    @Html.DropDownListFor(model => model.FarmTownId, (IEnumerable<SelectListItem>)Model.TownDDL, new { @class="span3"})
+                    @Html.ValidationMessageFor(model => model.FarmTownId, null, new { @class = "help-inline" })
+                    @Html.DropDownListFor(model => model.FarmSection, (IEnumerable<SelectListItem>)Model.SectionList, new { @class = "span6"})
+                    @Html.ValidationMessageFor(model => model.FarmSection, null, new { @class = "help-inline" })
+                </div>  
+            </div>           
+        </div>
+        
+        <div class="control-group form-inline">
+            
+            <div class="controls controls-row">
+                @*<label for="LandNo">地號</label>*@
+                @Html.EditorFor(model => model.LandNo, new { @class = "input-small" })
+
+                <input id="btn_FarmQuery" type="button" value="查詢" class="btn btn-primary" />
+                @Html.ActionLink( "返回", "index",new { Controller = "ApplyIndex" }, new { @class = "btn btn-primary" } )
+                @Html.ValidationMessageFor(model => model.LandNo, null, new { @class = "help-inline" })
+                <h5>範例: 1-1 或 1</h5>
+            </div>
+        </div>
+        <div id="div_NewApplyMsg" class="alert alert-info">
+            <button id="btn_NewApplyMsgClose" type="button" class="close">&times;</button>
+            <span id="span_NewApplyMsg"></span>
+        </div>
+
+    </div>
+</div>
+
+
+    <script>
+        $(function () {
+            $("#LandNo").attr("placeholder", "輸入地號");
+            $("#div_NewApplyMsg").hide();
+            $('#FarmCityCode').change(function () {
+                var val = $('#FarmCityCode option:selected').val();
+                GetTownDDL(val);
+            });
+            $('#FarmTownId').change(function () {
+                var val = parseInt($('#FarmTownId option:selected').val());
+                GetSecDDL(val);
+            });
+            $('#btn_FarmQuery').click(function () {
+                if ($('#FarmSection option:selected').val() == -1) {
+                    alert("請選擇地段!");
+                    return;
+                }
+                if ($('#LandNo').val().trim() == "") {
+                    alert("請輸入地號!");
+                    return;
+                }
+                $("#div_NewApplyMsg").hide();
+                $.EnableBlockUI('資料查詢中...');
+                $.ajaxSettings.async = true;
+                //$.EnableBlockUI('');
+                $.getJSON('../ReapplyQuery/FarmQuery?FarmSection=' + $('#FarmSection option:selected').val() + '&LandNo=' + $('#LandNo').val(), function (data) {
+
+                    //var res = data.status.replace('\n', '<br/>');
+                    //alert(data.status);
+                    //console.log(data.status);
+                    $.DisableBlockUI();
+                    $('#span_NewApplyMsg').html(data.status);
+                    $("#div_NewApplyMsg").fadeIn();
+                    //$.ajaxSettings.async = false;
+                });
+            });
+            $('#btn_NewApplyMsgClose').click(function () {
+                $("#div_NewApplyMsg").fadeOut();
+            });
+
+            function GetTownDDL(DDLvalue) {
+                $.EnableBlockUI('');
+                $.ajaxSettings.async = false;
+                $.getJSON('../ReapplyQuery/GetTownDDL?CityCode=' + DDLvalue, function (data) {
+                    var TownDDL = $('#FarmTownId');
+                    TownDDL.empty();
+                    var sectDDL = $('#FarmSection');
+                    sectDDL.empty();
+                    for (i = 0; i < data.length; i++) { 
+                        TownDDL.append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+                    }
+                });
+                $.DisableBlockUI();
+            }
+            function GetSecDDL(DDLvalue) {
+                $.EnableBlockUI('');
+                $.ajaxSettings.async = false;
+                $.getJSON('../ReapplyQuery/GetSecDDL?townid=' + DDLvalue, function (data) {
+                    var sectDDL = $('#FarmSection');
+                    sectDDL.empty();
+                    for (i = 0; i < data.length; i++) { 
+                        sectDDL.append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+                    }
+                });
+                $.DisableBlockUI();
+            }
+
+        });
+    </script>
+</body>
+
+</html>

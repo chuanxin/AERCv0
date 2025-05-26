@@ -1,0 +1,153 @@
+﻿@model Dry.Models.ViewModel.EngineView
+@Scripts.Render("~/jquery.validate")
+<table id="ShowEngineTable" class="dashTable" border="1" align="center" style="width:100%;">
+    <thead>
+        <tr>
+            <th colspan="4" align="center">動力設施列表</th>
+        </tr>
+    </thead>
+    <tr id="td_EngineTitle">
+        <td width="40" align="center" class="td_style">序號</td>
+        <td width="100" align="center" class="td_style">動力設備</td>
+        @*<td width="100" align="center" class="td_style">引擎號碼</td>*@
+        <td width="100" align="center" class="td_style">動力補助款</td>
+        <td width="40" align="center" class="td_style">刪除</td>
+    </tr>
+    @if (Model.EngData != null && Model.EngData.Count > 0)
+    {
+        int i = 1;
+        foreach (var item in Model.EngData)
+        {
+            <tr id="tr_engine_@i">
+                <td id="td_no" width="40" align="center">
+                    @i
+                </td>
+                <td id="td_engine" width="100" align="center">@item.EngineName</td>
+                @*<td id="td_reg" width="100" align="center">@item.EngineRegCode</td>*@
+                <td id="td_money" width="100" align="center">@item.EngineMoney</td>
+                <td width="40" align="center">
+                    <a class="btn btn-danger" id="del_link" href="#" onclick="$('#tr_engine_@i').DelEng();return false;">刪除</a>
+                </td>
+                <input id="hidden_eng" type="hidden" value="@item.EngineCode" />
+                <input id="hidden_price" type="hidden" value="@item.EngineMoney" />
+            </tr>
+            i++;
+        }
+    }
+    else
+    {
+        <tr id="td_EngineEmpty">
+            <td colspan="5" align="center"><h2>尚未新增動力設施</h2></td>
+        </tr>
+    }
+</table>
+
+<br />
+
+<form id="form_Engine1">
+    <table border="1" class="dashTable" align="center" style="width:100%;">
+        <tr>
+            <td class="td_style">
+                動力設備 :
+            </td>
+            <td colspan="2">
+                @Html.DropDownList("ddl_Engine", (IEnumerable<SelectListItem>)Model.EngineDDL)
+            </td>
+            @*<td class="td_style">
+                引擎號碼 :
+            </td>
+            <td>
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.EditorFor(model => model.txt_EngRegcd)
+                        @Html.ValidationMessageFor(model => model.txt_EngRegcd, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>*@
+            <td>
+                @Html.TextBoxFor(model => model.EngPrice)
+            </td>
+            <td>
+                <input type="button" id="btn_Ins" value="新增動力設備" class="btn" />
+            </td>
+        </tr>
+    </table>
+    <br />
+</form>
+
+<form id="form_Engine2">
+    <table class="dashTable" align="center" width="80%">
+        @*<tr>
+                <td class="td_style">
+                    動力設施建置工程費
+                </td>
+                <td>
+                    <div class="control-group">
+                        <div class="controls">
+                            @Html.EditorFor(model => model.FacPrice)
+                            @Html.ValidationMessageFor(model => model.FacPrice, null, new { @class = "help-inline" })
+                        </div>
+                    </div>
+                </td>
+            </tr>*@
+
+        <tr>
+            <td class="td_style">
+                補助來源
+            </td>
+            <td colspan="2">
+                <div class="control-group">
+                    <div class="controls">
+                        @*@Html.DropDownListFor(model => model.ddl_Unit, new SelectList((System.Collections.IEnumerable)Model.UnitDDL, "Value", "Text"), new { style = "width: 300px;" })*@
+                        @Html.DropDownListFor(model => model.ddl_EngineUnit, (IEnumerable<SelectListItem>)Model.UnitDDL, new { style = "width: 320px;" })
+                        @Html.ValidationMessageFor(model => model.ddl_EngineUnit, null, new { @class = "help-inline" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                @{ if (@ViewBag.Gold == true)
+                   {
+                       //Html.RenderPartial("../FundingTableGold");
+                       Html.RenderPartial("../FundingTable");
+                   }else {
+                       Html.RenderPartial("../FundingTable");
+                   } }
+            </td>
+        </tr>
+    </table>
+    @if(Model.Step < 8)
+    {
+        if(!Model.IsModify)
+        {
+            <input id="btn_EngineSubmit" type="button" value="送出，前往下個步驟" class="btn" />
+            <input id="btn_EnginePass" type="button" value="略過>>" class="btn" />
+        }
+        else
+        {
+            <input id="btn_EngineModify" type="button" value="修改動力設施" class="btn" />
+        }
+    }
+    
+    <div id="alert_EngineNoData" class="alert alert-error" style="display:none; width:160px;">
+        至少輸入一筆動力設備資料。
+    </div>
+</form>
+
+<script src="~/Scripts/_Engine.js"></script>
+
+<script>
+
+    $("#tdCaseM").text('@(Model.CaseMoney)');
+    $("#tdTotalM").text('@(Model.TotalM)');
+    $("#tdGovM").text('@(Model.GovM)');
+    $('#tdFarM').text('@(Model.FarmM)');
+    var gold = $('#tdGoldM');
+    if (gold !== null) //黃金廊道金額
+    {
+        gold.text('@Model.GoldM');
+
+
+    }
+</script>

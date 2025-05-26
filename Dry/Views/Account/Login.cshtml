@@ -1,0 +1,97 @@
+﻿@using BotDetect.Web.Mvc;
+
+@{
+    Layout = null;
+}
+@model AERC.Models.ViewModel.Accounts
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>推廣管路灌溉設施管理資料庫</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/style.css")
+    @Scripts.Render("~/js")
+    <script>
+        $(function () {
+
+            if ('@Model.IsLogin' == 'False') {
+                $('.alert').addClass('fade').addClass('in');
+                $(".alert").alert();
+            } else {
+                $(".alert").alert('close');
+            }
+            $('#btn_Login').click(function () {
+                $(".alert").alert('close');
+            });
+        });
+    </script>
+
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+          rel="stylesheet" type="text/css" />
+</head>
+<body>
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div id="login">
+            <img src="~/Content/images/login.png" alt="login" />
+            <div style="height:50px;">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>登入失敗!</strong> 帳號或密碼或驗證碼錯誤。
+                </div>
+            </div>
+            <div>ACCOUNT</div>
+            <div>
+                @Html.TextBoxFor(model => model.Account, new { @class = "input", placeholder = "輸入帳號" })
+            </div>
+            <div>PASSWORD</div>
+            <div>
+                @Html.PasswordFor(model => model.PassWord, new { @class = "input", placeholder = "輸入密碼" })
+            </div>
+            <div class="">
+
+                @{ MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha") { UserInputID = "CaptchaCode" };
+                    exampleCaptcha.CodeLength = 4;
+                    exampleCaptcha.CodeStyle = BotDetect.CodeStyle.Numeric;
+                    exampleCaptcha.ImageSize = new System.Drawing.Size(200, 50);
+                    exampleCaptcha.SoundEnabled = false;
+                    exampleCaptcha.ReloadTooltip = "更新驗證碼";
+                    exampleCaptcha.HelpLinkMode = BotDetect.HelpLinkMode.Image;
+
+                }
+                <center>
+                    @Html.Captcha(exampleCaptcha)
+                </center>
+            </div>
+            <div>
+                @Html.TextBox("CaptchaCode", null, new { @class = "input", placeholder = "請輸入驗證碼" })
+            </div>
+            <div>
+                <input id="btn_Login" class="loginBtn" type="submit" value="登入" />
+            </div>
+            <div id="ssl_table">
+                <table border="0">
+                    <tr>
+                        <td width="51%" class="SSLmemo">
+                            本站符合<br>
+                            <b>SSL</b> <BR>安全認證
+                        </td>
+                        <td width="49%" class="SSL"><a href="javascript:location.href='https://ra.publicca.hinet.net/SSLQueryCert/SSLQueryCert.jsp?Domain_name='+document.location.hostname" target="_blank"><img src="~/Content/images/SSLSeal.gif" width="50" height="70" /></a>  </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+                    }
+<script>
+    if ("@TempData["msg"]" != "") {
+        alert("@TempData["msg"]");
+    }
+</script>
+
+</body>
+</html>

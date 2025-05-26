@@ -1,0 +1,1196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DryModelStoreContainer" CdmEntityContainer="DryEntities">
+    <EntitySetMapping Name="CntrlApply">
+      <EntityTypeMapping TypeName="DryModel.CntrlApply">
+        <MappingFragment StoreEntitySet="CntrlApply">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="FacMoney" ColumnName="FacMoney" />
+          <ScalarProperty Name="Subsidy" ColumnName="Subsidy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CntrlFac">
+      <EntityTypeMapping TypeName="DryModel.CntrlFac">
+        <MappingFragment StoreEntitySet="CntrlFac">
+          <ScalarProperty Name="CFNo" ColumnName="CFNo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CntrlList">
+      <EntityTypeMapping TypeName="DryModel.CntrlList">
+        <MappingFragment StoreEntitySet="CntrlList">
+          <ScalarProperty Name="CntrlCode" ColumnName="CntrlCode" />
+          <ScalarProperty Name="CntrlCNS" ColumnName="CntrlCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ControlLimit">
+      <EntityTypeMapping TypeName="DryModel.ControlLimit">
+        <MappingFragment StoreEntitySet="ControlLimit">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+          <ScalarProperty Name="CntrlCode" ColumnName="CntrlCode" />
+          <ScalarProperty Name="SubsidyPercent" ColumnName="SubsidyPercent" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesignerList">
+      <EntityTypeMapping TypeName="DryModel.DesignerList">
+        <MappingFragment StoreEntitySet="DesignerList">
+          <ScalarProperty Name="Designer_Id" ColumnName="Designer_Id" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Designer_Name" ColumnName="Designer_Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EFile">
+      <EntityTypeMapping TypeName="DryModel.EFile">
+        <MappingFragment StoreEntitySet="EFile">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="Filepath" ColumnName="Filepath" />
+          <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+          <ScalarProperty Name="FileDes" ColumnName="FileDes" />
+          <ScalarProperty Name="UpldTime" ColumnName="UpldTime" />
+          <ScalarProperty Name="Enable" ColumnName="Enable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EndTypeList">
+      <EntityTypeMapping TypeName="DryModel.EndTypeList">
+        <MappingFragment StoreEntitySet="EndTypeList">
+          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+          <ScalarProperty Name="EndType" ColumnName="EndType" />
+          <ScalarProperty Name="EndTypeCNS" ColumnName="EndTypeCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EngApply">
+      <EntityTypeMapping TypeName="DryModel.EngApply">
+        <MappingFragment StoreEntitySet="EngApply">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="FacMoney" ColumnName="FacMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Engine">
+      <EntityTypeMapping TypeName="DryModel.Engine">
+        <MappingFragment StoreEntitySet="Engine">
+          <ScalarProperty Name="ENo" ColumnName="ENo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EngCode" ColumnName="EngCode" />
+          <ScalarProperty Name="EngRegCode" ColumnName="EngRegCode" />
+          <ScalarProperty Name="EngPrice" ColumnName="EngPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EngineList">
+      <EntityTypeMapping TypeName="DryModel.EngineList">
+        <MappingFragment StoreEntitySet="EngineList">
+          <ScalarProperty Name="EngCode" ColumnName="EngCode" />
+          <ScalarProperty Name="EngCNS" ColumnName="EngCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EngLimit">
+      <EntityTypeMapping TypeName="DryModel.EngLimit">
+        <MappingFragment StoreEntitySet="EngLimit">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+          <ScalarProperty Name="EngCode" ColumnName="EngCode" />
+          <ScalarProperty Name="EngPrice" ColumnName="EngPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Examine">
+      <EntityTypeMapping TypeName="DryModel.Examine">
+        <MappingFragment StoreEntitySet="Examine">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EnginePnt" ColumnName="EnginePnt" />
+          <ScalarProperty Name="WaterPnt" ColumnName="WaterPnt" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Examiner" ColumnName="Examiner" />
+          <ScalarProperty Name="EDate" ColumnName="EDate" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacDesign">
+      <EntityTypeMapping TypeName="DryModel.FacDesign">
+        <MappingFragment StoreEntitySet="FacDesign">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="DesId" ColumnName="DesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacInspection">
+      <EntityTypeMapping TypeName="DryModel.FacInspection">
+        <MappingFragment StoreEntitySet="FacInspection">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="E_Date" ColumnName="E_Date" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacStatList">
+      <EntityTypeMapping TypeName="DryModel.FacStatList">
+        <MappingFragment StoreEntitySet="FacStatList">
+          <ScalarProperty Name="statCode" ColumnName="statCode" />
+          <ScalarProperty Name="statCNS" ColumnName="statCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacSysMAT">
+      <EntityTypeMapping TypeName="DryModel.FacSysMAT">
+        <MappingFragment StoreEntitySet="FacSysMAT">
+          <ScalarProperty Name="POMNo" ColumnName="POMNo" />
+          <ScalarProperty Name="ModuleNo" ColumnName="ModuleNo" />
+          <ScalarProperty Name="Bunit" ColumnName="Bunit" />
+          <ScalarProperty Name="MName" ColumnName="MName" />
+          <ScalarProperty Name="SpecLength" ColumnName="SpecLength" />
+          <ScalarProperty Name="MatType" ColumnName="MatType" />
+          <ScalarProperty Name="Spec" ColumnName="Spec" />
+          <ScalarProperty Name="SpecNo1" ColumnName="SpecNo1" />
+          <ScalarProperty Name="SpecNo2" ColumnName="SpecNo2" />
+          <ScalarProperty Name="SpecNo3" ColumnName="SpecNo3" />
+          <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacTypeList">
+      <EntityTypeMapping TypeName="DryModel.FacTypeList">
+        <MappingFragment StoreEntitySet="FacTypeList">
+          <ScalarProperty Name="FacType" ColumnName="FacType" />
+          <ScalarProperty Name="FTpeCNS" ColumnName="FTpeCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacVerify">
+      <EntityTypeMapping TypeName="DryModel.FacVerify">
+        <MappingFragment StoreEntitySet="FacVerify">
+          <ScalarProperty Name="V_RecNo" ColumnName="V_RecNo" />
+          <ScalarProperty Name="StatCode" ColumnName="StatCode" />
+          <ScalarProperty Name="VDes" ColumnName="VDes" />
+          <ScalarProperty Name="VDate" ColumnName="VDate" />
+          <ScalarProperty Name="VId" ColumnName="VId" />
+          <ScalarProperty Name="ReduceM" ColumnName="ReduceM" />
+          <ScalarProperty Name="PayM" ColumnName="PayM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Farm">
+      <EntityTypeMapping TypeName="DryModel.Farm">
+        <MappingFragment StoreEntitySet="Farm">
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FinalArea" ColumnName="FinalArea" />
+          <ScalarProperty Name="IsApplied" ColumnName="IsApplied" />
+          <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+          <ScalarProperty Name="AppliedArea" ColumnName="AppliedArea" />
+          <ScalarProperty Name="AreaCanApply" ColumnName="AreaCanApply" />
+          <ScalarProperty Name="Outside" ColumnName="Outside" />
+          <ScalarProperty Name="Pcent_Chd" ColumnName="Pcent_Chd" />
+          <ScalarProperty Name="Pcent_Par" ColumnName="Pcent_Par" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmChange">
+      <EntityTypeMapping TypeName="DryModel.FarmChange">
+        <MappingFragment StoreEntitySet="FarmChange">
+          <ScalarProperty Name="FarmChangeID" ColumnName="FarmChangeID" />
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FinalArea" ColumnName="FinalArea" />
+          <ScalarProperty Name="IsApplied" ColumnName="IsApplied" />
+          <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+          <ScalarProperty Name="AppliedArea" ColumnName="AppliedArea" />
+          <ScalarProperty Name="AreaCanApply" ColumnName="AreaCanApply" />
+          <ScalarProperty Name="Outside" ColumnName="Outside" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmCrop">
+      <EntityTypeMapping TypeName="DryModel.FarmCrop">
+        <MappingFragment StoreEntitySet="FarmCrop">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="CropCode" ColumnName="CropCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmDataLog">
+      <EntityTypeMapping TypeName="DryModel.FarmDataLog">
+        <MappingFragment StoreEntitySet="FarmDataLog">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="DBMessage" ColumnName="DBMessage" />
+          <ScalarProperty Name="Farm_Data" ColumnName="Farm_Data" />
+          <ScalarProperty Name="FarmCrop_Data" ColumnName="FarmCrop_Data" />
+          <ScalarProperty Name="LandEquity_Data" ColumnName="LandEquity_Data" />
+          <ScalarProperty Name="UserIP" ColumnName="UserIP" />
+          <ScalarProperty Name="UserHostName" ColumnName="UserHostName" />
+          <ScalarProperty Name="UserMac" ColumnName="UserMac" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Farmer">
+      <EntityTypeMapping TypeName="DryModel.Farmer">
+        <MappingFragment StoreEntitySet="Farmer">
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="CDate" ColumnName="CDate" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmerSys">
+      <EntityTypeMapping TypeName="DryModel.FarmerSys">
+        <MappingFragment StoreEntitySet="FarmerSys">
+          <ScalarProperty Name="FarSysNo" ColumnName="FarSysNo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="FacNo" ColumnName="FacNo" />
+          <ScalarProperty Name="FacMoney" ColumnName="FacMoney" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileTypeList">
+      <EntityTypeMapping TypeName="DryModel.FileTypeList">
+        <MappingFragment StoreEntitySet="FileTypeList">
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="FileTypeCNS" ColumnName="FileTypeCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IrrWaterList">
+      <EntityTypeMapping TypeName="DryModel.IrrWaterList">
+        <MappingFragment StoreEntitySet="IrrWaterList">
+          <ScalarProperty Name="IrrWCode" ColumnName="IrrWCode" />
+          <ScalarProperty Name="IrrWCNS" ColumnName="IrrWCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LandTypeList">
+      <EntityTypeMapping TypeName="DryModel.LandTypeList">
+        <MappingFragment StoreEntitySet="LandTypeList">
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="LandTypeCNS" ColumnName="LandTypeCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mat_Module">
+      <EntityTypeMapping TypeName="DryModel.Mat_Module">
+        <MappingFragment StoreEntitySet="Mat_Module">
+          <ScalarProperty Name="ModuleNo" ColumnName="ModuleNo" />
+          <ScalarProperty Name="ModuleCNS" ColumnName="ModuleCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAT_Spec">
+      <EntityTypeMapping TypeName="DryModel.MAT_Spec">
+        <MappingFragment StoreEntitySet="MAT_Spec">
+          <ScalarProperty Name="SpecNo" ColumnName="SpecNo" />
+          <ScalarProperty Name="Spec" ColumnName="Spec" />
+          <ScalarProperty Name="SpecName" ColumnName="SpecName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAT_Types">
+      <EntityTypeMapping TypeName="DryModel.MAT_Types">
+        <MappingFragment StoreEntitySet="MAT_Types">
+          <ScalarProperty Name="TypeNo" ColumnName="TypeNo" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoneyRules">
+      <EntityTypeMapping TypeName="DryModel.MoneyRules">
+        <MappingFragment StoreEntitySet="MoneyRules">
+          <ScalarProperty Name="MoneyRID" ColumnName="MoneyRID" />
+          <ScalarProperty Name="MYear" ColumnName="MYear" />
+          <ScalarProperty Name="MItem" ColumnName="MItem" />
+          <ScalarProperty Name="MClass" ColumnName="MClass" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Max" ColumnName="Max" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PigingLimit">
+      <EntityTypeMapping TypeName="DryModel.PigingLimit">
+        <MappingFragment StoreEntitySet="PigingLimit">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+          <ScalarProperty Name="EndType" ColumnName="EndType" />
+          <ScalarProperty Name="FacType" ColumnName="FacType" />
+          <ScalarProperty Name="SubsidyReference" ColumnName="SubsidyReference" />
+          <ScalarProperty Name="FacilityFee" ColumnName="FacilityFee" />
+          <ScalarProperty Name="WorkingFee" ColumnName="WorkingFee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pool">
+      <EntityTypeMapping TypeName="DryModel.Pool">
+        <MappingFragment StoreEntitySet="Pool">
+          <ScalarProperty Name="PNo" ColumnName="PNo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="PoolWeight" ColumnName="PoolWeight" />
+          <ScalarProperty Name="PtypeCode" ColumnName="PtypeCode" />
+          <ScalarProperty Name="PoolSize" ColumnName="PoolSize" />
+          <ScalarProperty Name="PoolPrice" ColumnName="PoolPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoolApply">
+      <EntityTypeMapping TypeName="DryModel.PoolApply">
+        <MappingFragment StoreEntitySet="PoolApply">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="FacMoney" ColumnName="FacMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoolTonList">
+      <EntityTypeMapping TypeName="DryModel.PoolTonList">
+        <MappingFragment StoreEntitySet="PoolTonList">
+          <ScalarProperty Name="PoolTonID" ColumnName="PoolTonID" />
+          <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+          <ScalarProperty Name="PtypeCode" ColumnName="PtypeCode" />
+          <ScalarProperty Name="PoolTon" ColumnName="PoolTon" />
+          <ScalarProperty Name="PoolPrice" ColumnName="PoolPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoolTypeList">
+      <EntityTypeMapping TypeName="DryModel.PoolTypeList">
+        <MappingFragment StoreEntitySet="PoolTypeList">
+          <ScalarProperty Name="PtypeCode" ColumnName="PtypeCode" />
+          <ScalarProperty Name="PtypeCNS" ColumnName="PtypeCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PriceOfMat">
+      <EntityTypeMapping TypeName="DryModel.PriceOfMat">
+        <MappingFragment StoreEntitySet="PriceOfMat">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="POMNo" ColumnName="POMNo" />
+          <ScalarProperty Name="BYear" ColumnName="BYear" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionList">
+      <EntityTypeMapping TypeName="DryModel.RegionList">
+        <MappingFragment StoreEntitySet="RegionList">
+          <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+          <ScalarProperty Name="RegionCNS" ColumnName="RegionCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StdFacSys">
+      <EntityTypeMapping TypeName="DryModel.StdFacSys">
+        <MappingFragment StoreEntitySet="StdFacSys">
+          <ScalarProperty Name="FacNo" ColumnName="FacNo" />
+          <ScalarProperty Name="FacTypeName" ColumnName="FacTypeName" />
+          <ScalarProperty Name="FacName" ColumnName="FacName" />
+          <ScalarProperty Name="EndType" ColumnName="EndType" />
+          <ScalarProperty Name="SubEndType" ColumnName="SubEndType" />
+          <ScalarProperty Name="FacType" ColumnName="FacType" />
+          <ScalarProperty Name="Descript" ColumnName="Descript" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StdFacSysMAT">
+      <EntityTypeMapping TypeName="DryModel.StdFacSysMAT">
+        <MappingFragment StoreEntitySet="StdFacSysMAT">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="FacNo" ColumnName="FacNo" />
+          <ScalarProperty Name="POMNo" ColumnName="POMNo" />
+          <ScalarProperty Name="AmountFormula" ColumnName="AmountFormula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subsidy">
+      <EntityTypeMapping TypeName="DryModel.Subsidy">
+        <MappingFragment StoreEntitySet="Subsidy">
+          <ScalarProperty Name="IAUnit" ColumnName="IAUnit" />
+          <ScalarProperty Name="SNo" ColumnName="SNo" />
+          <ScalarProperty Name="SYear" ColumnName="SYear" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="Total_M" ColumnName="Total_M" />
+          <ScalarProperty Name="Now_M" ColumnName="Now_M" />
+          <ScalarProperty Name="FcstArea" ColumnName="FcstArea" />
+          <ScalarProperty Name="FcstAmt" ColumnName="FcstAmt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubsidyItemList">
+      <EntityTypeMapping TypeName="DryModel.SubsidyItemList">
+        <MappingFragment StoreEntitySet="SubsidyItemList">
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="ItemCNS" ColumnName="ItemCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VerifyLog">
+      <EntityTypeMapping TypeName="DryModel.VerifyLog">
+        <MappingFragment StoreEntitySet="VerifyLog">
+          <ScalarProperty Name="V_RecNo" ColumnName="V_RecNo" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VerMapping">
+      <EntityTypeMapping TypeName="DryModel.VerMapping">
+        <MappingFragment StoreEntitySet="VerMapping">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+          <ScalarProperty Name="ChgVer" ColumnName="ChgVer" />
+          <ScalarProperty Name="ChgReason" ColumnName="ChgReason" />
+          <ScalarProperty Name="ChgDate" ColumnName="ChgDate" />
+          <ScalarProperty Name="ChgId" ColumnName="ChgId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaterSrcList">
+      <EntityTypeMapping TypeName="DryModel.WaterSrcList">
+        <MappingFragment StoreEntitySet="WaterSrcList">
+          <ScalarProperty Name="WsCode" ColumnName="WsCode" />
+          <ScalarProperty Name="WsCNS" ColumnName="WsCNS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WrkExecutReport">
+      <EntityTypeMapping TypeName="DryModel.WrkExecutReport">
+        <MappingFragment StoreEntitySet="WrkExecutReport">
+          <ScalarProperty Name="WNo" ColumnName="WNo" />
+          <ScalarProperty Name="EYear" ColumnName="EYear" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="FcstArea" ColumnName="FcstArea" />
+          <ScalarProperty Name="FcstAmt" ColumnName="FcstAmt" />
+          <ScalarProperty Name="CapitalAcc" ColumnName="CapitalAcc" />
+          <ScalarProperty Name="CurrentAcc" ColumnName="CurrentAcc" />
+          <ScalarProperty Name="M_Dis" ColumnName="M_Dis" />
+          <ScalarProperty Name="M_Used" ColumnName="M_Used" />
+          <ScalarProperty Name="FinishAmt" ColumnName="FinishAmt" />
+          <ScalarProperty Name="FinishArea" ColumnName="FinishArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Old_CountryCode">
+      <EntityTypeMapping TypeName="DryModel.Old_CountryCode">
+        <MappingFragment StoreEntitySet="Old_CountryCode">
+          <ScalarProperty Name="CITYCODE" ColumnName="CITYCODE" />
+          <ScalarProperty Name="CITYCNS" ColumnName="CITYCNS" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Old_Farm">
+      <EntityTypeMapping TypeName="DryModel.Old_Farm">
+        <MappingFragment StoreEntitySet="Old_Farm">
+          <ScalarProperty Name="工作站代號" ColumnName="工作站代號" />
+          <ScalarProperty Name="灌區外" ColumnName="灌區外" />
+          <ScalarProperty Name="備註" ColumnName="備註" />
+          <ScalarProperty Name="地號3" ColumnName="地號3" />
+          <ScalarProperty Name="地號2" ColumnName="地號2" />
+          <ScalarProperty Name="地號1" ColumnName="地號1" />
+          <ScalarProperty Name="面積" ColumnName="面積" />
+          <ScalarProperty Name="地目" ColumnName="地目" />
+          <ScalarProperty Name="地段" ColumnName="地段" />
+          <ScalarProperty Name="灌溉型式" ColumnName="灌溉型式" />
+          <ScalarProperty Name="編號2" ColumnName="編號2" />
+          <ScalarProperty Name="編號1" ColumnName="編號1" />
+          <ScalarProperty Name="單位" ColumnName="單位" />
+          <ScalarProperty Name="年度" ColumnName="年度" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Old_Farmer">
+      <EntityTypeMapping TypeName="DryModel.Old_Farmer">
+        <MappingFragment StoreEntitySet="Old_Farmer">
+          <ScalarProperty Name="灌區外" ColumnName="灌區外" />
+          <ScalarProperty Name="住址鄉鎮" ColumnName="住址鄉鎮" />
+          <ScalarProperty Name="設計人" ColumnName="設計人" />
+          <ScalarProperty Name="行動電話" ColumnName="行動電話" />
+          <ScalarProperty Name="工作站代號" ColumnName="工作站代號" />
+          <ScalarProperty Name="蓄水池數量" ColumnName="蓄水池數量" />
+          <ScalarProperty Name="抽水機數量" ColumnName="抽水機數量" />
+          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
+          <ScalarProperty Name="重複" ColumnName="重複" />
+          <ScalarProperty Name="蓄水池材質" ColumnName="蓄水池材質" />
+          <ScalarProperty Name="灌溉器名稱" ColumnName="灌溉器名稱" />
+          <ScalarProperty Name="系統設計代號" ColumnName="系統設計代號" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="SS" ColumnName="SS" />
+          <ScalarProperty Name="備註" ColumnName="備註" />
+          <ScalarProperty Name="調控設施輔助款" ColumnName="調控設施輔助款" />
+          <ScalarProperty Name="水源設施輔助款" ColumnName="水源設施輔助款" />
+          <ScalarProperty Name="政府總輔助款" ColumnName="政府總輔助款" />
+          <ScalarProperty Name="農戶配合款" ColumnName="農戶配合款" />
+          <ScalarProperty Name="水井設施費" ColumnName="水井設施費" />
+          <ScalarProperty Name="調控設施費" ColumnName="調控設施費" />
+          <ScalarProperty Name="水源管路設施費" ColumnName="水源管路設施費" />
+          <ScalarProperty Name="蓄水池輔助款" ColumnName="蓄水池輔助款" />
+          <ScalarProperty Name="動力輔助款" ColumnName="動力輔助款" />
+          <ScalarProperty Name="審查費" ColumnName="審查費" />
+          <ScalarProperty Name="設計費" ColumnName="設計費" />
+          <ScalarProperty Name="末端設施費" ColumnName="末端設施費" />
+          <ScalarProperty Name="設施情形" ColumnName="設施情形" />
+          <ScalarProperty Name="驗收日期" ColumnName="驗收日期" />
+          <ScalarProperty Name="勘查日期" ColumnName="勘查日期" />
+          <ScalarProperty Name="地址2" ColumnName="地址2" />
+          <ScalarProperty Name="地址1" ColumnName="地址1" />
+          <ScalarProperty Name="電話" ColumnName="電話" />
+          <ScalarProperty Name="姓名" ColumnName="姓名" />
+          <ScalarProperty Name="身份証字號" ColumnName="身份証字號" />
+          <ScalarProperty Name="設施面積" ColumnName="設施面積" />
+          <ScalarProperty Name="水源管路類別" ColumnName="水源管路類別" />
+          <ScalarProperty Name="水源設施" ColumnName="水源設施" />
+          <ScalarProperty Name="蓄水池3" ColumnName="蓄水池3" />
+          <ScalarProperty Name="蓄水池2" ColumnName="蓄水池2" />
+          <ScalarProperty Name="蓄水池1" ColumnName="蓄水池1" />
+          <ScalarProperty Name="抽水機" ColumnName="抽水機" />
+          <ScalarProperty Name="動力6" ColumnName="動力6" />
+          <ScalarProperty Name="動力5" ColumnName="動力5" />
+          <ScalarProperty Name="動力4" ColumnName="動力4" />
+          <ScalarProperty Name="動力3" ColumnName="動力3" />
+          <ScalarProperty Name="動力2" ColumnName="動力2" />
+          <ScalarProperty Name="動力1" ColumnName="動力1" />
+          <ScalarProperty Name="動力" ColumnName="動力" />
+          <ScalarProperty Name="灌溉型式" ColumnName="灌溉型式" />
+          <ScalarProperty Name="農作物4" ColumnName="農作物4" />
+          <ScalarProperty Name="農作物3" ColumnName="農作物3" />
+          <ScalarProperty Name="農作物2" ColumnName="農作物2" />
+          <ScalarProperty Name="農作物1" ColumnName="農作物1" />
+          <ScalarProperty Name="農作物" ColumnName="農作物" />
+          <ScalarProperty Name="推廣類別" ColumnName="推廣類別" />
+          <ScalarProperty Name="地區分類" ColumnName="地區分類" />
+          <ScalarProperty Name="鄉鎮" ColumnName="鄉鎮" />
+          <ScalarProperty Name="編號2" ColumnName="編號2" />
+          <ScalarProperty Name="編號1" ColumnName="編號1" />
+          <ScalarProperty Name="單位" ColumnName="單位" />
+          <ScalarProperty Name="年度" ColumnName="年度" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Old_Unit">
+      <EntityTypeMapping TypeName="DryModel.Old_Unit">
+        <MappingFragment StoreEntitySet="Old_Unit">
+          <ScalarProperty Name="NUB" ColumnName="NUB" />
+          <ScalarProperty Name="LOCNS" ColumnName="LOCNS" />
+          <ScalarProperty Name="LOCAL" ColumnName="LOCAL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LastVerOfMapNo">
+      <EntityTypeMapping TypeName="DryModel.LastVerOfMapNo">
+        <MappingFragment StoreEntitySet="LastVerOfMapNo">
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pay">
+      <EntityTypeMapping TypeName="DryModel.Pay">
+        <MappingFragment StoreEntitySet="Pay">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FarmerMoney" ColumnName="FarmerMoney" />
+          <ScalarProperty Name="PayMoney" ColumnName="PayMoney" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="PayNo" ColumnName="PayNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EndType">
+      <EntityTypeMapping TypeName="DryModel.EndType">
+        <MappingFragment StoreEntitySet="EndType">
+          <ScalarProperty Name="SprinklerSpec" ColumnName="SprinklerSpec" />
+          <ScalarProperty Name="SprinklerType" ColumnName="SprinklerType" />
+          <ScalarProperty Name="SS" ColumnName="SS" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="StdpipeSpec" ColumnName="StdpipeSpec" />
+          <ScalarProperty Name="StdpipeMat" ColumnName="StdpipeMat" />
+          <ScalarProperty Name="StdpipeHei" ColumnName="StdpipeHei" />
+          <ScalarProperty Name="BranchPipeSpec" ColumnName="BranchPipeSpec" />
+          <ScalarProperty Name="BranchPipeMat" ColumnName="BranchPipeMat" />
+          <ScalarProperty Name="FacType" ColumnName="FacType" />
+          <ScalarProperty Name="EndTypeCode" ColumnName="EndTypeCode" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EndTypeID" ColumnName="EndTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MatGroup">
+      <EntityTypeMapping TypeName="DryModel.MatGroup">
+        <MappingFragment StoreEntitySet="MatGroup">
+          <ScalarProperty Name="GroupCNS" ColumnName="GroupCNS" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PigingConf">
+      <EntityTypeMapping TypeName="DryModel.PigingConf">
+        <MappingFragment StoreEntitySet="PigingConf">
+          <ScalarProperty Name="WorkPrice" ColumnName="WorkPrice" />
+          <ScalarProperty Name="OtherDescript" ColumnName="OtherDescript" />
+          <ScalarProperty Name="IrrWCode" ColumnName="IrrWCode" />
+          <ScalarProperty Name="Cblock" ColumnName="Cblock" />
+          <ScalarProperty Name="L2Amount" ColumnName="L2Amount" />
+          <ScalarProperty Name="L2Price" ColumnName="L2Price" />
+          <ScalarProperty Name="L2Spec" ColumnName="L2Spec" />
+          <ScalarProperty Name="L2Mat" ColumnName="L2Mat" />
+          <ScalarProperty Name="L2" ColumnName="L2" />
+          <ScalarProperty Name="L1Amount" ColumnName="L1Amount" />
+          <ScalarProperty Name="L1Price" ColumnName="L1Price" />
+          <ScalarProperty Name="L1Spec" ColumnName="L1Spec" />
+          <ScalarProperty Name="L1Mat" ColumnName="L1Mat" />
+          <ScalarProperty Name="L1" ColumnName="L1" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OldSystemFarm">
+      <EntityTypeMapping TypeName="DryModel.OldSystemFarm">
+        <MappingFragment StoreEntitySet="OldSystemFarm">
+          <ScalarProperty Name="灌區外" ColumnName="灌區外" />
+          <ScalarProperty Name="備註" ColumnName="備註" />
+          <ScalarProperty Name="地號3" ColumnName="地號3" />
+          <ScalarProperty Name="地號2" ColumnName="地號2" />
+          <ScalarProperty Name="地號1" ColumnName="地號1" />
+          <ScalarProperty Name="面積" ColumnName="面積" />
+          <ScalarProperty Name="地目" ColumnName="地目" />
+          <ScalarProperty Name="SECCNS2" ColumnName="SECCNS2" />
+          <ScalarProperty Name="SECCNS1" ColumnName="SECCNS1" />
+          <ScalarProperty Name="SEC" ColumnName="SEC" />
+          <ScalarProperty Name="SECNO" ColumnName="SECNO" />
+          <ScalarProperty Name="CITYCNS" ColumnName="CITYCNS" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="灌溉型式" ColumnName="灌溉型式" />
+          <ScalarProperty Name="編號2" ColumnName="編號2" />
+          <ScalarProperty Name="編號1" ColumnName="編號1" />
+          <ScalarProperty Name="單位" ColumnName="單位" />
+          <ScalarProperty Name="年度" ColumnName="年度" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport">
+        <MappingFragment StoreEntitySet="LiugongReport">
+          <ScalarProperty Name="Filepath" ColumnName="Filepath" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FarmerFee" ColumnName="FarmerFee" />
+          <ScalarProperty Name="GovSubsidy" ColumnName="GovSubsidy" />
+          <ScalarProperty Name="EDate" ColumnName="EDate" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Outside" ColumnName="Outside" />
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="LandTypeCNS" ColumnName="LandTypeCNS" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="Subsection" ColumnName="Subsection" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport_Crop">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport_Crop">
+        <MappingFragment StoreEntitySet="LiugongReport_Crop">
+          <ScalarProperty Name="Crop" ColumnName="Crop" />
+          <ScalarProperty Name="CropCode" ColumnName="CropCode" />
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport_Engine">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport_Engine">
+        <MappingFragment StoreEntitySet="LiugongReport_Engine">
+          <ScalarProperty Name="EngPrice" ColumnName="EngPrice" />
+          <ScalarProperty Name="EngCNS" ColumnName="EngCNS" />
+          <ScalarProperty Name="EngCode" ColumnName="EngCode" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport_Piging">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport_Piging">
+        <MappingFragment StoreEntitySet="LiugongReport_Piging">
+          <ScalarProperty Name="WorkPrice" ColumnName="WorkPrice" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="SysPrice" ColumnName="SysPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+          <ScalarProperty Name="MAT" ColumnName="MAT" />
+          <ScalarProperty Name="EndTypeCode" ColumnName="EndTypeCode" />
+          <ScalarProperty Name="FTpeCNS" ColumnName="FTpeCNS" />
+          <ScalarProperty Name="FacType" ColumnName="FacType" />
+          <ScalarProperty Name="SS" ColumnName="SS" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="L2" ColumnName="L2" />
+          <ScalarProperty Name="L1" ColumnName="L1" />
+          <ScalarProperty Name="IrrWCode" ColumnName="IrrWCode" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport_Pool">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport_Pool">
+        <MappingFragment StoreEntitySet="LiugongReport_Pool">
+          <ScalarProperty Name="PtypeCNS" ColumnName="PtypeCNS" />
+          <ScalarProperty Name="PtypeCode" ColumnName="PtypeCode" />
+          <ScalarProperty Name="PoolWeight" ColumnName="PoolWeight" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TotalFunds">
+      <EntityTypeMapping TypeName="DryModel.TotalFunds">
+        <MappingFragment StoreEntitySet="TotalFunds">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FarmerFee" ColumnName="FarmerFee" />
+          <ScalarProperty Name="GovSubsidy" ColumnName="GovSubsidy" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmData">
+      <EntityTypeMapping TypeName="DryModel.FarmData">
+        <MappingFragment StoreEntitySet="FarmData">
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="Outside" ColumnName="Outside" />
+          <ScalarProperty Name="AreaCanApply" ColumnName="AreaCanApply" />
+          <ScalarProperty Name="AppliedArea" ColumnName="AppliedArea" />
+          <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+          <ScalarProperty Name="IsApplied" ColumnName="IsApplied" />
+          <ScalarProperty Name="FinalArea" ColumnName="FinalArea" />
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Pcent_Par" ColumnName="Pcent_Par" />
+          <ScalarProperty Name="Pcent_Chd" ColumnName="Pcent_Chd" />
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AcceptanceReportData">
+      <EntityTypeMapping TypeName="DryModel.AcceptanceReportData">
+        <MappingFragment StoreEntitySet="AcceptanceReportData">
+          <ScalarProperty Name="PayM" ColumnName="PayM" />
+          <ScalarProperty Name="ReduceM" ColumnName="ReduceM" />
+          <ScalarProperty Name="VId" ColumnName="VId" />
+          <ScalarProperty Name="VDate" ColumnName="VDate" />
+          <ScalarProperty Name="VDes" ColumnName="VDes" />
+          <ScalarProperty Name="StatCode" ColumnName="StatCode" />
+          <ScalarProperty Name="V_RecNo" ColumnName="V_RecNo" />
+          <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CntrlMat">
+      <EntityTypeMapping TypeName="DryModel.CntrlMat">
+        <MappingFragment StoreEntitySet="CntrlMat">
+          <ScalarProperty Name="MatPriceAply" ColumnName="MatPriceAply" />
+          <ScalarProperty Name="MatAmtAply" ColumnName="MatAmtAply" />
+          <ScalarProperty Name="MatPrice" ColumnName="MatPrice" />
+          <ScalarProperty Name="MatAmt" ColumnName="MatAmt" />
+          <ScalarProperty Name="MatName" ColumnName="MatName" />
+          <ScalarProperty Name="CntrlCode" ColumnName="CntrlCode" />
+          <ScalarProperty Name="CFNo" ColumnName="CFNo" />
+          <ScalarProperty Name="MatNo" ColumnName="MatNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiugongReport_Town">
+      <EntityTypeMapping TypeName="DryModel.LiugongReport_Town">
+        <MappingFragment StoreEntitySet="LiugongReport_Town">
+          <ScalarProperty Name="BuildArea" ColumnName="BuildArea" />
+          <ScalarProperty Name="FarmArea" ColumnName="FarmArea" />
+          <ScalarProperty Name="LandTypeCNS" ColumnName="LandTypeCNS" />
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="Subsection" ColumnName="Subsection" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TotalFee">
+      <EntityTypeMapping TypeName="DryModel.TotalFee">
+        <MappingFragment StoreEntitySet="TotalFee">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FarmerFee" ColumnName="FarmerFee" />
+          <ScalarProperty Name="GoldSubsidy" ColumnName="GoldSubsidy" />
+          <ScalarProperty Name="GovSubsidy" ColumnName="GovSubsidy" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CasePayDetail">
+      <EntityTypeMapping TypeName="DryModel.CasePayDetail">
+        <MappingFragment StoreEntitySet="CasePayDetail">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FarmerFee" ColumnName="FarmerFee" />
+          <ScalarProperty Name="工作費" ColumnName="工作費" />
+          <ScalarProperty Name="設施費總計" ColumnName="設施費總計" />
+          <ScalarProperty Name="蓄水設備費" ColumnName="蓄水設備費" />
+          <ScalarProperty Name="動力設備費" ColumnName="動力設備費" />
+          <ScalarProperty Name="調控設施費" ColumnName="調控設施費" />
+          <ScalarProperty Name="水源設施費" ColumnName="水源設施費" />
+          <ScalarProperty Name="規劃設計費" ColumnName="規劃設計費" />
+          <ScalarProperty Name="田間管路設施費" ColumnName="田間管路設施費" />
+          <ScalarProperty Name="mapno" ColumnName="mapno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmerSysM">
+      <EntityTypeMapping TypeName="DryModel.FarmerSysM">
+        <MappingFragment StoreEntitySet="FarmerSysM">
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="SysPrice" ColumnName="SysPrice" />
+          <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+          <ScalarProperty Name="SpecName3" ColumnName="SpecName3" />
+          <ScalarProperty Name="Spec3" ColumnName="Spec3" />
+          <ScalarProperty Name="SpecName2" ColumnName="SpecName2" />
+          <ScalarProperty Name="Spec2" ColumnName="Spec2" />
+          <ScalarProperty Name="SpecName1" ColumnName="SpecName1" />
+          <ScalarProperty Name="Spec1" ColumnName="Spec1" />
+          <ScalarProperty Name="Spec" ColumnName="Spec" />
+          <ScalarProperty Name="MName" ColumnName="MName" />
+          <ScalarProperty Name="MatGroupCNS" ColumnName="MatGroupCNS" />
+          <ScalarProperty Name="MatOrder" ColumnName="MatOrder" />
+          <ScalarProperty Name="MatGroupID" ColumnName="MatGroupID" />
+          <ScalarProperty Name="ModuleCNS" ColumnName="ModuleCNS" />
+          <ScalarProperty Name="ModuleNo" ColumnName="ModuleNo" />
+          <ScalarProperty Name="POMNo" ColumnName="POMNo" />
+          <ScalarProperty Name="FarSysNo" ColumnName="FarSysNo" />
+          <ScalarProperty Name="No" ColumnName="No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CropAreaDetail">
+      <EntityTypeMapping TypeName="DryModel.CropAreaDetail">
+        <MappingFragment StoreEntitySet="CropAreaDetail">
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Crop_Type" ColumnName="Crop_Type" />
+          <ScalarProperty Name="Crop" ColumnName="Crop" />
+          <ScalarProperty Name="Buildarea" ColumnName="Buildarea" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LandEquity">
+      <EntityTypeMapping TypeName="DryModel.LandEquity">
+        <MappingFragment StoreEntitySet="LandEquity">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+          <ScalarProperty Name="EquityArea" ColumnName="EquityArea" />
+          <ScalarProperty Name="Pcent_Par" ColumnName="Pcent_Par" />
+          <ScalarProperty Name="Pcent_Chd" ColumnName="Pcent_Chd" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FNo" ColumnName="FNo" />
+          <ScalarProperty Name="LNo" ColumnName="LNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CasePayUnit">
+      <EntityTypeMapping TypeName="DryModel.CasePayUnit">
+        <MappingFragment StoreEntitySet="CasePayUnit">
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="GovPayUnit" ColumnName="GovPayUnit" />
+          <ScalarProperty Name="ItemCNS" ColumnName="ItemCNS" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="PayNo" ColumnName="PayNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLog">
+      <EntityTypeMapping TypeName="DryModel.UserLog">
+        <MappingFragment StoreEntitySet="UserLog">
+          <ScalarProperty Name="Ip" ColumnName="Ip" />
+          <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+          <ScalarProperty Name="OperationLog" ColumnName="OperationLog" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SummaryView">
+      <EntityTypeMapping TypeName="DryModel.SummaryView">
+        <MappingFragment StoreEntitySet="SummaryView">
+          <ScalarProperty Name="PDate" ColumnName="PDate" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Designer_Name" ColumnName="Designer_Name" />
+          <ScalarProperty Name="DesId" ColumnName="DesId" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indigenous">
+      <EntityTypeMapping TypeName="DryModel.Indigenous">
+        <MappingFragment StoreEntitySet="Indigenous">
+          <ScalarProperty Name="TownCode" ColumnName="TownCode" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaseDetail">
+      <EntityTypeMapping TypeName="DryModel.CaseDetail">
+        <MappingFragment StoreEntitySet="CaseDetail">
+          <ScalarProperty Name="Indigenous" ColumnName="Indigenous" />
+          <ScalarProperty Name="finalarea" ColumnName="finalarea" />
+          <ScalarProperty Name="farmarea" ColumnName="farmarea" />
+          <ScalarProperty Name="buildarea" ColumnName="buildarea" />
+          <ScalarProperty Name="landCity" ColumnName="landCity" />
+          <ScalarProperty Name="landTown" ColumnName="landTown" />
+          <ScalarProperty Name="CatalogCNS" ColumnName="CatalogCNS" />
+          <ScalarProperty Name="FTpeCNS" ColumnName="FTpeCNS" />
+          <ScalarProperty Name="EndTypeCNS" ColumnName="EndTypeCNS" />
+          <ScalarProperty Name="PDate" ColumnName="PDate" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Designer_Name" ColumnName="Designer_Name" />
+          <ScalarProperty Name="DesId" ColumnName="DesId" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="IsMember" ColumnName="IsMember" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdNo" ColumnName="IdNo" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="MapNo" ColumnName="MapNo" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FarmReapplyQuery">
+      <EntityTypeMapping TypeName="DryModel.FarmReapplyQuery">
+        <MappingFragment StoreEntitySet="FarmReapplyQuery">
+          <ScalarProperty Name="secno" ColumnName="secno" />
+          <ScalarProperty Name="Indigenous" ColumnName="Indigenous" />
+          <ScalarProperty Name="TownCode" ColumnName="TownCode" />
+          <ScalarProperty Name="LandCode" ColumnName="LandCode" />
+          <ScalarProperty Name="Subsection" ColumnName="Subsection" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Section_Code" ColumnName="Section_Code" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="Land_Office_code" ColumnName="Land_Office_code" />
+          <ScalarProperty Name="Land_Office" ColumnName="Land_Office" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Section_Id" ColumnName="Section_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LandData">
+      <EntityTypeMapping TypeName="DryModel.LandData">
+        <MappingFragment StoreEntitySet="LandData">
+          <ScalarProperty Name="Indigenous" ColumnName="Indigenous" />
+          <ScalarProperty Name="TownCode" ColumnName="TownCode" />
+          <ScalarProperty Name="LandCode" ColumnName="LandCode" />
+          <ScalarProperty Name="Subsection" ColumnName="Subsection" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Section_Code" ColumnName="Section_Code" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="Land_Office_Code" ColumnName="Land_Office_Code" />
+          <ScalarProperty Name="Land_Office" ColumnName="Land_Office" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Section_Id" ColumnName="Section_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeisureFarm">
+      <EntityTypeMapping TypeName="DryModel.LeisureFarm">
+        <MappingFragment StoreEntitySet="LeisureFarm">
+          <ScalarProperty Name="License_Exp" ColumnName="License_Exp" />
+          <ScalarProperty Name="Site" ColumnName="Site" />
+          <ScalarProperty Name="Farm_name" ColumnName="Farm_name" />
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeisureFarm_LandInfo">
+      <EntityTypeMapping TypeName="DryModel.LeisureFarm_LandInfo">
+        <MappingFragment StoreEntitySet="LeisureFarm_LandInfo">
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="SectionCode" ColumnName="SectionCode" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="TownCode" ColumnName="TownCode" />
+          <ScalarProperty Name="Town_cns" ColumnName="Town_cns" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+          <ScalarProperty Name="City_cns" ColumnName="City_cns" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SWCBPools">
+      <EntityTypeMapping TypeName="DryModel.SWCBPools">
+        <MappingFragment StoreEntitySet="SWCBPools">
+          <ScalarProperty Name="LandNo" ColumnName="LandNo" />
+          <ScalarProperty Name="SectionCode" ColumnName="SectionCode" />
+          <ScalarProperty Name="SecCNS" ColumnName="SecCNS" />
+          <ScalarProperty Name="Pools" ColumnName="Pools" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Case">
+      <EntityTypeMapping TypeName="DryModel.Case">
+        <MappingFragment StoreEntitySet="Case">
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="PDate" ColumnName="PDate" />
+          <ScalarProperty Name="Is12" ColumnName="Is12" />
+          <ScalarProperty Name="Enable" ColumnName="Enable" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="CDate" ColumnName="CDate" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="IANum" ColumnName="IANum" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="EventNo" ColumnName="EventNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubsidyLimit">
+      <EntityTypeMapping TypeName="DryModel.SubsidyLimit">
+        <MappingFragment StoreEntitySet="SubsidyLimit">
+          <ScalarProperty Name="PlanningFee" ColumnName="PlanningFee" />
+          <ScalarProperty Name="AppliedPercent" ColumnName="AppliedPercent" />
+          <ScalarProperty Name="ControlMaxSubsidy" ColumnName="ControlMaxSubsidy" />
+          <ScalarProperty Name="PoolMinimumArea" ColumnName="PoolMinimumArea" />
+          <ScalarProperty Name="PoolMaxSubsidy" ColumnName="PoolMaxSubsidy" />
+          <ScalarProperty Name="ControlMinimumArea" ColumnName="ControlMinimumArea" />
+          <ScalarProperty Name="EngineMaxSubsidy" ColumnName="EngineMaxSubsidy" />
+          <ScalarProperty Name="PersionLimit" ColumnName="PersionLimit" />
+          <ScalarProperty Name="TotalLimit" ColumnName="TotalLimit" />
+          <ScalarProperty Name="MountainIncrease" ColumnName="MountainIncrease" />
+          <ScalarProperty Name="GoldPercent" ColumnName="GoldPercent" />
+          <ScalarProperty Name="GeneralPercent" ColumnName="GeneralPercent" />
+          <ScalarProperty Name="ApplyUnit" ColumnName="ApplyUnit" />
+          <ScalarProperty Name="ApplyYear" ColumnName="ApplyYear" />
+          <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

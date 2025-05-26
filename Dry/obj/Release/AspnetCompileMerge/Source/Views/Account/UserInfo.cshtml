@@ -1,0 +1,10 @@
+﻿@model AERC.Models.ViewModel.UserInfo
+<h4 class="user">@Model.Unit</h4>
+    您將於<span id="lbl_LogoutMin"></span>分鐘後登出<br><br>
+    帳號：@Model.Account<br>
+    姓名：@Model.Name<br>
+    IP @Request.UserHostAddress
+    @using (Html.BeginForm("Logout", "Account"))
+    {
+        <div class="center"><input id="btn_Logout" class="loginBtn" type="submit" value="登出" /></div>
+    }

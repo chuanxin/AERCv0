@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "推廣管路灌溉設施管理資料庫";
+    @model Dry.Models.ViewModel.ReportView
+}
+@Scripts.Render("~/jquery.validate")
+@Scripts.Render("~/bundles/jqueryjqgrid")
+
+    <h2>設計者批次設定功能</h2>
+<div class="content">
+    @*年度：@Html.DropDownList("ddl_ApplyYear", (IEnumerable<SelectListItem>)Model.ApplyYearDDL, new { style = "width: 100px;" })*@
+    <br />
+    <h4>本功能為批次設定案件的設計者，當完成此功能後將會修改原來的設計者，而無法回復，請謹慎使用此功能。</h4>
+    <br />
+
+    @using (Html.BeginForm("Exe_DesignerChange", "DesignerChange"))
+    {
+        <span>年度：</span>
+        @Html.EditorFor(model => model.ApplyYear)
+        <span>案件編號：</span>
+        @Html.EditorFor(model => model.IANumStart, new { htmlAttributes = new { @class = "input-mini" } })
+        <span>~</span>
+        @Html.EditorFor(model => model.IANumEnd, new { @class = "input-mini" })
+        <br />
+        <span>設計者：</span>
+        @Html.DropDownListFor(model => model.DesginerId, (IEnumerable<SelectListItem>)Model.DesginerDDL, new { style = "width: 120px;" })
+        <button id="BtnChange" type="submit" class="btn" title="修改">
+            <font size="2">修改</font>
+        </button>
+        <div></div>
+
+    }
+</div>
+@*<button id="BtnChange1" type="submit" class="btn" title="修改">
+    <font size="2">修改</font>
+</button>*@
+  
+
+@*<script type="text/javascript">
+    alert("a");
+    //儲存資料
+    $('#BtnChange').click(function () {
+        //alert("a");
+        $.postJson('@Url.Action("Exe_DesignerChange", "DesignerChange")',  function (data) {
+            //$.DisableBlockUI();
+            //alert(data);
+            if (data == "Success") {
+                //window.location.href = "FarmLand/CreateFarm";//Server path
+                @*window.location.href = '@Url.Action("CreateFarm", "FarmLand")';//localhost test path*@
+              @*  window.location.href = '@Url.Action("Exe_DesignerChange", "DesignerChange")';//localhost test path
+            } else {
+                $.DisableBlockUI();
+                alert(data);
+            }
+        });
+    });
+    
+</script>*@
+
+

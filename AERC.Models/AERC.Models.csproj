@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{832F9E9A-6EF9-4839-82AA-C266169023C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AERC.Models</RootNamespace>
+    <AssemblyName>AERC.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.3\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdminQuery.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin_Page.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Aerc_System.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City_Area.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CommonCls\GetAdminData.cs" />
+    <Compile Include="CommonCls\GetCrop.cs" />
+    <Compile Include="CommonCls\GetLandNumber.cs" />
+    <Compile Include="CommonCls\GetOrgan.cs" />
+    <Compile Include="CommonCls\GetSectionData.cs" />
+    <Compile Include="CommonCls\GetSoilData.cs" />
+    <Compile Include="CommonCls\GetStructure.cs" />
+    <Compile Include="CommonCls\GetTitle.cs" />
+    <Compile Include="CommonCls\GetTownData.cs" />
+    <Compile Include="CommonCls\GetUintsData.cs" />
+    <Compile Include="CommonCls\LoginData.cs" />
+    <Compile Include="Crop.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Crop_Type.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function_Page.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Funtion_Group.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Land_Number.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Land_Office.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Land_Type.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\AdminDBService.cs" />
+    <Compile Include="Service\CropDBService.cs" />
+    <Compile Include="Service\DBCommon.cs" />
+    <Compile Include="Service\LandNumberDBService.cs" />
+    <Compile Include="Service\SectionDBService.cs" />
+    <Compile Include="Service\StructureManageDBService.cs" />
+    <Compile Include="Service\TownDBService.cs" />
+    <Compile Include="Soil.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Soil_Type.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Structure.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StructureKind.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StructureType.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Title.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Title_Page.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Town.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unit.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unit_Town.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AdminView.cs" />
+    <Compile Include="ViewModel\CropView.cs" />
+    <Compile Include="ViewModel\LoginView.cs" />
+    <Compile Include="ViewModel\StructureView.cs" />
+    <Compile Include="ViewModel\TownVIew.cs" />
+    <Compile Include="View_Admin.cs">
+      <DependentUpon>Common.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="Common.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Common.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Common.edmx</DependentUpon>
+      <LastGenOutput>Common.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Common.edmx.diagram">
+      <DependentUpon>Common.edmx</DependentUpon>
+    </None>
+    <None Include="Common.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Common.edmx</DependentUpon>
+      <LastGenOutput>Common.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
