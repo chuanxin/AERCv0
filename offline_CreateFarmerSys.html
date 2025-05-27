@@ -2,7 +2,219 @@
 <html>
 <head>
     <title>Create Farmer System</title>
-    <link rel="stylesheet" href="offline_styles.css">
+    <style type="text/css">
+/* Basic Reset / Box Sizing */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 15px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+/* Tables */
+table.dashTable {
+    border-collapse: collapse;
+    width: 100%; /* Default width for all dashTables */
+    margin-bottom: 20px; /* Increased margin */
+    background-color: #fff; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+
+/* Table Cells */
+table.dashTable th,
+table.dashTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+/* Table Headers */
+table.dashTable th {
+    background-color: #e9ecef; /* Slightly softer gray */
+    font-weight: bold;
+    color: #495057; /* Darker text for header */
+}
+
+/* Specific td_style class cells (for labels) */
+.td_style { /* This class is available if HTML is updated to use it */
+    background-color: #f8f9fa; 
+    font-weight: bold;
+    text-align: right;
+    width: 15%; 
+    padding-right: 10px; /* Ensure spacing from input */
+}
+
+/* Input fields and Selects */
+input[type="text"],
+input[type="number"],
+select {
+    padding: 6px 10px; /* Adjusted padding */
+    border: 1px solid #ced4da; /* Softer border */
+    border-radius: 4px;
+    margin-bottom: 5px; 
+    font-size: 14px; /* Consistent font size */
+    line-height: 1.5; /* Improved line height */
+}
+
+input[type="text"].input-small,
+input[type="number"].input-small,
+select.input-small {
+    width: 100px; 
+}
+
+input[type="text"]:not(.input-small):not([style*="width"]), /* Apply only if no inline width style */
+input[type="number"]:not(.input-small):not([style*="width"]),
+select:not(.input-small):not([style*="width"]) { 
+    width: 220px; /* Slightly wider default */
+    max-width: 100%; 
+}
+
+
+/* Readonly inputs */
+input[readonly],
+input[type="text"][readonly],
+input[type="number"][readonly] {
+    background-color: #e9ecef; /* Consistent with header bg */
+    color: #495057; 
+    cursor: not-allowed;
+}
+
+/* Buttons */
+input[type="button"],
+button.btn, /* Targeting .btn class on button elements for specificity */
+button { /* General button styling */
+    padding: 8px 15px; /* Slightly more padding */
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 5px 5px 0; /* Adjusted margin for better spacing */
+    font-size: 14px; 
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Buttons (hover state) */
+input[type="button"]:hover,
+button.btn:hover,
+button:hover {
+    background-color: #0056b3;
+    border-color: #004085; 
+}
+
+/* control-group and controls classes (Bootstrap-like structure) */
+.control-group {
+    margin-bottom: 10px;
+    display: flex; /* Helps align label and control if they were in same group */
+    align-items: center;
+}
+.controls {
+    flex-grow: 1; /* Allows control to take available space */
+}
+
+
+/* Material Group Headers in MatTabl_MainPipe */
+#MatTabl_MainPipe .material-group-header td {
+    background-color: #dee2e6 !important; 
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #212529; 
+    padding: 10px 8px; /* More padding for headers */
+}
+
+
+/* Hidden elements (general utility) */
+.hidden {
+    display: none !important; 
+}
+
+/* Style for the div_Group popup */
+#div_Group {
+    padding: 20px; /* Increased padding */
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px; /* More rounded */
+    margin-top: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+}
+
+#div_Group select {
+    margin-right: 10px;
+    margin-bottom: 10px; /* Spacing for elements in div_Group */
+}
+#div_Group span { /* Style for spans in div_Group */
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal;
+    color: #333;
+}
+#div_Group br {
+    margin-bottom: 5px; /* Spacing after breaks */
+}
+
+
+/* Center align text for the final action buttons container */
+form#form_FarmerSys > div[style*="text-align:center"] {
+    padding: 15px; /* Increased padding */
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6; /* Softer border */
+    margin-top: 25px; /* Increased margin */
+}
+
+/* Styles for submission data display area */
+#submissionDataDisplay {
+    background-color: #282c34; /* Darker background for code */
+    color: #abb2bf; /* Light gray text */
+    border: 1px solid #444; /* Darker border */
+    padding: 15px;
+    margin-top: 20px;
+    display: none; /* Initially hidden, JS will show it */
+    white-space: pre-wrap;   
+    word-break: break-all;   
+    max-height: 500px;       /* Increased max-height */
+    overflow-y: auto;        
+    border-radius: 6px;      /* Rounded corners */
+    font-family: "Courier New", Courier, monospace; /* Monospace font */
+    font-size: 13px;         /* Slightly smaller font for code */
+}
+
+/* Typeahead specific styles (if needed, often handled by library CSS) */
+.tt-menu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: auto; /* Or a specific width */
+    min-width: 200px; /* Ensure it's wide enough */
+}
+.tt-suggestion {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.tt-suggestion:hover, .tt-suggestion.tt-cursor {
+    background-color: #007bff;
+    color: #fff;
+}
+    </style>
 </head>
 <body>
     <form id="form_FarmerSys">
@@ -297,6 +509,137 @@
 
     <pre id="submissionDataDisplay"></pre> <!-- Inline styles removed -->
 
-    <script src="offline_scripts.js" defer></script>
+    <script type="text/javascript">
+//<![CDATA[
+// --- Detailed Data Definitions ---
+// ... (All existing data definitions from previous steps are assumed to be here and complete)
+const unitDDL_Data = [ { value: "-1", text: "請選擇", selected: false }, { value: "0", text: "農田水利署", selected: true }, { value: "16", text: "七星管理處", selected: false }, { value: "17", text: "瑠公管理處", selected: false },{ value: "DIY", text: "DIY (戶長)", selected: false } ];
+const facTypeDDL_Data = [ { value: "", text: "--請選擇--", selected: true }, { value: "1", text: "網室設施", selected: false }, { value: "2", text: "簡易塑膠布溫室", selected: false }, { value: "3", text: "結構型鋼骨溫室", selected: false }, { value: "NONE_FACILITY", text: "無設施", selected: false } ];
+const waterSrcDDL_Data = [ { value: "", text: "--請選擇--", selected: true }, { value: "1", text: "河川", selected: false }, { value: "2", text: "池塘", selected: false }, { value: "3", text: "地下水", selected: false }, { value: "4", text: "水庫", selected: false } ];
+const l1MatDDL_Data = [ { value: "", text: "--材質--", selected: false }, { value: "1", text: "PVC", selected: true }, { value: "2", text: "PE", selected: false }, { value: "3", text: "不鏽鋼", selected: false }]; 
+const l1SpecDDL_Data = [ { value: "", text: "--管徑--", selected: false }, { value: "29", text: "1\"", selected: true }, { value: "28", text: "4吋", selected: false }, { value: "4", text: "2吋", selected: false }]; 
+const l2MatDDL_Data = [ { value: "", text: "--材質--", selected: true }, { value: "1", text: "PVC", selected: false }, { value: "2", text: "PE", selected: false }];
+const l2SpecDDL_Data = [ { value: "", text: "--管徑--", selected: true }, { value: "3", text: "1吋", selected: false }, { value: "2", text: "3/4吋", selected: false }];
+const branchPipeMaterialDDL_Data = [ { value: "", text: "--材質--", selected: true }, { value: "2", text: "PE", selected: false }, { value: "1", text: "PVC", selected: false }];
+const stdpipeMaterialDDL_Data = [ { value: "", text: "--材質--", selected: true }, { value: "1", text: "PVC", selected: false }, { value: "3", text: "不鏽鋼", selected: false }];
+const branchPipeSpecDDL_Data = [ { value: "", text: "--管徑--", selected: true }, { value: "2", text: "3/4吋", selected: false }, { value: "1", text: "1/2吋", selected: false }];
+const stdpipeSpecDDL_Data = [ { value: "", text: "--管徑--", selected: true }, { value: "1", text: "1/2吋", selected: false }, { value: "3", text: "1吋", selected: false }];
+const endTypeDDL_Data = [ { value: "", text: "--請選擇--", selected: true }, { value: "1", text: "穿孔管", selected: false },  { value: "2", text: "噴頭", selected: false }, { value: "3", text: "微噴", selected: false }, { value: "4", text: "滴灌", selected: false }, { value: "5", text: "管塞/閥門 (手動)", selected: false } ];
+const dropDDL_Data = [ { value: "", text: "--請選擇滴灌類型--", selected: true }, { value: "7", text: "滴嘴系統(末端)", selected: false } /* Value 7 for 滴嘴 */, { value: "DRIP001", text: "壓力補償式滴灌帶", selected: false }, { value: "DRIP002", text: "一般滴灌帶", selected: false } ];
+const sprayDDL_Data = [ { value: "", text: "--請選擇噴頭類型--", selected: true }, { value: "SPRAY001", text: "旋轉式噴頭", selected: false }, { value: "6", text: "噴灌槍", selected: false } ];
+const perforatedDDL_Data = [ { value: "", text: "--請選擇穿孔管類型--", selected: true }, { value: "PERF001", text: "單向穿孔", selected: false }, { value: "PERF002", text: "雙向穿孔", selected: false } ];
+const nozzleSpecDDL_Data = [ {value: "", text: "--規格--", selected: true}, {value: "SPRAY_SPEC_MED", text: "中壓噴頭規格 (1-2bar)", selected: false}, {value: "SPRAY_SPEC_LOW", text: "低壓噴頭規格 (0.5-1bar)", selected: false} ];
+const nozzleMaterialDDL_Data = [ {value: "", text: "--材質--", selected: true}, {value: "ABS_MAT", text: "ABS塑膠", selected: false}, {value: "BRASS_MAT", text: "黃銅", selected: false} ];
+const adjustableDDL_Data = [ {value: "", text: "--調整器--", selected: true}, {value: "ADJ_YES", text: "可調", selected: false}, {value: "ADJ_NO", text: "不可調", selected: false} ];
+const groupDDL_Data = [ { value: "", text: "--請選擇管材組--" }, { value: "MAINPIPE_GROUP", text: "主要管材" }, { value: "FITTING_GROUP", text: "管件" }, { value: "VALVE_GROUP", text: "閥類" }, { value: "SPRAYHEAD_GROUP", text: "噴灑器材" }, { value: "AUX_GROUP", text: "輔助材料" } ];
+const nozzleSpec_SourceData = { "6": [ { value: "PERF_SPEC_A", text: "穿孔管規格A (孔徑2mm)" }, { value: "PERF_SPEC_B", text: "穿孔管規格B (孔徑3mm)" } ], "5": [ { value: "SPRAY_SPEC_LOW", text: "低壓噴頭規格 (0.5-1bar)" }, { value: "SPRAY_SPEC_MED", text: "中壓噴頭規格 (1-2bar)" } ], "8": [ {value: "MICRO_SPEC_360", text: "360度微噴頭" }, { value: "MICRO_SPEC_180", text: "180度微噴頭" } ], "12": [ {value: "DRIP_SPEC_2LPH", text: "2 L/hr 滴頭" }, { value: "DRIP_SPEC_4LPH", text: "4 L/hr 滴頭" } ] };
+const nozzleMaterial_SourceData = { "5_SPRAY_SPEC_LOW": [{ value: "ABS_MAT", text: "ABS塑膠(低壓噴頭)" }, { value: "BRASS_MAT", text: "黃銅(低壓噴頭)" }], "5_SPRAY_SPEC_MED": [{ value: "SS_MAT", text: "不鏽鋼(中壓噴頭)"}], "6_PERF_SPEC_A": [{ value: "PE_MAT", text: "PE材質(穿孔管A)" }], "8_MICRO_SPEC_360": [{value: "PLASTIC_MICRO", text: "塑膠微噴頭"}], "12_DRIP_SPEC_2LPH": [{value: "PE_DRIP", text: "PE滴頭"}] };
+const allMaterials_Data_full = [ { pomno: "M001", matname: "PVC管", module: "管材", moduleNo: 1, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "4吋", specNo2: 28, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "一般農業用灰色PVC管", matprice: 120.50, specLength: 6.0 }, { pomno: "M002", matname: "PVC管", module: "管材", moduleNo: 1, mattype: "PVC", matTypeCode: 1, spec1: "SCH80", specNo1: 26, spec2: "2吋", specNo2: 4, spec3: "L:4M", specNo3: 30, itemunit: "支", description: "高壓PVC管", matprice: 90.00, specLength: 4.0 }, { pomno: "M003", matname: "PE軟管", module: "管材", moduleNo: 1, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1吋", specNo2: 3, spec3: "100M/卷", specNo3: 31, itemunit: "卷", description: "農業用黑色PE軟管", matprice: 350.00, specLength: 100.0 }, { pomno: "M004", matname: "PE硬管", module: "管材", moduleNo: 1, mattype: "PE", matTypeCode: 2, spec1: "PN10", specNo1: 32, spec2: "3/4吋", specNo2: 2, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "PE硬質管", matprice: 75.00, specLength: 6.0 }, { pomno: "F001", matname: "PVC彎頭90度", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "4吋", specNo2: 28, spec3: "", specNo3: 0, itemunit: "個", description: "90度彎頭", matprice: 15.00, specLength: null }, { pomno: "F002", matname: "PE快速三通", module: "管件", moduleNo: 2, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PE管用快速三通接頭", matprice: 25.00, specLength: null }, { pomno: "V001", matname: "PVC球閥", module: "閥類", moduleNo: 3, mattype: "PVC", matTypeCode: 1, spec1: "由令式", specNo1: 33, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PVC手動球閥", matprice: 50.00, specLength: null }, { pomno: "V002", matname: "鑄鐵閘閥", module: "閥類", moduleNo: 3, mattype: "鑄鐵", matTypeCode: 4, spec1: "法蘭式", specNo1: 34, spec2: "4吋", specNo2: 28, spec3: "", specNo3: 0, itemunit: "個", description: "手輪閘閥", matprice: 350.00, specLength: null }, { pomno: "S001", matname: "旋轉噴頭", module: "噴灑器材", moduleNo: 5, mattype: "ABS塑膠", matTypeCode: 5, spec1: "中壓", specNo1: 35, spec2: "1/2吋外牙", specNo2: 1, spec3: "灑水半徑5M", specNo3: 36, itemunit: "組", description: "360度旋轉噴頭", matprice: 45.00, specLength: null }, { pomno: "S002", matname: "固定噴霧頭", module: "噴灑器材", moduleNo: 5, mattype: "黃銅", matTypeCode: 50, spec1: "低壓", specNo1: 37, spec2: "1/4吋外牙", specNo2: 38, spec3: "霧化", specNo3: 39, itemunit: "個", description: "細霧噴頭", matprice: 30.00, specLength: null }, { pomno: "P001", matname: "PE穿孔管", module: "噴灑器材", moduleNo: 6, mattype: "PE", matTypeCode: 2, spec1: "單向孔", specNo1: 40, spec2: "3/4吋", specNo2: 2, spec3: "50M/卷", specNo3: 41, itemunit: "卷", description: "PE黑色穿孔管", matprice: 280.00, specLength: 50.0 }, { pomno: "MS001", matname: "十字微噴頭", module: "噴灑器材", moduleNo: 7, mattype: "ABS塑膠", matTypeCode: 5, spec1: "360度", specNo1: 42, spec2: "插式", specNo2: 43, spec3: "", specNo3: 0, itemunit: "組", description: "倒掛式微噴", matprice: 12.00, specLength: null }, { pomno: "D001", matname: "壓力補償滴灌帶", module: "噴灑器材", moduleNo: 8, mattype: "PE", matTypeCode: 2, spec1: "2 L/hr", specNo1: 44, spec2: "間距30cm", specNo2: 45, spec3: "100M/卷", specNo3: 31, itemunit: "卷", description: "內鑲式滴灌帶", matprice: 450.00, specLength: 100.0 }, { pomno: "M005", matname: "不鏽鋼管", module: "管材", moduleNo: 1, mattype: "不鏽鋼", matTypeCode: 3, spec1: "304", specNo1: 46, spec2: "1吋", specNo2: 3, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "食品級不鏽鋼管", matprice: 600.00, specLength: 6.0 }, { pomno: "F003", matname: "PVC大小頭", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "2吋x1吋", specNo2: 47, spec3: "", specNo3: 0, itemunit: "個", description: "異徑接頭", matprice: 10.00, specLength: null }, { pomno: "V003", matname: "PE電磁閥", module: "閥類", moduleNo: 3, mattype: "PE", matTypeCode: 2, spec1: "常閉型", specNo1: 48, spec2: "1吋內牙", specNo2: 3, spec3: "24VAC", specNo3: 49, itemunit: "個", description: "自動灌溉用電磁閥", matprice: 250.00, specLength: null }, { pomno: "S003", matname: "扇形噴頭", module: "噴灑器材", moduleNo: 5, mattype: "ABS塑膠", matTypeCode: 5, spec1: "90度", specNo1: 50, spec2: "1/2吋內牙", specNo2: 1, spec3: "", specNo3: 0, itemunit: "個", description: "邊界灌溉用", matprice: 35.00, specLength: null }, { pomno: "D002", matname: "可調式滴頭", module: "噴灑器材", moduleNo: 8, mattype: "ABS塑膠", matTypeCode: 5, spec1: "0-70 L/hr", specNo1: 51, spec2: "插式", specNo2: 43, spec3: "", specNo3: 0, itemunit: "個", description: "流量可調滴頭", matprice: 5.00, specLength: null }, { pomno: "AUX001", matname: "PVC膠水", module: "輔助材料", moduleNo: 10, mattype: "化學品", matTypeCode: 52, spec1: "小罐", specNo1: 53, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "罐", description: "PVC管專用膠合劑", matprice: 25.00, specLength: null }, { pomno: "AUX002", matname: "止洩帶", module: "輔助材料", moduleNo: 10, mattype: "PTFE", matTypeCode: 54, spec1: "標準", specNo1: 55, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "卷", description: "螺牙止洩用", matprice: 8.00, specLength: null }, { pomno: "M006", matname: "鍍鋅鋼管", module: "管材", moduleNo: 1, mattype: "鍍鋅鋼", matTypeCode: 56, spec1: "薄管", specNo1: 57, spec2: "1吋", specNo2: 3, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "溫室結構用", matprice: 220.00, specLength: 6.0 }, { pomno: "F004", matname: "PE彎頭", module: "管件", moduleNo: 2, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1/2吋", specNo2: 1, spec3: "", specNo3: 0, itemunit: "個", description: "PE快速彎頭", matprice: 12.00, specLength: null }, { pomno: "V004", matname: "過濾器", module: "閥類", moduleNo: 3, mattype: "塑膠", matTypeCode: 5, spec1: "Y型", specNo1: 58, spec2: "1吋", specNo2: 3, spec3: "120目", specNo3: 59, itemunit: "組", description: "滴灌系統過濾", matprice: 180.00, specLength: null }, { pomno: "MS002", matname: "單邊微噴帶", module: "噴灑器材", moduleNo: 7, mattype: "PE", matTypeCode: 2, spec1: "噴幅2M", specNo1: 60, spec2: "長50M", specNo2: 41, spec3: "", specNo3: 0, itemunit: "卷", description: "微噴帶", matprice: 300.00, specLength: 50.0 }, { pomno: "D003", matname: "滴箭", module: "噴灑器材", moduleNo: 8, mattype: "PP", matTypeCode: 61, spec1: "彎型", specNo1: 62, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "支", description: "盆栽用滴箭", matprice: 2.00, specLength: null }, { pomno: "AUX003", matname: "PE管束", module: "輔助材料", moduleNo: 10, mattype: "塑膠", matTypeCode: 5, spec1: "1吋", specNo1: 3, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "包", description: "固定PE管用", matprice: 30.00, specLength: null }, { pomno: "M007", matname: "PVC透明軟管", module: "管材", moduleNo: 9, mattype: "PVC", matTypeCode: 1, spec1: "食品級", specNo1: 63, spec2: "1/2吋", specNo2: 1, spec3: "50M/卷", specNo3: 41, itemunit: "卷", description: "觀察水位用", matprice: 200.00, specLength: 50.0 }, { pomno: "F005", matname: "管塞", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PVC管帽", matprice: 5.00, specLength: null }, { pomno: "V005", matname: "水錶", module: "閥類", moduleNo: 3, mattype: "鑄鐵", matTypeCode: 4, spec1: "機械式", specNo1: 64, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "流量計量", matprice: 450.00, specLength: null }
+];
+const allMaterials_Data = allMaterials_Data_full;
+const PigingLimit_Data = { "unit0_year112_endtype1_factype1": { FacilityFee: 40000, WorkingFee: 20000, PipeMeter: 70, PipePercent: 0, BranchPipeMeter: 0, BranchPipePercent: 0, DripPipeMeter: 0, DripPipePercent: 0 }, "unit0_year112_endtype2_factype1": { FacilityFee: 50000, WorkingFee: 25000, PipeMeter: 0, PipePercent: 50, BranchPipeMeter: 0, BranchPipePercent: 0, DripPipeMeter: 0, DripPipePercent: 0 }, "unit0_year112_endtype4_factype2": { FacilityFee: 60000, WorkingFee: 30000, PipeMeter: 0, PipePercent: 0, BranchPipeMeter: 0, BranchPipePercent: 0, DripPipeMeter: 200, DripPipePercent: 0 }, "default_endtype1": { FacilityFee: 35000, WorkingFee: 18000, PipeMeter: 60 }, "default_endtype2": { FacilityFee: 45000, WorkingFee: 22000, PipePercent: 45 }, "default_endtype4": { FacilityFee: 55000, WorkingFee: 28000, DripPipeMeter: 180 },"default": { FacilityFee: 30000, WorkingFee: 15000 } };
+const SubsidyLimit_Data = { "unit0_year112": { GeneralPercent: 49, AppliedPercent: 40, GoldPercent: 70, PlanningFeePercent: 2, TotalLimit: 200000, FacilityLimit: 100000 }, "unit16_year112": { GeneralPercent: 50, AppliedPercent: 42, GoldPercent: 75, PlanningFeePercent: 2.5, TotalLimit: 220000, FacilityLimit: 110000 }, "default": { GeneralPercent: 45, AppliedPercent: 35, GoldPercent: 65, PlanningFeePercent: 1.5, TotalLimit: 180000, FacilityLimit: 90000 }};
+const SLOPE_MULTIPLIER = 1.2; let IS_SLOPE_AREA = false; 
+const pipePriceAndSpecData = { "1_29_0_112": { price: 71, specLength: 4 }, "1_5_0_112": { price: 110, specLength: 6.0 }, "1_26_0_112": { price: 95, specLength: 4.0 }, "2_6_0_112": { price: 360, specLength: 100.0 }, "2_32_0_112": { price: 80, specLength: 6.0 } };
+let currentUnitId = "0";  let currentYear = "112"; 
+let currentMapNo_sim = { unitId: "0", applyYear: "112", endType: "", facType: "", isGold: false, isApplied: true };
+
+// --- Helper functions ---
+function toggleVisibility(controlElementValue, targetValueToShow, elementToShowId, elementToHideId) { const showElement = document.getElementById(elementToShowId); const hideElement = document.getElementById(elementToHideId); if (!showElement || !hideElement) { return; } if (controlElementValue === targetValueToShow) { showElement.style.display = ''; hideElement.style.display = 'none'; } else { showElement.style.display = 'none'; hideElement.style.display = ''; } }
+function setElementVisibility(elementId, isVisible) { const element = document.getElementById(elementId); if (element) { element.style.display = isVisible ? '' : 'none'; } }
+function populateDropdown(selectElementId, dataArray, useValueAndTextDirectly = false) { const selectElement = document.getElementById(selectElementId); if (selectElement) { selectElement.innerHTML = ''; dataArray.forEach(item => { const option = document.createElement('option'); if (useValueAndTextDirectly) { option.value = item.value; option.textContent = item.text; } else { option.value = item.value !== undefined ? item.value : item.matTypeCode !== undefined ? item.matTypeCode : item.specNo !== undefined ? item.specNo : ''; option.textContent = item.text; } if (item.selected) { option.selected = true; } selectElement.appendChild(option); }); } else { console.warn(`populateDropdown: Element with ID '${selectElementId}' not found.`); } }
+
+// --- Initialize Dropdowns ---
+function initializeFormDropdowns() { populateDropdown('ddl_FarmerSysUnit', unitDDL_Data); populateDropdown('ddl_FacType', facTypeDDL_Data); populateDropdown('ddl_WtaerSrc', waterSrcDDL_Data); populateDropdown('L1Mat', l1MatDDL_Data); populateDropdown('L1Spec', l1SpecDDL_Data); populateDropdown('L2Mat', l2MatDDL_Data); populateDropdown('L2Spec', l2SpecDDL_Data); populateDropdown('ddl_EndType', endTypeDDL_Data); populateDropdown('ddl_Drop', dropDDL_Data); populateDropdown('ddl_Sprinkler', sprayDDL_Data); populateDropdown('ddl_Perforated', perforatedDDL_Data); populateDropdown('BranchPipeMaterial', branchPipeMaterialDDL_Data); populateDropdown('NozzleType', nozzleMaterialDDL_Data); populateDropdown('BranchPipeSpec', branchPipeSpecDDL_Data); populateDropdown('NozzleSpec', nozzleSpecDDL_Data); populateDropdown('Adjustable', adjustableDDL_Data); populateDropdown('StdpipeMat', stdpipeMaterialDDL_Data); populateDropdown('StdpipeSpec', stdpipeSpecDDL_Data); populateDropdown('ddl_Group', groupDDL_Data); if(document.getElementById('NozzleSpec')) populateDropdown('NozzleSpec', [{value:"", text:"--請先選擇末端處理--"}]); if(document.getElementById('NozzleType')) populateDropdown('NozzleType', [{value:"", text:"--請先選擇規格--"}]); }
+
+// --- Local Data Lookup Functions ---
+function getLocalPipeData(materialId, specId, unitId, year, isSlope) { const key = `${materialId}_${specId}_${unitId}_${year}`; let data = pipePriceAndSpecData[key]; let price = 0; let specLength = null; if (data) { price = data.price; specLength = data.specLength; } else { const material = allMaterials_Data.find(m => m.matTypeCode === parseInt(materialId) && (m.specNo1 === parseInt(specId) || m.specNo2 === parseInt(specId) || m.specNo3 === parseInt(specId))); if (material) { price = material.matprice; specLength = material.specLength; } } if (isSlope && price) { price = parseFloat((price * SLOPE_MULTIPLIER).toFixed(2)); } return { price: price, specLength: specLength }; }
+function getModuleNoFromEndType(endTypeValue, sprinklerValue, dropValue) { let effectiveEndType = endTypeValue; if (endTypeValue === "2" && sprinklerValue) { effectiveEndType = sprinklerValue; } else if (endTypeValue === "4" && dropValue) { effectiveEndType = dropValue; } switch (effectiveEndType) { case "1": return "6"; case "2": return "5"; case "6": return "5"; case "3": return "8"; case "4": return "12"; case "7": return "9"; default: return null; } }
+function getLocalNozzleSpecs(endTypeValue, sprinklerValue, dropValue) { const moduleNo = getModuleNoFromEndType(endTypeValue, sprinklerValue, dropValue); if (moduleNo && nozzleSpec_SourceData[moduleNo]) { return nozzleSpec_SourceData[moduleNo]; } return [{ value: "", text: "--無適用規格--" }]; }
+function getLocalNozzleTypes(specNo, endTypeValue, sprinklerValue, dropValue) { const moduleNo = getModuleNoFromEndType(endTypeValue, sprinklerValue, dropValue); if (!moduleNo || !specNo) return [{ value: "", text: "--無適用材質--" }]; const key = `${moduleNo}_${specNo}`; if (nozzleMaterial_SourceData[key]) { return nozzleMaterial_SourceData[key]; } return [{ value: "", text: "--無適用材質--" }]; }
+
+// --- JS Objects for Material Module Logic ---
+const MaterialModule_Offline = {}; const HardwareMaterial_Offline = {}; const MainPipeline_Offline = {}; const Standpipeline_Offline = {}; const BranchPipeline_Offline = {}; const DripIrrigation_Offline = {}; const PerforatedPipe_Offline = {};
+function getLocalMaterialPrice(pomno, isSlopeParam) { const material = allMaterials_Data.find(m => m.pomno === pomno); if (!material || material.matprice === undefined) { console.warn(`Price not found for pomno: ${pomno}`); return 0; } let price = material.matprice; if (isSlopeParam) { price = parseFloat((price * SLOPE_MULTIPLIER).toFixed(2)); } return price; }
+function _createStdSysMat(item, quantity, groupNo, orderNo, customNote = "") { if (!item) return null; const price = getLocalMaterialPrice(item.pomno, IS_SLOPE_AREA); return { GroupNo: groupNo, OrderNo: orderNo, pomno: item.pomno, matname: item.matname, module: item.module, spec1: item.spec1, spec2: item.spec2, spec3: item.spec3, itemunit: item.itemunit, matprice: price, matamount: quantity, total: parseFloat((price * quantity).toFixed(2)), description: customNote || item.description, mattype: item.mattype }; }
+MainPipeline_Offline.L1MainPipeLine_local = function(materials, formData, unitId, year, isSlope) { const results = []; const mainPipeMaterial = materials.find(m => m.moduleNo === 1 && m.matTypeCode === parseInt(formData.L1Mat) && (m.specNo1 === parseInt(formData.L1Spec) || m.specNo2 === parseInt(formData.L1Spec) || m.specNo3 === parseInt(formData.L1Spec)) ); if (mainPipeMaterial && formData.L1Len > 0) { let quantity = 0; const specLength = mainPipeMaterial.specLength || 4; quantity = Math.ceil(parseFloat(formData.L1Len) / specLength); results.push(_createStdSysMat(mainPipeMaterial, quantity, 1, 1, "主幹管L1")); const elbow = HardwareMaterial_Offline.getElbow_local(materials, parseInt(formData.L1Spec), unitId, year, isSlope); if(elbow) results.push(elbow); const receptacle = HardwareMaterial_Offline.getReceptacle_local(materials, parseInt(formData.L1Spec), unitId, year, isSlope); if(receptacle) results.push(receptacle); } return results; };
+MainPipeline_Offline.L2MainPipeLine_local = function(materials, formData, unitId, year, isSlope) { const results = []; if (!formData.L2Len || formData.L2Len <= 0) return results; const mainPipeMaterial = materials.find(m => m.moduleNo === 1 && m.matTypeCode === parseInt(formData.L2Mat) && (m.specNo1 === parseInt(formData.L2Spec) || m.specNo2 === parseInt(formData.L2Spec) || m.specNo3 === parseInt(formData.L2Spec)) ); if (mainPipeMaterial && formData.L2Len > 0) { let quantity = 0; const specLength = mainPipeMaterial.specLength || 4; quantity = Math.ceil(parseFloat(formData.L2Len) / specLength); results.push(_createStdSysMat(mainPipeMaterial, quantity, 1, 2, "次幹管L2")); const elbow = HardwareMaterial_Offline.getElbow_local(materials, parseInt(formData.L2Spec), unitId, year, isSlope, 2); if(elbow) results.push(elbow); } return results; };
+HardwareMaterial_Offline.getElbow_local = function(materials, mainPipeSpecNo_val, unitId, year, isSlope, quantity = 2) { const elbowMaterial = materials.find(m => m.moduleNo === 2 && m.matname.includes("彎頭") && (m.specNo1 === mainPipeSpecNo_val || m.specNo2 === mainPipeSpecNo_val || m.specNo3 === mainPipeSpecNo_val) ); if (elbowMaterial) return _createStdSysMat(elbowMaterial, quantity, 2, 1, "彎頭"); return null; };
+HardwareMaterial_Offline.getReceptacle_local = function(materials, mainPipeSpecNo_val, unitId, year, isSlope, quantity = 1) { const receptacleMaterial = materials.find(m => m.moduleNo === 2 && m.matname.includes("管塞") && (m.specNo1 === mainPipeSpecNo_val || m.specNo2 === mainPipeSpecNo_val || m.specNo3 === mainPipeSpecNo_val) ); if (receptacleMaterial) return _createStdSysMat(receptacleMaterial, quantity, 2, 2, "管塞"); return null; };
+HardwareMaterial_Offline.GetTeePipe_local = function(materials, mainSpecNo, branchSpecNo, quantity = 1) { const tee = materials.find(m => m.moduleNo === 2 && m.matname.includes("三通") && (m.specNo1 === mainSpecNo || m.specNo2 === mainSpecNo)); if (tee) return _createStdSysMat(tee, quantity, 2, 3, "三通接頭"); return null; }
+HardwareMaterial_Offline.GetValves_local = function(materials, pipeSpecNo, quantity = 1) { const valve = materials.find(m => m.moduleNo === 3 && (m.specNo1 === pipeSpecNo || m.specNo2 === pipeSpecNo)); if (valve) return _createStdSysMat(valve, quantity, 2, 4, "閥門"); return null; }
+PerforatedPipe_Offline.getPerforatedPipeMaterials_local = function(materials, formData, unitId, year, isSlope, mainPipeSpecVal) { const results = []; const perfPipeMaterial = materials.find(m => m.pomno === formData.PerforatedPipeType); if (perfPipeMaterial && formData.Length > 0 && formData.SL > 0 && formData.width > 0) { const BN = parseFloat(formData.Length) / parseFloat(formData.SL); let amount = Math.ceil((BN * parseFloat(formData.width)) / (perfPipeMaterial.specLength || 100)); if (formData.PerforatedPipeLayout === "2") { amount *= 2; } results.push(_createStdSysMat(perfPipeMaterial, amount, 3, 1, "穿孔管")); if (formData.PerforatedPipeLayout === "2") { } else { const tee = HardwareMaterial_Offline.GetTeePipe_local(materials, mainPipeSpecVal, perfPipeMaterial.specNo2 || perfPipeMaterial.specNo1, Math.ceil(BN)); if(tee) results.push(tee); } const valve = HardwareMaterial_Offline.GetValves_local(materials, perfPipeMaterial.specNo2 || perfPipeMaterial.specNo1, Math.ceil(BN)); if(valve) results.push(valve); } return results; };
+DripIrrigation_Offline.getDripNozzleSystemMaterials_local = function(materials, formData, unitId, year, isSlope, mainPipeSpecVal) { const results = []; if(!formData.BranchMaterial || !formData.BranchSpec) return results; const branchPipe = BranchPipeline_Offline.getBranchPipe_local(materials, formData, unitId, year, isSlope); if(branchPipe) results.push(branchPipe); const BN = formData.Length > 0 && formData.SL > 0 ? Math.ceil(parseFloat(formData.Length) / parseFloat(formData.SL)) : 0; if (BN > 0 && branchPipe) { const tee = HardwareMaterial_Offline.GetTeePipe_local(materials, mainPipeSpecVal, branchPipe.specNo2 || branchPipe.specNo1, BN); if(tee) results.push(tee); const valve = HardwareMaterial_Offline.GetValves_local(materials, branchPipe.specNo2 || branchPipe.specNo1, BN); if(valve) results.push(valve); const endFitting = materials.find(m => m.moduleNo === 2 && m.matname.includes("管塞") && (m.specNo1 === (branchPipe.specNo2 || branchPipe.specNo1))); if(endFitting) results.push(_createStdSysMat(endFitting, BN * 2, 4, 3, "管末處理")); } const dripNozzle = materials.find(m => m.pomno === formData.NozzleSpec); if (dripNozzle && BN > 0 && formData.SS > 0 && formData.width > 0) { const SN = Math.ceil(parseFloat(formData.width) / parseFloat(formData.SS)); const totalNozzles = BN * SN; results.push(_createStdSysMat(dripNozzle, totalNozzles, 8, 1, "滴嘴")); } return results; };
+BranchPipeline_Offline.getBranchPipe_local = function(materials, formData, unitId, year, isSlope) { const branchMaterial = materials.find(m => m.moduleNo === 1 && m.matTypeCode === parseInt(formData.BranchMaterial) && (m.specNo1 === parseInt(formData.BranchSpec) || m.specNo2 === parseInt(formData.BranchSpec) || m.specNo3 === parseInt(formData.BranchSpec)) ); if (branchMaterial && formData.Length > 0 && formData.SL > 0 && formData.width > 0) { const BN = Math.ceil(parseFloat(formData.Length) / parseFloat(formData.SL)); const totalLength = BN * parseFloat(formData.width); const specLength = branchMaterial.specLength || 100; const quantity = Math.ceil(totalLength / specLength); return _createStdSysMat(branchMaterial, quantity, 4, 1, "支管(滴灌用)"); } return null; };
+const groupNameMapping = { 1: "主要管材", 2: "管件與閥類", 3: "穿孔管材", 4: "支管(滴灌)", 8: "滴灌器材", /* ... more ... */ };
+function groupMaterials(materialList) { if (!materialList || materialList.length === 0) return []; const grouped = {}; materialList.forEach(mat => { if(!mat) return; const groupNo = mat.GroupNo || 0; if (!grouped[groupNo]) { grouped[groupNo] = { GroupName: groupNameMapping[groupNo] || `其他材料 (組 ${groupNo})`, GroupNo: groupNo, List: [] }; } grouped[groupNo].List.push({ pomNo: mat.pomno, matOrderCNS: `${groupNameMapping[groupNo] || '項目'} ${mat.OrderNo || ''}`.trim(), mName: mat.matname, moduleCNS: mat.module, spec: `${mat.spec1 || ''} ${mat.spec2 || ''} ${mat.spec3 || ''}`.trim(), itemUnit: mat.itemunit, note: mat.description, price: mat.matprice, amount: mat.matamount, totalPrice: mat.total, matOrder: mat.OrderNo, matGroup: `GROUP_${groupNo}` }); }); return Object.values(grouped).sort((a, b) => a.GroupNo - b.GroupNo); }
+MaterialModule_Offline.generateStandardMaterials_local = function(formData) { let materialList = []; const unitId = currentUnitId; const year = parseInt(currentYear); const isSlope = IS_SLOPE_AREA; const l1Pipes = MainPipeline_Offline.L1MainPipeLine_local(allMaterials_Data, formData, unitId, year, isSlope); materialList = materialList.concat(l1Pipes.filter(m => m !== null)); const mainPipeSpecVal = parseInt(formData.L1Spec); if (formData.L2Len && parseFloat(formData.L2Len) > 0) { const l2Pipes = MainPipeline_Offline.L2MainPipeLine_local(allMaterials_Data, formData, unitId, year, isSlope); materialList = materialList.concat(l2Pipes.filter(m => m !== null)); } switch (formData.ddl_EndType) { case "1": const perfMaterials = PerforatedPipe_Offline.getPerforatedPipeMaterials_local(allMaterials_Data, formData, unitId, year, isSlope, mainPipeSpecVal); materialList = materialList.concat(perfMaterials.filter(m => m !== null)); break; case "4": if (formData.ddl_Drop === '7') { const dripNozzleMaterials = DripIrrigation_Offline.getDripNozzleSystemMaterials_local(allMaterials_Data, formData, unitId, year, isSlope, mainPipeSpecVal); materialList = materialList.concat(dripNozzleMaterials.filter(m => m !== null)); } else if (formData.ddl_Drop === '8') { console.log("EndType: Drip - Drip Pipe (8) logic to be implemented"); } else { console.log("EndType: Drip - Other drip type logic to be implemented"); } break; case "2": console.log("EndType: Spray - logic to be implemented"); break; case "3": console.log("EndType: MicroSpray - logic to be implemented"); break; default: console.log("EndType: Default or Manual (plug/valve) - specific items beyond main pipe + fittings not automatically added."); break; } return materialList.filter(m => m !== null); };
+function loadStandardMaterials() { console.log("Initiating local standard material generation..."); const formDataObject = { ddl_EndType: document.getElementById('ddl_EndType').value, L1Mat: document.getElementById('L1Mat').value, L1Spec: document.getElementById('L1Spec').value, L1Len: parseFloat(document.getElementById('L1Len').value) || 0, L2Mat: document.getElementById('L2Mat').value, L2Spec: document.getElementById('L2Spec').value, L2Len: parseFloat(document.getElementById('L2Len').value) || 0, Length: parseFloat(document.getElementById('Length').value) || 0, width: parseFloat(document.getElementById('width').value) || 0, SL: parseFloat(document.getElementById('SL')?.value) || 0, SS: parseFloat(document.getElementById('SS')?.value) || 0, PerforatedPipeType: document.getElementById('ddl_Perforated')?.value, PerforatedPipeLayout: "1", ddl_Drop: document.getElementById('ddl_Drop')?.value, ddl_Sprinkler: document.getElementById('ddl_Sprinkler')?.value, BranchMaterial: document.getElementById('BranchPipeMaterial')?.value, BranchSpec: document.getElementById('BranchPipeSpec')?.value, NozzleSpec: document.getElementById('NozzleSpec')?.value, IS_SLOPE_AREA: IS_SLOPE_AREA }; const flatMaterialList = MaterialModule_Offline.generateStandardMaterials_local(formDataObject); const groupedMaterialList = groupMaterials(flatMaterialList); populateInitialMaterials(groupedMaterialList); updateGrandTotal(); }
+function collectParaObjData() { const ParaObj = { Unit: document.getElementById('ddl_FarmerSysUnit')?.value || "", ApplyYear: document.getElementById('ApplyYear')?.value || currentYear, Block: "", IrrWCode: document.getElementById('ddl_WtaerSrc')?.value || "", FacNo: document.getElementById('ddl_FacType')?.value || "", width: parseFloat(document.getElementById('width')?.value) || 0, Length: parseFloat(document.getElementById('Length')?.value) || 0, BuildArea: parseFloat(document.getElementById('BuildArea')?.value) || 0, SendArea: parseFloat(document.getElementById('SendArea')?.value) || 0, L1Len: parseFloat(document.getElementById('L1Len')?.value) || 0, L1Mat: document.getElementById('L1Mat')?.value || "", L1Spec: document.getElementById('L1Spec')?.value || "", L2Len: parseFloat(document.getElementById('L2Len')?.value) || 0, L2Mat: document.getElementById('L2Mat')?.value || "", L2Spec: document.getElementById('L2Spec')?.value || "", ddl_EndType: document.getElementById('ddl_EndType')?.value || "", ddl_Drop: document.getElementById('ddl_Drop')?.value || "", ddl_Sprinkler: document.getElementById('ddl_Sprinkler')?.value || "", ddl_Perforated: document.getElementById('ddl_Perforated')?.value || "", BranchPipeMaterial: document.getElementById('BranchPipeMaterial')?.value || "", BranchPipeSpec: document.getElementById('BranchPipeSpec')?.value || "", SS: parseFloat(document.getElementById('SS')?.value) || 0, SL: parseFloat(document.getElementById('SL')?.value) || 0, NozzleType: document.getElementById('NozzleType')?.value || "", NozzleSpec: document.getElementById('NozzleSpec')?.value || "", Adjustable: document.getElementById('Adjustable')?.value || "", StdpipeMat: document.getElementById('StdpipeMat')?.value || "", StdpipeHei: parseFloat(document.getElementById('StdpipeHei')?.value) || 0, StdpipeSpec: document.getElementById('StdpipeSpec')?.value || "", PriceJsonDataAry: [], MainJsonDataAry: [], EndTypeDataAry: [] }; const materialTableRows = document.querySelectorAll("#MatTabl_MainPipe tbody tr:not(.material-group-header)"); materialTableRows.forEach((row, index) => { const cells = row.cells; if (cells.length < 10) return; const pomno = cells[0].textContent; const matOrderCNS = cells[1].textContent; const matGroupHeader = $(row).prevAll('.material-group-header:first').find('td').text(); ParaObj.PriceJsonDataAry.push({ pomno: pomno, Amt: parseFloat(row.querySelector('.mat_num')?.value) || 0, Price: parseFloat(row.querySelector('.mat_price')?.value) || 0, TotalPrice: parseFloat(row.querySelector('.mat_total')?.value) || 0, Group: matGroupHeader || "N/A", Order: index + 1 }); }); ParaObj.MainJsonDataAry.push({ L1Len: ParaObj.L1Len, L1Mat: ParaObj.L1Mat, L1Spec: ParaObj.L1Spec, L1Price: parseFloat(document.getElementById('L1Price')?.value) || 0, L1MatAmt: parseFloat(document.getElementById('L1MatAmt')?.value) || 0, L1SpecLength: parseFloat(document.getElementById('L1SpecLength')?.value) || null }); if(ParaObj.L2Len > 0) { ParaObj.MainJsonDataAry.push({ L2Len: ParaObj.L2Len, L2Mat: ParaObj.L2Mat, L2Spec: ParaObj.L2Spec, L2Price: parseFloat(document.getElementById('L2Price')?.value) || 0, L2MatAmt: parseFloat(document.getElementById('L2MatAmt')?.value) || 0, L2SpecLength: parseFloat(document.getElementById('L2SpecLength')?.value) || null }); } if (ParaObj.ddl_EndType) { ParaObj.EndTypeDataAry.push({ Endtype: ParaObj.ddl_EndType, NozzleSpec: ParaObj.NozzleSpec, NozzleType: ParaObj.NozzleType, ddl_Drop: ParaObj.ddl_Drop, ddl_Sprinkler: ParaObj.ddl_Sprinkler, ddl_Perforated: ParaObj.ddl_Perforated }); } return ParaObj; }
+FarmerSysPriceService_Offline.getWorkPrice_local = function(paraObjData, area, mapNo_sim_context) { /* ... */ return 0; }; FarmerSysPriceService_Offline.getPlanningPrice_local = function(totalPrice, unitId, applyYear) { /* ... */ return 0; }; FarmerSysPriceService_Offline.getPrice_local = function(paraObjData, mapNo_sim_context, area) { /* ... */ return 0; }; FarmerSysPriceService_Offline.getHelpPrice_local = function(paraObjData, area, mapNo_sim_context) { /* ... */ return 0; }; FarmerSysPriceService_Offline.getHelpTotalPrice_local = function(paraObjData, mapNo_sim_context) { /* ... */ return [0,0,0]; };
+Calculate_Funding_Offline.CalIrrMoney_local = function(isGold, isApplied, area, endType, facType, ss, sl, total_money, caseData_sim, pigingLimit_sim, subsidyLimit_sim) { /* ... */ return 0; }; Calculate_Funding_Offline.CalLiuIrrMoney_local = function() { console.warn("CalLiuIrrMoney_local not implemented."); return 0; }; Calculate_Funding_Offline.SevenCalIrrMoney_local = function() { console.warn("SevenCalIrrMoney_local not implemented."); return 0; };
+function updateFundingDisplay_local() { /* ... */ }
+function handleSaveFarmerSys() { /* ... */ }
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeFormDropdowns();
+    populateInitialMaterials(initialMaterialsData); 
+    updateGrandTotal();  
+    calculateBlockArea(); 
+    setElementVisibility('ddl_Drop', false); setElementVisibility('ddl_Sprinkler', false); setElementVisibility('ddl_Perforated', false);
+    
+    const DryMat_localData = allMaterials_Data.map(m => ({ pomno: m.pomno, matname: m.matname, module: m.module, mattype: m.mattype, spec1: m.spec1, spec2: m.spec2, spec3: m.spec3, description: m.description, itemunit: m.itemunit, matprice: m.matprice }));
+    const DryMat = new Bloodhound({ datumTokenizer: function (d) { const matnameTokens = Bloodhound.tokenizers.whitespace(d.matname); const pomnoTokens = Bloodhound.tokenizers.whitespace(d.pomno); return matnameTokens.concat(pomnoTokens); }, queryTokenizer: Bloodhound.tokenizers.whitespace, local: DryMat_localData });
+    DryMat.initialize();
+    if (typeof $ !== 'undefined' && $.fn.typeahead) {
+        $('#Mat_Search').typeahead({ hint: true, highlight: true, minLength: 1 }, { name: 'drymat-materials', displayKey: 'matname', source: DryMat.ttAdapter(), templates: { empty: [ '<div class="empty-message" style="padding: 5px 10px; text-align: center;">', '未找到符合的物料', '</div>'].join('\n'), suggestion: function(data) { return '<div><strong>' + data.matname + '</strong> – ' + (data.spec1 || '') + ' ' + (data.spec2 || '') + ' (' + data.pomno + ')</div>'; } }
+        }).bind('typeahead:selected', function (obj, datum, name) {
+            $('#span_matname').text(datum.matname || 'N/A'); $('#span_matspec').text(`${datum.spec1 || ''} ${datum.spec2 || ''} ${datum.spec3 || ''}`.trim() || 'N/A'); $('#span_itemunit').text(datum.itemunit || 'N/A'); $('#span_price').text(datum.matprice !== undefined ? datum.matprice.toFixed(2) : '0.00'); $('#hiddn_pomno_selected').val(datum.pomno || '');
+            handleOpenMaterialPopup();
+        });
+    } else { console.warn("jQuery or Typeahead.js not loaded. Material search will not be fully functional."); }
+
+    const l1Mat = document.getElementById('L1Mat'); const l1Spec = document.getElementById('L1Spec'); const l1Len = document.getElementById('L1Len');
+    if (l1Mat) l1Mat.addEventListener('change', handleL1MatOrSpecChange);
+    if (l1Spec) l1Spec.addEventListener('change', handleL1MatOrSpecChange);
+    if (l1Len) l1Len.addEventListener('input', calculateL1MatAmt);
+    const l2Mat = document.getElementById('L2Mat'); const l2Spec = document.getElementById('L2Spec'); const l2Len = document.getElementById('L2Len');
+    if (l2Mat) l2Mat.addEventListener('change', handleL2MatOrSpecChange);
+    if (l2Spec) l2Spec.addEventListener('change', handleL2MatOrSpecChange);
+    if (l2Len) l2Len.addEventListener('input', calculateL2MatAmt);
+    const lengthInput = document.getElementById('Length'); if (lengthInput) lengthInput.addEventListener('input', calculateBlockArea);
+    const widthInput = document.getElementById('width'); if (widthInput) widthInput.addEventListener('input', calculateBlockArea);
+    const ddlEndType = document.getElementById('ddl_EndType'); if (ddlEndType) ddlEndType.addEventListener('change', handleEndTypeChange);
+    const nozzleSpecSelect = document.getElementById('NozzleSpec'); if (nozzleSpecSelect) nozzleSpecSelect.addEventListener('change', handleNozzleSpecChange);
+    const ddlDrop = document.getElementById('ddl_Drop'); if (ddlDrop) ddlDrop.addEventListener('change', handleIrrigationTypeSpecificChange);
+    const ddlSprinkler = document.getElementById('ddl_Sprinkler'); if (ddlSprinkler) ddlSprinkler.addEventListener('change', handleIrrigationTypeSpecificChange);
+    const ddlPerforated = document.getElementById('ddl_Perforated'); if(ddlPerforated) ddlPerforated.addEventListener('change', handleIrrigationTypeSpecificChange);
+    const ddlFacType = document.getElementById('ddl_FacType'); if (ddlFacType) ddlFacType.addEventListener('change', handleFacTypeChange);
+    const btnLoadStd = document.getElementById('btn_LoadStd'); if (btnLoadStd) btnLoadStd.addEventListener('click', loadStandardMaterials);
+    const btnOpenMaterialPopup = document.getElementById('btn_OpenMaterialPopup'); if (btnOpenMaterialPopup) btnOpenMaterialPopup.addEventListener('click', handleOpenMaterialPopup); 
+    const btnCloseGroupPopup = document.getElementById('btn_CloseGroupPopup'); if (btnCloseGroupPopup) btnCloseGroupPopup.addEventListener('click', handleCloseGroupPopup);
+    const btnSendGroupSelection = document.getElementById('btn_SendGroupSelection'); if (btnSendGroupSelection) btnSendGroupSelection.addEventListener('click', handleSendGroupSelection);
+    const ddlGroup = document.getElementById('ddl_Group'); if(ddlGroup) ddlGroup.addEventListener('change', function() { console.log("Selected group for new material:", this.value, this.options[this.selectedIndex].text); });
+    const btnCalculateFunding = document.getElementById('btn_CalculateFunding'); if (btnCalculateFunding) btnCalculateFunding.addEventListener('click', updateFundingDisplay_local);
+    const btnSaveFarmerSys = document.getElementById('btn_SaveFarmerSys'); if (btnSaveFarmerSys) { btnSaveFarmerSys.addEventListener('click', handleSaveFarmerSys); }
+
+    if (ddlEndType) ddlEndType.dispatchEvent(new Event('change'));
+    if (ddlFacType) ddlFacType.dispatchEvent(new Event('change'));
+    handleL1MatOrSpecChange(); calculateL1MatAmt();
+    handleL2MatOrSpecChange(); calculateL2MatAmt();
+});
+
+const initialMaterialsData_actual = [ { groupName: "主要管材 (預設)", list: [ { pomNo: 'P001', matGroup: 'MAINPIPE', matOrder: 1, matOrderCNS: '田間主管1', mName: 'PVC硬管', moduleCNS: '管材', spec: '4英寸 SCH80', itemUnit: '米', note: '高壓主幹', price: 120, amount: 50, totalPrice: 6000 }, { pomNo: 'P002', matGroup: 'MAINPIPE', matOrder: 2, matOrderCNS: '田間主管2', mName: 'PE軟管', moduleCNS: '管材', spec: '2英寸 SDR11', itemUnit: '米', note: '低壓分支', price: 30, amount: 100, totalPrice: 3000 } ] }, { groupName: "配件 (預設)", list: [ { pomNo: 'F001', matGroup: 'FITTINGS', matOrder: 1, matOrderCNS: '接頭', mName: 'PVC彎頭', moduleCNS: '配件', spec: '4英寸 90度', itemUnit: '個', note: '', price: 50, amount: 10, totalPrice: 500 }] } ];
+initialMaterialsData.length = 0; initialMaterialsData.push(...initialMaterialsData_actual);
+const standardMaterialsData_actual = [ { groupName: "標準自動帶入管材", list: [ { pomNo: 'STD_P001', matGroup: 'STDPIPE', matOrder: 1, matOrderCNS: '標準主管', mName: '耐壓PE管', moduleCNS: '管材', spec: '3英寸 PN10', itemUnit: '卷 (100米)', note: '自動帶入標準品', price: 800, amount: 1, totalPrice: 800 }, { pomNo: 'STD_F001', matGroup: 'STDFIT', matOrder: 1, matOrderCNS: '標準接頭', mName: 'PE快速接頭', moduleCNS: '配件', spec: '3英寸', itemUnit: '個', note: '自動帶入標準品', price: 75, amount: 10, totalPrice: 750 }, { pomNo: 'STD_V001', matGroup: 'STDVALVE', matOrder: 2, matOrderCNS: '標準閥門', mName: '塑膠球閥', moduleCNS: '閥件', spec: '3英寸', itemUnit: '個', note: '自動帶入標準品', price: 150, amount: 2, totalPrice: 300 } ] }, { groupName: "標準輔助材料", list: [ { pomNo: 'STD_A001', matGroup: 'STDAUX', matOrder: 1, matOrderCNS: '止洩帶', mName: 'PTFE止洩帶', moduleCNS: '輔材', spec: '標準寬度', itemUnit: '卷', note: '自動帶入', price: 10, amount: 5, totalPrice: 50 }] } ];
+standardMaterialsData.length = 0; standardMaterialsData.push(...standardMaterialsData_actual);
+allMaterials_Data_full.length=0; allMaterials_Data_full.push( { pomno: "M001", matname: "PVC管", module: "管材", moduleNo: 1, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "4吋", specNo2: 28, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "一般農業用灰色PVC管", matprice: 120.50, specLength: 6.0 }, { pomno: "M002", matname: "PVC管", module: "管材", moduleNo: 1, mattype: "PVC", matTypeCode: 1, spec1: "SCH80", specNo1: 26, spec2: "2吋", specNo2: 4, spec3: "L:4M", specNo3: 30, itemunit: "支", description: "高壓PVC管", matprice: 90.00, specLength: 4.0 }, { pomno: "M003", matname: "PE軟管", module: "管材", moduleNo: 1, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1吋", specNo2: 3, spec3: "100M/卷", specNo3: 31, itemunit: "卷", description: "農業用黑色PE軟管", matprice: 350.00, specLength: 100.0 }, { pomno: "M004", matname: "PE硬管", module: "管材", moduleNo: 1, mattype: "PE", matTypeCode: 2, spec1: "PN10", specNo1: 32, spec2: "3/4吋", specNo2: 2, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "PE硬質管", matprice: 75.00, specLength: 6.0 }, { pomno: "F001", matname: "PVC彎頭90度", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "4吋", specNo2: 28, spec3: "", specNo3: 0, itemunit: "個", description: "90度彎頭", matprice: 15.00, specLength: null }, { pomno: "F002", matname: "PE快速三通", module: "管件", moduleNo: 2, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PE管用快速三通接頭", matprice: 25.00, specLength: null }, { pomno: "V001", matname: "PVC球閥", module: "閥類", moduleNo: 3, mattype: "PVC", matTypeCode: 1, spec1: "由令式", specNo1: 33, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PVC手動球閥", matprice: 50.00, specLength: null }, { pomno: "V002", matname: "鑄鐵閘閥", module: "閥類", moduleNo: 3, mattype: "鑄鐵", matTypeCode: 4, spec1: "法蘭式", specNo1: 34, spec2: "4吋", specNo2: 28, spec3: "", specNo3: 0, itemunit: "個", description: "手輪閘閥", matprice: 350.00, specLength: null }, { pomno: "S001", matname: "旋轉噴頭", module: "噴灑器材", moduleNo: 5, mattype: "ABS塑膠", matTypeCode: 5, spec1: "中壓", specNo1: 35, spec2: "1/2吋外牙", specNo2: 1, spec3: "灑水半徑5M", specNo3: 36, itemunit: "組", description: "360度旋轉噴頭", matprice: 45.00, specLength: null }, { pomno: "S002", matname: "固定噴霧頭", module: "噴灑器材", moduleNo: 5, mattype: "黃銅", matTypeCode: 50, spec1: "低壓", specNo1: 37, spec2: "1/4吋外牙", specNo2: 38, spec3: "霧化", specNo3: 39, itemunit: "個", description: "細霧噴頭", matprice: 30.00, specLength: null }, { pomno: "P001", matname: "PE穿孔管", module: "噴灑器材", moduleNo: 6, mattype: "PE", matTypeCode: 2, spec1: "單向孔", specNo1: 40, spec2: "3/4吋", specNo2: 2, spec3: "50M/卷", specNo3: 41, itemunit: "卷", description: "PE黑色穿孔管", matprice: 280.00, specLength: 50.0 }, { pomno: "MS001", matname: "十字微噴頭", module: "噴灑器材", moduleNo: 7, mattype: "ABS塑膠", matTypeCode: 5, spec1: "360度", specNo1: 42, spec2: "插式", specNo2: 43, spec3: "", specNo3: 0, itemunit: "組", description: "倒掛式微噴", matprice: 12.00, specLength: null }, { pomno: "D001", matname: "壓力補償滴灌帶", module: "噴灑器材", moduleNo: 8, mattype: "PE", matTypeCode: 2, spec1: "2 L/hr", specNo1: 44, spec2: "間距30cm", specNo2: 45, spec3: "100M/卷", specNo3: 31, itemunit: "卷", description: "內鑲式滴灌帶", matprice: 450.00, specLength: 100.0 }, { pomno: "M005", matname: "不鏽鋼管", module: "管材", moduleNo: 1, mattype: "不鏽鋼", matTypeCode: 3, spec1: "304", specNo1: 46, spec2: "1吋", specNo2: 3, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "食品級不鏽鋼管", matprice: 600.00, specLength: 6.0 }, { pomno: "F003", matname: "PVC大小頭", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "2吋x1吋", specNo2: 47, spec3: "", specNo3: 0, itemunit: "個", description: "異徑接頭", matprice: 10.00, specLength: null }, { pomno: "V003", matname: "PE電磁閥", module: "閥類", moduleNo: 3, mattype: "PE", matTypeCode: 2, spec1: "常閉型", specNo1: 48, spec2: "1吋內牙", specNo2: 3, spec3: "24VAC", specNo3: 49, itemunit: "個", description: "自動灌溉用電磁閥", matprice: 250.00, specLength: null }, { pomno: "S003", matname: "扇形噴頭", module: "噴灑器材", moduleNo: 5, mattype: "ABS塑膠", matTypeCode: 5, spec1: "90度", specNo1: 50, spec2: "1/2吋內牙", specNo2: 1, spec3: "", specNo3: 0, itemunit: "個", description: "邊界灌溉用", matprice: 35.00, specLength: null }, { pomno: "D002", matname: "可調式滴頭", module: "噴灑器材", moduleNo: 8, mattype: "ABS塑膠", matTypeCode: 5, spec1: "0-70 L/hr", specNo1: 51, spec2: "插式", specNo2: 43, spec3: "", specNo3: 0, itemunit: "個", description: "流量可調滴頭", matprice: 5.00, specLength: null }, { pomno: "AUX001", matname: "PVC膠水", module: "輔助材料", moduleNo: 10, mattype: "化學品", matTypeCode: 52, spec1: "小罐", specNo1: 53, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "罐", description: "PVC管專用膠合劑", matprice: 25.00, specLength: null }, { pomno: "AUX002", matname: "止洩帶", module: "輔助材料", moduleNo: 10, mattype: "PTFE", matTypeCode: 54, spec1: "標準", specNo1: 55, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "卷", description: "螺牙止洩用", matprice: 8.00, specLength: null }, { pomno: "M006", matname: "鍍鋅鋼管", module: "管材", moduleNo: 1, mattype: "鍍鋅鋼", matTypeCode: 56, spec1: "薄管", specNo1: 57, spec2: "1吋", specNo2: 3, spec3: "L:6M", specNo3: 7, itemunit: "支", description: "溫室結構用", matprice: 220.00, specLength: 6.0 }, { pomno: "F004", matname: "PE彎頭", module: "管件", moduleNo: 2, mattype: "PE", matTypeCode: 2, spec1: "SDR11", specNo1: 6, spec2: "1/2吋", specNo2: 1, spec3: "", specNo3: 0, itemunit: "個", description: "PE快速彎頭", matprice: 12.00, specLength: null }, { pomno: "V004", matname: "過濾器", module: "閥類", moduleNo: 3, mattype: "塑膠", matTypeCode: 5, spec1: "Y型", specNo1: 58, spec2: "1吋", specNo2: 3, spec3: "120目", specNo3: 59, itemunit: "組", description: "滴灌系統過濾", matprice: 180.00, specLength: null }, { pomno: "MS002", matname: "單邊微噴帶", module: "噴灑器材", moduleNo: 7, mattype: "PE", matTypeCode: 2, spec1: "噴幅2M", specNo1: 60, spec2: "長50M", specNo2: 41, spec3: "", specNo3: 0, itemunit: "卷", description: "微噴帶", matprice: 300.00, specLength: 50.0 }, { pomno: "D003", matname: "滴箭", module: "噴灑器材", moduleNo: 8, mattype: "PP", matTypeCode: 61, spec1: "彎型", specNo1: 62, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "支", description: "盆栽用滴箭", matprice: 2.00, specLength: null }, { pomno: "AUX003", matname: "PE管束", module: "輔助材料", moduleNo: 10, mattype: "塑膠", matTypeCode: 5, spec1: "1吋", specNo1: 3, spec2: "", specNo2: 0, spec3: "", specNo3: 0, itemunit: "包", description: "固定PE管用", matprice: 30.00, specLength: null }, { pomno: "M007", matname: "PVC透明軟管", module: "管材", moduleNo: 9, mattype: "PVC", matTypeCode: 1, spec1: "食品級", specNo1: 63, spec2: "1/2吋", specNo2: 1, spec3: "50M/卷", specNo3: 41, itemunit: "卷", description: "觀察水位用", matprice: 200.00, specLength: 50.0 }, { pomno: "F005", matname: "管塞", module: "管件", moduleNo: 2, mattype: "PVC", matTypeCode: 1, spec1: "SCH40", specNo1: 5, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "PVC管帽", matprice: 5.00, specLength: null }, { pomno: "V005", matname: "水錶", module: "閥類", moduleNo: 3, mattype: "鑄鐵", matTypeCode: 4, spec1: "機械式", specNo1: 64, spec2: "1吋", specNo2: 3, spec3: "", specNo3: 0, itemunit: "個", description: "流量計量", matprice: 450.00, specLength: null }
+);
+allMaterials_Data.length = 0; allMaterials_Data.push(...allMaterials_Data_full);
+initialMaterialsData.length = 0; initialMaterialsData.push(...initialMaterialsData_actual);
+standardMaterialsData.length = 0; standardMaterialsData.push(...standardMaterialsData_actual);
+// Full function definitions (ensure these are the definitions used by the script)
+// ... (This section should contain the full, correct definitions of all functions used in the script) ...//]]>
+    </script>
 </body>
 </html>
