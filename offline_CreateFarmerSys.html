@@ -9,146 +9,188 @@
         <!-- Content will be added here -->
         <h2>田間管路補設</h2>
         <hr />
-
-        <table id="PipingInfoTabl" class="dashTable" style="width:80%;">
+        <table id="PipingInfoTabl" class="dashTable" style="width: 90%;">
             <tr>
-                <td style="width:15%; text-align:right;">管路設置方式：</td>
-                <td style="width:35%;">
-                    <select id="ddl_FarmerSysUnit" name="ddl_FarmerSysUnit" required>
-                        <!-- Options will be added by JS or manually if static -->
-                        <!-- JS populateDropdown adds a value="" option first -->
-                    </select>
+                <td class="td_style" style="width: 15%;">年度：</td>
+                <td style="width: 35%;">
+                    <input id="ApplyYear" name="ApplyYear" readonly="True" style="width: 100px;" type="text" value="112" />
                 </td>
-                <td style="width:15%; text-align:right;">施設面積(㎡)：</td>
-                <td style="width:35%;">
-                    <input type="number" id="BuildArea" name="BuildArea" readonly="readonly" step="any" min="0" />
-                    <input type="hidden" id="hdnBuildArea" name="hdnBuildArea" />
+                <td class="td_style" style="width: 15%;">管理處：</td>
+                <td style="width: 35%;">
+                    <select id="ddl_FarmerSysUnit" name="ddl_FarmerSysUnit" style="width: 150px;"></select>
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right;">寬度(m)：</td>
+                <td class="td_style">設施型式：</td>
                 <td>
-                    <input type="number" id="width" name="width" readonly="readonly" step="any" min="0" />
-                </td>
-                <td style="text-align:right;">長度(m)：</td>
-                <td>
-                    <input type="number" id="Length" name="Length" step="any" min="0" />
-                </td>
-            </tr>
-            <!-- Facility Type Row -->
-            <tr>
-                <td style="text-align:right;">設施型式:</td>
-                <td colspan="3">
                     <div id="div_FacTypeTrue" class="control-group">
                         <div class="controls">
-                            <select id="ddl_FacType" style="width: 150px;"></select> <!-- Populated by JS -->
+                            <select data-val="true" data-val-required="設施型式 欄位是必要項。" id="ddl_FacType" name="ddl_FacType" style="width: 150px;"></select>
+                            <span class="field-validation-valid help-inline" data-valmsg-for="ddl_FacType" data-valmsg-replace="true"></span>
                         </div>
                     </div>
-                    <div id="div_FacTypeFalse" style="display:none;">
-                        無 (此處原為主要管線區塊，現已簡化為設施型式控制)
+                    <div id="div_FacTypeFalse" style="display: none;">無</div>
+                </td>
+                <td class="td_style">水源：</td>
+                <td>
+                    <select data-val="true" data-val-required="水源 欄位是必要項。" id="ddl_WtaerSrc" name="ddl_WtaerSrc" style="width: 150px;"></select>
+                    <span class="field-validation-valid help-inline" data-valmsg-for="ddl_WtaerSrc" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">寬度(m)：</td>
+                <td>
+                    <input id="width" name="width" style="width: 50px;" type="text" value="30" />
+                    <span class="field-validation-valid help-inline" data-valmsg-for="width" data-valmsg-replace="true"></span>
+                </td>
+                <td class="td_style">長度(m)：</td>
+                <td>
+                    <input id="Length" name="Length" style="width: 50px;" type="text" value="420" />
+                    <span class="field-validation-valid help-inline" data-valmsg-for="Length" data-valmsg-replace="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">設施面積：</td>
+                <td>
+                    <input id="BuildArea_display" name="BuildArea_display" readonly="True" style="width: 50px;" type="text" value="12600" /> m²
+                    <input data-val="true" data-val-number="The field BuildArea must be a number." data-val-required="BuildArea 欄位是必要項。" id="BuildArea" name="BuildArea" type="hidden" value="12600" />
+                </td>
+                <td class="td_style">送審面積：</td>
+                <td><input id="SendArea" name="SendArea" readonly="True" style="width: 50px;" type="text" value="" /> m²</td>
+            </tr>
+            <tr id="tr_MainPipeDetails">
+                <td class="td_style">主幹管：</td>
+                <td colspan="3">
+                    長度(m)：<input id="L1Len" name="L1Len" style="width: 50px;" type="text" value="0" />
+                    <span class="field-validation-valid help-inline" data-valmsg-for="L1Len" data-valmsg-replace="true"></span>
+                    材質：<select id="L1Mat" name="L1Mat" style="width: 100px;"></select>
+                    管徑(mm)：<select id="L1Spec" name="L1Spec" style="width: 80px;"></select>
+                    <input id="L1SpecLength" name="L1SpecLength" type="hidden" value="" />
+                    單價(元/m)：<input id="L1Price" name="L1Price" readonly="True" style="width: 50px;" type="text" value="0" />
+                    材料費小計(元)：<input id="L1MatAmt" name="L1MatAmt" readonly="True" style="width: 80px;" type="text" value="0" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">次幹管：</td>
+                <td colspan="3">
+                    長度(m)：<input id="L2Len" name="L2Len" style="width: 50px;" type="text" value="0" />
+                    <span class="field-validation-valid help-inline" data-valmsg-for="L2Len" data-valmsg-replace="true"></span>
+                    材質：<select id="L2Mat" name="L2Mat" style="width: 100px;"></select>
+                    管徑(mm)：<select id="L2Spec" name="L2Spec" style="width: 80px;"></select>
+                    <input id="L2SpecLength" name="L2SpecLength" type="hidden" value="" />
+                    單價(元/m)：<input id="L2Price" name="L2Price" readonly="True" style="width: 50px;" type="text" value="0" />
+                    材料費小計(元)：<input id="L2MatAmt" name="L2MatAmt" readonly="True" style="width: 80px;" type="text" value="0" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">管末端處理方式：</td>
+                <td colspan="3">
+                    <div class="control-group">
+                        <div class="controls">
+                            <select id="ddl_EndType" name="ddl_EndType" style="width: 150px;"></select>
+                            <select id="ddl_Drop" name="ddl_Drop" style="width: 150px; display: none;"></select>
+                            <select id="ddl_Sprinkler" name="ddl_Sprinkler" style="width: 150px; display: none;"></select>
+                            <select id="ddl_Perforated" name="ddl_Perforated" style="width: 150px; display: none;"></select>
+                        </div>
                     </div>
                 </td>
             </tr>
-            <!-- Main Pipe Details - Conditionally Shown by JS based on ddl_FacType (example, not directly controlled by div_FacTypeTrue/False) -->
-            <tr id="tr_MainPipeDetails"> 
-                <td style="text-align:right;">主幹管：</td>
-                <td colspan="3">
-                    <table>
-                        <tr>
-                            <td>長度(m)：</td>
-                            <td><input type="number" id="L1Len" name="L1Len" class="input-small" step="any" min="0" /></td>
-                            <td>材質：</td>
-                            <td><select id="L1Mat" name="L1Mat" class="input-small"></select></td>
-                            <td>管徑(mm)：</td>
-                            <td>
-                                <select id="L1Spec" name="L1Spec" class="input-small"></select>
-                                <input type="hidden" id="L1SpecLength" name="L1SpecLength">
-                            </td>
-                            <td>單價(元/m)：</td>
-                            <td><input type="number" id="L1Price" name="L1Price" class="input-small" step="any" min="0" /></td>
-                            <td>材料費小計(元)：</td>
-                            <td><input type="number" id="L1MatAmt" name="L1MatAmt" class="input-small" readonly="readonly" step="any" min="0" /></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
             <tr>
-                <td style="text-align:right;">管末端處理方式：</td>
-                <td colspan="3">
-                    <select id="ddl_EndType" name="ddl_EndType"></select>
-                    <select id="ddl_Drop" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
-                    <select id="ddl_Sprinkler" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
-                    <select id="ddl_Perforated" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
-                </td>
-            </tr>
-            <!-- Branch Pipe Material Row -->
-            <tr>
-                <td style="text-align:right;">支管 材質:</td>
+                <td class="td_style">支管 材質：</td>
                 <td>
                     <div id="div_BranchPipeMaterialTrue" class="control-group">
                         <div class="controls">
-                            <select id="ddl_BranchPipeMaterial" style="width: 150px;"></select> <!-- Populated by JS -->
+                            <select id="BranchPipeMaterial" name="BranchPipeMaterial" style="width: 150px;"></select>
                         </div>
                     </div>
-                    <div id="div_BranchPipeMaterialFalse" style="display:none;">無</div>
+                    <div id="div_BranchPipeMaterialFalse" style="display: none;">無</div>
                 </td>
-                <td style="text-align:right;">支管 規格:</td>
+                <td class="td_style">噴頭型式：</td>
+                <td>
+                     <div id="div_NozzleTypeTrue" class="control-group">
+                        <div class="controls">
+                            <select id="NozzleType" name="NozzleType" style="width: 150px;"></select>
+                        </div>
+                    </div>
+                    <div id="div_NozzleTypeFalse" style="display:none;">無</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_style">支管 管徑：</td>
                 <td>
                     <div id="div_BranchPipeSpecTrue" class="control-group">
                         <div class="controls">
-                            <select id="ddl_BranchPipeSpec" style="width: 150px;"></select> <!-- Populated by JS -->
+                             <select id="BranchPipeSpec" name="BranchPipeSpec" style="width: 150px;"></select>
                         </div>
                     </div>
-                    <div id="div_BranchPipeSpecFalse" style="display:none;">無</div>
+                    <div id="div_BranchPipeSpecFalse" style="display: none;">無</div>
+                </td>
+                <td class="td_style">噴頭(含調整器)規格：</td>
+                 <td>
+                     <div id="div_NozzleSpecTrue" class="control-group">
+                        <div class="controls">
+                            <select id="NozzleSpec" name="NozzleSpec" style="width: 150px;"></select>
+                            <select id="Adjustable" name="Adjustable" style="width: 150px; display: none;"></select>
+                        </div>
+                    </div>
+                    <div id="div_NozzleSpecFalse" style="display:none;">無</div>
                 </td>
             </tr>
-            <!-- Branch Pipe Spacing SS Row -->
             <tr>
-                <td style="text-align:right;">支管 間距(SS):</td>
-                <td colspan="3">
+                <td class="td_style">支管 間距(SS)(m)：</td>
+                <td>
                     <div id="div_SSTrue" class="control-group">
                         <div class="controls">
-                            <input type="number" id="SS" name="SS" class="input-small" step="any" min="0" />
+                            <input id="SS" name="SS" style="width: 50px;" type="text" value="0" />
+                            <span class="field-validation-valid help-inline" data-valmsg-for="SS" data-valmsg-replace="true"></span>
                         </div>
                     </div>
-                    <div id="div_SSFalse" style="display:none;">無</div>
+                    <div id="div_SSFalse" style="display: none;">無</div>
+                </td>
+                <td class="td_style">噴頭 間距(SL)(m)：</td>
+                <td>
+                    <div id="div_SLTrue" class="control-group">
+                        <div class="controls">
+                             <input id="SL" name="SL" style="width: 50px;" type="text" value="0" />
+                             <span class="field-validation-valid help-inline" data-valmsg-for="SL" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div id="div_SLFalse" style="display:none;">無</div>
                 </td>
             </tr>
-            <!-- Standpipe Height Row -->
             <tr>
-                <td style="text-align:right;">豎管 高度:</td>
-                <td>
-                    <div id="div_PipeHeightTrue" class="control-group">
-                        <div class="controls">
-                            <input type="number" id="StdpipeHei" name="StdpipeHei" class="input-small" step="any" min="0" />
-                        </div>
-                    </div>
-                    <div id="div_PipeHeightFalse" style="display:none;">無</div>
-                </td>
-                <td style="text-align:right;">豎管 材質:</td>
+                <td class="td_style">豎管 材質：</td>
                 <td>
                     <div id="div_PipeMaterialTrue" class="control-group">
                         <div class="controls">
-                            <select id="ddl_StdpipeMat" style="width: 150px;"></select> <!-- Populated by JS -->
+                            <select id="StdpipeMat" name="StdpipeMat" style="width: 150px;"></select>
                         </div>
                     </div>
-                    <div id="div_PipeMaterialFalse" style="display:none;">無</div>
+                    <div id="div_PipeMaterialFalse" style="display: none;">無</div>
+                </td>
+                <td class="td_style">豎管 高度(m)：</td>
+                <td>
+                    <div id="div_PipeHeightTrue" class="control-group">
+                        <div class="controls">
+                            <input id="StdpipeHei" name="StdpipeHei" style="width: 50px;" type="text" value="0" />
+                            <span class="field-validation-valid help-inline" data-valmsg-for="StdpipeHei" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div id="div_PipeHeightFalse" style="display: none;">無</div>
                 </td>
             </tr>
-            <!-- Standpipe Specification Row -->
             <tr>
-                <td style="text-align:right;">豎管 規格:</td>
+                <td class="td_style">豎管 管徑：</td>
                 <td colspan="3">
                     <div id="div_PipeSpecTrue" class="control-group">
                         <div class="controls">
-                            <select id="ddl_StdpipeSpec" style="width: 150px;"></select> <!-- Populated by JS -->
+                            <select id="StdpipeSpec" name="StdpipeSpec" style="width: 150px;"></select>
                         </div>
                     </div>
-                    <div id="div_PipeSpecFalse" style="display:none;">無</div>
+                    <div id="div_PipeSpecFalse" style="display: none;">無</div>
                 </td>
             </tr>
         </table>
-
         <br />
 
         <table id="FarsysTabl" class="dashTable" style="width:80%;">
