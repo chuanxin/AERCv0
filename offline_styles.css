@@ -1,0 +1,211 @@
+/* Basic Reset / Box Sizing */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 15px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+/* Tables */
+table.dashTable {
+    border-collapse: collapse;
+    width: 100%; /* Default width for all dashTables */
+    margin-bottom: 20px; /* Increased margin */
+    background-color: #fff; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+
+/* Table Cells */
+table.dashTable th,
+table.dashTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+/* Table Headers */
+table.dashTable th {
+    background-color: #e9ecef; /* Slightly softer gray */
+    font-weight: bold;
+    color: #495057; /* Darker text for header */
+}
+
+/* Specific td_style class cells (for labels) */
+.td_style { /* This class is available if HTML is updated to use it */
+    background-color: #f8f9fa; 
+    font-weight: bold;
+    text-align: right;
+    width: 15%; 
+    padding-right: 10px; /* Ensure spacing from input */
+}
+
+/* Input fields and Selects */
+input[type="text"],
+input[type="number"],
+select {
+    padding: 6px 10px; /* Adjusted padding */
+    border: 1px solid #ced4da; /* Softer border */
+    border-radius: 4px;
+    margin-bottom: 5px; 
+    font-size: 14px; /* Consistent font size */
+    line-height: 1.5; /* Improved line height */
+}
+
+input[type="text"].input-small,
+input[type="number"].input-small,
+select.input-small {
+    width: 100px; 
+}
+
+input[type="text"]:not(.input-small):not([style*="width"]), /* Apply only if no inline width style */
+input[type="number"]:not(.input-small):not([style*="width"]),
+select:not(.input-small):not([style*="width"]) { 
+    width: 220px; /* Slightly wider default */
+    max-width: 100%; 
+}
+
+
+/* Readonly inputs */
+input[readonly],
+input[type="text"][readonly],
+input[type="number"][readonly] {
+    background-color: #e9ecef; /* Consistent with header bg */
+    color: #495057; 
+    cursor: not-allowed;
+}
+
+/* Buttons */
+input[type="button"],
+button.btn, /* Targeting .btn class on button elements for specificity */
+button { /* General button styling */
+    padding: 8px 15px; /* Slightly more padding */
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 5px 5px 0; /* Adjusted margin for better spacing */
+    font-size: 14px; 
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Buttons (hover state) */
+input[type="button"]:hover,
+button.btn:hover,
+button:hover {
+    background-color: #0056b3;
+    border-color: #004085; 
+}
+
+/* control-group and controls classes (Bootstrap-like structure) */
+.control-group {
+    margin-bottom: 10px;
+    display: flex; /* Helps align label and control if they were in same group */
+    align-items: center;
+}
+.controls {
+    flex-grow: 1; /* Allows control to take available space */
+}
+
+
+/* Material Group Headers in MatTabl_MainPipe */
+#MatTabl_MainPipe .material-group-header td {
+    background-color: #dee2e6 !important; 
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #212529; 
+    padding: 10px 8px; /* More padding for headers */
+}
+
+
+/* Hidden elements (general utility) */
+.hidden {
+    display: none !important; 
+}
+
+/* Style for the div_Group popup */
+#div_Group {
+    padding: 20px; /* Increased padding */
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px; /* More rounded */
+    margin-top: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+}
+
+#div_Group select {
+    margin-right: 10px;
+    margin-bottom: 10px; /* Spacing for elements in div_Group */
+}
+#div_Group span { /* Style for spans in div_Group */
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal;
+    color: #333;
+}
+#div_Group br {
+    margin-bottom: 5px; /* Spacing after breaks */
+}
+
+
+/* Center align text for the final action buttons container */
+form#form_FarmerSys > div[style*="text-align:center"] {
+    padding: 15px; /* Increased padding */
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6; /* Softer border */
+    margin-top: 25px; /* Increased margin */
+}
+
+/* Styles for submission data display area */
+#submissionDataDisplay {
+    background-color: #282c34; /* Darker background for code */
+    color: #abb2bf; /* Light gray text */
+    border: 1px solid #444; /* Darker border */
+    padding: 15px;
+    margin-top: 20px;
+    display: none; /* Initially hidden, JS will show it */
+    white-space: pre-wrap;   
+    word-break: break-all;   
+    max-height: 500px;       /* Increased max-height */
+    overflow-y: auto;        
+    border-radius: 6px;      /* Rounded corners */
+    font-family: "Courier New", Courier, monospace; /* Monospace font */
+    font-size: 13px;         /* Slightly smaller font for code */
+}
+
+/* Typeahead specific styles (if needed, often handled by library CSS) */
+.tt-menu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: auto; /* Or a specific width */
+    min-width: 200px; /* Ensure it's wide enough */
+}
+.tt-suggestion {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.tt-suggestion:hover, .tt-suggestion.tt-cursor {
+    background-color: #007bff;
+    color: #fff;
+}
