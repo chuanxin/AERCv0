@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Farmer System</title>
+    <link rel="stylesheet" href="offline_styles.css">
+</head>
+<body>
+    <form id="form_FarmerSys">
+        <!-- Content will be added here -->
+        <h2>田間管路補設</h2>
+        <hr />
+
+        <table id="PipingInfoTabl" class="dashTable" style="width:80%;">
+            <tr>
+                <td style="width:15%; text-align:right;">管路設置方式：</td>
+                <td style="width:35%;">
+                    <select id="ddl_FarmerSysUnit" name="ddl_FarmerSysUnit" required>
+                        <!-- Options will be added by JS or manually if static -->
+                        <!-- JS populateDropdown adds a value="" option first -->
+                    </select>
+                </td>
+                <td style="width:15%; text-align:right;">施設面積(㎡)：</td>
+                <td style="width:35%;">
+                    <input type="number" id="BuildArea" name="BuildArea" readonly="readonly" step="any" min="0" />
+                    <input type="hidden" id="hdnBuildArea" name="hdnBuildArea" />
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;">寬度(m)：</td>
+                <td>
+                    <input type="number" id="width" name="width" readonly="readonly" step="any" min="0" />
+                </td>
+                <td style="text-align:right;">長度(m)：</td>
+                <td>
+                    <input type="number" id="Length" name="Length" step="any" min="0" />
+                </td>
+            </tr>
+            <!-- Facility Type Row -->
+            <tr>
+                <td style="text-align:right;">設施型式:</td>
+                <td colspan="3">
+                    <div id="div_FacTypeTrue" class="control-group">
+                        <div class="controls">
+                            <select id="ddl_FacType" style="width: 150px;"></select> <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="div_FacTypeFalse" style="display:none;">
+                        無 (此處原為主要管線區塊，現已簡化為設施型式控制)
+                    </div>
+                </td>
+            </tr>
+            <!-- Main Pipe Details - Conditionally Shown by JS based on ddl_FacType (example, not directly controlled by div_FacTypeTrue/False) -->
+            <tr id="tr_MainPipeDetails"> 
+                <td style="text-align:right;">主幹管：</td>
+                <td colspan="3">
+                    <table>
+                        <tr>
+                            <td>長度(m)：</td>
+                            <td><input type="number" id="L1Len" name="L1Len" class="input-small" step="any" min="0" /></td>
+                            <td>材質：</td>
+                            <td><select id="L1Mat" name="L1Mat" class="input-small"></select></td>
+                            <td>管徑(mm)：</td>
+                            <td><select id="L1Spec" name="L1Spec" class="input-small"></select></td>
+                            <td>單價(元/m)：</td>
+                            <td><input type="number" id="L1Price" name="L1Price" class="input-small" step="any" min="0" /></td>
+                            <td>材料費小計(元)：</td>
+                            <td><input type="number" id="L1MatAmt" name="L1MatAmt" class="input-small" readonly="readonly" step="any" min="0" /></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;">管末端處理方式：</td>
+                <td colspan="3">
+                    <select id="ddl_EndType" name="ddl_EndType"></select>
+                    <select id="ddl_Drop" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
+                    <select id="ddl_Sprinkler" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
+                    <select id="ddl_Perforated" style="display:none; width: 150px;"></select> <!-- Populated by JS -->
+                </td>
+            </tr>
+            <!-- Branch Pipe Material Row -->
+            <tr>
+                <td style="text-align:right;">支管 材質:</td>
+                <td>
+                    <div id="div_BranchPipeMaterialTrue" class="control-group">
+                        <div class="controls">
+                            <select id="ddl_BranchPipeMaterial" style="width: 150px;"></select> <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="div_BranchPipeMaterialFalse" style="display:none;">無</div>
+                </td>
+                <td style="text-align:right;">支管 規格:</td>
+                <td>
+                    <div id="div_BranchPipeSpecTrue" class="control-group">
+                        <div class="controls">
+                            <select id="ddl_BranchPipeSpec" style="width: 150px;"></select> <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="div_BranchPipeSpecFalse" style="display:none;">無</div>
+                </td>
+            </tr>
+            <!-- Branch Pipe Spacing SS Row -->
+            <tr>
+                <td style="text-align:right;">支管 間距(SS):</td>
+                <td colspan="3">
+                    <div id="div_SSTrue" class="control-group">
+                        <div class="controls">
+                            <input type="number" id="SS" name="SS" class="input-small" step="any" min="0" />
+                        </div>
+                    </div>
+                    <div id="div_SSFalse" style="display:none;">無</div>
+                </td>
+            </tr>
+            <!-- Standpipe Height Row -->
+            <tr>
+                <td style="text-align:right;">豎管 高度:</td>
+                <td>
+                    <div id="div_PipeHeightTrue" class="control-group">
+                        <div class="controls">
+                            <input type="number" id="StdpipeHei" name="StdpipeHei" class="input-small" step="any" min="0" />
+                        </div>
+                    </div>
+                    <div id="div_PipeHeightFalse" style="display:none;">無</div>
+                </td>
+                <td style="text-align:right;">豎管 材質:</td>
+                <td>
+                    <div id="div_PipeMaterialTrue" class="control-group">
+                        <div class="controls">
+                            <select id="ddl_StdpipeMat" style="width: 150px;"></select> <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="div_PipeMaterialFalse" style="display:none;">無</div>
+                </td>
+            </tr>
+            <!-- Standpipe Specification Row -->
+            <tr>
+                <td style="text-align:right;">豎管 規格:</td>
+                <td colspan="3">
+                    <div id="div_PipeSpecTrue" class="control-group">
+                        <div class="controls">
+                            <select id="ddl_StdpipeSpec" style="width: 150px;"></select> <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="div_PipeSpecFalse" style="display:none;">無</div>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+
+        <table id="FarsysTabl" class="dashTable" style="width:80%;">
+            <tr>
+                <td style="width:20%; text-align:right;">
+                    <input id="btn_LoadStd" type="button" value="<<自動帶入材料>>" class="btn" />
+                </td>
+                <td style="width:80%;">
+                    <div id="div_Group" style="display:none;">
+                        選擇管材組：
+                        <select id="ddl_Group" name="ddl_Group">
+                            <!-- Options populated by JS -->
+                        </select>
+                        <input id="btn_SendGroupSelection" type="button" value="送出選取" class="btn" />
+                        <input id="btn_CloseGroupPopup" type="button" value="關閉" class="btn" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table id="MatTabl_MainPipe" class="dashTable">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">ID</th>
+                                <th>項目</th>
+                                <th>名稱</th>
+                                <th>類別</th>
+                                <th>規格</th>
+                                <th>單位</th>
+                                <th>敘述</th>
+                                <th>單價</th>
+                                <th>數量</th>
+                                <th>總價</th>
+                                <th style="display:none;">排序</th>
+                                <th>刪除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows will be added by JS -->
+                            <tr>
+                                <td colspan="11" style="text-align:center;">(無資料)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr id="add_new_mat"> <!-- style="display:none;" removed -->
+                <td style="text-align:right;">新增物料:</td>
+                <td colspan="10"> <!-- Adjusted colspan to match typical row structure if header has 11 cells (10 visible data + 1 action) -->
+                    <input id="Mat_Search" type="text" placeholder="請輸入物料名稱 or 物料代碼" style="width: 200px;">
+                    <button type="button" id="btn_OpenMaterialPopup" class="btn">選擇物料</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right;">
+                    總計：<input id="txt_Mat_Total" type="text" class="input-small" value="0" readonly="readonly" /> 元
+                </td>
+            </tr>
+        </table>
+
+        <br />
+
+        <table id="MatList"></table>
+        <div id="MatFooter"></div>
+
+        <br />
+
+        <table border="1" class="dashTable" align="center" style="width:80%;">
+            <thead>
+                <tr>
+                    <th colspan="6">Funding Information (Placeholder)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6">Details about funding... Case Money: <span id="tdCaseM">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr />
+        <div style="text-align:center;">
+            <input id="btn_SaveFarmerSys" type="button" value="送出，前往下個步驟" class="btn" />
+            <input id="btn_PassFarmerSys" type="button" value="略過>>" class="btn" />
+            <input id="btn_ModifyFarmerSys" type="button" value="修改田間管路" class="btn" style="display:none;" />
+        </div>
+
+    </form>
+    <script src="offline_scripts.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* Basic Reset / Box Sizing */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 15px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Tables */
+table.dashTable {
+    border-collapse: collapse;
+    width: 100%; /* Default width for all dashTables */
+    margin-bottom: 15px;
+    background-color: #fff; /* Give tables a white background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for tables */
+}
+
+/* Table Cells */
+table.dashTable th,
+table.dashTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Table Headers */
+table.dashTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Specific td_style class cells (for labels) */
+.td_style {
+    background-color: #e9eff7; /* Light blue/gray */
+    font-weight: bold;
+    text-align: right;
+    width: 15%; /* Default width, can be overridden by inline styles or more specific selectors */
+}
+
+/* Input fields and Selects */
+input[type="text"],
+select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* box-sizing: border-box; Applied globally */
+    margin-bottom: 5px; /* Add some space below inputs */
+}
+
+/* Ensure selects and inputs take up reasonable width if not otherwise specified */
+input[type="text"].input-small,
+select.input-small {
+    width: 100px; /* Adjusted from 80px for better padding */
+}
+
+input[type="text"]:not(.input-small),
+select:not(.input-small) { /* Apply to selects that don't have input-small */
+    width: 200px; /* Default width for text inputs and selects */
+    max-width: 100%; /* Ensure they don't overflow container */
+}
+
+
+/* Readonly inputs */
+input[readonly],
+input[type="text"][readonly] { /* More specific for text inputs */
+    background-color: #eee;
+    color: #555; /* Darker text for readability */
+}
+
+/* Buttons */
+input[type="button"],
+button {
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 2px; /* Default margin */
+    font-size: 14px; /* Consistent font size */
+}
+
+/* Buttons (hover state) */
+input[type="button"]:hover,
+button:hover {
+    background-color: #0056b3;
+    border-color: #004085; /* Darken border on hover too */
+}
+
+/* control-group and controls classes (Bootstrap-like structure) */
+.control-group {
+    margin-bottom: 10px;
+}
+/* .controls usually doesn't need specific styling unless for layout (e.g., display: flex) */
+
+/* Material Group Headers in MatTabl_MainPipe */
+#MatTabl_MainPipe .material-group-header td {
+    background-color: #d3d3d3 !important; /* Light gray, important to override other td styles if needed */
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #333; /* Darker text for contrast */
+}
+
+
+/* Hidden elements (general utility) */
+.hidden {
+    display: none !important; /* Important to override inline styles if this class is used */
+}
+
+/* Style for the div_Group popup */
+#div_Group {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#div_Group select {
+    margin-right: 10px;
+}
+
+/* Center align text for the final action buttons container */
+form#form_FarmerSys > div[style*="text-align:center"] {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+}
